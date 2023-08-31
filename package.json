@@ -1,0 +1,31 @@
+{
+  "private": true,
+  "author": "Travis1024 <travis_x@163.com>",
+  "scripts": {
+    "dev": "max dev",
+    "build": "max build",
+    "format": "prettier --cache --write .",
+    "prepare": "husky install",
+    "postinstall": "max setup",
+    "setup": "max setup",
+    "start": "npm run dev"
+  },
+  "dependencies": {
+    "@ant-design/icons": "^5.2.5",
+    "@ant-design/pro-components": "^2.6.13",
+    "@umijs/max": "^4.0.76",
+    "antd": "^4.24.13",
+    "axios": "^1.4.0",
+    "react-json-view": "^1.21.3"
+  },
+  "devDependencies": {
+    "@types/react": "^18.2.21",
+    "@types/react-dom": "^18.2.7",
+    "husky": "^8.0.3",
+    "lint-staged": "^14.0.1",
+    "prettier": "^3.0.2",
+    "prettier-plugin-organize-imports": "^3.2.3",
+    "prettier-plugin-packagejson": "^2.4.5",
+    "typescript": "^5.1.6"
+  }
+}
