@@ -1682,3 +1682,603 @@ src/pages/Monitor/index.tsx:27:9: ERROR: No matching export in "src/pages/Monito
 
 error - [icons] build failed: Error: Build failed with 1 error:
 src/pages/Monitor/index.tsx:27:7: ERROR: No matching export in "src/pages/Monitor/components/HostInfoCard.tsx" for import "default"
+✘ [ERROR] Expected "=" but found "struct"
+
+    src/pages/Monitor/components/CPUInfoCard.tsx:16:18:
+      16 │ type CpuBasicInfo struct {
+         │                   ~~~~~~
+         ╵                   =
+
+error - [icons] build failed: Error: Build failed with 1 error:
+src/pages/Monitor/components/CPUInfoCard.tsx:16:18: ERROR: Expected "=" but found "struct"
+✘ [ERROR] Expected "=" but found "struct"
+
+    src/pages/Monitor/components/CPUInfoCard.tsx:16:18:
+      16 │ type CpuBasicInfo struct {
+         │                   ~~~~~~
+         ╵                   =
+
+error - [icons] build failed: Error: Build failed with 1 error:
+src/pages/Monitor/components/CPUInfoCard.tsx:16:18: ERROR: Expected "=" but found "struct"
+✘ [ERROR] Expected "=" but found "struct"
+
+    src/pages/Monitor/components/CPUInfoCard.tsx:16:18:
+      16 │ type CpuBasicInfo struct {
+         │                   ~~~~~~
+         ╵                   =
+
+error - [icons] build failed: Error: Build failed with 1 error:
+src/pages/Monitor/components/CPUInfoCard.tsx:16:18: ERROR: Expected "=" but found "struct"
+✘ [ERROR] Expected "=" but found "struct"
+
+    src/pages/Monitor/components/CPUInfoCard.tsx:16:18:
+      16 │ type CpuBasicInfo struct {
+         │                   ~~~~~~
+         ╵                   =
+
+error - [icons] build failed: Error: Build failed with 1 error:
+src/pages/Monitor/components/CPUInfoCard.tsx:16:18: ERROR: Expected "=" but found "struct"
+✘ [ERROR] Expected "=" but found "struct"
+
+    src/pages/Monitor/components/CPUInfoCard.tsx:16:18:
+      16 │ type CpuBasicInfo struct {
+         │                   ~~~~~~
+         ╵                   =
+
+error - [icons] build failed: Error: Build failed with 1 error:
+src/pages/Monitor/components/CPUInfoCard.tsx:16:18: ERROR: Expected "=" but found "struct"
+✘ [ERROR] Expected "=" but found "struct"
+
+    src/pages/Monitor/components/CPUInfoCard.tsx:16:18:
+      16 │ type CpuBasicInfo struct {
+         │                   ~~~~~~
+         ╵                   =
+
+error - [icons] build failed: Error: Build failed with 1 error:
+src/pages/Monitor/components/CPUInfoCard.tsx:16:18: ERROR: Expected "=" but found "struct"
+✘ [ERROR] Expected "=" but found "struct"
+
+    src/pages/Monitor/components/CPUInfoCard.tsx:16:18:
+      16 │ type CpuBasicInfo struct {
+         │                   ~~~~~~
+         ╵                   =
+
+error - [icons] build failed: Error: Build failed with 1 error:
+src/pages/Monitor/components/CPUInfoCard.tsx:16:18: ERROR: Expected "=" but found "struct"
+✘ [ERROR] Expected "=" but found "struct"
+
+    src/pages/Monitor/components/CPUInfoCard.tsx:16:18:
+      16 │ type CpuBasicInfo struct {
+         │                   ~~~~~~
+         ╵                   =
+
+error - [icons] build failed: Error: Build failed with 1 error:
+src/pages/Monitor/components/CPUInfoCard.tsx:16:18: ERROR: Expected "=" but found "struct"
+✘ [ERROR] Expected "=" but found "struct"
+
+    src/pages/Monitor/components/CPUInfoCard.tsx:16:18:
+      16 │ type CpuBasicInfo struct {
+         │                   ~~~~~~
+         ╵                   =
+
+error - [icons] build failed: Error: Build failed with 1 error:
+src/pages/Monitor/components/CPUInfoCard.tsx:16:18: ERROR: Expected "=" but found "struct"
+✘ [ERROR] Expected "=" but found "struct"
+
+    src/pages/Monitor/components/CPUInfoCard.tsx:16:18:
+      16 │ type CpuBasicInfo struct {
+         │                   ~~~~~~
+         ╵                   =
+
+error - [icons] build failed: Error: Build failed with 1 error:
+src/pages/Monitor/components/CPUInfoCard.tsx:16:18: ERROR: Expected "=" but found "struct"
+✘ [ERROR] Expected "=" but found "struct"
+
+    src/pages/Monitor/components/CPUInfoCard.tsx:16:18:
+      16 │ type CpuBasicInfo struct {
+         │                   ~~~~~~
+         ╵                   =
+
+error - [icons] build failed: Error: Build failed with 1 error:
+src/pages/Monitor/components/CPUInfoCard.tsx:16:18: ERROR: Expected "=" but found "struct"
+✘ [ERROR] Expected "=" but found "struct"
+
+    src/pages/Monitor/components/CPUInfoCard.tsx:16:18:
+      16 │ type CpuBasicInfo struct {
+         │                   ~~~~~~
+         ╵                   =
+
+error - [icons] build failed: Error: Build failed with 1 error:
+src/pages/Monitor/components/CPUInfoCard.tsx:16:18: ERROR: Expected "=" but found "struct"
+✘ [ERROR] Expected "=" but found "struct"
+
+    src/pages/Monitor/components/CPUInfoCard.tsx:435:21:
+      435 │     type CPUTimeStat struct {
+          │                      ~~~~~~
+          ╵                      =
+
+error - [icons] build failed: Error: Build failed with 1 error:
+src/pages/Monitor/components/CPUInfoCard.tsx:435:21: ERROR: Expected "=" but found "struct"
+✘ [ERROR] Expected "=" but found "struct"
+
+    src/pages/Monitor/components/CPUInfoCard.tsx:435:21:
+      435 │     type CPUTimeStat struct {
+          │                      ~~~~~~
+          ╵                      =
+
+error - [icons] build failed: Error: Build failed with 1 error:
+src/pages/Monitor/components/CPUInfoCard.tsx:435:21: ERROR: Expected "=" but found "struct"
+✘ [ERROR] Expected "=" but found "struct"
+
+    src/pages/Monitor/components/CPUInfoCard.tsx:435:21:
+      435 │     type CPUTimeStat struct {
+          │                      ~~~~~~
+          ╵                      =
+
+error - [icons] build failed: Error: Build failed with 1 error:
+src/pages/Monitor/components/CPUInfoCard.tsx:435:21: ERROR: Expected "=" but found "struct"
+✘ [ERROR] Expected "=" but found "struct"
+
+    src/pages/Monitor/components/CPUInfoCard.tsx:435:21:
+      435 │     type CPUTimeStat struct {
+          │                      ~~~~~~
+          ╵                      =
+
+error - [icons] build failed: Error: Build failed with 1 error:
+src/pages/Monitor/components/CPUInfoCard.tsx:435:21: ERROR: Expected "=" but found "struct"
+✘ [ERROR] Expected "=" but found "struct"
+
+    src/pages/Monitor/components/CPUInfoCard.tsx:435:21:
+      435 │     type CPUTimeStat struct {
+          │                      ~~~~~~
+          ╵                      =
+
+error - [icons] build failed: Error: Build failed with 1 error:
+src/pages/Monitor/components/CPUInfoCard.tsx:435:21: ERROR: Expected "=" but found "struct"
+✘ [ERROR] Expected "=" but found "struct"
+
+    src/pages/Monitor/components/CPUInfoCard.tsx:435:21:
+      435 │     type CPUTimeStat struct {
+          │                      ~~~~~~
+          ╵                      =
+
+error - [icons] build failed: Error: Build failed with 1 error:
+src/pages/Monitor/components/CPUInfoCard.tsx:435:21: ERROR: Expected "=" but found "struct"
+✘ [ERROR] Expected "=" but found "struct"
+
+    src/pages/Monitor/components/CPUInfoCard.tsx:435:21:
+      435 │     type CPUTimeStat struct {
+          │                      ~~~~~~
+          ╵                      =
+
+error - [icons] build failed: Error: Build failed with 1 error:
+src/pages/Monitor/components/CPUInfoCard.tsx:435:21: ERROR: Expected "=" but found "struct"
+✘ [ERROR] Expected "=" but found "struct"
+
+    src/pages/Monitor/components/CPUInfoCard.tsx:435:21:
+      435 │     type CPUTimeStat struct {
+          │                      ~~~~~~
+          ╵                      =
+
+error - [icons] build failed: Error: Build failed with 1 error:
+src/pages/Monitor/components/CPUInfoCard.tsx:435:21: ERROR: Expected "=" but found "struct"
+✘ [ERROR] Expected "=" but found "struct"
+
+    src/pages/Monitor/components/CPUInfoCard.tsx:435:21:
+      435 │     type CPUTimeStat struct {
+          │                      ~~~~~~
+          ╵                      =
+
+error - [icons] build failed: Error: Build failed with 1 error:
+src/pages/Monitor/components/CPUInfoCard.tsx:435:21: ERROR: Expected "=" but found "struct"
+✘ [ERROR] Expected "=" but found "struct"
+
+    src/pages/Monitor/components/CPUInfoCard.tsx:435:21:
+      435 │     type CPUTimeStat struct {
+          │                      ~~~~~~
+          ╵                      =
+
+error - [icons] build failed: Error: Build failed with 1 error:
+src/pages/Monitor/components/CPUInfoCard.tsx:435:21: ERROR: Expected "=" but found "struct"
+✘ [ERROR] Expected "=" but found "struct"
+
+    src/pages/Monitor/components/CPUInfoCard.tsx:435:21:
+      435 │     type CPUTimeStat struct {
+          │                      ~~~~~~
+          ╵                      =
+
+error - [icons] build failed: Error: Build failed with 1 error:
+src/pages/Monitor/components/CPUInfoCard.tsx:435:21: ERROR: Expected "=" but found "struct"
+✘ [ERROR] Expected "=" but found "struct"
+
+    src/pages/Monitor/components/CPUInfoCard.tsx:435:21:
+      435 │     type CPUTimeStat struct {
+          │                      ~~~~~~
+          ╵                      =
+
+error - [icons] build failed: Error: Build failed with 1 error:
+src/pages/Monitor/components/CPUInfoCard.tsx:435:21: ERROR: Expected "=" but found "struct"
+✘ [ERROR] Expected "=" but found "struct"
+
+    src/pages/Monitor/components/CPUInfoCard.tsx:435:21:
+      435 │     type CPUTimeStat struct {
+          │                      ~~~~~~
+          ╵                      =
+
+error - [icons] build failed: Error: Build failed with 1 error:
+src/pages/Monitor/components/CPUInfoCard.tsx:435:21: ERROR: Expected "=" but found "struct"
+✘ [ERROR] Expected "=" but found "struct"
+
+    src/pages/Monitor/components/CPUInfoCard.tsx:435:21:
+      435 │     type CPUTimeStat struct {
+          │                      ~~~~~~
+          ╵                      =
+
+error - [icons] build failed: Error: Build failed with 1 error:
+src/pages/Monitor/components/CPUInfoCard.tsx:435:21: ERROR: Expected "=" but found "struct"
+✘ [ERROR] Expected "=" but found "struct"
+
+    src/pages/Monitor/components/CPUInfoCard.tsx:435:21:
+      435 │     type CPUTimeStat struct {
+          │                      ~~~~~~
+          ╵                      =
+
+error - [icons] build failed: Error: Build failed with 1 error:
+src/pages/Monitor/components/CPUInfoCard.tsx:435:21: ERROR: Expected "=" but found "struct"
+✘ [ERROR] Expected "=" but found "struct"
+
+    src/pages/Monitor/components/CPUInfoCard.tsx:435:21:
+      435 │     type CPUTimeStat struct {
+          │                      ~~~~~~
+          ╵                      =
+
+error - [icons] build failed: Error: Build failed with 1 error:
+src/pages/Monitor/components/CPUInfoCard.tsx:435:21: ERROR: Expected "=" but found "struct"
+✘ [ERROR] Expected "=" but found "struct"
+
+    src/pages/Monitor/components/CPUInfoCard.tsx:435:21:
+      435 │     type CPUTimeStat struct {
+          │                      ~~~~~~
+          ╵                      =
+
+error - [icons] build failed: Error: Build failed with 1 error:
+src/pages/Monitor/components/CPUInfoCard.tsx:435:21: ERROR: Expected "=" but found "struct"
+✘ [ERROR] Expected "=" but found "struct"
+
+    src/pages/Monitor/components/CPUInfoCard.tsx:435:21:
+      435 │     type CPUTimeStat struct {
+          │                      ~~~~~~
+          ╵                      =
+
+error - [icons] build failed: Error: Build failed with 1 error:
+src/pages/Monitor/components/CPUInfoCard.tsx:435:21: ERROR: Expected "=" but found "struct"
+✘ [ERROR] Expected "=" but found "struct"
+
+    src/pages/Monitor/components/CPUInfoCard.tsx:435:21:
+      435 │     type CPUTimeStat struct {
+          │                      ~~~~~~
+          ╵                      =
+
+error - [icons] build failed: Error: Build failed with 1 error:
+src/pages/Monitor/components/CPUInfoCard.tsx:435:21: ERROR: Expected "=" but found "struct"
+✘ [ERROR] Expected "=" but found "struct"
+
+    src/pages/Monitor/components/CPUInfoCard.tsx:435:21:
+      435 │     type CPUTimeStat struct {
+          │                      ~~~~~~
+          ╵                      =
+
+error - [icons] build failed: Error: Build failed with 1 error:
+src/pages/Monitor/components/CPUInfoCard.tsx:435:21: ERROR: Expected "=" but found "struct"
+✘ [ERROR] Expected "=" but found "struct"
+
+    src/pages/Monitor/components/CPUInfoCard.tsx:435:21:
+      435 │     type CPUTimeStat struct {
+          │                      ~~~~~~
+          ╵                      =
+
+error - [icons] build failed: Error: Build failed with 1 error:
+src/pages/Monitor/components/CPUInfoCard.tsx:435:21: ERROR: Expected "=" but found "struct"
+✘ [ERROR] Expected "=" but found "struct"
+
+    src/pages/Monitor/components/CPUInfoCard.tsx:435:21:
+      435 │     type CPUTimeStat struct {
+          │                      ~~~~~~
+          ╵                      =
+
+error - [icons] build failed: Error: Build failed with 1 error:
+src/pages/Monitor/components/CPUInfoCard.tsx:435:21: ERROR: Expected "=" but found "struct"
+✘ [ERROR] Expected "=" but found "struct"
+
+    src/pages/Monitor/components/CPUInfoCard.tsx:435:21:
+      435 │     type CPUTimeStat struct {
+          │                      ~~~~~~
+          ╵                      =
+
+error - [icons] build failed: Error: Build failed with 1 error:
+src/pages/Monitor/components/CPUInfoCard.tsx:435:21: ERROR: Expected "=" but found "struct"
+✘ [ERROR] Expected "=" but found "struct"
+
+    src/pages/Monitor/components/CPUInfoCard.tsx:435:21:
+      435 │     type CPUTimeStat struct {
+          │                      ~~~~~~
+          ╵                      =
+
+error - [icons] build failed: Error: Build failed with 1 error:
+src/pages/Monitor/components/CPUInfoCard.tsx:435:21: ERROR: Expected "=" but found "struct"
+✘ [ERROR] Expected "=" but found "struct"
+
+    src/pages/Monitor/components/CPUInfoCard.tsx:435:21:
+      435 │     type CPUTimeStat struct {
+          │                      ~~~~~~
+          ╵                      =
+
+error - [icons] build failed: Error: Build failed with 1 error:
+src/pages/Monitor/components/CPUInfoCard.tsx:435:21: ERROR: Expected "=" but found "struct"
+✘ [ERROR] Expected "=" but found "struct"
+
+    src/pages/Monitor/components/CPUInfoCard.tsx:435:21:
+      435 │     type CPUTimeStat struct {
+          │                      ~~~~~~
+          ╵                      =
+
+error - [icons] build failed: Error: Build failed with 1 error:
+src/pages/Monitor/components/CPUInfoCard.tsx:435:21: ERROR: Expected "=" but found "struct"
+✘ [ERROR] Expected "=" but found "struct"
+
+    src/pages/Monitor/components/CPUInfoCard.tsx:435:21:
+      435 │     type CPUTimeStat struct {
+          │                      ~~~~~~
+          ╵                      =
+
+error - [icons] build failed: Error: Build failed with 1 error:
+src/pages/Monitor/components/CPUInfoCard.tsx:435:21: ERROR: Expected "=" but found "struct"
+✘ [ERROR] Expected "=" but found "struct"
+
+    src/pages/Monitor/components/CPUInfoCard.tsx:435:21:
+      435 │     type CPUTimeStat struct {
+          │                      ~~~~~~
+          ╵                      =
+
+error - [icons] build failed: Error: Build failed with 1 error:
+src/pages/Monitor/components/CPUInfoCard.tsx:435:21: ERROR: Expected "=" but found "struct"
+✘ [ERROR] Expected "=" but found "struct"
+
+    src/pages/Monitor/components/CPUInfoCard.tsx:435:21:
+      435 │     type CPUTimeStat struct {
+          │                      ~~~~~~
+          ╵                      =
+
+error - [icons] build failed: Error: Build failed with 1 error:
+src/pages/Monitor/components/CPUInfoCard.tsx:435:21: ERROR: Expected "=" but found "struct"
+✘ [ERROR] Expected "=" but found "struct"
+
+    src/pages/Monitor/components/CPUInfoCard.tsx:435:21:
+      435 │     type CPUTimeStat struct {
+          │                      ~~~~~~
+          ╵                      =
+
+error - [icons] build failed: Error: Build failed with 1 error:
+src/pages/Monitor/components/CPUInfoCard.tsx:435:21: ERROR: Expected "=" but found "struct"
+✘ [ERROR] Expected "=" but found "struct"
+
+    src/pages/Monitor/components/CPUInfoCard.tsx:435:21:
+      435 │     type CPUTimeStat struct {
+          │                      ~~~~~~
+          ╵                      =
+
+error - [icons] build failed: Error: Build failed with 1 error:
+src/pages/Monitor/components/CPUInfoCard.tsx:435:21: ERROR: Expected "=" but found "struct"
+✘ [ERROR] Expected "=" but found "struct"
+
+    src/pages/Monitor/components/CPUInfoCard.tsx:435:21:
+      435 │     type CPUTimeStat struct {
+          │                      ~~~~~~
+          ╵                      =
+
+error - [icons] build failed: Error: Build failed with 1 error:
+src/pages/Monitor/components/CPUInfoCard.tsx:435:21: ERROR: Expected "=" but found "struct"
+✘ [ERROR] Expected "=" but found "struct"
+
+    src/pages/Monitor/components/CPUInfoCard.tsx:435:21:
+      435 │     type CPUTimeStat struct {
+          │                      ~~~~~~
+          ╵                      =
+
+error - [icons] build failed: Error: Build failed with 1 error:
+src/pages/Monitor/components/CPUInfoCard.tsx:435:21: ERROR: Expected "=" but found "struct"
+✘ [ERROR] Expected "=" but found "struct"
+
+    src/pages/Monitor/components/CPUInfoCard.tsx:435:21:
+      435 │     type CPUTimeStat struct {
+          │                      ~~~~~~
+          ╵                      =
+
+error - [icons] build failed: Error: Build failed with 1 error:
+src/pages/Monitor/components/CPUInfoCard.tsx:435:21: ERROR: Expected "=" but found "struct"
+✘ [ERROR] Expected "=" but found "struct"
+
+    src/pages/Monitor/components/CPUInfoCard.tsx:435:21:
+      435 │     type CPUTimeStat struct {
+          │                      ~~~~~~
+          ╵                      =
+
+error - [icons] build failed: Error: Build failed with 1 error:
+src/pages/Monitor/components/CPUInfoCard.tsx:435:21: ERROR: Expected "=" but found "struct"
+✘ [ERROR] Expected "=" but found "struct"
+
+    src/pages/Monitor/components/CPUInfoCard.tsx:435:21:
+      435 │     type CPUTimeStat struct {
+          │                      ~~~~~~
+          ╵                      =
+
+error - [icons] build failed: Error: Build failed with 1 error:
+src/pages/Monitor/components/CPUInfoCard.tsx:435:21: ERROR: Expected "=" but found "struct"
+✘ [ERROR] Expected "=" but found "struct"
+
+    src/pages/Monitor/components/CPUInfoCard.tsx:435:21:
+      435 │     type CPUTimeStat struct {
+          │                      ~~~~~~
+          ╵                      =
+
+error - [icons] build failed: Error: Build failed with 1 error:
+src/pages/Monitor/components/CPUInfoCard.tsx:435:21: ERROR: Expected "=" but found "struct"
+✘ [ERROR] Expected "=" but found "struct"
+
+    src/pages/Monitor/components/CPUInfoCard.tsx:435:21:
+      435 │     type CPUTimeStat struct {
+          │                      ~~~~~~
+          ╵                      =
+
+error - [icons] build failed: Error: Build failed with 1 error:
+src/pages/Monitor/components/CPUInfoCard.tsx:435:21: ERROR: Expected "=" but found "struct"
+✘ [ERROR] Expected "=" but found "struct"
+
+    src/pages/Monitor/components/CPUInfoCard.tsx:435:21:
+      435 │     type CPUTimeStat struct {
+          │                      ~~~~~~
+          ╵                      =
+
+error - [icons] build failed: Error: Build failed with 1 error:
+src/pages/Monitor/components/CPUInfoCard.tsx:435:21: ERROR: Expected "=" but found "struct"
+✘ [ERROR] Expected "=" but found "struct"
+
+    src/pages/Monitor/components/CPUInfoCard.tsx:435:21:
+      435 │     type CPUTimeStat struct {
+          │                      ~~~~~~
+          ╵                      =
+
+error - [icons] build failed: Error: Build failed with 1 error:
+src/pages/Monitor/components/CPUInfoCard.tsx:435:21: ERROR: Expected "=" but found "struct"
+✘ [ERROR] Expected "=" but found "struct"
+
+    src/pages/Monitor/components/CPUInfoCard.tsx:435:21:
+      435 │     type CPUTimeStat struct {
+          │                      ~~~~~~
+          ╵                      =
+
+error - [icons] build failed: Error: Build failed with 1 error:
+src/pages/Monitor/components/CPUInfoCard.tsx:435:21: ERROR: Expected "=" but found "struct"
+✘ [ERROR] Expected "=" but found "struct"
+
+    src/pages/Monitor/components/CPUInfoCard.tsx:435:21:
+      435 │     type CPUTimeStat struct {
+          │                      ~~~~~~
+          ╵                      =
+
+error - [icons] build failed: Error: Build failed with 1 error:
+src/pages/Monitor/components/CPUInfoCard.tsx:435:21: ERROR: Expected "=" but found "struct"
+✘ [ERROR] Expected "=" but found "struct"
+
+    src/pages/Monitor/components/CPUInfoCard.tsx:435:21:
+      435 │     type CPUTimeStat struct {
+          │                      ~~~~~~
+          ╵                      =
+
+error - [icons] build failed: Error: Build failed with 1 error:
+src/pages/Monitor/components/CPUInfoCard.tsx:435:21: ERROR: Expected "=" but found "struct"
+✘ [ERROR] The symbol "CPUStatCard" has already been declared
+
+    src/pages/Monitor/components/CPUInfoCard.tsx:726:8:
+      726 │   const CPUStatCard: React.FC = () => {
+          ╵         ~~~~~~~~~~~
+
+  The symbol "CPUStatCard" was originally declared here:
+
+    src/pages/Monitor/components/CPUInfoCard.tsx:216:6:
+      216 │ const CPUStatCard: React.FC = () => {
+          ╵       ~~~~~~~~~~~
+
+error - [icons] build failed: Error: Build failed with 1 error:
+src/pages/Monitor/components/CPUInfoCard.tsx:726:8: ERROR: The symbol "CPUStatCard" has already been declared
+✘ [ERROR] The symbol "CPUStatCard" has already been declared
+
+    src/pages/Monitor/components/CPUInfoCard.tsx:726:8:
+      726 │   const CPUStatCard: React.FC = () => {
+          ╵         ~~~~~~~~~~~
+
+  The symbol "CPUStatCard" was originally declared here:
+
+    src/pages/Monitor/components/CPUInfoCard.tsx:216:6:
+      216 │ const CPUStatCard: React.FC = () => {
+          ╵       ~~~~~~~~~~~
+
+error - [icons] build failed: Error: Build failed with 1 error:
+src/pages/Monitor/components/CPUInfoCard.tsx:726:8: ERROR: The symbol "CPUStatCard" has already been declared
+✘ [ERROR] The symbol "CPUStatCard" has already been declared
+
+    src/pages/Monitor/components/CPUInfoCard.tsx:726:8:
+      726 │   const CPUStatCard: React.FC = () => {
+          ╵         ~~~~~~~~~~~
+
+  The symbol "CPUStatCard" was originally declared here:
+
+    src/pages/Monitor/components/CPUInfoCard.tsx:216:6:
+      216 │ const CPUStatCard: React.FC = () => {
+          ╵       ~~~~~~~~~~~
+
+error - [icons] build failed: Error: Build failed with 1 error:
+src/pages/Monitor/components/CPUInfoCard.tsx:726:8: ERROR: The symbol "CPUStatCard" has already been declared
+✘ [ERROR] The symbol "cpuPercentStat" has already been declared
+
+    src/pages/Monitor/components/CPUInfoCard.tsx:739:11:
+      739 │     const [cpuPercentStat, setIOBytesRecvStat] = useState([]);
+          ╵            ~~~~~~~~~~~~~~
+
+  The symbol "cpuPercentStat" was originally declared here:
+
+    src/pages/Monitor/components/CPUInfoCard.tsx:738:11:
+      738 │     const [cpuPercentStat, setCPUPercentStat] = useState([]);
+          ╵            ~~~~~~~~~~~~~~
+
+error - [icons] build failed: Error: Build failed with 1 error:
+src/pages/Monitor/components/CPUInfoCard.tsx:739:11: ERROR: The symbol "cpuPercentStat" has already been declared
+✘ [ERROR] The symbol "config" has already been declared
+
+    src/pages/Monitor/components/CPUInfoCard.tsx:848:10:
+      848 │     const config = {
+          ╵           ~~~~~~
+
+  The symbol "config" was originally declared here:
+
+    src/pages/Monitor/components/CPUInfoCard.tsx:842:10:
+      842 │     const config = {
+          ╵           ~~~~~~
+
+error - [icons] build failed: Error: Build failed with 1 error:
+src/pages/Monitor/components/CPUInfoCard.tsx:848:10: ERROR: The symbol "config" has already been declared
+✘ [ERROR] Expected "]" but found ":"
+
+    src/pages/Monitor/components/CPUInfoCard.tsx:817:36:
+      817 │                   ).toISOString()[-5:],
+          │                                     ^
+          ╵                                     ]
+
+error - [icons] build failed: Error: Build failed with 1 error:
+src/pages/Monitor/components/CPUInfoCard.tsx:817:36: ERROR: Expected "]" but found ":"
+✘ [ERROR] Expected "]" but found ":"
+
+    src/pages/Monitor/components/CPUInfoCard.tsx:817:36:
+      817 │                   ).toISOString()[-5:-1],
+          │                                     ^
+          ╵                                     ]
+
+error - [icons] build failed: Error: Build failed with 1 error:
+src/pages/Monitor/components/CPUInfoCard.tsx:817:36: ERROR: Expected "]" but found ":"
+✘ [ERROR] Unexpected "]"
+
+    src/pages/Monitor/components/CPUInfoCard.tsx:817:34:
+      817 │                   ).toISOString()[],
+          ╵                                   ^
+
+error - [icons] build failed: Error: Build failed with 1 error:
+src/pages/Monitor/components/CPUInfoCard.tsx:817:34: ERROR: Unexpected "]"
+✘ [ERROR] Expected "]" but found ":"
+
+    src/pages/Monitor/components/CPUInfoCard.tsx:817:36:
+      817 │                   ).toISOString()[-5:],
+          │                                     ^
+          ╵                                     ]
+
+error - [icons] build failed: Error: Build failed with 1 error:
+src/pages/Monitor/components/CPUInfoCard.tsx:817:36: ERROR: Expected "]" but found ":"

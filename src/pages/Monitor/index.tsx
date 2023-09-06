@@ -25,6 +25,8 @@ import type { ColumnsType } from 'antd/es/table';
 import React, { useEffect, useState } from 'react';
 import HostInfoCard from './components/HostInfoCard';
 import NetInfoCard from './components/NetInfoCard';
+import CPUInfoCard from './components/CPUInfoCard';
+import MemInfoCard from './components/MemInfoCard';
 
 const onChange = (key: string) => {
   console.log(key);
@@ -34,12 +36,12 @@ const TAB_ITEMS: TabsProps['items'] = [
   {
     key: 'cpu',
     label: `处理器`,
-    children: `TODO`,
+    children: <CPUInfoCard />,
   },
   {
     key: 'mem',
     label: `内存`,
-    children: `TODO`,
+    children: <MemInfoCard />,
   },
   {
     key: 'disk',
