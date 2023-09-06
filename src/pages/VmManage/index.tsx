@@ -4,6 +4,7 @@ import {Button, Popconfirm, Space, Table, Tooltip} from "antd";
 import {ColumnsType} from "antd/es/table";
 import {apiRefreshHostList} from "@/api/HostManage";
 import {apiQueryVmList} from "@/api/VmManage";
+import { history } from 'umi';
 
 interface DataType {
     vmZzid: string,
@@ -84,7 +85,9 @@ const VmManagePage: React.FC = () => {
             },
             render: (vmId) => (
                 <Tooltip placement="topLeft" title={vmId}>
-                    {vmId}
+                    <a onClick={(event) => {event.preventDefault();history.push("/monitor?uuid=" + vmId)}}>
+                        {vmId}
+                    </a>
                 </Tooltip>
             ),
             fixed: "left",

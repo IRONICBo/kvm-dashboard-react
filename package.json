@@ -11,12 +11,14 @@
     "start": "npm run dev"
   },
   "dependencies": {
+    "@ant-design/charts": "^1.4.2",
     "@ant-design/icons": "^5.2.5",
     "@ant-design/pro-components": "^2.6.13",
     "@umijs/max": "^4.0.76",
     "antd": "^4.24.13",
     "axios": "^1.4.0",
-    "react-json-view": "^1.21.3"
+    "react-json-view": "^1.21.3",
+    "socket.io-client": "^4.7.2"
   },
   "devDependencies": {
     "@types/react": "^18.2.21",

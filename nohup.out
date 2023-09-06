@@ -1,0 +1,1684 @@
+
+> start
+> npm run dev
+
+
+> dev
+> max dev
+
+info  - [你知道吗？] 如果想检测未使用的文件和导出，可尝试新出的 deadCode 配置项，详见 https://umijs.org/docs/api/config#deadcode
+info  - Umi v4.0.79
+info  - Preparing...
+info  - MFSU eager strategy enabled
+info  - [MFSU][eager] restored cache
+event - [MFSU][eager] start build deps
+info  - [MFSU] skip buildDeps
+        ╔════════════════════════════════════════════════════╗
+        ║ App listening at:                                  ║
+        ║  >   Local: http://localhost:8000                  ║
+ready - ║  > Network: http://192.168.122.1:8000              ║
+        ║                                                    ║
+        ║ Now you can open browser with the above addresses↑ ║
+        ╚════════════════════════════════════════════════════╝
+info  - [MFSU][eager] worker init, takes 1276ms
+event - [Webpack] Compiled in 6102 ms (391 modules)
+wait  - [Webpack] Compiling...
+event - [MFSU][eager] start build deps
+info  - [MFSU] skip buildDeps
+event - [Webpack] Compiled in 388 ms (377 modules)
+wait  - [Webpack] Compiling...
+event - [MFSU][eager] start build deps
+info  - [MFSU] skip buildDeps
+event - [Webpack] Compiled in 255 ms (377 modules)
+
+> start
+> npm run dev
+
+glob error [Error: EACCES: permission denied, scandir '/root/.npm/_logs'] {
+  errno: -13,
+  code: 'EACCES',
+  syscall: 'scandir',
+  path: '/root/.npm/_logs'
+}
+
+> dev
+> max dev
+
+info  - [你知道吗？] 如果想检测未使用的文件和导出，可尝试新出的 deadCode 配置项，详见 https://umijs.org/docs/api/config#deadcode
+info  - Umi v4.0.79
+info  - Preparing...
+info  - MFSU eager strategy enabled
+info  - [MFSU][eager] restored cache
+event - [MFSU][eager] start build deps
+info  - [MFSU] skip buildDeps
+        ╔════════════════════════════════════════════════════╗
+        ║ App listening at:                                  ║
+        ║  >   Local: http://localhost:8000                  ║
+ready - ║  > Network: http://192.168.122.1:8000              ║
+        ║                                                    ║
+        ║ Now you can open browser with the above addresses↑ ║
+        ╚════════════════════════════════════════════════════╝
+info  - [MFSU][eager] worker init, takes 1216ms
+event - [Webpack] Compiled in 5620 ms (391 modules)
+wait  - [Webpack] Compiling...
+event - [MFSU][eager] start build deps
+info  - [MFSU] skip buildDeps
+event - [Webpack] Compiled in 348 ms (377 modules)
+wait  - [Webpack] Compiling...
+event - [MFSU][eager] start build deps
+info  - [MFSU] skip buildDeps
+event - [Webpack] Compiled in 238 ms (377 modules)
+✘ [ERROR] Could not resolve "/preview/2023-08-31/vm-umi-operate-master/src/.umi/umi.ts"
+
+wait  - [Webpack] Compiling...
+error - [icons] build failed: Error: Build failed with 1 error:
+error: Could not resolve "/preview/2023-08-31/vm-umi-operate-master/src/.umi/umi.ts"
+event - [MFSU][eager] start build deps
+info  - [MFSU] buildDeps since dependencies changed
+info  - [MFSU][eager] build worker start to build
+✘ [ERROR] Could not resolve "/preview/2023-08-31/vm-umi-operate-master/src/.umi/umi.ts"
+
+error - [icons] build failed: Error: Build failed with 1 error:
+error: Could not resolve "/preview/2023-08-31/vm-umi-operate-master/src/.umi/umi.ts"
+error - ./mfsu-virtual-entry/umi.js:4:6-73
+Module not found: Error: Can't resolve '/preview/2023-08-31/vm-umi-operate-master/src/.umi/umi.ts' in '/preview/2023-08-31/vm-umi-operate-master/mfsu-virtual-entry'
+✘ [ERROR] Can't resolve '/preview/2023-08-31/vm-umi-operate-master/src/.umi/exports' in '/preview/2023-08-31/vm-umi-operate-master/src/.umi' [plugin esbuildAliasPlugin]
+
+    node_modules/enhanced-resolve/lib/Resolver.js:309:17:
+      309 │       const error = new Error("Can't " + message);
+          ╵                     ^
+
+    at finishWithoutResolve (/preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/Resolver.js:309:18)
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/Resolver.js:386:15
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/Resolver.js:435:5
+    at eval (eval at create (/preview/2023-08-31/vm-umi-operate-master/node_modules/tapable/lib/HookCodeFactory.js:33:10), <anonymous>:15:1)
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/Resolver.js:435:5
+    at eval (eval at create (/preview/2023-08-31/vm-umi-operate-master/node_modules/tapable/lib/HookCodeFactory.js:33:10), <anonymous>:27:1)
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/DescriptionFilePlugin.js:87:43
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/Resolver.js:435:5
+    at eval (eval at create (/preview/2023-08-31/vm-umi-operate-master/node_modules/tapable/lib/HookCodeFactory.js:33:10), <anonymous>:15:1)
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/Resolver.js:435:5
+    at eval (eval at create (/preview/2023-08-31/vm-umi-operate-master/node_modules/tapable/lib/HookCodeFactory.js:33:10), <anonymous>:16:1)
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/Resolver.js:435:5
+    at eval (eval at create (/preview/2023-08-31/vm-umi-operate-master/node_modules/tapable/lib/HookCodeFactory.js:33:10), <anonymous>:27:1)
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/DescriptionFilePlugin.js:87:43
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/Resolver.js:435:5
+    at eval (eval at create (/preview/2023-08-31/vm-umi-operate-master/node_modules/tapable/lib/HookCodeFactory.js:33:10), <anonymous>:16:1)
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/Resolver.js:435:5
+    at eval (eval at create (/preview/2023-08-31/vm-umi-operate-master/node_modules/tapable/lib/HookCodeFactory.js:33:10), <anonymous>:15:1)
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/DirectoryExistsPlugin.js:41:15
+    at processTicksAndRejections (node:internal/process/task_queues:82:21)
+
+  This error came from the "onResolve" callback registered here:
+
+    node_modules/@umijs/preset-umi/dist/features/prepare/esbuildPlugins/esbuildAliasPlugin.js:78:14:
+      78 │         build.onResolve({ filter }, async (args) => {
+         ╵               ~~~~~~~~~
+
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/@umijs/preset-umi/dist/features/prepare/esbuildPlugins/esbuildAliasPlugin.js:78:15
+    at Array.forEach (<anonymous>)
+    at setup (/preview/2023-08-31/vm-umi-operate-master/node_modules/@umijs/preset-umi/dist/features/prepare/esbuildPlugins/esbuildAliasPlugin.js:75:10)
+    at handlePlugins (/preview/2023-08-31/vm-umi-operate-master/node_modules/esbuild/lib/main.js:1279:21)
+    at buildOrContextImpl (/preview/2023-08-31/vm-umi-operate-master/node_modules/esbuild/lib/main.js:968:5)
+    at Object.buildOrContext (/preview/2023-08-31/vm-umi-operate-master/node_modules/esbuild/lib/main.js:776:5)
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/esbuild/lib/main.js:2172:68
+    at new Promise (<anonymous>)
+    at Object.context (/preview/2023-08-31/vm-umi-operate-master/node_modules/esbuild/lib/main.js:2172:27)
+    at Object.context (/preview/2023-08-31/vm-umi-operate-master/node_modules/esbuild/lib/main.js:2012:58)
+    at build (/preview/2023-08-31/vm-umi-operate-master/node_modules/@umijs/preset-umi/dist/features/prepare/build.js:91:46)
+    at Hook.fn (/preview/2023-08-31/vm-umi-operate-master/node_modules/@umijs/preset-umi/dist/features/prepare/prepare.js:105:40)
+    at async /preview/2023-08-31/vm-umi-operate-master/node_modules/@umijs/core/dist/service/service.js:184:15
+
+  The plugin "esbuildAliasPlugin" was triggered by this import
+
+    src/.umi/umi.ts:10:33:
+      10 │ import { ApplyPluginsType } from 'umi';
+         ╵                                  ~~~~~
+
+✘ [ERROR] Could not resolve "/preview/2023-08-31/vm-umi-operate-master/src/.umi/plugin-access/runtime.tsx"
+
+    src/.umi/core/plugin.ts:5:26:
+      5 │ ...gin_1 from '/preview/2023-08-31/vm-umi-operate-master/src/.umi/p...
+        ╵               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+✘ [ERROR] Could not resolve "/preview/2023-08-31/vm-umi-operate-master/src/.umi/plugin-initialState/runtime.tsx"
+
+    src/.umi/core/plugin.ts:6:26:
+      6 │ ...gin_2 from '/preview/2023-08-31/vm-umi-operate-master/src/.umi/p...
+        ╵               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+✘ [ERROR] Could not resolve "/preview/2023-08-31/vm-umi-operate-master/src/.umi/plugin-layout/runtime.tsx"
+
+    src/.umi/core/plugin.ts:7:26:
+      7 │ ...gin_3 from '/preview/2023-08-31/vm-umi-operate-master/src/.umi/p...
+        ╵               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+✘ [ERROR] Could not resolve "/preview/2023-08-31/vm-umi-operate-master/src/.umi/plugin-model/runtime.tsx"
+
+    src/.umi/core/plugin.ts:8:26:
+      8 │ ...gin_4 from '/preview/2023-08-31/vm-umi-operate-master/src/.umi/p...
+        ╵               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+✘ [ERROR] Can't resolve '/preview/2023-08-31/vm-umi-operate-master/src/.umi/exports' in '/preview/2023-08-31/vm-umi-operate-master/src/.umi/core' [plugin esbuildAliasPlugin]
+
+    node_modules/enhanced-resolve/lib/Resolver.js:309:17:
+      309 │       const error = new Error("Can't " + message);
+          ╵                     ^
+
+    at finishWithoutResolve (/preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/Resolver.js:309:18)
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/Resolver.js:386:15
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/Resolver.js:435:5
+    at eval (eval at create (/preview/2023-08-31/vm-umi-operate-master/node_modules/tapable/lib/HookCodeFactory.js:33:10), <anonymous>:15:1)
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/Resolver.js:435:5
+    at eval (eval at create (/preview/2023-08-31/vm-umi-operate-master/node_modules/tapable/lib/HookCodeFactory.js:33:10), <anonymous>:27:1)
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/DescriptionFilePlugin.js:87:43
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/Resolver.js:435:5
+    at eval (eval at create (/preview/2023-08-31/vm-umi-operate-master/node_modules/tapable/lib/HookCodeFactory.js:33:10), <anonymous>:15:1)
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/Resolver.js:435:5
+    at eval (eval at create (/preview/2023-08-31/vm-umi-operate-master/node_modules/tapable/lib/HookCodeFactory.js:33:10), <anonymous>:16:1)
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/Resolver.js:435:5
+    at eval (eval at create (/preview/2023-08-31/vm-umi-operate-master/node_modules/tapable/lib/HookCodeFactory.js:33:10), <anonymous>:27:1)
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/DescriptionFilePlugin.js:87:43
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/Resolver.js:435:5
+    at eval (eval at create (/preview/2023-08-31/vm-umi-operate-master/node_modules/tapable/lib/HookCodeFactory.js:33:10), <anonymous>:16:1)
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/Resolver.js:435:5
+    at eval (eval at create (/preview/2023-08-31/vm-umi-operate-master/node_modules/tapable/lib/HookCodeFactory.js:33:10), <anonymous>:15:1)
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/DirectoryExistsPlugin.js:41:15
+    at processTicksAndRejections (node:internal/process/task_queues:82:21)
+
+  This error came from the "onResolve" callback registered here:
+
+    node_modules/@umijs/preset-umi/dist/features/prepare/esbuildPlugins/esbuildAliasPlugin.js:78:14:
+      78 │         build.onResolve({ filter }, async (args) => {
+         ╵               ~~~~~~~~~
+
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/@umijs/preset-umi/dist/features/prepare/esbuildPlugins/esbuildAliasPlugin.js:78:15
+    at Array.forEach (<anonymous>)
+    at setup (/preview/2023-08-31/vm-umi-operate-master/node_modules/@umijs/preset-umi/dist/features/prepare/esbuildPlugins/esbuildAliasPlugin.js:75:10)
+    at handlePlugins (/preview/2023-08-31/vm-umi-operate-master/node_modules/esbuild/lib/main.js:1279:21)
+    at buildOrContextImpl (/preview/2023-08-31/vm-umi-operate-master/node_modules/esbuild/lib/main.js:968:5)
+    at Object.buildOrContext (/preview/2023-08-31/vm-umi-operate-master/node_modules/esbuild/lib/main.js:776:5)
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/esbuild/lib/main.js:2172:68
+    at new Promise (<anonymous>)
+    at Object.context (/preview/2023-08-31/vm-umi-operate-master/node_modules/esbuild/lib/main.js:2172:27)
+    at Object.context (/preview/2023-08-31/vm-umi-operate-master/node_modules/esbuild/lib/main.js:2012:58)
+    at build (/preview/2023-08-31/vm-umi-operate-master/node_modules/@umijs/preset-umi/dist/features/prepare/build.js:91:46)
+    at Hook.fn (/preview/2023-08-31/vm-umi-operate-master/node_modules/@umijs/preset-umi/dist/features/prepare/prepare.js:105:40)
+    at async /preview/2023-08-31/vm-umi-operate-master/node_modules/@umijs/core/dist/service/service.js:184:15
+
+  The plugin "esbuildAliasPlugin" was triggered by this import
+
+    src/.umi/core/plugin.ts:9:30:
+      9 │ import { PluginManager } from 'umi';
+        ╵                               ~~~~~
+
+✘ [ERROR] Could not resolve "/preview/2023-08-31/vm-umi-operate-master/src/.umi/plugin-layout/Layout.tsx"
+
+    src/.umi/core/route.tsx:16:101:
+      16 │ ...Layout" */'/preview/2023-08-31/vm-umi-operate-master/src/.umi/p...
+         ╵              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+✘ [ERROR] Can't resolve '/preview/2023-08-31/vm-umi-operate-master/src/.umi/exports' in '/preview/2023-08-31/vm-umi-operate-master/src/.umi/core' [plugin esbuildAliasPlugin]
+
+    node_modules/enhanced-resolve/lib/Resolver.js:309:17:
+      309 │       const error = new Error("Can't " + message);
+          ╵                     ^
+
+    at finishWithoutResolve (/preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/Resolver.js:309:18)
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/Resolver.js:386:15
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/Resolver.js:435:5
+    at eval (eval at create (/preview/2023-08-31/vm-umi-operate-master/node_modules/tapable/lib/HookCodeFactory.js:33:10), <anonymous>:15:1)
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/Resolver.js:435:5
+    at eval (eval at create (/preview/2023-08-31/vm-umi-operate-master/node_modules/tapable/lib/HookCodeFactory.js:33:10), <anonymous>:27:1)
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/DescriptionFilePlugin.js:87:43
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/Resolver.js:435:5
+    at eval (eval at create (/preview/2023-08-31/vm-umi-operate-master/node_modules/tapable/lib/HookCodeFactory.js:33:10), <anonymous>:15:1)
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/Resolver.js:435:5
+    at eval (eval at create (/preview/2023-08-31/vm-umi-operate-master/node_modules/tapable/lib/HookCodeFactory.js:33:10), <anonymous>:16:1)
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/Resolver.js:435:5
+    at eval (eval at create (/preview/2023-08-31/vm-umi-operate-master/node_modules/tapable/lib/HookCodeFactory.js:33:10), <anonymous>:27:1)
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/DescriptionFilePlugin.js:87:43
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/Resolver.js:435:5
+    at eval (eval at create (/preview/2023-08-31/vm-umi-operate-master/node_modules/tapable/lib/HookCodeFactory.js:33:10), <anonymous>:16:1)
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/Resolver.js:435:5
+    at eval (eval at create (/preview/2023-08-31/vm-umi-operate-master/node_modules/tapable/lib/HookCodeFactory.js:33:10), <anonymous>:15:1)
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/DirectoryExistsPlugin.js:41:15
+    at processTicksAndRejections (node:internal/process/task_queues:82:21)
+
+  This error came from the "onResolve" callback registered here:
+
+    node_modules/@umijs/preset-umi/dist/features/prepare/esbuildPlugins/esbuildAliasPlugin.js:78:14:
+      78 │         build.onResolve({ filter }, async (args) => {
+         ╵               ~~~~~~~~~
+
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/@umijs/preset-umi/dist/features/prepare/esbuildPlugins/esbuildAliasPlugin.js:78:15
+    at Array.forEach (<anonymous>)
+    at setup (/preview/2023-08-31/vm-umi-operate-master/node_modules/@umijs/preset-umi/dist/features/prepare/esbuildPlugins/esbuildAliasPlugin.js:75:10)
+    at handlePlugins (/preview/2023-08-31/vm-umi-operate-master/node_modules/esbuild/lib/main.js:1279:21)
+    at buildOrContextImpl (/preview/2023-08-31/vm-umi-operate-master/node_modules/esbuild/lib/main.js:968:5)
+    at Object.buildOrContext (/preview/2023-08-31/vm-umi-operate-master/node_modules/esbuild/lib/main.js:776:5)
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/esbuild/lib/main.js:2172:68
+    at new Promise (<anonymous>)
+    at Object.context (/preview/2023-08-31/vm-umi-operate-master/node_modules/esbuild/lib/main.js:2172:27)
+    at Object.context (/preview/2023-08-31/vm-umi-operate-master/node_modules/esbuild/lib/main.js:2012:58)
+    at build (/preview/2023-08-31/vm-umi-operate-master/node_modules/@umijs/preset-umi/dist/features/prepare/build.js:91:46)
+    at Hook.fn (/preview/2023-08-31/vm-umi-operate-master/node_modules/@umijs/preset-umi/dist/features/prepare/prepare.js:105:40)
+    at async /preview/2023-08-31/vm-umi-operate-master/node_modules/@umijs/core/dist/service/service.js:184:15
+
+  The plugin "esbuildAliasPlugin" was triggered by this import
+
+    src/.umi/core/EmptyRoute.tsx:5:41:
+      5 │ import { Outlet, useOutletContext } from 'umi';
+        ╵                                          ~~~~~
+
+✘ [ERROR] Can't resolve '/preview/2023-08-31/vm-umi-operate-master/src/.umi/exports' in '/preview/2023-08-31/vm-umi-operate-master/src/pages/HostManage' [plugin esbuildAliasPlugin]
+
+    node_modules/enhanced-resolve/lib/Resolver.js:309:17:
+      309 │       const error = new Error("Can't " + message);
+          ╵                     ^
+
+    at finishWithoutResolve (/preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/Resolver.js:309:18)
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/Resolver.js:386:15
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/Resolver.js:435:5
+    at eval (eval at create (/preview/2023-08-31/vm-umi-operate-master/node_modules/tapable/lib/HookCodeFactory.js:33:10), <anonymous>:15:1)
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/Resolver.js:435:5
+    at eval (eval at create (/preview/2023-08-31/vm-umi-operate-master/node_modules/tapable/lib/HookCodeFactory.js:33:10), <anonymous>:27:1)
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/DescriptionFilePlugin.js:87:43
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/Resolver.js:435:5
+    at eval (eval at create (/preview/2023-08-31/vm-umi-operate-master/node_modules/tapable/lib/HookCodeFactory.js:33:10), <anonymous>:15:1)
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/Resolver.js:435:5
+    at eval (eval at create (/preview/2023-08-31/vm-umi-operate-master/node_modules/tapable/lib/HookCodeFactory.js:33:10), <anonymous>:16:1)
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/Resolver.js:435:5
+    at eval (eval at create (/preview/2023-08-31/vm-umi-operate-master/node_modules/tapable/lib/HookCodeFactory.js:33:10), <anonymous>:27:1)
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/DescriptionFilePlugin.js:87:43
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/Resolver.js:435:5
+    at eval (eval at create (/preview/2023-08-31/vm-umi-operate-master/node_modules/tapable/lib/HookCodeFactory.js:33:10), <anonymous>:16:1)
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/Resolver.js:435:5
+    at eval (eval at create (/preview/2023-08-31/vm-umi-operate-master/node_modules/tapable/lib/HookCodeFactory.js:33:10), <anonymous>:15:1)
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/DirectoryExistsPlugin.js:41:15
+    at processTicksAndRejections (node:internal/process/task_queues:82:21)
+
+  This error came from the "onResolve" callback registered here:
+
+    node_modules/@umijs/preset-umi/dist/features/prepare/esbuildPlugins/esbuildAliasPlugin.js:78:14:
+      78 │         build.onResolve({ filter }, async (args) => {
+         ╵               ~~~~~~~~~
+
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/@umijs/preset-umi/dist/features/prepare/esbuildPlugins/esbuildAliasPlugin.js:78:15
+    at Array.forEach (<anonymous>)
+    at setup (/preview/2023-08-31/vm-umi-operate-master/node_modules/@umijs/preset-umi/dist/features/prepare/esbuildPlugins/esbuildAliasPlugin.js:75:10)
+    at handlePlugins (/preview/2023-08-31/vm-umi-operate-master/node_modules/esbuild/lib/main.js:1279:21)
+    at buildOrContextImpl (/preview/2023-08-31/vm-umi-operate-master/node_modules/esbuild/lib/main.js:968:5)
+    at Object.buildOrContext (/preview/2023-08-31/vm-umi-operate-master/node_modules/esbuild/lib/main.js:776:5)
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/esbuild/lib/main.js:2172:68
+    at new Promise (<anonymous>)
+    at Object.context (/preview/2023-08-31/vm-umi-operate-master/node_modules/esbuild/lib/main.js:2172:27)
+    at Object.context (/preview/2023-08-31/vm-umi-operate-master/node_modules/esbuild/lib/main.js:2012:58)
+    at build (/preview/2023-08-31/vm-umi-operate-master/node_modules/@umijs/preset-umi/dist/features/prepare/build.js:91:46)
+    at Hook.fn (/preview/2023-08-31/vm-umi-operate-master/node_modules/@umijs/preset-umi/dist/features/prepare/prepare.js:105:40)
+    at async /preview/2023-08-31/vm-umi-operate-master/node_modules/@umijs/core/dist/service/service.js:184:15
+
+  The plugin "esbuildAliasPlugin" was triggered by this import
+
+    src/pages/HostManage/index.tsx:6:24:
+      6 │ import { history } from 'umi';
+        ╵                         ~~~~~
+
+✘ [ERROR] Can't resolve '/preview/2023-08-31/vm-umi-operate-master/src/.umi/exports' in '/preview/2023-08-31/vm-umi-operate-master/src/pages/VmManage' [plugin esbuildAliasPlugin]
+
+    node_modules/enhanced-resolve/lib/Resolver.js:309:17:
+      309 │       const error = new Error("Can't " + message);
+          ╵                     ^
+
+    at finishWithoutResolve (/preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/Resolver.js:309:18)
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/Resolver.js:386:15
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/Resolver.js:435:5
+    at eval (eval at create (/preview/2023-08-31/vm-umi-operate-master/node_modules/tapable/lib/HookCodeFactory.js:33:10), <anonymous>:15:1)
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/Resolver.js:435:5
+    at eval (eval at create (/preview/2023-08-31/vm-umi-operate-master/node_modules/tapable/lib/HookCodeFactory.js:33:10), <anonymous>:27:1)
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/DescriptionFilePlugin.js:87:43
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/Resolver.js:435:5
+    at eval (eval at create (/preview/2023-08-31/vm-umi-operate-master/node_modules/tapable/lib/HookCodeFactory.js:33:10), <anonymous>:15:1)
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/Resolver.js:435:5
+    at eval (eval at create (/preview/2023-08-31/vm-umi-operate-master/node_modules/tapable/lib/HookCodeFactory.js:33:10), <anonymous>:16:1)
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/Resolver.js:435:5
+    at eval (eval at create (/preview/2023-08-31/vm-umi-operate-master/node_modules/tapable/lib/HookCodeFactory.js:33:10), <anonymous>:27:1)
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/DescriptionFilePlugin.js:87:43
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/Resolver.js:435:5
+    at eval (eval at create (/preview/2023-08-31/vm-umi-operate-master/node_modules/tapable/lib/HookCodeFactory.js:33:10), <anonymous>:16:1)
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/Resolver.js:435:5
+    at eval (eval at create (/preview/2023-08-31/vm-umi-operate-master/node_modules/tapable/lib/HookCodeFactory.js:33:10), <anonymous>:15:1)
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/DirectoryExistsPlugin.js:41:15
+    at processTicksAndRejections (node:internal/process/task_queues:82:21)
+
+  This error came from the "onResolve" callback registered here:
+
+    node_modules/@umijs/preset-umi/dist/features/prepare/esbuildPlugins/esbuildAliasPlugin.js:78:14:
+      78 │         build.onResolve({ filter }, async (args) => {
+         ╵               ~~~~~~~~~
+
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/@umijs/preset-umi/dist/features/prepare/esbuildPlugins/esbuildAliasPlugin.js:78:15
+    at Array.forEach (<anonymous>)
+    at setup (/preview/2023-08-31/vm-umi-operate-master/node_modules/@umijs/preset-umi/dist/features/prepare/esbuildPlugins/esbuildAliasPlugin.js:75:10)
+    at handlePlugins (/preview/2023-08-31/vm-umi-operate-master/node_modules/esbuild/lib/main.js:1279:21)
+    at buildOrContextImpl (/preview/2023-08-31/vm-umi-operate-master/node_modules/esbuild/lib/main.js:968:5)
+    at Object.buildOrContext (/preview/2023-08-31/vm-umi-operate-master/node_modules/esbuild/lib/main.js:776:5)
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/esbuild/lib/main.js:2172:68
+    at new Promise (<anonymous>)
+    at Object.context (/preview/2023-08-31/vm-umi-operate-master/node_modules/esbuild/lib/main.js:2172:27)
+    at Object.context (/preview/2023-08-31/vm-umi-operate-master/node_modules/esbuild/lib/main.js:2012:58)
+    at build (/preview/2023-08-31/vm-umi-operate-master/node_modules/@umijs/preset-umi/dist/features/prepare/build.js:91:46)
+    at Hook.fn (/preview/2023-08-31/vm-umi-operate-master/node_modules/@umijs/preset-umi/dist/features/prepare/prepare.js:105:40)
+    at async /preview/2023-08-31/vm-umi-operate-master/node_modules/@umijs/core/dist/service/service.js:184:15
+
+  The plugin "esbuildAliasPlugin" was triggered by this import
+
+    src/pages/VmManage/index.tsx:7:24:
+      7 │ import { history } from 'umi';
+        ╵                         ~~~~~
+
+✘ [ERROR] Can't resolve '/preview/2023-08-31/vm-umi-operate-master/src/.umi/exports' in '/preview/2023-08-31/vm-umi-operate-master/src/pages/Monitor' [plugin esbuildAliasPlugin]
+
+    node_modules/enhanced-resolve/lib/Resolver.js:309:17:
+      309 │       const error = new Error("Can't " + message);
+          ╵                     ^
+
+    at finishWithoutResolve (/preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/Resolver.js:309:18)
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/Resolver.js:386:15
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/Resolver.js:435:5
+    at eval (eval at create (/preview/2023-08-31/vm-umi-operate-master/node_modules/tapable/lib/HookCodeFactory.js:33:10), <anonymous>:15:1)
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/Resolver.js:435:5
+    at eval (eval at create (/preview/2023-08-31/vm-umi-operate-master/node_modules/tapable/lib/HookCodeFactory.js:33:10), <anonymous>:27:1)
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/DescriptionFilePlugin.js:87:43
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/Resolver.js:435:5
+    at eval (eval at create (/preview/2023-08-31/vm-umi-operate-master/node_modules/tapable/lib/HookCodeFactory.js:33:10), <anonymous>:15:1)
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/Resolver.js:435:5
+    at eval (eval at create (/preview/2023-08-31/vm-umi-operate-master/node_modules/tapable/lib/HookCodeFactory.js:33:10), <anonymous>:16:1)
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/Resolver.js:435:5
+    at eval (eval at create (/preview/2023-08-31/vm-umi-operate-master/node_modules/tapable/lib/HookCodeFactory.js:33:10), <anonymous>:27:1)
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/DescriptionFilePlugin.js:87:43
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/Resolver.js:435:5
+    at eval (eval at create (/preview/2023-08-31/vm-umi-operate-master/node_modules/tapable/lib/HookCodeFactory.js:33:10), <anonymous>:16:1)
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/Resolver.js:435:5
+    at eval (eval at create (/preview/2023-08-31/vm-umi-operate-master/node_modules/tapable/lib/HookCodeFactory.js:33:10), <anonymous>:15:1)
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/DirectoryExistsPlugin.js:41:15
+    at processTicksAndRejections (node:internal/process/task_queues:82:21)
+
+  This error came from the "onResolve" callback registered here:
+
+    node_modules/@umijs/preset-umi/dist/features/prepare/esbuildPlugins/esbuildAliasPlugin.js:78:14:
+      78 │         build.onResolve({ filter }, async (args) => {
+         ╵               ~~~~~~~~~
+
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/@umijs/preset-umi/dist/features/prepare/esbuildPlugins/esbuildAliasPlugin.js:78:15
+    at Array.forEach (<anonymous>)
+    at setup (/preview/2023-08-31/vm-umi-operate-master/node_modules/@umijs/preset-umi/dist/features/prepare/esbuildPlugins/esbuildAliasPlugin.js:75:10)
+    at handlePlugins (/preview/2023-08-31/vm-umi-operate-master/node_modules/esbuild/lib/main.js:1279:21)
+    at buildOrContextImpl (/preview/2023-08-31/vm-umi-operate-master/node_modules/esbuild/lib/main.js:968:5)
+    at Object.buildOrContext (/preview/2023-08-31/vm-umi-operate-master/node_modules/esbuild/lib/main.js:776:5)
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/esbuild/lib/main.js:2172:68
+    at new Promise (<anonymous>)
+    at Object.context (/preview/2023-08-31/vm-umi-operate-master/node_modules/esbuild/lib/main.js:2172:27)
+    at Object.context (/preview/2023-08-31/vm-umi-operate-master/node_modules/esbuild/lib/main.js:2012:58)
+    at build (/preview/2023-08-31/vm-umi-operate-master/node_modules/@umijs/preset-umi/dist/features/prepare/build.js:91:46)
+    at Hook.fn (/preview/2023-08-31/vm-umi-operate-master/node_modules/@umijs/preset-umi/dist/features/prepare/prepare.js:105:40)
+    at async /preview/2023-08-31/vm-umi-operate-master/node_modules/@umijs/core/dist/service/service.js:184:15
+
+  The plugin "esbuildAliasPlugin" was triggered by this import
+
+    src/pages/Monitor/index.tsx:12:32:
+      12 │ import { useSearchParams } from '@umijs/max';
+         ╵                                 ~~~~~~~~~~~~
+
+error - [icons] build failed: Error: Build failed with 11 errors:
+node_modules/enhanced-resolve/lib/Resolver.js:309:17: ERROR: [plugin: esbuildAliasPlugin] Can't resolve '/preview/2023-08-31/vm-umi-operate-master/src/.umi/exports' in '/preview/2023-08-31/vm-umi-operate-master/src/.umi'
+node_modules/enhanced-resolve/lib/Resolver.js:309:17: ERROR: [plugin: esbuildAliasPlugin] Can't resolve '/preview/2023-08-31/vm-umi-operate-master/src/.umi/exports' in '/preview/2023-08-31/vm-umi-operate-master/src/.umi/core'
+node_modules/enhanced-resolve/lib/Resolver.js:309:17: ERROR: [plugin: esbuildAliasPlugin] Can't resolve '/preview/2023-08-31/vm-umi-operate-master/src/.umi/exports' in '/preview/2023-08-31/vm-umi-operate-master/src/.umi/core'
+node_modules/enhanced-resolve/lib/Resolver.js:309:17: ERROR: [plugin: esbuildAliasPlugin] Can't resolve '/preview/2023-08-31/vm-umi-operate-master/src/.umi/exports' in '/preview/2023-08-31/vm-umi-operate-master/src/pages/HostManage'
+node_modules/enhanced-resolve/lib/Resolver.js:309:17: ERROR: [plugin: esbuildAliasPlugin] Can't resolve '/preview/2023-08-31/vm-umi-operate-master/src/.umi/exports' in '/preview/2023-08-31/vm-umi-operate-master/src/pages/Monitor'
+...
+✘ [ERROR] Can't resolve '/preview/2023-08-31/vm-umi-operate-master/src/.umi/exports' in '/preview/2023-08-31/vm-umi-operate-master/src/.umi' [plugin esbuildAliasPlugin]
+
+    node_modules/enhanced-resolve/lib/Resolver.js:309:17:
+      309 │       const error = new Error("Can't " + message);
+          ╵                     ^
+
+    at finishWithoutResolve (/preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/Resolver.js:309:18)
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/Resolver.js:386:15
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/Resolver.js:435:5
+    at eval (eval at create (/preview/2023-08-31/vm-umi-operate-master/node_modules/tapable/lib/HookCodeFactory.js:33:10), <anonymous>:15:1)
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/Resolver.js:435:5
+    at eval (eval at create (/preview/2023-08-31/vm-umi-operate-master/node_modules/tapable/lib/HookCodeFactory.js:33:10), <anonymous>:27:1)
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/DescriptionFilePlugin.js:87:43
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/Resolver.js:435:5
+    at eval (eval at create (/preview/2023-08-31/vm-umi-operate-master/node_modules/tapable/lib/HookCodeFactory.js:33:10), <anonymous>:15:1)
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/Resolver.js:435:5
+    at eval (eval at create (/preview/2023-08-31/vm-umi-operate-master/node_modules/tapable/lib/HookCodeFactory.js:33:10), <anonymous>:16:1)
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/Resolver.js:435:5
+    at eval (eval at create (/preview/2023-08-31/vm-umi-operate-master/node_modules/tapable/lib/HookCodeFactory.js:33:10), <anonymous>:27:1)
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/DescriptionFilePlugin.js:87:43
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/Resolver.js:435:5
+    at eval (eval at create (/preview/2023-08-31/vm-umi-operate-master/node_modules/tapable/lib/HookCodeFactory.js:33:10), <anonymous>:16:1)
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/Resolver.js:435:5
+    at eval (eval at create (/preview/2023-08-31/vm-umi-operate-master/node_modules/tapable/lib/HookCodeFactory.js:33:10), <anonymous>:15:1)
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/DirectoryExistsPlugin.js:41:15
+    at processTicksAndRejections (node:internal/process/task_queues:82:21)
+
+  This error came from the "onResolve" callback registered here:
+
+    node_modules/@umijs/preset-umi/dist/features/prepare/esbuildPlugins/esbuildAliasPlugin.js:78:14:
+      78 │         build.onResolve({ filter }, async (args) => {
+         ╵               ~~~~~~~~~
+
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/@umijs/preset-umi/dist/features/prepare/esbuildPlugins/esbuildAliasPlugin.js:78:15
+    at Array.forEach (<anonymous>)
+    at setup (/preview/2023-08-31/vm-umi-operate-master/node_modules/@umijs/preset-umi/dist/features/prepare/esbuildPlugins/esbuildAliasPlugin.js:75:10)
+    at handlePlugins (/preview/2023-08-31/vm-umi-operate-master/node_modules/esbuild/lib/main.js:1279:21)
+    at buildOrContextImpl (/preview/2023-08-31/vm-umi-operate-master/node_modules/esbuild/lib/main.js:968:5)
+    at Object.buildOrContext (/preview/2023-08-31/vm-umi-operate-master/node_modules/esbuild/lib/main.js:776:5)
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/esbuild/lib/main.js:2172:68
+    at new Promise (<anonymous>)
+    at Object.context (/preview/2023-08-31/vm-umi-operate-master/node_modules/esbuild/lib/main.js:2172:27)
+    at Object.context (/preview/2023-08-31/vm-umi-operate-master/node_modules/esbuild/lib/main.js:2012:58)
+    at build (/preview/2023-08-31/vm-umi-operate-master/node_modules/@umijs/preset-umi/dist/features/prepare/build.js:91:46)
+    at Hook.fn (/preview/2023-08-31/vm-umi-operate-master/node_modules/@umijs/preset-umi/dist/features/prepare/prepare.js:105:40)
+    at async /preview/2023-08-31/vm-umi-operate-master/node_modules/@umijs/core/dist/service/service.js:184:15
+
+  The plugin "esbuildAliasPlugin" was triggered by this import
+
+    src/.umi/umi.ts:10:33:
+      10 │ import { ApplyPluginsType } from 'umi';
+         ╵                                  ~~~~~
+
+✘ [ERROR] Can't resolve '/preview/2023-08-31/vm-umi-operate-master/src/.umi/exports' in '/preview/2023-08-31/vm-umi-operate-master/src/.umi/core' [plugin esbuildAliasPlugin]
+
+    node_modules/enhanced-resolve/lib/Resolver.js:309:17:
+      309 │       const error = new Error("Can't " + message);
+          ╵                     ^
+
+    at finishWithoutResolve (/preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/Resolver.js:309:18)
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/Resolver.js:386:15
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/Resolver.js:435:5
+    at eval (eval at create (/preview/2023-08-31/vm-umi-operate-master/node_modules/tapable/lib/HookCodeFactory.js:33:10), <anonymous>:15:1)
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/Resolver.js:435:5
+    at eval (eval at create (/preview/2023-08-31/vm-umi-operate-master/node_modules/tapable/lib/HookCodeFactory.js:33:10), <anonymous>:27:1)
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/DescriptionFilePlugin.js:87:43
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/Resolver.js:435:5
+    at eval (eval at create (/preview/2023-08-31/vm-umi-operate-master/node_modules/tapable/lib/HookCodeFactory.js:33:10), <anonymous>:15:1)
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/Resolver.js:435:5
+    at eval (eval at create (/preview/2023-08-31/vm-umi-operate-master/node_modules/tapable/lib/HookCodeFactory.js:33:10), <anonymous>:16:1)
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/Resolver.js:435:5
+    at eval (eval at create (/preview/2023-08-31/vm-umi-operate-master/node_modules/tapable/lib/HookCodeFactory.js:33:10), <anonymous>:27:1)
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/DescriptionFilePlugin.js:87:43
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/Resolver.js:435:5
+    at eval (eval at create (/preview/2023-08-31/vm-umi-operate-master/node_modules/tapable/lib/HookCodeFactory.js:33:10), <anonymous>:16:1)
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/Resolver.js:435:5
+    at eval (eval at create (/preview/2023-08-31/vm-umi-operate-master/node_modules/tapable/lib/HookCodeFactory.js:33:10), <anonymous>:15:1)
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/DirectoryExistsPlugin.js:41:15
+    at processTicksAndRejections (node:internal/process/task_queues:82:21)
+
+  This error came from the "onResolve" callback registered here:
+
+    node_modules/@umijs/preset-umi/dist/features/prepare/esbuildPlugins/esbuildAliasPlugin.js:78:14:
+      78 │         build.onResolve({ filter }, async (args) => {
+         ╵               ~~~~~~~~~
+
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/@umijs/preset-umi/dist/features/prepare/esbuildPlugins/esbuildAliasPlugin.js:78:15
+    at Array.forEach (<anonymous>)
+    at setup (/preview/2023-08-31/vm-umi-operate-master/node_modules/@umijs/preset-umi/dist/features/prepare/esbuildPlugins/esbuildAliasPlugin.js:75:10)
+    at handlePlugins (/preview/2023-08-31/vm-umi-operate-master/node_modules/esbuild/lib/main.js:1279:21)
+    at buildOrContextImpl (/preview/2023-08-31/vm-umi-operate-master/node_modules/esbuild/lib/main.js:968:5)
+    at Object.buildOrContext (/preview/2023-08-31/vm-umi-operate-master/node_modules/esbuild/lib/main.js:776:5)
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/esbuild/lib/main.js:2172:68
+    at new Promise (<anonymous>)
+    at Object.context (/preview/2023-08-31/vm-umi-operate-master/node_modules/esbuild/lib/main.js:2172:27)
+    at Object.context (/preview/2023-08-31/vm-umi-operate-master/node_modules/esbuild/lib/main.js:2012:58)
+    at build (/preview/2023-08-31/vm-umi-operate-master/node_modules/@umijs/preset-umi/dist/features/prepare/build.js:91:46)
+    at Hook.fn (/preview/2023-08-31/vm-umi-operate-master/node_modules/@umijs/preset-umi/dist/features/prepare/prepare.js:105:40)
+    at async /preview/2023-08-31/vm-umi-operate-master/node_modules/@umijs/core/dist/service/service.js:184:15
+
+  The plugin "esbuildAliasPlugin" was triggered by this import
+
+    src/.umi/core/plugin.ts:9:30:
+      9 │ import { PluginManager } from 'umi';
+        ╵                               ~~~~~
+
+✘ [ERROR] Can't resolve '/preview/2023-08-31/vm-umi-operate-master/src/.umi/exports' in '/preview/2023-08-31/vm-umi-operate-master/src/.umi/core' [plugin esbuildAliasPlugin]
+
+    node_modules/enhanced-resolve/lib/Resolver.js:309:17:
+      309 │       const error = new Error("Can't " + message);
+          ╵                     ^
+
+    at finishWithoutResolve (/preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/Resolver.js:309:18)
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/Resolver.js:386:15
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/Resolver.js:435:5
+    at eval (eval at create (/preview/2023-08-31/vm-umi-operate-master/node_modules/tapable/lib/HookCodeFactory.js:33:10), <anonymous>:15:1)
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/Resolver.js:435:5
+    at eval (eval at create (/preview/2023-08-31/vm-umi-operate-master/node_modules/tapable/lib/HookCodeFactory.js:33:10), <anonymous>:27:1)
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/DescriptionFilePlugin.js:87:43
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/Resolver.js:435:5
+    at eval (eval at create (/preview/2023-08-31/vm-umi-operate-master/node_modules/tapable/lib/HookCodeFactory.js:33:10), <anonymous>:15:1)
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/Resolver.js:435:5
+    at eval (eval at create (/preview/2023-08-31/vm-umi-operate-master/node_modules/tapable/lib/HookCodeFactory.js:33:10), <anonymous>:16:1)
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/Resolver.js:435:5
+    at eval (eval at create (/preview/2023-08-31/vm-umi-operate-master/node_modules/tapable/lib/HookCodeFactory.js:33:10), <anonymous>:27:1)
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/DescriptionFilePlugin.js:87:43
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/Resolver.js:435:5
+    at eval (eval at create (/preview/2023-08-31/vm-umi-operate-master/node_modules/tapable/lib/HookCodeFactory.js:33:10), <anonymous>:16:1)
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/Resolver.js:435:5
+    at eval (eval at create (/preview/2023-08-31/vm-umi-operate-master/node_modules/tapable/lib/HookCodeFactory.js:33:10), <anonymous>:15:1)
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/DirectoryExistsPlugin.js:41:15
+    at processTicksAndRejections (node:internal/process/task_queues:82:21)
+
+  This error came from the "onResolve" callback registered here:
+
+    node_modules/@umijs/preset-umi/dist/features/prepare/esbuildPlugins/esbuildAliasPlugin.js:78:14:
+      78 │         build.onResolve({ filter }, async (args) => {
+         ╵               ~~~~~~~~~
+
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/@umijs/preset-umi/dist/features/prepare/esbuildPlugins/esbuildAliasPlugin.js:78:15
+    at Array.forEach (<anonymous>)
+    at setup (/preview/2023-08-31/vm-umi-operate-master/node_modules/@umijs/preset-umi/dist/features/prepare/esbuildPlugins/esbuildAliasPlugin.js:75:10)
+    at handlePlugins (/preview/2023-08-31/vm-umi-operate-master/node_modules/esbuild/lib/main.js:1279:21)
+    at buildOrContextImpl (/preview/2023-08-31/vm-umi-operate-master/node_modules/esbuild/lib/main.js:968:5)
+    at Object.buildOrContext (/preview/2023-08-31/vm-umi-operate-master/node_modules/esbuild/lib/main.js:776:5)
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/esbuild/lib/main.js:2172:68
+    at new Promise (<anonymous>)
+    at Object.context (/preview/2023-08-31/vm-umi-operate-master/node_modules/esbuild/lib/main.js:2172:27)
+    at Object.context (/preview/2023-08-31/vm-umi-operate-master/node_modules/esbuild/lib/main.js:2012:58)
+    at build (/preview/2023-08-31/vm-umi-operate-master/node_modules/@umijs/preset-umi/dist/features/prepare/build.js:91:46)
+    at Hook.fn (/preview/2023-08-31/vm-umi-operate-master/node_modules/@umijs/preset-umi/dist/features/prepare/prepare.js:105:40)
+    at async /preview/2023-08-31/vm-umi-operate-master/node_modules/@umijs/core/dist/service/service.js:184:15
+
+  The plugin "esbuildAliasPlugin" was triggered by this import
+
+    src/.umi/core/EmptyRoute.tsx:5:41:
+      5 │ import { Outlet, useOutletContext } from 'umi';
+        ╵                                          ~~~~~
+
+✘ [ERROR] Can't resolve '/preview/2023-08-31/vm-umi-operate-master/src/.umi/exports' in '/preview/2023-08-31/vm-umi-operate-master/src/.umi/plugin-layout' [plugin esbuildAliasPlugin]
+
+    node_modules/enhanced-resolve/lib/Resolver.js:309:17:
+      309 │       const error = new Error("Can't " + message);
+          ╵                     ^
+
+    at finishWithoutResolve (/preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/Resolver.js:309:18)
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/Resolver.js:386:15
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/Resolver.js:435:5
+    at eval (eval at create (/preview/2023-08-31/vm-umi-operate-master/node_modules/tapable/lib/HookCodeFactory.js:33:10), <anonymous>:15:1)
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/Resolver.js:435:5
+    at eval (eval at create (/preview/2023-08-31/vm-umi-operate-master/node_modules/tapable/lib/HookCodeFactory.js:33:10), <anonymous>:27:1)
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/DescriptionFilePlugin.js:87:43
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/Resolver.js:435:5
+    at eval (eval at create (/preview/2023-08-31/vm-umi-operate-master/node_modules/tapable/lib/HookCodeFactory.js:33:10), <anonymous>:15:1)
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/Resolver.js:435:5
+    at eval (eval at create (/preview/2023-08-31/vm-umi-operate-master/node_modules/tapable/lib/HookCodeFactory.js:33:10), <anonymous>:16:1)
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/Resolver.js:435:5
+    at eval (eval at create (/preview/2023-08-31/vm-umi-operate-master/node_modules/tapable/lib/HookCodeFactory.js:33:10), <anonymous>:27:1)
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/DescriptionFilePlugin.js:87:43
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/Resolver.js:435:5
+    at eval (eval at create (/preview/2023-08-31/vm-umi-operate-master/node_modules/tapable/lib/HookCodeFactory.js:33:10), <anonymous>:16:1)
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/Resolver.js:435:5
+    at eval (eval at create (/preview/2023-08-31/vm-umi-operate-master/node_modules/tapable/lib/HookCodeFactory.js:33:10), <anonymous>:15:1)
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/DirectoryExistsPlugin.js:41:15
+    at processTicksAndRejections (node:internal/process/task_queues:82:21)
+
+  This error came from the "onResolve" callback registered here:
+
+    node_modules/@umijs/preset-umi/dist/features/prepare/esbuildPlugins/esbuildAliasPlugin.js:78:14:
+      78 │         build.onResolve({ filter }, async (args) => {
+         ╵               ~~~~~~~~~
+
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/@umijs/preset-umi/dist/features/prepare/esbuildPlugins/esbuildAliasPlugin.js:78:15
+    at Array.forEach (<anonymous>)
+    at setup (/preview/2023-08-31/vm-umi-operate-master/node_modules/@umijs/preset-umi/dist/features/prepare/esbuildPlugins/esbuildAliasPlugin.js:75:10)
+    at handlePlugins (/preview/2023-08-31/vm-umi-operate-master/node_modules/esbuild/lib/main.js:1279:21)
+    at buildOrContextImpl (/preview/2023-08-31/vm-umi-operate-master/node_modules/esbuild/lib/main.js:968:5)
+    at Object.buildOrContext (/preview/2023-08-31/vm-umi-operate-master/node_modules/esbuild/lib/main.js:776:5)
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/esbuild/lib/main.js:2172:68
+    at new Promise (<anonymous>)
+    at Object.context (/preview/2023-08-31/vm-umi-operate-master/node_modules/esbuild/lib/main.js:2172:27)
+    at Object.context (/preview/2023-08-31/vm-umi-operate-master/node_modules/esbuild/lib/main.js:2012:58)
+    at build (/preview/2023-08-31/vm-umi-operate-master/node_modules/@umijs/preset-umi/dist/features/prepare/build.js:91:46)
+    at Hook.fn (/preview/2023-08-31/vm-umi-operate-master/node_modules/@umijs/preset-umi/dist/features/prepare/prepare.js:105:40)
+    at async /preview/2023-08-31/vm-umi-operate-master/node_modules/@umijs/core/dist/service/service.js:184:15
+
+  The plugin "esbuildAliasPlugin" was triggered by this import
+
+    src/.umi/plugin-layout/Layout.tsx:7:94:
+      7 │ ...vigate, Outlet, useAppData, useRouteData, matchRoutes } from 'umi';
+        ╵                                                                 ~~~~~
+
+✘ [ERROR] Can't resolve '/preview/2023-08-31/vm-umi-operate-master/src/.umi/exports' in '/preview/2023-08-31/vm-umi-operate-master/src/pages/Monitor' [plugin esbuildAliasPlugin]
+
+    node_modules/enhanced-resolve/lib/Resolver.js:309:17:
+      309 │       const error = new Error("Can't " + message);
+          ╵                     ^
+
+    at finishWithoutResolve (/preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/Resolver.js:309:18)
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/Resolver.js:386:15
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/Resolver.js:435:5
+    at eval (eval at create (/preview/2023-08-31/vm-umi-operate-master/node_modules/tapable/lib/HookCodeFactory.js:33:10), <anonymous>:15:1)
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/Resolver.js:435:5
+    at eval (eval at create (/preview/2023-08-31/vm-umi-operate-master/node_modules/tapable/lib/HookCodeFactory.js:33:10), <anonymous>:27:1)
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/DescriptionFilePlugin.js:87:43
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/Resolver.js:435:5
+    at eval (eval at create (/preview/2023-08-31/vm-umi-operate-master/node_modules/tapable/lib/HookCodeFactory.js:33:10), <anonymous>:15:1)
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/Resolver.js:435:5
+    at eval (eval at create (/preview/2023-08-31/vm-umi-operate-master/node_modules/tapable/lib/HookCodeFactory.js:33:10), <anonymous>:16:1)
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/Resolver.js:435:5
+    at eval (eval at create (/preview/2023-08-31/vm-umi-operate-master/node_modules/tapable/lib/HookCodeFactory.js:33:10), <anonymous>:27:1)
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/DescriptionFilePlugin.js:87:43
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/Resolver.js:435:5
+    at eval (eval at create (/preview/2023-08-31/vm-umi-operate-master/node_modules/tapable/lib/HookCodeFactory.js:33:10), <anonymous>:16:1)
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/Resolver.js:435:5
+    at eval (eval at create (/preview/2023-08-31/vm-umi-operate-master/node_modules/tapable/lib/HookCodeFactory.js:33:10), <anonymous>:15:1)
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/DirectoryExistsPlugin.js:41:15
+    at processTicksAndRejections (node:internal/process/task_queues:82:21)
+
+  This error came from the "onResolve" callback registered here:
+
+    node_modules/@umijs/preset-umi/dist/features/prepare/esbuildPlugins/esbuildAliasPlugin.js:78:14:
+      78 │         build.onResolve({ filter }, async (args) => {
+         ╵               ~~~~~~~~~
+
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/@umijs/preset-umi/dist/features/prepare/esbuildPlugins/esbuildAliasPlugin.js:78:15
+    at Array.forEach (<anonymous>)
+    at setup (/preview/2023-08-31/vm-umi-operate-master/node_modules/@umijs/preset-umi/dist/features/prepare/esbuildPlugins/esbuildAliasPlugin.js:75:10)
+    at handlePlugins (/preview/2023-08-31/vm-umi-operate-master/node_modules/esbuild/lib/main.js:1279:21)
+    at buildOrContextImpl (/preview/2023-08-31/vm-umi-operate-master/node_modules/esbuild/lib/main.js:968:5)
+    at Object.buildOrContext (/preview/2023-08-31/vm-umi-operate-master/node_modules/esbuild/lib/main.js:776:5)
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/esbuild/lib/main.js:2172:68
+    at new Promise (<anonymous>)
+    at Object.context (/preview/2023-08-31/vm-umi-operate-master/node_modules/esbuild/lib/main.js:2172:27)
+    at Object.context (/preview/2023-08-31/vm-umi-operate-master/node_modules/esbuild/lib/main.js:2012:58)
+    at build (/preview/2023-08-31/vm-umi-operate-master/node_modules/@umijs/preset-umi/dist/features/prepare/build.js:91:46)
+    at Hook.fn (/preview/2023-08-31/vm-umi-operate-master/node_modules/@umijs/preset-umi/dist/features/prepare/prepare.js:105:40)
+    at async /preview/2023-08-31/vm-umi-operate-master/node_modules/@umijs/core/dist/service/service.js:184:15
+
+  The plugin "esbuildAliasPlugin" was triggered by this import
+
+    src/pages/Monitor/index.tsx:12:32:
+      12 │ import { useSearchParams } from '@umijs/max';
+         ╵                                 ~~~~~~~~~~~~
+
+✘ [ERROR] Can't resolve '/preview/2023-08-31/vm-umi-operate-master/src/.umi/exports' in '/preview/2023-08-31/vm-umi-operate-master/src/pages/HostManage' [plugin esbuildAliasPlugin]
+
+    node_modules/enhanced-resolve/lib/Resolver.js:309:17:
+      309 │       const error = new Error("Can't " + message);
+          ╵                     ^
+
+    at finishWithoutResolve (/preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/Resolver.js:309:18)
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/Resolver.js:386:15
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/Resolver.js:435:5
+    at eval (eval at create (/preview/2023-08-31/vm-umi-operate-master/node_modules/tapable/lib/HookCodeFactory.js:33:10), <anonymous>:15:1)
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/Resolver.js:435:5
+    at eval (eval at create (/preview/2023-08-31/vm-umi-operate-master/node_modules/tapable/lib/HookCodeFactory.js:33:10), <anonymous>:27:1)
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/DescriptionFilePlugin.js:87:43
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/Resolver.js:435:5
+    at eval (eval at create (/preview/2023-08-31/vm-umi-operate-master/node_modules/tapable/lib/HookCodeFactory.js:33:10), <anonymous>:15:1)
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/Resolver.js:435:5
+    at eval (eval at create (/preview/2023-08-31/vm-umi-operate-master/node_modules/tapable/lib/HookCodeFactory.js:33:10), <anonymous>:16:1)
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/Resolver.js:435:5
+    at eval (eval at create (/preview/2023-08-31/vm-umi-operate-master/node_modules/tapable/lib/HookCodeFactory.js:33:10), <anonymous>:27:1)
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/DescriptionFilePlugin.js:87:43
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/Resolver.js:435:5
+    at eval (eval at create (/preview/2023-08-31/vm-umi-operate-master/node_modules/tapable/lib/HookCodeFactory.js:33:10), <anonymous>:16:1)
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/Resolver.js:435:5
+    at eval (eval at create (/preview/2023-08-31/vm-umi-operate-master/node_modules/tapable/lib/HookCodeFactory.js:33:10), <anonymous>:15:1)
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/DirectoryExistsPlugin.js:41:15
+    at processTicksAndRejections (node:internal/process/task_queues:82:21)
+
+  This error came from the "onResolve" callback registered here:
+
+    node_modules/@umijs/preset-umi/dist/features/prepare/esbuildPlugins/esbuildAliasPlugin.js:78:14:
+      78 │         build.onResolve({ filter }, async (args) => {
+         ╵               ~~~~~~~~~
+
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/@umijs/preset-umi/dist/features/prepare/esbuildPlugins/esbuildAliasPlugin.js:78:15
+    at Array.forEach (<anonymous>)
+    at setup (/preview/2023-08-31/vm-umi-operate-master/node_modules/@umijs/preset-umi/dist/features/prepare/esbuildPlugins/esbuildAliasPlugin.js:75:10)
+    at handlePlugins (/preview/2023-08-31/vm-umi-operate-master/node_modules/esbuild/lib/main.js:1279:21)
+    at buildOrContextImpl (/preview/2023-08-31/vm-umi-operate-master/node_modules/esbuild/lib/main.js:968:5)
+    at Object.buildOrContext (/preview/2023-08-31/vm-umi-operate-master/node_modules/esbuild/lib/main.js:776:5)
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/esbuild/lib/main.js:2172:68
+    at new Promise (<anonymous>)
+    at Object.context (/preview/2023-08-31/vm-umi-operate-master/node_modules/esbuild/lib/main.js:2172:27)
+    at Object.context (/preview/2023-08-31/vm-umi-operate-master/node_modules/esbuild/lib/main.js:2012:58)
+    at build (/preview/2023-08-31/vm-umi-operate-master/node_modules/@umijs/preset-umi/dist/features/prepare/build.js:91:46)
+    at Hook.fn (/preview/2023-08-31/vm-umi-operate-master/node_modules/@umijs/preset-umi/dist/features/prepare/prepare.js:105:40)
+    at async /preview/2023-08-31/vm-umi-operate-master/node_modules/@umijs/core/dist/service/service.js:184:15
+
+  The plugin "esbuildAliasPlugin" was triggered by this import
+
+    src/pages/HostManage/index.tsx:6:24:
+      6 │ import { history } from 'umi';
+        ╵                         ~~~~~
+
+✘ [ERROR] Can't resolve '/preview/2023-08-31/vm-umi-operate-master/src/.umi/exports' in '/preview/2023-08-31/vm-umi-operate-master/src/pages/VmManage' [plugin esbuildAliasPlugin]
+
+    node_modules/enhanced-resolve/lib/Resolver.js:309:17:
+      309 │       const error = new Error("Can't " + message);
+          ╵                     ^
+
+    at finishWithoutResolve (/preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/Resolver.js:309:18)
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/Resolver.js:386:15
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/Resolver.js:435:5
+    at eval (eval at create (/preview/2023-08-31/vm-umi-operate-master/node_modules/tapable/lib/HookCodeFactory.js:33:10), <anonymous>:15:1)
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/Resolver.js:435:5
+    at eval (eval at create (/preview/2023-08-31/vm-umi-operate-master/node_modules/tapable/lib/HookCodeFactory.js:33:10), <anonymous>:27:1)
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/DescriptionFilePlugin.js:87:43
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/Resolver.js:435:5
+    at eval (eval at create (/preview/2023-08-31/vm-umi-operate-master/node_modules/tapable/lib/HookCodeFactory.js:33:10), <anonymous>:15:1)
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/Resolver.js:435:5
+    at eval (eval at create (/preview/2023-08-31/vm-umi-operate-master/node_modules/tapable/lib/HookCodeFactory.js:33:10), <anonymous>:16:1)
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/Resolver.js:435:5
+    at eval (eval at create (/preview/2023-08-31/vm-umi-operate-master/node_modules/tapable/lib/HookCodeFactory.js:33:10), <anonymous>:27:1)
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/DescriptionFilePlugin.js:87:43
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/Resolver.js:435:5
+    at eval (eval at create (/preview/2023-08-31/vm-umi-operate-master/node_modules/tapable/lib/HookCodeFactory.js:33:10), <anonymous>:16:1)
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/Resolver.js:435:5
+    at eval (eval at create (/preview/2023-08-31/vm-umi-operate-master/node_modules/tapable/lib/HookCodeFactory.js:33:10), <anonymous>:15:1)
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/DirectoryExistsPlugin.js:41:15
+    at processTicksAndRejections (node:internal/process/task_queues:82:21)
+
+  This error came from the "onResolve" callback registered here:
+
+    node_modules/@umijs/preset-umi/dist/features/prepare/esbuildPlugins/esbuildAliasPlugin.js:78:14:
+      78 │         build.onResolve({ filter }, async (args) => {
+         ╵               ~~~~~~~~~
+
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/@umijs/preset-umi/dist/features/prepare/esbuildPlugins/esbuildAliasPlugin.js:78:15
+    at Array.forEach (<anonymous>)
+    at setup (/preview/2023-08-31/vm-umi-operate-master/node_modules/@umijs/preset-umi/dist/features/prepare/esbuildPlugins/esbuildAliasPlugin.js:75:10)
+    at handlePlugins (/preview/2023-08-31/vm-umi-operate-master/node_modules/esbuild/lib/main.js:1279:21)
+    at buildOrContextImpl (/preview/2023-08-31/vm-umi-operate-master/node_modules/esbuild/lib/main.js:968:5)
+    at Object.buildOrContext (/preview/2023-08-31/vm-umi-operate-master/node_modules/esbuild/lib/main.js:776:5)
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/esbuild/lib/main.js:2172:68
+    at new Promise (<anonymous>)
+    at Object.context (/preview/2023-08-31/vm-umi-operate-master/node_modules/esbuild/lib/main.js:2172:27)
+    at Object.context (/preview/2023-08-31/vm-umi-operate-master/node_modules/esbuild/lib/main.js:2012:58)
+    at build (/preview/2023-08-31/vm-umi-operate-master/node_modules/@umijs/preset-umi/dist/features/prepare/build.js:91:46)
+    at Hook.fn (/preview/2023-08-31/vm-umi-operate-master/node_modules/@umijs/preset-umi/dist/features/prepare/prepare.js:105:40)
+    at async /preview/2023-08-31/vm-umi-operate-master/node_modules/@umijs/core/dist/service/service.js:184:15
+
+  The plugin "esbuildAliasPlugin" was triggered by this import
+
+    src/pages/VmManage/index.tsx:7:24:
+      7 │ import { history } from 'umi';
+        ╵                         ~~~~~
+
+✘ [ERROR] Can't resolve '/preview/2023-08-31/vm-umi-operate-master/src/.umi/exports' in '/preview/2023-08-31/vm-umi-operate-master/src/.umi/plugin-layout' [plugin esbuildAliasPlugin]
+
+    node_modules/enhanced-resolve/lib/Resolver.js:309:17:
+      309 │       const error = new Error("Can't " + message);
+          ╵                     ^
+
+    at finishWithoutResolve (/preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/Resolver.js:309:18)
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/Resolver.js:386:15
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/Resolver.js:435:5
+    at eval (eval at create (/preview/2023-08-31/vm-umi-operate-master/node_modules/tapable/lib/HookCodeFactory.js:33:10), <anonymous>:15:1)
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/Resolver.js:435:5
+    at eval (eval at create (/preview/2023-08-31/vm-umi-operate-master/node_modules/tapable/lib/HookCodeFactory.js:33:10), <anonymous>:27:1)
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/DescriptionFilePlugin.js:87:43
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/Resolver.js:435:5
+    at eval (eval at create (/preview/2023-08-31/vm-umi-operate-master/node_modules/tapable/lib/HookCodeFactory.js:33:10), <anonymous>:15:1)
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/Resolver.js:435:5
+    at eval (eval at create (/preview/2023-08-31/vm-umi-operate-master/node_modules/tapable/lib/HookCodeFactory.js:33:10), <anonymous>:16:1)
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/Resolver.js:435:5
+    at eval (eval at create (/preview/2023-08-31/vm-umi-operate-master/node_modules/tapable/lib/HookCodeFactory.js:33:10), <anonymous>:27:1)
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/DescriptionFilePlugin.js:87:43
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/Resolver.js:435:5
+    at eval (eval at create (/preview/2023-08-31/vm-umi-operate-master/node_modules/tapable/lib/HookCodeFactory.js:33:10), <anonymous>:16:1)
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/Resolver.js:435:5
+    at eval (eval at create (/preview/2023-08-31/vm-umi-operate-master/node_modules/tapable/lib/HookCodeFactory.js:33:10), <anonymous>:15:1)
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/DirectoryExistsPlugin.js:41:15
+    at processTicksAndRejections (node:internal/process/task_queues:82:21)
+
+  This error came from the "onResolve" callback registered here:
+
+    node_modules/@umijs/preset-umi/dist/features/prepare/esbuildPlugins/esbuildAliasPlugin.js:78:14:
+      78 │         build.onResolve({ filter }, async (args) => {
+         ╵               ~~~~~~~~~
+
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/@umijs/preset-umi/dist/features/prepare/esbuildPlugins/esbuildAliasPlugin.js:78:15
+    at Array.forEach (<anonymous>)
+    at setup (/preview/2023-08-31/vm-umi-operate-master/node_modules/@umijs/preset-umi/dist/features/prepare/esbuildPlugins/esbuildAliasPlugin.js:75:10)
+    at handlePlugins (/preview/2023-08-31/vm-umi-operate-master/node_modules/esbuild/lib/main.js:1279:21)
+    at buildOrContextImpl (/preview/2023-08-31/vm-umi-operate-master/node_modules/esbuild/lib/main.js:968:5)
+    at Object.buildOrContext (/preview/2023-08-31/vm-umi-operate-master/node_modules/esbuild/lib/main.js:776:5)
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/esbuild/lib/main.js:2172:68
+    at new Promise (<anonymous>)
+    at Object.context (/preview/2023-08-31/vm-umi-operate-master/node_modules/esbuild/lib/main.js:2172:27)
+    at Object.context (/preview/2023-08-31/vm-umi-operate-master/node_modules/esbuild/lib/main.js:2012:58)
+    at build (/preview/2023-08-31/vm-umi-operate-master/node_modules/@umijs/preset-umi/dist/features/prepare/build.js:91:46)
+    at Hook.fn (/preview/2023-08-31/vm-umi-operate-master/node_modules/@umijs/preset-umi/dist/features/prepare/prepare.js:105:40)
+    at async /preview/2023-08-31/vm-umi-operate-master/node_modules/@umijs/core/dist/service/service.js:184:15
+
+  The plugin "esbuildAliasPlugin" was triggered by this import
+
+    src/.umi/plugin-layout/Exception.tsx:5:37:
+      5 │ import { history, type IRoute } from 'umi';
+        ╵                                      ~~~~~
+
+error - [icons] build failed: Error: Build failed with 8 errors:
+node_modules/enhanced-resolve/lib/Resolver.js:309:17: ERROR: [plugin: esbuildAliasPlugin] Can't resolve '/preview/2023-08-31/vm-umi-operate-master/src/.umi/exports' in '/preview/2023-08-31/vm-umi-operate-master/src/.umi'
+node_modules/enhanced-resolve/lib/Resolver.js:309:17: ERROR: [plugin: esbuildAliasPlugin] Can't resolve '/preview/2023-08-31/vm-umi-operate-master/src/.umi/exports' in '/preview/2023-08-31/vm-umi-operate-master/src/.umi/core'
+node_modules/enhanced-resolve/lib/Resolver.js:309:17: ERROR: [plugin: esbuildAliasPlugin] Can't resolve '/preview/2023-08-31/vm-umi-operate-master/src/.umi/exports' in '/preview/2023-08-31/vm-umi-operate-master/src/.umi/core'
+node_modules/enhanced-resolve/lib/Resolver.js:309:17: ERROR: [plugin: esbuildAliasPlugin] Can't resolve '/preview/2023-08-31/vm-umi-operate-master/src/.umi/exports' in '/preview/2023-08-31/vm-umi-operate-master/src/.umi/plugin-layout'
+node_modules/enhanced-resolve/lib/Resolver.js:309:17: ERROR: [plugin: esbuildAliasPlugin] Can't resolve '/preview/2023-08-31/vm-umi-operate-master/src/.umi/exports' in '/preview/2023-08-31/vm-umi-operate-master/src/.umi/plugin-layout'
+...
+✘ [ERROR] Can't resolve '/preview/2023-08-31/vm-umi-operate-master/src/.umi/exports' in '/preview/2023-08-31/vm-umi-operate-master/src/.umi' [plugin esbuildAliasPlugin]
+
+    node_modules/enhanced-resolve/lib/Resolver.js:309:17:
+      309 │       const error = new Error("Can't " + message);
+          ╵                     ^
+
+    at finishWithoutResolve (/preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/Resolver.js:309:18)
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/Resolver.js:386:15
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/Resolver.js:435:5
+    at eval (eval at create (/preview/2023-08-31/vm-umi-operate-master/node_modules/tapable/lib/HookCodeFactory.js:33:10), <anonymous>:15:1)
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/Resolver.js:435:5
+    at eval (eval at create (/preview/2023-08-31/vm-umi-operate-master/node_modules/tapable/lib/HookCodeFactory.js:33:10), <anonymous>:27:1)
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/DescriptionFilePlugin.js:87:43
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/Resolver.js:435:5
+    at eval (eval at create (/preview/2023-08-31/vm-umi-operate-master/node_modules/tapable/lib/HookCodeFactory.js:33:10), <anonymous>:15:1)
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/Resolver.js:435:5
+    at eval (eval at create (/preview/2023-08-31/vm-umi-operate-master/node_modules/tapable/lib/HookCodeFactory.js:33:10), <anonymous>:16:1)
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/Resolver.js:435:5
+    at eval (eval at create (/preview/2023-08-31/vm-umi-operate-master/node_modules/tapable/lib/HookCodeFactory.js:33:10), <anonymous>:27:1)
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/DescriptionFilePlugin.js:87:43
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/Resolver.js:435:5
+    at eval (eval at create (/preview/2023-08-31/vm-umi-operate-master/node_modules/tapable/lib/HookCodeFactory.js:33:10), <anonymous>:16:1)
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/Resolver.js:435:5
+    at eval (eval at create (/preview/2023-08-31/vm-umi-operate-master/node_modules/tapable/lib/HookCodeFactory.js:33:10), <anonymous>:15:1)
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/DirectoryExistsPlugin.js:41:15
+    at processTicksAndRejections (node:internal/process/task_queues:82:21)
+
+  This error came from the "onResolve" callback registered here:
+
+    node_modules/@umijs/preset-umi/dist/features/prepare/esbuildPlugins/esbuildAliasPlugin.js:78:14:
+      78 │         build.onResolve({ filter }, async (args) => {
+         ╵               ~~~~~~~~~
+
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/@umijs/preset-umi/dist/features/prepare/esbuildPlugins/esbuildAliasPlugin.js:78:15
+    at Array.forEach (<anonymous>)
+    at setup (/preview/2023-08-31/vm-umi-operate-master/node_modules/@umijs/preset-umi/dist/features/prepare/esbuildPlugins/esbuildAliasPlugin.js:75:10)
+    at handlePlugins (/preview/2023-08-31/vm-umi-operate-master/node_modules/esbuild/lib/main.js:1279:21)
+    at buildOrContextImpl (/preview/2023-08-31/vm-umi-operate-master/node_modules/esbuild/lib/main.js:968:5)
+    at Object.buildOrContext (/preview/2023-08-31/vm-umi-operate-master/node_modules/esbuild/lib/main.js:776:5)
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/esbuild/lib/main.js:2172:68
+    at new Promise (<anonymous>)
+    at Object.context (/preview/2023-08-31/vm-umi-operate-master/node_modules/esbuild/lib/main.js:2172:27)
+    at Object.context (/preview/2023-08-31/vm-umi-operate-master/node_modules/esbuild/lib/main.js:2012:58)
+    at build (/preview/2023-08-31/vm-umi-operate-master/node_modules/@umijs/preset-umi/dist/features/prepare/build.js:91:46)
+    at Hook.fn (/preview/2023-08-31/vm-umi-operate-master/node_modules/@umijs/preset-umi/dist/features/prepare/prepare.js:105:40)
+    at async /preview/2023-08-31/vm-umi-operate-master/node_modules/@umijs/core/dist/service/service.js:184:15
+
+  The plugin "esbuildAliasPlugin" was triggered by this import
+
+    src/.umi/umi.ts:10:33:
+      10 │ import { ApplyPluginsType } from 'umi';
+         ╵                                  ~~~~~
+
+✘ [ERROR] Can't resolve '/preview/2023-08-31/vm-umi-operate-master/src/.umi/exports' in '/preview/2023-08-31/vm-umi-operate-master/src/.umi/core' [plugin esbuildAliasPlugin]
+
+    node_modules/enhanced-resolve/lib/Resolver.js:309:17:
+      309 │       const error = new Error("Can't " + message);
+          ╵                     ^
+
+    at finishWithoutResolve (/preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/Resolver.js:309:18)
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/Resolver.js:386:15
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/Resolver.js:435:5
+    at eval (eval at create (/preview/2023-08-31/vm-umi-operate-master/node_modules/tapable/lib/HookCodeFactory.js:33:10), <anonymous>:15:1)
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/Resolver.js:435:5
+    at eval (eval at create (/preview/2023-08-31/vm-umi-operate-master/node_modules/tapable/lib/HookCodeFactory.js:33:10), <anonymous>:27:1)
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/DescriptionFilePlugin.js:87:43
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/Resolver.js:435:5
+    at eval (eval at create (/preview/2023-08-31/vm-umi-operate-master/node_modules/tapable/lib/HookCodeFactory.js:33:10), <anonymous>:15:1)
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/Resolver.js:435:5
+    at eval (eval at create (/preview/2023-08-31/vm-umi-operate-master/node_modules/tapable/lib/HookCodeFactory.js:33:10), <anonymous>:16:1)
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/Resolver.js:435:5
+    at eval (eval at create (/preview/2023-08-31/vm-umi-operate-master/node_modules/tapable/lib/HookCodeFactory.js:33:10), <anonymous>:27:1)
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/DescriptionFilePlugin.js:87:43
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/Resolver.js:435:5
+    at eval (eval at create (/preview/2023-08-31/vm-umi-operate-master/node_modules/tapable/lib/HookCodeFactory.js:33:10), <anonymous>:16:1)
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/Resolver.js:435:5
+    at eval (eval at create (/preview/2023-08-31/vm-umi-operate-master/node_modules/tapable/lib/HookCodeFactory.js:33:10), <anonymous>:15:1)
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/DirectoryExistsPlugin.js:41:15
+    at processTicksAndRejections (node:internal/process/task_queues:82:21)
+
+  This error came from the "onResolve" callback registered here:
+
+    node_modules/@umijs/preset-umi/dist/features/prepare/esbuildPlugins/esbuildAliasPlugin.js:78:14:
+      78 │         build.onResolve({ filter }, async (args) => {
+         ╵               ~~~~~~~~~
+
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/@umijs/preset-umi/dist/features/prepare/esbuildPlugins/esbuildAliasPlugin.js:78:15
+    at Array.forEach (<anonymous>)
+    at setup (/preview/2023-08-31/vm-umi-operate-master/node_modules/@umijs/preset-umi/dist/features/prepare/esbuildPlugins/esbuildAliasPlugin.js:75:10)
+    at handlePlugins (/preview/2023-08-31/vm-umi-operate-master/node_modules/esbuild/lib/main.js:1279:21)
+    at buildOrContextImpl (/preview/2023-08-31/vm-umi-operate-master/node_modules/esbuild/lib/main.js:968:5)
+    at Object.buildOrContext (/preview/2023-08-31/vm-umi-operate-master/node_modules/esbuild/lib/main.js:776:5)
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/esbuild/lib/main.js:2172:68
+    at new Promise (<anonymous>)
+    at Object.context (/preview/2023-08-31/vm-umi-operate-master/node_modules/esbuild/lib/main.js:2172:27)
+    at Object.context (/preview/2023-08-31/vm-umi-operate-master/node_modules/esbuild/lib/main.js:2012:58)
+    at build (/preview/2023-08-31/vm-umi-operate-master/node_modules/@umijs/preset-umi/dist/features/prepare/build.js:91:46)
+    at Hook.fn (/preview/2023-08-31/vm-umi-operate-master/node_modules/@umijs/preset-umi/dist/features/prepare/prepare.js:105:40)
+    at async /preview/2023-08-31/vm-umi-operate-master/node_modules/@umijs/core/dist/service/service.js:184:15
+
+  The plugin "esbuildAliasPlugin" was triggered by this import
+
+    src/.umi/core/plugin.ts:9:30:
+      9 │ import { PluginManager } from 'umi';
+        ╵                               ~~~~~
+
+✘ [ERROR] Can't resolve '/preview/2023-08-31/vm-umi-operate-master/src/.umi/exports' in '/preview/2023-08-31/vm-umi-operate-master/src/.umi/plugin-layout' [plugin esbuildAliasPlugin]
+
+    node_modules/enhanced-resolve/lib/Resolver.js:309:17:
+      309 │       const error = new Error("Can't " + message);
+          ╵                     ^
+
+    at finishWithoutResolve (/preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/Resolver.js:309:18)
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/Resolver.js:386:15
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/Resolver.js:435:5
+    at eval (eval at create (/preview/2023-08-31/vm-umi-operate-master/node_modules/tapable/lib/HookCodeFactory.js:33:10), <anonymous>:15:1)
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/Resolver.js:435:5
+    at eval (eval at create (/preview/2023-08-31/vm-umi-operate-master/node_modules/tapable/lib/HookCodeFactory.js:33:10), <anonymous>:27:1)
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/DescriptionFilePlugin.js:87:43
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/Resolver.js:435:5
+    at eval (eval at create (/preview/2023-08-31/vm-umi-operate-master/node_modules/tapable/lib/HookCodeFactory.js:33:10), <anonymous>:15:1)
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/Resolver.js:435:5
+    at eval (eval at create (/preview/2023-08-31/vm-umi-operate-master/node_modules/tapable/lib/HookCodeFactory.js:33:10), <anonymous>:16:1)
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/Resolver.js:435:5
+    at eval (eval at create (/preview/2023-08-31/vm-umi-operate-master/node_modules/tapable/lib/HookCodeFactory.js:33:10), <anonymous>:27:1)
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/DescriptionFilePlugin.js:87:43
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/Resolver.js:435:5
+    at eval (eval at create (/preview/2023-08-31/vm-umi-operate-master/node_modules/tapable/lib/HookCodeFactory.js:33:10), <anonymous>:16:1)
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/Resolver.js:435:5
+    at eval (eval at create (/preview/2023-08-31/vm-umi-operate-master/node_modules/tapable/lib/HookCodeFactory.js:33:10), <anonymous>:15:1)
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/DirectoryExistsPlugin.js:41:15
+    at processTicksAndRejections (node:internal/process/task_queues:82:21)
+
+  This error came from the "onResolve" callback registered here:
+
+    node_modules/@umijs/preset-umi/dist/features/prepare/esbuildPlugins/esbuildAliasPlugin.js:78:14:
+      78 │         build.onResolve({ filter }, async (args) => {
+         ╵               ~~~~~~~~~
+
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/@umijs/preset-umi/dist/features/prepare/esbuildPlugins/esbuildAliasPlugin.js:78:15
+    at Array.forEach (<anonymous>)
+    at setup (/preview/2023-08-31/vm-umi-operate-master/node_modules/@umijs/preset-umi/dist/features/prepare/esbuildPlugins/esbuildAliasPlugin.js:75:10)
+    at handlePlugins (/preview/2023-08-31/vm-umi-operate-master/node_modules/esbuild/lib/main.js:1279:21)
+    at buildOrContextImpl (/preview/2023-08-31/vm-umi-operate-master/node_modules/esbuild/lib/main.js:968:5)
+    at Object.buildOrContext (/preview/2023-08-31/vm-umi-operate-master/node_modules/esbuild/lib/main.js:776:5)
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/esbuild/lib/main.js:2172:68
+    at new Promise (<anonymous>)
+    at Object.context (/preview/2023-08-31/vm-umi-operate-master/node_modules/esbuild/lib/main.js:2172:27)
+    at Object.context (/preview/2023-08-31/vm-umi-operate-master/node_modules/esbuild/lib/main.js:2012:58)
+    at build (/preview/2023-08-31/vm-umi-operate-master/node_modules/@umijs/preset-umi/dist/features/prepare/build.js:91:46)
+    at Hook.fn (/preview/2023-08-31/vm-umi-operate-master/node_modules/@umijs/preset-umi/dist/features/prepare/prepare.js:105:40)
+    at async /preview/2023-08-31/vm-umi-operate-master/node_modules/@umijs/core/dist/service/service.js:184:15
+
+  The plugin "esbuildAliasPlugin" was triggered by this import
+
+    src/.umi/plugin-layout/Layout.tsx:7:94:
+      7 │ ...vigate, Outlet, useAppData, useRouteData, matchRoutes } from 'umi';
+        ╵                                                                 ~~~~~
+
+✘ [ERROR] Can't resolve '/preview/2023-08-31/vm-umi-operate-master/src/.umi/exports' in '/preview/2023-08-31/vm-umi-operate-master/src/.umi/core' [plugin esbuildAliasPlugin]
+
+    node_modules/enhanced-resolve/lib/Resolver.js:309:17:
+      309 │       const error = new Error("Can't " + message);
+          ╵                     ^
+
+    at finishWithoutResolve (/preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/Resolver.js:309:18)
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/Resolver.js:386:15
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/Resolver.js:435:5
+    at eval (eval at create (/preview/2023-08-31/vm-umi-operate-master/node_modules/tapable/lib/HookCodeFactory.js:33:10), <anonymous>:15:1)
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/Resolver.js:435:5
+    at eval (eval at create (/preview/2023-08-31/vm-umi-operate-master/node_modules/tapable/lib/HookCodeFactory.js:33:10), <anonymous>:27:1)
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/DescriptionFilePlugin.js:87:43
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/Resolver.js:435:5
+    at eval (eval at create (/preview/2023-08-31/vm-umi-operate-master/node_modules/tapable/lib/HookCodeFactory.js:33:10), <anonymous>:15:1)
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/Resolver.js:435:5
+    at eval (eval at create (/preview/2023-08-31/vm-umi-operate-master/node_modules/tapable/lib/HookCodeFactory.js:33:10), <anonymous>:16:1)
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/Resolver.js:435:5
+    at eval (eval at create (/preview/2023-08-31/vm-umi-operate-master/node_modules/tapable/lib/HookCodeFactory.js:33:10), <anonymous>:27:1)
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/DescriptionFilePlugin.js:87:43
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/Resolver.js:435:5
+    at eval (eval at create (/preview/2023-08-31/vm-umi-operate-master/node_modules/tapable/lib/HookCodeFactory.js:33:10), <anonymous>:16:1)
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/Resolver.js:435:5
+    at eval (eval at create (/preview/2023-08-31/vm-umi-operate-master/node_modules/tapable/lib/HookCodeFactory.js:33:10), <anonymous>:15:1)
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/DirectoryExistsPlugin.js:41:15
+    at processTicksAndRejections (node:internal/process/task_queues:82:21)
+
+  This error came from the "onResolve" callback registered here:
+
+    node_modules/@umijs/preset-umi/dist/features/prepare/esbuildPlugins/esbuildAliasPlugin.js:78:14:
+      78 │         build.onResolve({ filter }, async (args) => {
+         ╵               ~~~~~~~~~
+
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/@umijs/preset-umi/dist/features/prepare/esbuildPlugins/esbuildAliasPlugin.js:78:15
+    at Array.forEach (<anonymous>)
+    at setup (/preview/2023-08-31/vm-umi-operate-master/node_modules/@umijs/preset-umi/dist/features/prepare/esbuildPlugins/esbuildAliasPlugin.js:75:10)
+    at handlePlugins (/preview/2023-08-31/vm-umi-operate-master/node_modules/esbuild/lib/main.js:1279:21)
+    at buildOrContextImpl (/preview/2023-08-31/vm-umi-operate-master/node_modules/esbuild/lib/main.js:968:5)
+    at Object.buildOrContext (/preview/2023-08-31/vm-umi-operate-master/node_modules/esbuild/lib/main.js:776:5)
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/esbuild/lib/main.js:2172:68
+    at new Promise (<anonymous>)
+    at Object.context (/preview/2023-08-31/vm-umi-operate-master/node_modules/esbuild/lib/main.js:2172:27)
+    at Object.context (/preview/2023-08-31/vm-umi-operate-master/node_modules/esbuild/lib/main.js:2012:58)
+    at build (/preview/2023-08-31/vm-umi-operate-master/node_modules/@umijs/preset-umi/dist/features/prepare/build.js:91:46)
+    at Hook.fn (/preview/2023-08-31/vm-umi-operate-master/node_modules/@umijs/preset-umi/dist/features/prepare/prepare.js:105:40)
+    at async /preview/2023-08-31/vm-umi-operate-master/node_modules/@umijs/core/dist/service/service.js:184:15
+
+  The plugin "esbuildAliasPlugin" was triggered by this import
+
+    src/.umi/core/EmptyRoute.tsx:5:41:
+      5 │ import { Outlet, useOutletContext } from 'umi';
+        ╵                                          ~~~~~
+
+✘ [ERROR] Can't resolve '/preview/2023-08-31/vm-umi-operate-master/src/.umi/exports' in '/preview/2023-08-31/vm-umi-operate-master/src/pages/Monitor' [plugin esbuildAliasPlugin]
+
+    node_modules/enhanced-resolve/lib/Resolver.js:309:17:
+      309 │       const error = new Error("Can't " + message);
+          ╵                     ^
+
+    at finishWithoutResolve (/preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/Resolver.js:309:18)
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/Resolver.js:386:15
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/Resolver.js:435:5
+    at eval (eval at create (/preview/2023-08-31/vm-umi-operate-master/node_modules/tapable/lib/HookCodeFactory.js:33:10), <anonymous>:15:1)
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/Resolver.js:435:5
+    at eval (eval at create (/preview/2023-08-31/vm-umi-operate-master/node_modules/tapable/lib/HookCodeFactory.js:33:10), <anonymous>:27:1)
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/DescriptionFilePlugin.js:87:43
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/Resolver.js:435:5
+    at eval (eval at create (/preview/2023-08-31/vm-umi-operate-master/node_modules/tapable/lib/HookCodeFactory.js:33:10), <anonymous>:15:1)
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/Resolver.js:435:5
+    at eval (eval at create (/preview/2023-08-31/vm-umi-operate-master/node_modules/tapable/lib/HookCodeFactory.js:33:10), <anonymous>:16:1)
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/Resolver.js:435:5
+    at eval (eval at create (/preview/2023-08-31/vm-umi-operate-master/node_modules/tapable/lib/HookCodeFactory.js:33:10), <anonymous>:27:1)
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/DescriptionFilePlugin.js:87:43
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/Resolver.js:435:5
+    at eval (eval at create (/preview/2023-08-31/vm-umi-operate-master/node_modules/tapable/lib/HookCodeFactory.js:33:10), <anonymous>:16:1)
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/Resolver.js:435:5
+    at eval (eval at create (/preview/2023-08-31/vm-umi-operate-master/node_modules/tapable/lib/HookCodeFactory.js:33:10), <anonymous>:15:1)
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/DirectoryExistsPlugin.js:41:15
+    at processTicksAndRejections (node:internal/process/task_queues:82:21)
+
+  This error came from the "onResolve" callback registered here:
+
+    node_modules/@umijs/preset-umi/dist/features/prepare/esbuildPlugins/esbuildAliasPlugin.js:78:14:
+      78 │         build.onResolve({ filter }, async (args) => {
+         ╵               ~~~~~~~~~
+
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/@umijs/preset-umi/dist/features/prepare/esbuildPlugins/esbuildAliasPlugin.js:78:15
+    at Array.forEach (<anonymous>)
+    at setup (/preview/2023-08-31/vm-umi-operate-master/node_modules/@umijs/preset-umi/dist/features/prepare/esbuildPlugins/esbuildAliasPlugin.js:75:10)
+    at handlePlugins (/preview/2023-08-31/vm-umi-operate-master/node_modules/esbuild/lib/main.js:1279:21)
+    at buildOrContextImpl (/preview/2023-08-31/vm-umi-operate-master/node_modules/esbuild/lib/main.js:968:5)
+    at Object.buildOrContext (/preview/2023-08-31/vm-umi-operate-master/node_modules/esbuild/lib/main.js:776:5)
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/esbuild/lib/main.js:2172:68
+    at new Promise (<anonymous>)
+    at Object.context (/preview/2023-08-31/vm-umi-operate-master/node_modules/esbuild/lib/main.js:2172:27)
+    at Object.context (/preview/2023-08-31/vm-umi-operate-master/node_modules/esbuild/lib/main.js:2012:58)
+    at build (/preview/2023-08-31/vm-umi-operate-master/node_modules/@umijs/preset-umi/dist/features/prepare/build.js:91:46)
+    at Hook.fn (/preview/2023-08-31/vm-umi-operate-master/node_modules/@umijs/preset-umi/dist/features/prepare/prepare.js:105:40)
+    at async /preview/2023-08-31/vm-umi-operate-master/node_modules/@umijs/core/dist/service/service.js:184:15
+
+  The plugin "esbuildAliasPlugin" was triggered by this import
+
+    src/pages/Monitor/index.tsx:12:32:
+      12 │ import { useSearchParams } from '@umijs/max';
+         ╵                                 ~~~~~~~~~~~~
+
+✘ [ERROR] Can't resolve '/preview/2023-08-31/vm-umi-operate-master/src/.umi/exports' in '/preview/2023-08-31/vm-umi-operate-master/src/pages/VmManage' [plugin esbuildAliasPlugin]
+
+    node_modules/enhanced-resolve/lib/Resolver.js:309:17:
+      309 │       const error = new Error("Can't " + message);
+          ╵                     ^
+
+    at finishWithoutResolve (/preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/Resolver.js:309:18)
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/Resolver.js:386:15
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/Resolver.js:435:5
+    at eval (eval at create (/preview/2023-08-31/vm-umi-operate-master/node_modules/tapable/lib/HookCodeFactory.js:33:10), <anonymous>:15:1)
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/Resolver.js:435:5
+    at eval (eval at create (/preview/2023-08-31/vm-umi-operate-master/node_modules/tapable/lib/HookCodeFactory.js:33:10), <anonymous>:27:1)
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/DescriptionFilePlugin.js:87:43
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/Resolver.js:435:5
+    at eval (eval at create (/preview/2023-08-31/vm-umi-operate-master/node_modules/tapable/lib/HookCodeFactory.js:33:10), <anonymous>:15:1)
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/Resolver.js:435:5
+    at eval (eval at create (/preview/2023-08-31/vm-umi-operate-master/node_modules/tapable/lib/HookCodeFactory.js:33:10), <anonymous>:16:1)
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/Resolver.js:435:5
+    at eval (eval at create (/preview/2023-08-31/vm-umi-operate-master/node_modules/tapable/lib/HookCodeFactory.js:33:10), <anonymous>:27:1)
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/DescriptionFilePlugin.js:87:43
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/Resolver.js:435:5
+    at eval (eval at create (/preview/2023-08-31/vm-umi-operate-master/node_modules/tapable/lib/HookCodeFactory.js:33:10), <anonymous>:16:1)
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/Resolver.js:435:5
+    at eval (eval at create (/preview/2023-08-31/vm-umi-operate-master/node_modules/tapable/lib/HookCodeFactory.js:33:10), <anonymous>:15:1)
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/DirectoryExistsPlugin.js:41:15
+    at processTicksAndRejections (node:internal/process/task_queues:82:21)
+
+  This error came from the "onResolve" callback registered here:
+
+    node_modules/@umijs/preset-umi/dist/features/prepare/esbuildPlugins/esbuildAliasPlugin.js:78:14:
+      78 │         build.onResolve({ filter }, async (args) => {
+         ╵               ~~~~~~~~~
+
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/@umijs/preset-umi/dist/features/prepare/esbuildPlugins/esbuildAliasPlugin.js:78:15
+    at Array.forEach (<anonymous>)
+    at setup (/preview/2023-08-31/vm-umi-operate-master/node_modules/@umijs/preset-umi/dist/features/prepare/esbuildPlugins/esbuildAliasPlugin.js:75:10)
+    at handlePlugins (/preview/2023-08-31/vm-umi-operate-master/node_modules/esbuild/lib/main.js:1279:21)
+    at buildOrContextImpl (/preview/2023-08-31/vm-umi-operate-master/node_modules/esbuild/lib/main.js:968:5)
+    at Object.buildOrContext (/preview/2023-08-31/vm-umi-operate-master/node_modules/esbuild/lib/main.js:776:5)
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/esbuild/lib/main.js:2172:68
+    at new Promise (<anonymous>)
+    at Object.context (/preview/2023-08-31/vm-umi-operate-master/node_modules/esbuild/lib/main.js:2172:27)
+    at Object.context (/preview/2023-08-31/vm-umi-operate-master/node_modules/esbuild/lib/main.js:2012:58)
+    at build (/preview/2023-08-31/vm-umi-operate-master/node_modules/@umijs/preset-umi/dist/features/prepare/build.js:91:46)
+    at Hook.fn (/preview/2023-08-31/vm-umi-operate-master/node_modules/@umijs/preset-umi/dist/features/prepare/prepare.js:105:40)
+    at async /preview/2023-08-31/vm-umi-operate-master/node_modules/@umijs/core/dist/service/service.js:184:15
+
+  The plugin "esbuildAliasPlugin" was triggered by this import
+
+    src/pages/VmManage/index.tsx:7:24:
+      7 │ import { history } from 'umi';
+        ╵                         ~~~~~
+
+✘ [ERROR] Can't resolve '/preview/2023-08-31/vm-umi-operate-master/src/.umi/exports' in '/preview/2023-08-31/vm-umi-operate-master/src/pages/HostManage' [plugin esbuildAliasPlugin]
+
+    node_modules/enhanced-resolve/lib/Resolver.js:309:17:
+      309 │       const error = new Error("Can't " + message);
+          ╵                     ^
+
+    at finishWithoutResolve (/preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/Resolver.js:309:18)
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/Resolver.js:386:15
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/Resolver.js:435:5
+    at eval (eval at create (/preview/2023-08-31/vm-umi-operate-master/node_modules/tapable/lib/HookCodeFactory.js:33:10), <anonymous>:15:1)
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/Resolver.js:435:5
+    at eval (eval at create (/preview/2023-08-31/vm-umi-operate-master/node_modules/tapable/lib/HookCodeFactory.js:33:10), <anonymous>:27:1)
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/DescriptionFilePlugin.js:87:43
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/Resolver.js:435:5
+    at eval (eval at create (/preview/2023-08-31/vm-umi-operate-master/node_modules/tapable/lib/HookCodeFactory.js:33:10), <anonymous>:15:1)
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/Resolver.js:435:5
+    at eval (eval at create (/preview/2023-08-31/vm-umi-operate-master/node_modules/tapable/lib/HookCodeFactory.js:33:10), <anonymous>:16:1)
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/Resolver.js:435:5
+    at eval (eval at create (/preview/2023-08-31/vm-umi-operate-master/node_modules/tapable/lib/HookCodeFactory.js:33:10), <anonymous>:27:1)
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/DescriptionFilePlugin.js:87:43
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/Resolver.js:435:5
+    at eval (eval at create (/preview/2023-08-31/vm-umi-operate-master/node_modules/tapable/lib/HookCodeFactory.js:33:10), <anonymous>:16:1)
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/Resolver.js:435:5
+    at eval (eval at create (/preview/2023-08-31/vm-umi-operate-master/node_modules/tapable/lib/HookCodeFactory.js:33:10), <anonymous>:15:1)
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/DirectoryExistsPlugin.js:41:15
+    at processTicksAndRejections (node:internal/process/task_queues:82:21)
+
+  This error came from the "onResolve" callback registered here:
+
+    node_modules/@umijs/preset-umi/dist/features/prepare/esbuildPlugins/esbuildAliasPlugin.js:78:14:
+      78 │         build.onResolve({ filter }, async (args) => {
+         ╵               ~~~~~~~~~
+
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/@umijs/preset-umi/dist/features/prepare/esbuildPlugins/esbuildAliasPlugin.js:78:15
+    at Array.forEach (<anonymous>)
+    at setup (/preview/2023-08-31/vm-umi-operate-master/node_modules/@umijs/preset-umi/dist/features/prepare/esbuildPlugins/esbuildAliasPlugin.js:75:10)
+    at handlePlugins (/preview/2023-08-31/vm-umi-operate-master/node_modules/esbuild/lib/main.js:1279:21)
+    at buildOrContextImpl (/preview/2023-08-31/vm-umi-operate-master/node_modules/esbuild/lib/main.js:968:5)
+    at Object.buildOrContext (/preview/2023-08-31/vm-umi-operate-master/node_modules/esbuild/lib/main.js:776:5)
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/esbuild/lib/main.js:2172:68
+    at new Promise (<anonymous>)
+    at Object.context (/preview/2023-08-31/vm-umi-operate-master/node_modules/esbuild/lib/main.js:2172:27)
+    at Object.context (/preview/2023-08-31/vm-umi-operate-master/node_modules/esbuild/lib/main.js:2012:58)
+    at build (/preview/2023-08-31/vm-umi-operate-master/node_modules/@umijs/preset-umi/dist/features/prepare/build.js:91:46)
+    at Hook.fn (/preview/2023-08-31/vm-umi-operate-master/node_modules/@umijs/preset-umi/dist/features/prepare/prepare.js:105:40)
+    at async /preview/2023-08-31/vm-umi-operate-master/node_modules/@umijs/core/dist/service/service.js:184:15
+
+  The plugin "esbuildAliasPlugin" was triggered by this import
+
+    src/pages/HostManage/index.tsx:6:24:
+      6 │ import { history } from 'umi';
+        ╵                         ~~~~~
+
+✘ [ERROR] Can't resolve '/preview/2023-08-31/vm-umi-operate-master/src/.umi/exports' in '/preview/2023-08-31/vm-umi-operate-master/src/.umi/plugin-layout' [plugin esbuildAliasPlugin]
+
+    node_modules/enhanced-resolve/lib/Resolver.js:309:17:
+      309 │       const error = new Error("Can't " + message);
+          ╵                     ^
+
+    at finishWithoutResolve (/preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/Resolver.js:309:18)
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/Resolver.js:386:15
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/Resolver.js:435:5
+    at eval (eval at create (/preview/2023-08-31/vm-umi-operate-master/node_modules/tapable/lib/HookCodeFactory.js:33:10), <anonymous>:15:1)
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/Resolver.js:435:5
+    at eval (eval at create (/preview/2023-08-31/vm-umi-operate-master/node_modules/tapable/lib/HookCodeFactory.js:33:10), <anonymous>:27:1)
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/DescriptionFilePlugin.js:87:43
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/Resolver.js:435:5
+    at eval (eval at create (/preview/2023-08-31/vm-umi-operate-master/node_modules/tapable/lib/HookCodeFactory.js:33:10), <anonymous>:15:1)
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/Resolver.js:435:5
+    at eval (eval at create (/preview/2023-08-31/vm-umi-operate-master/node_modules/tapable/lib/HookCodeFactory.js:33:10), <anonymous>:16:1)
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/Resolver.js:435:5
+    at eval (eval at create (/preview/2023-08-31/vm-umi-operate-master/node_modules/tapable/lib/HookCodeFactory.js:33:10), <anonymous>:27:1)
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/DescriptionFilePlugin.js:87:43
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/Resolver.js:435:5
+    at eval (eval at create (/preview/2023-08-31/vm-umi-operate-master/node_modules/tapable/lib/HookCodeFactory.js:33:10), <anonymous>:16:1)
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/Resolver.js:435:5
+    at eval (eval at create (/preview/2023-08-31/vm-umi-operate-master/node_modules/tapable/lib/HookCodeFactory.js:33:10), <anonymous>:15:1)
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/DirectoryExistsPlugin.js:41:15
+    at processTicksAndRejections (node:internal/process/task_queues:82:21)
+
+  This error came from the "onResolve" callback registered here:
+
+    node_modules/@umijs/preset-umi/dist/features/prepare/esbuildPlugins/esbuildAliasPlugin.js:78:14:
+      78 │         build.onResolve({ filter }, async (args) => {
+         ╵               ~~~~~~~~~
+
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/@umijs/preset-umi/dist/features/prepare/esbuildPlugins/esbuildAliasPlugin.js:78:15
+    at Array.forEach (<anonymous>)
+    at setup (/preview/2023-08-31/vm-umi-operate-master/node_modules/@umijs/preset-umi/dist/features/prepare/esbuildPlugins/esbuildAliasPlugin.js:75:10)
+    at handlePlugins (/preview/2023-08-31/vm-umi-operate-master/node_modules/esbuild/lib/main.js:1279:21)
+    at buildOrContextImpl (/preview/2023-08-31/vm-umi-operate-master/node_modules/esbuild/lib/main.js:968:5)
+    at Object.buildOrContext (/preview/2023-08-31/vm-umi-operate-master/node_modules/esbuild/lib/main.js:776:5)
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/esbuild/lib/main.js:2172:68
+    at new Promise (<anonymous>)
+    at Object.context (/preview/2023-08-31/vm-umi-operate-master/node_modules/esbuild/lib/main.js:2172:27)
+    at Object.context (/preview/2023-08-31/vm-umi-operate-master/node_modules/esbuild/lib/main.js:2012:58)
+    at build (/preview/2023-08-31/vm-umi-operate-master/node_modules/@umijs/preset-umi/dist/features/prepare/build.js:91:46)
+    at Hook.fn (/preview/2023-08-31/vm-umi-operate-master/node_modules/@umijs/preset-umi/dist/features/prepare/prepare.js:105:40)
+    at async /preview/2023-08-31/vm-umi-operate-master/node_modules/@umijs/core/dist/service/service.js:184:15
+
+  The plugin "esbuildAliasPlugin" was triggered by this import
+
+    src/.umi/plugin-layout/Exception.tsx:5:37:
+      5 │ import { history, type IRoute } from 'umi';
+        ╵                                      ~~~~~
+
+error - [icons] build failed: Error: Build failed with 8 errors:
+node_modules/enhanced-resolve/lib/Resolver.js:309:17: ERROR: [plugin: esbuildAliasPlugin] Can't resolve '/preview/2023-08-31/vm-umi-operate-master/src/.umi/exports' in '/preview/2023-08-31/vm-umi-operate-master/src/.umi'
+node_modules/enhanced-resolve/lib/Resolver.js:309:17: ERROR: [plugin: esbuildAliasPlugin] Can't resolve '/preview/2023-08-31/vm-umi-operate-master/src/.umi/exports' in '/preview/2023-08-31/vm-umi-operate-master/src/.umi/core'
+node_modules/enhanced-resolve/lib/Resolver.js:309:17: ERROR: [plugin: esbuildAliasPlugin] Can't resolve '/preview/2023-08-31/vm-umi-operate-master/src/.umi/exports' in '/preview/2023-08-31/vm-umi-operate-master/src/.umi/core'
+node_modules/enhanced-resolve/lib/Resolver.js:309:17: ERROR: [plugin: esbuildAliasPlugin] Can't resolve '/preview/2023-08-31/vm-umi-operate-master/src/.umi/exports' in '/preview/2023-08-31/vm-umi-operate-master/src/.umi/plugin-layout'
+node_modules/enhanced-resolve/lib/Resolver.js:309:17: ERROR: [plugin: esbuildAliasPlugin] Can't resolve '/preview/2023-08-31/vm-umi-operate-master/src/.umi/exports' in '/preview/2023-08-31/vm-umi-operate-master/src/.umi/plugin-layout'
+...
+event - [Webpack] Compiled in 15562 ms (5077 modules)
+info  - [MFSU][eager] write cache
+✘ [ERROR] Could not resolve "./core/defineApp"
+
+    src/.umi/exports.ts:4:26:
+      4 │ export { defineApp } from './core/defineApp'
+        ╵                           ~~~~~~~~~~~~~~~~~~
+
+✘ [ERROR] Could not resolve "./EmptyRoute"
+
+    src/.umi/core/route.tsx:11:30:
+      11 │ '1': React.lazy(() => import( './EmptyRoute')),
+         ╵                               ~~~~~~~~~~~~~~
+
+✘ [ERROR] Could not resolve "./core/terminal"
+
+    src/.umi/exports.ts:12:25:
+      12 │ export { terminal } from './core/terminal';
+         ╵                          ~~~~~~~~~~~~~~~~~
+
+✘ [ERROR] Could not resolve "/preview/2023-08-31/vm-umi-operate-master/src/.umi/plugin-access"
+
+    src/.umi/exports.ts:16:57:
+      16 │ ...es } from '/preview/2023-08-31/vm-umi-operate-master/src/.umi/p...
+         ╵              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+✘ [ERROR] Could not resolve "/preview/2023-08-31/vm-umi-operate-master/src/.umi/plugin-model"
+
+    src/.umi/exports.ts:17:35:
+      17 │ ...el } from '/preview/2023-08-31/vm-umi-operate-master/src/.umi/p...
+         ╵              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+✘ [ERROR] Could not resolve "/preview/2023-08-31/vm-umi-operate-master/src/.umi/plugin-request"
+
+    src/.umi/exports.ts:18:76:
+      18 │ ...ce } from '/preview/2023-08-31/vm-umi-operate-master/src/.umi/p...
+         ╵              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+✘ [ERROR] Can't resolve '/preview/2023-08-31/vm-umi-operate-master/src/.umi/core/helmet.ts' in '/preview/2023-08-31/vm-umi-operate-master/src/.umi/core' [plugin esbuildAliasPlugin]
+
+    node_modules/enhanced-resolve/lib/Resolver.js:309:17:
+      309 │       const error = new Error("Can't " + message);
+          ╵                     ^
+
+    at finishWithoutResolve (/preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/Resolver.js:309:18)
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/Resolver.js:386:15
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/Resolver.js:435:5
+    at eval (eval at create (/preview/2023-08-31/vm-umi-operate-master/node_modules/tapable/lib/HookCodeFactory.js:33:10), <anonymous>:15:1)
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/Resolver.js:435:5
+    at eval (eval at create (/preview/2023-08-31/vm-umi-operate-master/node_modules/tapable/lib/HookCodeFactory.js:33:10), <anonymous>:27:1)
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/DescriptionFilePlugin.js:87:43
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/Resolver.js:435:5
+    at eval (eval at create (/preview/2023-08-31/vm-umi-operate-master/node_modules/tapable/lib/HookCodeFactory.js:33:10), <anonymous>:15:1)
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/Resolver.js:435:5
+    at eval (eval at create (/preview/2023-08-31/vm-umi-operate-master/node_modules/tapable/lib/HookCodeFactory.js:33:10), <anonymous>:16:1)
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/Resolver.js:435:5
+    at eval (eval at create (/preview/2023-08-31/vm-umi-operate-master/node_modules/tapable/lib/HookCodeFactory.js:33:10), <anonymous>:27:1)
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/DescriptionFilePlugin.js:87:43
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/Resolver.js:435:5
+    at eval (eval at create (/preview/2023-08-31/vm-umi-operate-master/node_modules/tapable/lib/HookCodeFactory.js:33:10), <anonymous>:16:1)
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/Resolver.js:435:5
+    at eval (eval at create (/preview/2023-08-31/vm-umi-operate-master/node_modules/tapable/lib/HookCodeFactory.js:33:10), <anonymous>:15:1)
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/DirectoryExistsPlugin.js:41:15
+    at processTicksAndRejections (node:internal/process/task_queues:82:21)
+
+  This error came from the "onResolve" callback registered here:
+
+    node_modules/@umijs/preset-umi/dist/features/prepare/esbuildPlugins/esbuildAliasPlugin.js:89:16:
+      89 │           build.onResolve({ filter: filter2 }, async (args) => {
+         ╵                 ~~~~~~~~~
+
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/@umijs/preset-umi/dist/features/prepare/esbuildPlugins/esbuildAliasPlugin.js:89:17
+    at Array.forEach (<anonymous>)
+    at setup (/preview/2023-08-31/vm-umi-operate-master/node_modules/@umijs/preset-umi/dist/features/prepare/esbuildPlugins/esbuildAliasPlugin.js:75:10)
+    at handlePlugins (/preview/2023-08-31/vm-umi-operate-master/node_modules/esbuild/lib/main.js:1279:21)
+    at buildOrContextImpl (/preview/2023-08-31/vm-umi-operate-master/node_modules/esbuild/lib/main.js:968:5)
+    at Object.buildOrContext (/preview/2023-08-31/vm-umi-operate-master/node_modules/esbuild/lib/main.js:776:5)
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/esbuild/lib/main.js:2172:68
+    at new Promise (<anonymous>)
+    at Object.context (/preview/2023-08-31/vm-umi-operate-master/node_modules/esbuild/lib/main.js:2172:27)
+    at Object.context (/preview/2023-08-31/vm-umi-operate-master/node_modules/esbuild/lib/main.js:2012:58)
+    at build (/preview/2023-08-31/vm-umi-operate-master/node_modules/@umijs/preset-umi/dist/features/prepare/build.js:91:46)
+    at Hook.fn (/preview/2023-08-31/vm-umi-operate-master/node_modules/@umijs/preset-umi/dist/features/prepare/prepare.js:105:40)
+    at async /preview/2023-08-31/vm-umi-operate-master/node_modules/@umijs/core/dist/service/service.js:184:15
+
+  The plugin "esbuildAliasPlugin" was triggered by this import
+
+    src/.umi/core/plugin.ts:4:26:
+      4 │ import * as Plugin_0 from '@@/core/helmet.ts';
+        ╵                           ~~~~~~~~~~~~~~~~~~~
+
+✘ [ERROR] Could not resolve "/preview/2023-08-31/vm-umi-operate-master/src/.umi/plugin-access/runtime.tsx"
+
+    src/.umi/core/plugin.ts:5:26:
+      5 │ ...gin_1 from '/preview/2023-08-31/vm-umi-operate-master/src/.umi/p...
+        ╵               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+✘ [ERROR] Could not resolve "/preview/2023-08-31/vm-umi-operate-master/src/.umi/plugin-initialState/runtime.tsx"
+
+    src/.umi/core/plugin.ts:6:26:
+      6 │ ...gin_2 from '/preview/2023-08-31/vm-umi-operate-master/src/.umi/p...
+        ╵               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+✘ [ERROR] Could not resolve "/preview/2023-08-31/vm-umi-operate-master/src/.umi/plugin-layout/runtime.tsx"
+
+    src/.umi/core/plugin.ts:7:26:
+      7 │ ...gin_3 from '/preview/2023-08-31/vm-umi-operate-master/src/.umi/p...
+        ╵               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+✘ [ERROR] Could not read from file: /preview/2023-08-31/vm-umi-operate-master/src/.umi/testBrowser.tsx
+
+    src/.umi/exports.ts:13:28:
+      13 │ export { TestBrowser } from './testBrowser';
+         ╵                             ~~~~~~~~~~~~~~~
+
+✘ [ERROR] Could not resolve "/preview/2023-08-31/vm-umi-operate-master/src/.umi/plugin-model/runtime.tsx"
+
+    src/.umi/core/plugin.ts:8:26:
+      8 │ ...gin_4 from '/preview/2023-08-31/vm-umi-operate-master/src/.umi/p...
+        ╵               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+✘ [ERROR] Could not resolve "/preview/2023-08-31/vm-umi-operate-master/src/.umi/plugin-layout/Layout.tsx"
+
+    src/.umi/core/route.tsx:16:101:
+      16 │ ...Layout" */'/preview/2023-08-31/vm-umi-operate-master/src/.umi/p...
+         ╵              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+error - [icons] build failed: Error: Build failed with 13 errors:
+node_modules/enhanced-resolve/lib/Resolver.js:309:17: ERROR: [plugin: esbuildAliasPlugin] Can't resolve '/preview/2023-08-31/vm-umi-operate-master/src/.umi/core/helmet.ts' in '/preview/2023-08-31/vm-umi-operate-master/src/.umi/core'
+src/.umi/core/plugin.ts:5:26: ERROR: Could not resolve "/preview/2023-08-31/vm-umi-operate-master/src/.umi/plugin-access/runtime.tsx"
+src/.umi/core/plugin.ts:6:26: ERROR: Could not resolve "/preview/2023-08-31/vm-umi-operate-master/src/.umi/plugin-initialState/runtime.tsx"
+src/.umi/core/plugin.ts:7:26: ERROR: Could not resolve "/preview/2023-08-31/vm-umi-operate-master/src/.umi/plugin-layout/runtime.tsx"
+src/.umi/core/plugin.ts:8:26: ERROR: Could not resolve "/preview/2023-08-31/vm-umi-operate-master/src/.umi/plugin-model/runtime.tsx"
+...
+✘ [ERROR] Could not resolve "/preview/2023-08-31/vm-umi-operate-master/src/.umi/umi.ts"
+
+error - [icons] build failed: Error: Build failed with 1 error:
+error: Could not resolve "/preview/2023-08-31/vm-umi-operate-master/src/.umi/umi.ts"
+✘ [ERROR] Could not read from file: /preview/2023-08-31/vm-umi-operate-master/src/.umi/exports.ts
+
+    src/.umi/umi.ts:10:33:
+      10 │ import { ApplyPluginsType } from 'umi';
+         ╵                                  ~~~~~
+
+✘ [ERROR] Can't resolve '/preview/2023-08-31/vm-umi-operate-master/src/.umi/core/helmet.ts' in '/preview/2023-08-31/vm-umi-operate-master/src/.umi/core' [plugin esbuildAliasPlugin]
+
+    node_modules/enhanced-resolve/lib/Resolver.js:309:17:
+      309 │       const error = new Error("Can't " + message);
+          ╵                     ^
+
+    at finishWithoutResolve (/preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/Resolver.js:309:18)
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/Resolver.js:386:15
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/Resolver.js:435:5
+    at eval (eval at create (/preview/2023-08-31/vm-umi-operate-master/node_modules/tapable/lib/HookCodeFactory.js:33:10), <anonymous>:15:1)
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/Resolver.js:435:5
+    at eval (eval at create (/preview/2023-08-31/vm-umi-operate-master/node_modules/tapable/lib/HookCodeFactory.js:33:10), <anonymous>:27:1)
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/DescriptionFilePlugin.js:87:43
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/Resolver.js:435:5
+    at eval (eval at create (/preview/2023-08-31/vm-umi-operate-master/node_modules/tapable/lib/HookCodeFactory.js:33:10), <anonymous>:15:1)
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/Resolver.js:435:5
+    at eval (eval at create (/preview/2023-08-31/vm-umi-operate-master/node_modules/tapable/lib/HookCodeFactory.js:33:10), <anonymous>:16:1)
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/Resolver.js:435:5
+    at eval (eval at create (/preview/2023-08-31/vm-umi-operate-master/node_modules/tapable/lib/HookCodeFactory.js:33:10), <anonymous>:27:1)
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/DescriptionFilePlugin.js:87:43
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/Resolver.js:435:5
+    at eval (eval at create (/preview/2023-08-31/vm-umi-operate-master/node_modules/tapable/lib/HookCodeFactory.js:33:10), <anonymous>:16:1)
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/Resolver.js:435:5
+    at eval (eval at create (/preview/2023-08-31/vm-umi-operate-master/node_modules/tapable/lib/HookCodeFactory.js:33:10), <anonymous>:15:1)
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/DirectoryExistsPlugin.js:41:15
+    at processTicksAndRejections (node:internal/process/task_queues:82:21)
+
+  This error came from the "onResolve" callback registered here:
+
+    node_modules/@umijs/preset-umi/dist/features/prepare/esbuildPlugins/esbuildAliasPlugin.js:89:16:
+      89 │           build.onResolve({ filter: filter2 }, async (args) => {
+         ╵                 ~~~~~~~~~
+
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/@umijs/preset-umi/dist/features/prepare/esbuildPlugins/esbuildAliasPlugin.js:89:17
+    at Array.forEach (<anonymous>)
+    at setup (/preview/2023-08-31/vm-umi-operate-master/node_modules/@umijs/preset-umi/dist/features/prepare/esbuildPlugins/esbuildAliasPlugin.js:75:10)
+    at handlePlugins (/preview/2023-08-31/vm-umi-operate-master/node_modules/esbuild/lib/main.js:1279:21)
+    at buildOrContextImpl (/preview/2023-08-31/vm-umi-operate-master/node_modules/esbuild/lib/main.js:968:5)
+    at Object.buildOrContext (/preview/2023-08-31/vm-umi-operate-master/node_modules/esbuild/lib/main.js:776:5)
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/esbuild/lib/main.js:2172:68
+    at new Promise (<anonymous>)
+    at Object.context (/preview/2023-08-31/vm-umi-operate-master/node_modules/esbuild/lib/main.js:2172:27)
+    at Object.context (/preview/2023-08-31/vm-umi-operate-master/node_modules/esbuild/lib/main.js:2012:58)
+    at build (/preview/2023-08-31/vm-umi-operate-master/node_modules/@umijs/preset-umi/dist/features/prepare/build.js:91:46)
+    at Hook.fn (/preview/2023-08-31/vm-umi-operate-master/node_modules/@umijs/preset-umi/dist/features/prepare/prepare.js:105:40)
+    at async /preview/2023-08-31/vm-umi-operate-master/node_modules/@umijs/core/dist/service/service.js:184:15
+
+  The plugin "esbuildAliasPlugin" was triggered by this import
+
+    src/.umi/core/plugin.ts:4:26:
+      4 │ import * as Plugin_0 from '@@/core/helmet.ts';
+        ╵                           ~~~~~~~~~~~~~~~~~~~
+
+✘ [ERROR] Could not resolve "/preview/2023-08-31/vm-umi-operate-master/src/.umi/plugin-access/runtime.tsx"
+
+    src/.umi/core/plugin.ts:5:26:
+      5 │ ...gin_1 from '/preview/2023-08-31/vm-umi-operate-master/src/.umi/p...
+        ╵               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+✘ [ERROR] Could not resolve "/preview/2023-08-31/vm-umi-operate-master/src/.umi/plugin-initialState/runtime.tsx"
+
+    src/.umi/core/plugin.ts:6:26:
+      6 │ ...gin_2 from '/preview/2023-08-31/vm-umi-operate-master/src/.umi/p...
+        ╵               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+✘ [ERROR] Could not resolve "/preview/2023-08-31/vm-umi-operate-master/src/.umi/plugin-layout/runtime.tsx"
+
+    src/.umi/core/plugin.ts:7:26:
+      7 │ ...gin_3 from '/preview/2023-08-31/vm-umi-operate-master/src/.umi/p...
+        ╵               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+✘ [ERROR] Could not resolve "/preview/2023-08-31/vm-umi-operate-master/src/.umi/plugin-model/runtime.tsx"
+
+    src/.umi/core/plugin.ts:8:26:
+      8 │ ...gin_4 from '/preview/2023-08-31/vm-umi-operate-master/src/.umi/p...
+        ╵               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+✘ [ERROR] Could not resolve "/preview/2023-08-31/vm-umi-operate-master/src/.umi/plugin-layout/Layout.tsx"
+
+    src/.umi/core/route.tsx:16:101:
+      16 │ ...Layout" */'/preview/2023-08-31/vm-umi-operate-master/src/.umi/p...
+         ╵              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+error - [icons] build failed: Error: Build failed with 7 errors:
+node_modules/enhanced-resolve/lib/Resolver.js:309:17: ERROR: [plugin: esbuildAliasPlugin] Can't resolve '/preview/2023-08-31/vm-umi-operate-master/src/.umi/core/helmet.ts' in '/preview/2023-08-31/vm-umi-operate-master/src/.umi/core'
+src/.umi/core/plugin.ts:5:26: ERROR: Could not resolve "/preview/2023-08-31/vm-umi-operate-master/src/.umi/plugin-access/runtime.tsx"
+src/.umi/core/plugin.ts:6:26: ERROR: Could not resolve "/preview/2023-08-31/vm-umi-operate-master/src/.umi/plugin-initialState/runtime.tsx"
+src/.umi/core/plugin.ts:7:26: ERROR: Could not resolve "/preview/2023-08-31/vm-umi-operate-master/src/.umi/plugin-layout/runtime.tsx"
+src/.umi/core/plugin.ts:8:26: ERROR: Could not resolve "/preview/2023-08-31/vm-umi-operate-master/src/.umi/plugin-model/runtime.tsx"
+...
+✘ [ERROR] Could not read from file: /preview/2023-08-31/vm-umi-operate-master/src/.umi/exports.ts
+
+    src/.umi/umi.ts:10:33:
+      10 │ import { ApplyPluginsType } from 'umi';
+         ╵                                  ~~~~~
+
+✘ [ERROR] Can't resolve '/preview/2023-08-31/vm-umi-operate-master/src/.umi/core/helmet.ts' in '/preview/2023-08-31/vm-umi-operate-master/src/.umi/core' [plugin esbuildAliasPlugin]
+
+    node_modules/enhanced-resolve/lib/Resolver.js:309:17:
+      309 │       const error = new Error("Can't " + message);
+          ╵                     ^
+
+    at finishWithoutResolve (/preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/Resolver.js:309:18)
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/Resolver.js:386:15
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/Resolver.js:435:5
+    at eval (eval at create (/preview/2023-08-31/vm-umi-operate-master/node_modules/tapable/lib/HookCodeFactory.js:33:10), <anonymous>:15:1)
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/Resolver.js:435:5
+    at eval (eval at create (/preview/2023-08-31/vm-umi-operate-master/node_modules/tapable/lib/HookCodeFactory.js:33:10), <anonymous>:27:1)
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/DescriptionFilePlugin.js:87:43
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/Resolver.js:435:5
+    at eval (eval at create (/preview/2023-08-31/vm-umi-operate-master/node_modules/tapable/lib/HookCodeFactory.js:33:10), <anonymous>:15:1)
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/Resolver.js:435:5
+    at eval (eval at create (/preview/2023-08-31/vm-umi-operate-master/node_modules/tapable/lib/HookCodeFactory.js:33:10), <anonymous>:16:1)
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/Resolver.js:435:5
+    at eval (eval at create (/preview/2023-08-31/vm-umi-operate-master/node_modules/tapable/lib/HookCodeFactory.js:33:10), <anonymous>:27:1)
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/DescriptionFilePlugin.js:87:43
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/Resolver.js:435:5
+    at eval (eval at create (/preview/2023-08-31/vm-umi-operate-master/node_modules/tapable/lib/HookCodeFactory.js:33:10), <anonymous>:16:1)
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/Resolver.js:435:5
+    at eval (eval at create (/preview/2023-08-31/vm-umi-operate-master/node_modules/tapable/lib/HookCodeFactory.js:33:10), <anonymous>:15:1)
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/DirectoryExistsPlugin.js:41:15
+    at processTicksAndRejections (node:internal/process/task_queues:82:21)
+
+  This error came from the "onResolve" callback registered here:
+
+    node_modules/@umijs/preset-umi/dist/features/prepare/esbuildPlugins/esbuildAliasPlugin.js:89:16:
+      89 │           build.onResolve({ filter: filter2 }, async (args) => {
+         ╵                 ~~~~~~~~~
+
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/@umijs/preset-umi/dist/features/prepare/esbuildPlugins/esbuildAliasPlugin.js:89:17
+    at Array.forEach (<anonymous>)
+    at setup (/preview/2023-08-31/vm-umi-operate-master/node_modules/@umijs/preset-umi/dist/features/prepare/esbuildPlugins/esbuildAliasPlugin.js:75:10)
+    at handlePlugins (/preview/2023-08-31/vm-umi-operate-master/node_modules/esbuild/lib/main.js:1279:21)
+    at buildOrContextImpl (/preview/2023-08-31/vm-umi-operate-master/node_modules/esbuild/lib/main.js:968:5)
+    at Object.buildOrContext (/preview/2023-08-31/vm-umi-operate-master/node_modules/esbuild/lib/main.js:776:5)
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/esbuild/lib/main.js:2172:68
+    at new Promise (<anonymous>)
+    at Object.context (/preview/2023-08-31/vm-umi-operate-master/node_modules/esbuild/lib/main.js:2172:27)
+    at Object.context (/preview/2023-08-31/vm-umi-operate-master/node_modules/esbuild/lib/main.js:2012:58)
+    at build (/preview/2023-08-31/vm-umi-operate-master/node_modules/@umijs/preset-umi/dist/features/prepare/build.js:91:46)
+    at Hook.fn (/preview/2023-08-31/vm-umi-operate-master/node_modules/@umijs/preset-umi/dist/features/prepare/prepare.js:105:40)
+    at async /preview/2023-08-31/vm-umi-operate-master/node_modules/@umijs/core/dist/service/service.js:184:15
+
+  The plugin "esbuildAliasPlugin" was triggered by this import
+
+    src/.umi/core/plugin.ts:4:26:
+      4 │ import * as Plugin_0 from '@@/core/helmet.ts';
+        ╵                           ~~~~~~~~~~~~~~~~~~~
+
+error - [icons] build failed: Error: Build failed with 2 errors:
+node_modules/enhanced-resolve/lib/Resolver.js:309:17: ERROR: [plugin: esbuildAliasPlugin] Can't resolve '/preview/2023-08-31/vm-umi-operate-master/src/.umi/core/helmet.ts' in '/preview/2023-08-31/vm-umi-operate-master/src/.umi/core'
+src/.umi/umi.ts:10:33: ERROR: Could not read from file: /preview/2023-08-31/vm-umi-operate-master/src/.umi/exports.ts
+✘ [ERROR] Can't resolve '/preview/2023-08-31/vm-umi-operate-master/src/.umi/core/helmet.ts' in '/preview/2023-08-31/vm-umi-operate-master/src/.umi/core' [plugin esbuildAliasPlugin]
+
+    node_modules/enhanced-resolve/lib/Resolver.js:309:17:
+      309 │       const error = new Error("Can't " + message);
+          ╵                     ^
+
+    at finishWithoutResolve (/preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/Resolver.js:309:18)
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/Resolver.js:386:15
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/Resolver.js:435:5
+    at eval (eval at create (/preview/2023-08-31/vm-umi-operate-master/node_modules/tapable/lib/HookCodeFactory.js:33:10), <anonymous>:15:1)
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/Resolver.js:435:5
+    at eval (eval at create (/preview/2023-08-31/vm-umi-operate-master/node_modules/tapable/lib/HookCodeFactory.js:33:10), <anonymous>:27:1)
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/DescriptionFilePlugin.js:87:43
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/Resolver.js:435:5
+    at eval (eval at create (/preview/2023-08-31/vm-umi-operate-master/node_modules/tapable/lib/HookCodeFactory.js:33:10), <anonymous>:15:1)
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/Resolver.js:435:5
+    at eval (eval at create (/preview/2023-08-31/vm-umi-operate-master/node_modules/tapable/lib/HookCodeFactory.js:33:10), <anonymous>:16:1)
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/Resolver.js:435:5
+    at eval (eval at create (/preview/2023-08-31/vm-umi-operate-master/node_modules/tapable/lib/HookCodeFactory.js:33:10), <anonymous>:27:1)
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/DescriptionFilePlugin.js:87:43
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/Resolver.js:435:5
+    at eval (eval at create (/preview/2023-08-31/vm-umi-operate-master/node_modules/tapable/lib/HookCodeFactory.js:33:10), <anonymous>:16:1)
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/Resolver.js:435:5
+    at eval (eval at create (/preview/2023-08-31/vm-umi-operate-master/node_modules/tapable/lib/HookCodeFactory.js:33:10), <anonymous>:15:1)
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/enhanced-resolve/lib/DirectoryExistsPlugin.js:41:15
+    at processTicksAndRejections (node:internal/process/task_queues:82:21)
+
+  This error came from the "onResolve" callback registered here:
+
+    node_modules/@umijs/preset-umi/dist/features/prepare/esbuildPlugins/esbuildAliasPlugin.js:89:16:
+      89 │           build.onResolve({ filter: filter2 }, async (args) => {
+         ╵                 ~~~~~~~~~
+
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/@umijs/preset-umi/dist/features/prepare/esbuildPlugins/esbuildAliasPlugin.js:89:17
+    at Array.forEach (<anonymous>)
+    at setup (/preview/2023-08-31/vm-umi-operate-master/node_modules/@umijs/preset-umi/dist/features/prepare/esbuildPlugins/esbuildAliasPlugin.js:75:10)
+    at handlePlugins (/preview/2023-08-31/vm-umi-operate-master/node_modules/esbuild/lib/main.js:1279:21)
+    at buildOrContextImpl (/preview/2023-08-31/vm-umi-operate-master/node_modules/esbuild/lib/main.js:968:5)
+    at Object.buildOrContext (/preview/2023-08-31/vm-umi-operate-master/node_modules/esbuild/lib/main.js:776:5)
+    at /preview/2023-08-31/vm-umi-operate-master/node_modules/esbuild/lib/main.js:2172:68
+    at new Promise (<anonymous>)
+    at Object.context (/preview/2023-08-31/vm-umi-operate-master/node_modules/esbuild/lib/main.js:2172:27)
+    at Object.context (/preview/2023-08-31/vm-umi-operate-master/node_modules/esbuild/lib/main.js:2012:58)
+    at build (/preview/2023-08-31/vm-umi-operate-master/node_modules/@umijs/preset-umi/dist/features/prepare/build.js:91:46)
+    at Hook.fn (/preview/2023-08-31/vm-umi-operate-master/node_modules/@umijs/preset-umi/dist/features/prepare/prepare.js:105:40)
+    at async /preview/2023-08-31/vm-umi-operate-master/node_modules/@umijs/core/dist/service/service.js:184:15
+
+  The plugin "esbuildAliasPlugin" was triggered by this import
+
+    src/.umi/core/plugin.ts:4:26:
+      4 │ import * as Plugin_0 from '@@/core/helmet.ts';
+        ╵                           ~~~~~~~~~~~~~~~~~~~
+
+error - [icons] build failed: Error: Build failed with 1 error:
+node_modules/enhanced-resolve/lib/Resolver.js:309:17: ERROR: [plugin: esbuildAliasPlugin] Can't resolve '/preview/2023-08-31/vm-umi-operate-master/src/.umi/core/helmet.ts' in '/preview/2023-08-31/vm-umi-operate-master/src/.umi/core'
+✘ [ERROR] Unexpected "NetInfoCard"
+
+    src/pages/Monitor/components/NetInfoCard.tsx:862:7:
+      862 │ export NetInfoCard;
+          ╵        ~~~~~~~~~~~
+
+error - [icons] build failed: Error: Build failed with 1 error:
+src/pages/Monitor/components/NetInfoCard.tsx:862:7: ERROR: Unexpected "NetInfoCard"
+✘ [ERROR] No matching export in "src/pages/Monitor/components/NetInfoCard.tsx" for import "NetInfoCard"
+
+    src/pages/Monitor/index.tsx:27:9:
+      27 │ import { NetInfoCard } from './components/NetInfoCard';
+         ╵          ~~~~~~~~~~~
+
+error - [icons] build failed: Error: Build failed with 1 error:
+src/pages/Monitor/index.tsx:27:9: ERROR: No matching export in "src/pages/Monitor/components/NetInfoCard.tsx" for import "NetInfoCard"
+✘ [ERROR] No matching export in "src/pages/Monitor/components/NetInfoCard.tsx" for import "NetInfoCard"
+
+    src/pages/Monitor/index.tsx:27:9:
+      27 │ import { NetInfoCard } from './components/NetInfoCard';
+         ╵          ~~~~~~~~~~~
+
+error - [icons] build failed: Error: Build failed with 1 error:
+src/pages/Monitor/index.tsx:27:9: ERROR: No matching export in "src/pages/Monitor/components/NetInfoCard.tsx" for import "NetInfoCard"
+✘ [ERROR] No matching export in "src/pages/Monitor/components/HostInfoCard.tsx" for import "default"
+
+    src/pages/Monitor/index.tsx:27:7:
+      27 │ import HostInfoCard from './components/HostInfoCard';
+         ╵        ~~~~~~~~~~~~
+
+error - [icons] build failed: Error: Build failed with 1 error:
+src/pages/Monitor/index.tsx:27:7: ERROR: No matching export in "src/pages/Monitor/components/HostInfoCard.tsx" for import "default"

@@ -3,6 +3,7 @@ import {PageContainer} from "@ant-design/pro-components";
 import {Button, Form, Input, Modal, Popconfirm, Space, Table, Tooltip} from "antd";
 import {ColumnsType} from "antd/es/table";
 import {apiAddHost, apiDeleteHost, apiRefreshHostList, apiUpdateHost} from "@/api/HostManage";
+import { history } from 'umi';
 
 interface DataType {
     hostZzid: number,
@@ -31,7 +32,9 @@ const HostManagePage: React.FC = () => {
             fixed: "left",
             render: (hostId) => (
                 <Tooltip placement="topLeft" title={hostId}>
-                    {hostId}
+                    <a onClick={(event) => {event.preventDefault();history.push("/monitor?uuid=" + hostId)}}>
+                        {hostId}
+                    </a>
                 </Tooltip>
             )
         },

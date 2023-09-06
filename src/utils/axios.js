@@ -11,7 +11,7 @@ axios.interceptors.response.use(success => {
 });
 
 
-let base = 'http://140.246.171.8:28080/api';
+let base = 'http://localhost:28080/api';
 
 //传送json格式的post请求
 export const postRequest = (url, params) => {
