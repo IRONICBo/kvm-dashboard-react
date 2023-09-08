@@ -27,6 +27,8 @@ import HostInfoCard from './components/HostInfoCard';
 import NetInfoCard from './components/NetInfoCard';
 import CPUInfoCard from './components/CPUInfoCard';
 import MemInfoCard from './components/MemInfoCard';
+import DiskInfoCard from './components/DiskInfoCard';
+import ProcessInfoCard from './components/ProcessInfoCard';
 
 const onChange = (key: string) => {
   console.log(key);
@@ -46,7 +48,7 @@ const TAB_ITEMS: TabsProps['items'] = [
   {
     key: 'disk',
     label: `磁盘`,
-    children: `TODO`,
+    children: <DiskInfoCard />,
   },
   {
     key: 'net',
@@ -56,7 +58,7 @@ const TAB_ITEMS: TabsProps['items'] = [
   {
     key: 'process',
     label: `进程`,
-    children: `TODO`,
+    children: <ProcessInfoCard />,
   },
 ];
 

@@ -235,11 +235,11 @@ const CPUStatCard: React.FC = () => {
     useEffect(() => {
       const fetchData = async () => {
         try {
-          const metricType = 'net_stat';
+          const metricType = 'cpu_stat';
           let res = await apiGetKeySet(metricType);
           console.log('apiGetKeySet : ', res);
   
-          const deletedIndex = res.indexOf('net_stat.connection_stats');
+          const deletedIndex = res.indexOf('cpu_stat.cpu_time_stats');
           if (deletedIndex > -1) {
             res.splice(deletedIndex, 1);
           }
@@ -411,7 +411,7 @@ const CPUStatCard: React.FC = () => {
             </Radio.Group>
           </Col>
         </Row>
-        <Area {...config} data={chartList} />
+        <Line {...config} data={chartList} />
       </>
     );
   };
@@ -436,7 +436,7 @@ const CPUStatCard: React.FC = () => {
   
     const { RangePicker } = DatePicker;
 
-    const NET_CONN_TABLE_CLOUMNS: ColumnsType = [
+    const CPU_TABLE_CLOUMNS: ColumnsType = [
       {
         title: '处理器',
         key: 'cpu',
@@ -636,7 +636,7 @@ const CPUStatCard: React.FC = () => {
           // Max is 100
           const res = await apiGetMetricPage(
             selectedEndTime,
-            'net_stat.connection_stats',
+            'cpu_stat.cpu_time_stats',
             50,
             0,
             selectedStartTime,
@@ -703,7 +703,7 @@ const CPUStatCard: React.FC = () => {
             <RangePicker showTime onChange={handleRangeTimeChange} />
           </Col>
         </Row>
-        <Area
+        <Line
           {...config}
           data={chartList}
           onReady={(plot) => {
@@ -715,9 +715,9 @@ const CPUStatCard: React.FC = () => {
           style={{ marginBottom: '50px' }}
         />
         {new Date(selectTime * 1000 + 8 * 60 * 60 * 1000).toISOString() +
-          ' 时刻连接状态'}
+          ' 时刻处理器状态'}
         {connTableData.length !== 0 && (
-          <Table columns={NET_CONN_TABLE_CLOUMNS} dataSource={connTableData} />
+          <Table columns={CPU_TABLE_CLOUMNS} dataSource={connTableData} />
         )}
       </>
     );
@@ -737,7 +737,7 @@ const CPUStatCard: React.FC = () => {
     // TODO: Modify statType
     // TODO: Modify statType
     // TODO: Modify statType
-    const statType = 'net_stat';
+    const statType = 'cpu_stat';
     const [cpuPercentStat, setCPUPercentStat] = useState([]);
     const [cpuLoadStat, setCPULoadStat] = useState([]);
     const [recvNewEvent, setRecvNewEvent] = useState(0);
@@ -798,36 +798,42 @@ const CPUStatCard: React.FC = () => {
     useEffect(() => {
       const fetchData = async () => {
         try {
-          const statType = 'net_stat';
+          const statType = 'cpu_stat';
           const res = await apiGetCacheData(statType, UUID);
           console.log('parsedIOStat: ', res);
   
-          const tempCPUPercentStat: ((prevState: never[]) => never[]) | { time: string; interfaces: string; value: any; }[] = [];
-          const tempCPULoadStat: ((prevState: never[]) => never[]) | { time: string; interfaces: string; value: any; }[] = [];
+          const tempCPUPercentStat: ((prevState: never[]) => never[]) | { time: string; name: string; value: any; }[] = [];
+          const tempCPULoadStat: ((prevState: never[]) => never[]) | { time: string; name: string; value: any; }[] = [];
           // change data format, get value and time
           res.forEach((element) => {
-            const ioItem = JSON.parse(element);
+            const cpuItem = JSON.parse(element);
             // time => timestamp, interfaces => key, value => send_bytes
   
-            Object.keys(ioItem).forEach((key) => {
+            Object.keys(cpuItem).forEach((key) => {
             // TODO: Modify statType
             // TODO: Modify statType
             // TODO: Modify statType
-              if (key !== 'timestamp') {
-                tempCPUPercentStat.push({
-                  time: new Date(
-                    ioItem.timestamp * 1000 + 8 * 60 * 60 * 1000,
-                  ).toISOString().substring(11, 19),
-                  interfaces: key,
-                  value: ioItem[key].bytes_sent,
+              if (key == 'cpu_percents') {
+                // 遍历cpu_percents数组
+                cpuItem.cpu_percents.forEach((v, i) => {
+                  tempCPUPercentStat.push({
+                    time: new Date(
+                      cpuItem.timestamp * 1000 + 8 * 60 * 60 * 1000,
+                    ).toISOString().substring(11, 19),
+                    name: "cpu-" + i,
+                    value: v,
+                  });
                 });
-                tempCPULoadStat.push({
-                  time: new Date(
-                    ioItem.timestamp * 1000 + 8 * 60 * 60 * 1000,
-                  ).toISOString(),
-                  interfaces: key,
-                  value: ioItem[key].bytes_recv,
-                });
+              } else if (key == 'cpu_load') {
+                Object.keys(cpuItem.cpu_load).forEach((key) => {
+                  tempCPULoadStat.push({
+                    time: new Date(
+                      cpuItem.timestamp * 1000 + 8 * 60 * 60 * 1000,
+                    ).toISOString(),
+                    name: key,
+                    value: cpuItem.cpu_load[key],
+                  });
+                })
               }
             });
           });
@@ -845,15 +851,15 @@ const CPUStatCard: React.FC = () => {
     const config = {
       xField: 'time',
       yField: 'value',
-      seriesField: 'interfaces',
+      seriesField: 'name',
     };
 
     const heatmapConfig = {
         width: 500,
         autoFit: false,
         data,
-        xField: 'interfaces',
-        yField: 'time',
+        xField: 'time',
+        yField: 'name',
         colorField: 'value',
         color: ['#174c83', '#7eb6d4', '#efefeb', '#efa759', '#9b4d16'],
         tooltip: {
@@ -877,7 +883,7 @@ const CPUStatCard: React.FC = () => {
           </Col>
           <Col span={12}>
             处理器负载
-            <Area {...config} data={cpuLoadStat} />
+            <Line {...config} data={cpuLoadStat} />
           </Col>
         </Row>
       </>

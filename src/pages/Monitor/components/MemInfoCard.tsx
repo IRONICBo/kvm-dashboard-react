@@ -81,14 +81,14 @@ const MemStatCard: React.FC = () => {
     useEffect(() => {
       const fetchData = async () => {
         try {
-          const metricType = 'net_stat';
+          const metricType = 'mem_stat';
           let res = await apiGetKeySet(metricType);
           console.log('apiGetKeySet : ', res);
   
-          const deletedIndex = res.indexOf('net_stat.connection_stats');
-          if (deletedIndex > -1) {
-            res.splice(deletedIndex, 1);
-          }
+          // const deletedIndex = res.indexOf('mem_stat.connection_stats');
+          // if (deletedIndex > -1) {
+          //   res.splice(deletedIndex, 1);
+          // }
   
           console.log('res', res);
           const tempMetricList = res.map((item) => {
@@ -257,7 +257,7 @@ const MemStatCard: React.FC = () => {
             </Radio.Group>
           </Col>
         </Row>
-        <Area {...config} data={chartList} />
+        <Line {...config} data={chartList} />
       </>
     );
   };
@@ -276,7 +276,7 @@ const MemStatCard: React.FC = () => {
     // TODO: Modify statType
     // TODO: Modify statType
     // TODO: Modify statType
-    const statType = 'net_stat';
+    const statType = 'mem_stat';
     const [memPercentStat, setMemPercentStat] = useState([]);
     const [swapPercentStat, setSwapPercentStat] = useState([]);
     const [recvNewEvent, setRecvNewEvent] = useState(0);
@@ -337,35 +337,35 @@ const MemStatCard: React.FC = () => {
     useEffect(() => {
       const fetchData = async () => {
         try {
-          const statType = 'net_stat';
+          const statType = 'mem_stat';
           const res = await apiGetCacheData(statType, UUID);
           console.log('parsedIOStat: ', res);
   
-          const tempMemPercentStat: ((prevState: never[]) => never[]) | { time: string; interfaces: string; value: any; }[] = [];
-          const tempSwapPercentStat: ((prevState: never[]) => never[]) | { time: string; interfaces: string; value: any; }[] = [];
+          const tempMemPercentStat: ((prevState: never[]) => never[]) | { time: string; name: string; value: any; }[] = [];
+          const tempSwapPercentStat: ((prevState: never[]) => never[]) | { time: string; name: string; value: any; }[] = [];
           // change data format, get value and time
           res.forEach((element) => {
-            const ioItem = JSON.parse(element);
+            const memItem = JSON.parse(element);
             // time => timestamp, interfaces => key, value => send_bytes
   
-            Object.keys(ioItem).forEach((key) => {
+            Object.keys(memItem).forEach((key) => {
             // TODO: Modify statType
             // TODO: Modify statType
             // TODO: Modify statType
               if (key !== 'timestamp') {
                 tempMemPercentStat.push({
                   time: new Date(
-                    ioItem.timestamp * 1000 + 8 * 60 * 60 * 1000,
+                    memItem.timestamp * 1000 + 8 * 60 * 60 * 1000,
                   ).toISOString(),
-                  interfaces: key,
-                  value: ioItem[key].bytes_sent,
+                  name: "virtualMemoryUsedPercent",
+                  value: parseFloat(memItem.virtualMemoryUsedPercent),
                 });
                 tempSwapPercentStat.push({
                   time: new Date(
-                    ioItem.timestamp * 1000 + 8 * 60 * 60 * 1000,
+                    memItem.timestamp * 1000 + 8 * 60 * 60 * 1000,
                   ).toISOString(),
-                  interfaces: key,
-                  value: ioItem[key].bytes_recv,
+                  name: "swapMemoryUsedPercent",
+                  value: parseFloat(memItem.swapMemoryUsedPercent),
                 });
               }
             });
@@ -384,19 +384,19 @@ const MemStatCard: React.FC = () => {
     const config = {
       xField: 'time',
       yField: 'value',
-      seriesField: 'interfaces',
+      seriesField: 'name',
     };
 
     return (
       <>
         <Row>
           <Col span={12}>
-            虚拟内存占用
-            <Area {...config} data={memPercentStat} />
+            虚拟内存占用百分比
+            <Line {...config} data={memPercentStat} />
           </Col>
           <Col span={12}>
-            交换内存占用
-            <Area {...config} data={swapPercentStat} />
+            交换内存占用百分比
+            <Line {...config} data={swapPercentStat} />
           </Col>
         </Row>
       </>

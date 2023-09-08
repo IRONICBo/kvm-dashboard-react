@@ -479,7 +479,7 @@ const NetStatCard: React.FC = () => {
           </Radio.Group>
         </Col>
       </Row>
-      <Area {...config} data={chartList} />
+      <Line {...config} data={chartList} />
     </>
   );
 };
@@ -658,6 +658,7 @@ const NetConnStatCard: React.FC = () => {
   };
 
   useEffect(() => {
+    console.log(111)
     console.log(selectTime);
     console.log(tempData);
 
@@ -764,12 +765,13 @@ const NetConnStatCard: React.FC = () => {
           <RangePicker showTime onChange={handleRangeTimeChange} />
         </Col>
       </Row>
-      <Area
+      <Line
         {...config}
         data={chartList}
         onReady={(plot) => {
           PlotMaps.line = plot;
           plot.on('element:click', (evt: PlotEvent) => {
+            console.log(222)
             setTableData(evt, plot);
           });
         }}
