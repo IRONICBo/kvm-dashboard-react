@@ -12,7 +12,7 @@ import { useSearchParams } from '@umijs/max';
 import { Col, DatePicker, Radio, Row, Select, Table, Tag } from 'antd';
 import type { ColumnsType } from 'antd/es/table';
 import React, { useEffect, useState } from 'react';
-
+import translateKey from '../../../utils/translate';
 
 const ProcessStatCard: React.FC = () => {
   // Get UUID
@@ -26,7 +26,7 @@ const ProcessStatCard: React.FC = () => {
   };
 
   const [metricList, setMetricList] = useState([
-    { key: 'process_stat.processes', value: 'process_stat.processes' },
+    { key: 'process_stat.processes', value: translateKey('process_stat.processes') },
   ]);
 
   const { RangePicker } = DatePicker;

@@ -12,6 +12,8 @@ import { useSearchParams } from '@umijs/max';
 import { Col, DatePicker, Radio, Row, Select, Table, Tag } from 'antd';
 import type { ColumnsType } from 'antd/es/table';
 import React, { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import translateKey from '../../../utils/translate';
 
 const TEMP_NET_INFO_DATA = [
   {
@@ -297,6 +299,7 @@ const NetStatCard: React.FC = () => {
     yField: 'value',
   };
 
+  const { t } = useTranslation();
   const [metricList, setMetricList] = useState([
     { key: '请选择', value: '请选择' },
   ]);
@@ -316,7 +319,7 @@ const NetStatCard: React.FC = () => {
         const tempMetricList = res.map((item) => {
           return {
             value: item,
-            label: item,
+            label: translateKey(item),
           };
         });
         setMetricList(tempMetricList);
@@ -494,9 +497,10 @@ const NetConnStatCard: React.FC = () => {
     xField: 'time',
     yField: 'value',
   };
+  const { t } = useTranslation();
 
   const [metricList, setMetricList] = useState([
-    { key: 'net_stat.connection_stats', value: 'net_stat.connection_stats' },
+    { key: 'net_stat.connection_stats', value: translateKey('net_stat.connection_stats') },
   ]);
 
   const { RangePicker } = DatePicker;
