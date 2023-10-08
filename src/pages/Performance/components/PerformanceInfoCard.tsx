@@ -2,8 +2,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { apiGetGuestInfos } from '@/api/Monitor';
 import { ProDescriptions } from '@ant-design/pro-components';
-import { Tag, Table } from 'antd';
-import type { ColumnsType } from 'antd/es/table';
+import { Tag } from 'antd';
 import React, { useEffect, useState } from 'react';
 
 const AGENT_INFO_CLOUMNS = [
@@ -72,114 +71,41 @@ const AGENT_INFO_CLOUMNS = [
     dataIndex: 'updatedAt',
   },
 ];
-const HOST_INFO_CLOUMNS = [
+const Performace_INFO_CLOUMNS = [
   {
-    title: '主机名',
+    title: '接口耗时',
     key: 'hostname',
     dataIndex: 'hostname',
   },
-  // {
-  //     title: '运行时间',
-  //     key: 'uptime',
-  //     dataIndex: 'uptime',
-  //     valueType: 'date',
-  // },
-  // {
-  //     title: '启动时间',
-  //     key: 'boot_time',
-  //     dataIndex: 'boot_time',
-  //     valueType: 'date',
-  // },
   {
-    title: '进程数',
+    title: '接口数',
     key: 'procs',
     dataIndex: 'procs',
   },
   {
-    title: '操作系统',
+    title: '虚拟机创建耗时',
     key: 'os',
     dataIndex: 'os',
   },
   {
-    title: '系统架构',
+    title: '虚拟机创建数',
     key: 'platform',
     dataIndex: 'platform',
   },
   {
-    title: '平台系列',
+    title: '虚拟机迁移速度',
     key: 'platform_family',
     dataIndex: 'platform_family',
   },
   {
-    title: '平台版本',
+    title: '接口成功率',
     key: 'platform_version',
     dataIndex: 'platform_version',
   },
   {
-    title: '内核版本',
+    title: '接口失败率',
     key: 'kernel_version',
     dataIndex: 'kernel_version',
-  },
-  {
-    title: '内核架构',
-    key: 'kernel_arch',
-    dataIndex: 'kernel_arch',
-  },
-  {
-    title: '虚拟化系统',
-    key: 'virtualization_system',
-    dataIndex: 'virtualization_system',
-  },
-  {
-    title: '虚拟化角色',
-    key: 'virtualization_role',
-    dataIndex: 'virtualization_role',
-  },
-  {
-    title: '主机标识',
-    key: 'hostid',
-    dataIndex: 'hostid',
-  },
-];
-
-const SYSTEMD_INFO_COLUMN: ColumnsType = [
-  {
-    title: '自启动项',
-    key: 'systemd',
-    dataIndex: 'systemd',
-  },
-  {
-    title: '状态',
-    key: 'status',
-    dataIndex: 'status',
-    render: (_, { status }) => {
-      let tagContent = '';
-      if (status === 'enabled') {
-        return (
-          <>
-            <Tag color="green" key={status}>
-              {status}
-            </Tag>
-          </>
-        );
-      } else if (status === 'disabled') {
-        return (
-          <>
-            <Tag color="orange" key={status}>
-              {status}
-            </Tag>
-          </>
-        );
-      } else {
-        return (
-          <>
-            <Tag color="magenta" key={status}>
-              {status}
-            </Tag>
-          </>
-        );
-      }
-    },
   },
 ];
 
@@ -198,7 +124,6 @@ const HostInfoCard: React.FC<HostIdProps> = (props) => {
   const [hostInfo, setHostInfo] = useState(Object);
   const [hostDesc, setHostDesc] = useState(Object);
   const [agentInfo, setAgentInfo] = useState(Object);
-  const [systemdData, setSystemdData] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -232,21 +157,10 @@ const HostInfoCard: React.FC<HostIdProps> = (props) => {
   return (
     <>
       <ProDescriptions
-        title="基本信息"
+        title="基本性能信息"
         dataSource={hostDesc}
-        columns={HOST_INFO_CLOUMNS}
+        columns={Performace_INFO_CLOUMNS}
       ></ProDescriptions>
-      <ProDescriptions
-        title="代理信息"
-        dataSource={agentInfo}
-        columns={AGENT_INFO_CLOUMNS}
-      ></ProDescriptions>
-      <ProDescriptions
-        title="系统自启动项"
-      ></ProDescriptions>
-      {/* {systemdData.length !== 0 && ( */}
-        <Table columns={SYSTEMD_INFO_COLUMN} dataSource={systemdData} />
-      {/* )} */}
     </>
   );
 };

@@ -39,6 +39,12 @@ export default defineConfig({
             component: './Monitor',
             hideInMenu: true,
         },
+        {
+            name: '性能指标',
+            path: '/performance',
+            icon: 'Performace',
+            component: './Performance',
+        },
     ],
     npmClient: 'pnpm',
 });

@@ -101,6 +101,49 @@ const NET_INFO_TABLE_CLOUMNS: ColumnsType = [
   },
 ];
 
+const IPROUTE_INFO_COLUMN: ColumnsType = [
+  {
+    title: '目标站点',
+    key: 'destination',
+    dataIndex: 'destination',
+  },
+  {
+    title: '网关',
+    key: 'gateway',
+    dataIndex: 'gateway',
+  },
+  {
+    title: '子网掩码',
+    key: 'genmask',
+    dataIndex: 'genmask',
+  },
+  {
+    title: '标志位',
+    key: 'flags',
+    dataIndex: 'flags',
+  },
+  {
+    title: '接口',
+    key: 'mss',
+    dataIndex: 'mss',
+  },
+  {
+    title: '窗口大小',
+    key: 'window',
+    dataIndex: 'window',
+  },
+  {
+    title: '初始往返时间',
+    key: 'irtt',
+    dataIndex: 'irtt',
+  },
+  {
+    title: '网络接口',
+    key: 'iface',
+    dataIndex: 'iface',
+  },
+];
+
 const NetIOCard: React.FC = () => {
   const [UUID, setUUID] = useState('');
   const [searchParams, setSearchParams] = useSearchParams();
@@ -118,6 +161,7 @@ const NetIOCard: React.FC = () => {
   const [ioPacketsSendStat, setIOPacketsSendStat] = useState([]);
   const [ioPacketsRecvStat, setIOPacketsRecvStat] = useState([]);
   const [recvNewEvent, setRecvNewEvent] = useState(0);
+
 
   useEffect(() => {
     const websocket = new WebSocket(
@@ -800,6 +844,7 @@ const NetInfoCard: React.FC = () => {
   }, []);
 
   const [netInfo, setNetInfo] = useState([]);
+  const [ipRouteData, setIPRouteData] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -826,9 +871,20 @@ const NetInfoCard: React.FC = () => {
       >
         网卡配置信息
       </div>
-      {netInfo.length !== 0 && (
+      {/* {netInfo.length !== 0 && ( */}
         <Table columns={NET_INFO_TABLE_CLOUMNS} dataSource={netInfo} />
-      )}
+      {/* )} */}
+      <div
+        style={{
+          fontSize: '20px',
+          marginBottom: '20px',
+        }}
+      >
+        路由信息
+      </div>
+      {/* {ipRouteData.length !== 0 && ( */}
+        <Table columns={IPROUTE_INFO_COLUMN} dataSource={ipRouteData} />
+      {/* )} */}
       <div
         style={{
           fontSize: '20px',
