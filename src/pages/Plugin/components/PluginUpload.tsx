@@ -26,12 +26,16 @@ const PluginUpload: React.FC<HostIdProps> = (props) => {
 
   const onFinish = (values: any) => {
     console.log('Received values of form: ', values);
-    // 上传文件
-    const formData = new FormData();
-    formData.append('file', values.dragger[0].originFileObj);
-    formData.append('command', values.command);
-    // formData.append('uuid', props.uuid);
-    apiPluginUpload(formData);
+    console.log('values.dragger[0].originFileObj: ', values.dragger[0].originFileObj);
+    console.log('values.command: ', values.command);
+    // 上传文件 
+    let formdata = new FormData();
+    formdata.set('multipartFile', values.dragger[0].originFileObj);
+    formdata.set('startCommand', values.command);
+    formdata.set('plugName', values.dragger[0].name);
+    formdata.set('description', values.dragger[0].name);
+    console.log(formdata.get('startCommand'));
+    apiPluginUpload(formdata);
   };
 
   const { Dragger } = Upload;

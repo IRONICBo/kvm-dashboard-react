@@ -5,7 +5,8 @@ import { MinusCircleOutlined, PlusOutlined } from '@ant-design/icons';
 import { ProDescriptions } from '@ant-design/pro-components';
 import type { UploadProps } from 'antd';
 import { Button, Form, Input, Select, Space, message, Empty, Spin } from 'antd';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { apiGetPluginInfo, apiRunPlugin, apiGetPluginResp } from '@/api/Plugin';
 
 const normFile = (e: any) => {
   console.log('Upload event:', e);
@@ -27,10 +28,13 @@ const PluginRun: React.FC<HostIdProps> = (props) => {
   const onFinish = (values: any) => {
     console.log('Received values of form: ', values);
     // 上传文件
-    const formData = new FormData();
-    formData.append('node', values.node);
-    formData.append('params', JSON.stringify(values.params));
-    apiPluginUpload(formData);
+    const params = {
+      "plugId": selectedMetric,
+      "paramsJson": JSON.stringify(values.params),
+    }
+    console.log('plugId', selectedMetric);
+    console.log('paramsJson', JSON.stringify(values.params));
+    apiRunPlugin(params);
   };
 
   const { Option } = Select;
@@ -64,6 +68,45 @@ const PluginRun: React.FC<HostIdProps> = (props) => {
     }
   };
 
+  const [metricList, setMetricList] = useState([
+    { key: '请选择', value: '请选择' },
+  ]);
+  const [selectedMetric, setSelectedMetric] = useState(
+    'netstat',
+  );
+  const handleMetricListChange = (value: string) => {
+    console.log(`selected ${value}`);
+    setSelectedMetric(value);
+  };
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        let res = await apiGetPluginInfo();
+        console.log('apiGetPluginInfo : ', res);
+
+        const deletedIndex = res.indexOf('net_stat.connection_stats');
+        if (deletedIndex > -1) {
+          res.splice(deletedIndex, 1);
+        }
+
+        console.log('res', res);
+        const tempMetricList = res.map((item) => {
+          return {
+            value: item.plugZzid,
+            label: item.plugName,
+          };
+        });
+        setMetricList(tempMetricList);
+        // set default metric
+        setSelectedMetric(tempMetricList[0].value);
+        console.log('metricList : ', tempMetricList);
+      } catch (error) {
+        console.error('Error retrieving guest infos:', error);
+      }
+    };
+    fetchData();
+  }, [1]);
+
   return (
     <>
       <ProDescriptions title="运行参数配置"></ProDescriptions>
@@ -83,14 +126,22 @@ const PluginRun: React.FC<HostIdProps> = (props) => {
             <Option value="vm1">vm1</Option>
           </Select>
         </Form.Item>
-        <Form.Item name="node" label="插件" rules={[{ required: true }]}>
-          <Select
+        <Form.Item name="plugin" label="插件" rules={[{ required: true }]}>
+          {/* <Select
             placeholder="选择一个插件并更改上面的输入"
             onChange={onNodeChange}
             allowClear
           >
             <Option value="vm1">vm1</Option>
-          </Select>
+          </Select> */}
+          <Select
+            placeholder="选择一个插件并更改上面的输入"
+            showSearch
+            defaultValue={metricList[0].value}
+            onChange={handleMetricListChange}
+            onSearch={handleMetricListChange}
+            options={metricList}
+          />
         </Form.Item>
         <Form.List name="params">
           {(fields, { add, remove }) => (
@@ -103,15 +154,15 @@ const PluginRun: React.FC<HostIdProps> = (props) => {
                 >
                   <Form.Item
                     {...restField}
-                    name={[name, 'first']}
-                    rules={[{ required: true, message: 'Missing first name' }]}
+                    name={[name, 'key']}
+                    rules={[{ required: true, message: '请填写键名称' }]}
                   >
                     <Input placeholder="参数名" />
                   </Form.Item>
                   <Form.Item
                     {...restField}
-                    name={[name, 'last']}
-                    rules={[{ required: true, message: 'Missing last name' }]}
+                    name={[name, 'value']}
+                    rules={[{ required: true, message: '请填写值的名称' }]}
                   >
                     <Input placeholder="参数值" />
                   </Form.Item>
@@ -133,7 +184,7 @@ const PluginRun: React.FC<HostIdProps> = (props) => {
         </Form.List>
         <Form.Item>
           <Button type="primary" htmlType="submit">
-            提交
+            运行
           </Button>
         </Form.Item>
       </Form>
