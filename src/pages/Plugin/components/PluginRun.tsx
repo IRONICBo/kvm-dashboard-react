@@ -34,7 +34,15 @@ const PluginRun: React.FC<HostIdProps> = (props) => {
     }
     console.log('plugId', selectedMetric);
     console.log('paramsJson', JSON.stringify(values.params));
-    apiRunPlugin(params);
+    apiRunPlugin(params).then((res) => {
+      console.log('apiRunPlugin', res);
+      // 获取结果
+      const res2 = apiGetPluginResp(res).then((res2) => {
+        console.log('apiGetPluginResp', res2);
+        setPluginResult(res2);
+      });
+    });
+
   };
 
   const { Option } = Select;
@@ -74,6 +82,7 @@ const PluginRun: React.FC<HostIdProps> = (props) => {
   const [selectedMetric, setSelectedMetric] = useState(
     'netstat',
   );
+  const [pluginResult, setPluginResult] = useState();
   const handleMetricListChange = (value: string) => {
     console.log(`selected ${value}`);
     setSelectedMetric(value);
@@ -190,9 +199,11 @@ const PluginRun: React.FC<HostIdProps> = (props) => {
       </Form>
 
       <ProDescriptions title="插件测试结果"></ProDescriptions>
-      <Spin tip="Loading...">
-        <Empty />
-      </Spin>
+
+      {/* <Spin tip="Loading..."> */}
+
+      { pluginResult == null ? <Empty /> : <pre>{pluginResult}</pre> }
+      {/* </Spin> */}
     </>
   );
 };

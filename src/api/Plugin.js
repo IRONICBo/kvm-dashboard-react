@@ -34,7 +34,7 @@ export const apiRunPlugin = (params) => {
 }
 
 export const apiGetPluginResp = (params) => {
-    return getRequest('/plugState/queryFinishState', params).then(resp => {
+    return getRequest('/plugState/queryFinishState?plugStateId='+params).then(resp => {
         if (resp.code == 200) {
             return resp.data;
         } else {
