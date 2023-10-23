@@ -73,3 +73,13 @@ export const apiGetAlertPage = (uuid, pageCurrent, pageSize) => {
         }
     })
 }
+
+export const apiGetEvaluateData = () => {
+    return getRequest('/monitor/getEvaluateData').then(resp => {
+        if (resp.code == 200) {
+            return resp.data;
+        } else {
+            console.log(resp.code + ":" + resp.message);
+        }
+    })
+}

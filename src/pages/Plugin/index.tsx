@@ -24,8 +24,10 @@ import {
 } from 'antd';
 import type { ColumnsType } from 'antd/es/table';
 import React, { useEffect, useState } from 'react';
-import PerformanceInfoCard from './components/PerformanceInfoCard';
-import APIInfoCard from './components/APIInfoCard';
+import PluginUpload from './components/PluginUpload';
+import APIInfoCard from './components/PluginResult';
+import PluginRun from './components/PluginRun';
+import PluginResult from './components/PluginResult';
 
 const Context = React.createContext({ name: 'Default' });
 const Performance: React.FC = () => {
@@ -101,9 +103,9 @@ const Performance: React.FC = () => {
               marginBottom: '30px',
             }}
           >
-            系统响应性与满意度
+            插件上传
           </div>
-          <PerformanceInfoCard uuid={UUID} />
+          <PluginUpload uuid={UUID} />
         </div>
       </Card>
       <Card
@@ -129,9 +131,9 @@ const Performance: React.FC = () => {
               marginBottom: '30px',
             }}
           >
-            接口性能
+            插件测试
           </div>
-          <APIInfoCard uuid={UUID} />
+          <PluginRun uuid={UUID} />
         </div>
       </Card>
     </PageContainer>

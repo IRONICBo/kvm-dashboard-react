@@ -249,7 +249,7 @@ const ALL_EVALUATE_DTO_CLOUMNS = [
 interface HostIdProps {
   uuid: string;
 }
-const HostInfoCard: React.FC<HostIdProps> = (props) => {
+const APIInfoCard: React.FC<HostIdProps> = (props) => {
   interface AgentInfo {
     isOnline: boolean;
     useGzip: boolean;
@@ -296,39 +296,12 @@ const HostInfoCard: React.FC<HostIdProps> = (props) => {
 
   return (
     <>
-      <ProDescriptions
-        title="总体分析"
-        dataSource={performaceInfo.allEvaluateDTO}
-        columns={ALL_EVALUATE_DTO_CLOUMNS}
-      ></ProDescriptions>
-      <ProDescriptions
-        title="处理器性能"
-        dataSource={performaceInfo.cpuEvaluateDTO}
-        columns={EVALUATE_DTO_CLOUMNS}
-      ></ProDescriptions>
-      <ProDescriptions
-        title="内存性能"
-        dataSource={performaceInfo.memEvaluateDTO}
-        columns={EVALUATE_DTO_CLOUMNS}
-      ></ProDescriptions>
-      <ProDescriptions
-        title="磁盘性能"
-        dataSource={performaceInfo.diskEvaluateDTO}
-        columns={EVALUATE_DTO_CLOUMNS}
-      ></ProDescriptions>
-      <ProDescriptions
-        title="网络性能"
-        dataSource={performaceInfo.netEvaluateDTO}
-        columns={EVALUATE_DTO_CLOUMNS}
-      ></ProDescriptions>
-      <ProDescriptions
-        title="进程性能"
-        dataSource={performaceInfo.processEvaluateDTO}
-        columns={EVALUATE_DTO_CLOUMNS}
-      ></ProDescriptions>
+      {apiInfo.length !== 0 && (
+        <Table columns={API_INFO_CLOUMNS} dataSource={apiInfo} />
+      )}
     </>
   );
 };
 
 
-export default HostInfoCard;
+export default APIInfoCard;

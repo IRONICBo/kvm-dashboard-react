@@ -139,8 +139,8 @@ const IPROUTE_INFO_COLUMN: ColumnsType = [
   },
   {
     title: '网络接口',
-    key: 'iface',
-    dataIndex: 'iface',
+    key: 'interface',
+    dataIndex: 'interface',
   },
 ];
 
@@ -851,8 +851,11 @@ const NetInfoCard: React.FC = () => {
       try {
         const res = await apiGetGuestInfos(UUID);
         const parsedNetDesc = JSON.parse(res.netDesc);
-        console.log('parsedNetDesc: ', parsedNetDesc.interface_infos);
+        console.log('interface_infos: ', parsedNetDesc.interface_infos);
         setNetInfo(parsedNetDesc.interface_infos);
+
+        console.log('ip_route_infos: ', parsedNetDesc.ip_route_infos);
+        setIPRouteData(parsedNetDesc.ip_route_infos);        
       } catch (error) {
         console.error('Error retrieving guest infos:', error);
       }

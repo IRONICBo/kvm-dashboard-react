@@ -145,8 +145,8 @@ const HOST_INFO_CLOUMNS = [
 const SYSTEMD_INFO_COLUMN: ColumnsType = [
   {
     title: '自启动项',
-    key: 'systemd',
-    dataIndex: 'systemd',
+    key: 'name',
+    dataIndex: 'name',
   },
   {
     title: '状态',
@@ -218,6 +218,9 @@ const HostInfoCard: React.FC<HostIdProps> = (props) => {
           updatedAt: res.updatedAt,
         };
         setAgentInfo(tempAgentInfo);
+
+        // Set systemd data
+        setSystemdData(parsedHostDesc.host_info_stat.systemd_infos);
       } catch (error) {
         console.error('Error retrieving guest infos:', error);
       }

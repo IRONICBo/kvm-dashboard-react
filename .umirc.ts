@@ -42,8 +42,14 @@ export default defineConfig({
         {
             name: '性能指标',
             path: '/performance',
-            icon: 'Performace',
+            icon: 'info',
             component: './Performance',
+        },
+        {
+            name: '插件测试',
+            path: '/plugin',
+            icon: 'T',
+            component: './Plugin',
         },
     ],
     npmClient: 'pnpm',
