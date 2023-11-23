@@ -39,6 +39,7 @@ export default defineConfig({
             component: './Monitor',
             hideInMenu: true,
         },
+        // TODO: Update Create VM Machine
         {
             name: '性能指标',
             path: '/performance',
