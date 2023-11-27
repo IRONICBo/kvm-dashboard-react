@@ -17,6 +17,7 @@
     "@umijs/max": "^4.0.76",
     "antd": "^4.24.13",
     "axios": "^1.4.0",
+    "core-js": "^3.33.3",
     "react-i18next": "^13.2.2",
     "react-json-view": "^1.21.3",
     "socket.io-client": "^4.7.2"

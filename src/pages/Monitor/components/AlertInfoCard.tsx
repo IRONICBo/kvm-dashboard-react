@@ -101,7 +101,7 @@ const AlertInfoCard: React.FC<HostIdProps> = (props) => {
 
   return (
     <>
-      {alertInfo.length !== 0 && (
+      { alertInfo != undefined && alertInfo.length !== 0 && (
         <Table columns={ALERT_INFO_CLOUMNS} dataSource={alertInfo} pagination={{ current: alertCurrent, total: alertTotal, onChange(page, pageSize) {
           setAlertCurrent(page)
         }, }}/>
