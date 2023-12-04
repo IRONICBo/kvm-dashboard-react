@@ -1,19 +1,19 @@
 import React, {useState, useEffect} from "react";
 import {PageContainer} from "@ant-design/pro-components";
-import {Button, Form, Drawer, Input, Modal, Popconfirm, Space, Table, Tooltip, Tag} from "antd";
+import {Button, Form, Input, Modal, Popconfirm, Space, Table, Tooltip} from "antd";
 import {ColumnsType} from "antd/es/table";
 import {apiAddHost, apiDeleteHost, apiRefreshHostList, apiUpdateHost} from "@/api/HostManage";
 import { history } from 'umi';
-import { RedoOutlined, PlusOutlined, PlayCircleOutlined, PauseCircleOutlined } from '@ant-design/icons';
 
 interface DataType {
     hostZzid: number,
-    hostUuid: string,
+    hostId: string,
     hostName: string,
     hostDescription: string,
     hostIp: string,
-    hostSshPort: string,
-    hostLoginUser: string,
+    hostPort: string,
+    hostPortSsh: string,
+    hostLoginUsername: string,
     hostLoginPassword: string,
     hostEnable: number,
     hostCreateTime: unknown
@@ -23,21 +23,12 @@ const HostManagePage: React.FC = () => {
 
     const columns: ColumnsType<DataType> = [
         {
-            title: 'ID',
-            dataIndex: 'hostZzid',
-            ellipsis: {
-                showTitle: false,
-            },
-            width: 50,
-            fixed: "left",
-        },
-        {
             title: 'UUID',
-            dataIndex: 'hostUuid',
+            dataIndex: 'hostId',
             ellipsis: {
                 showTitle: false,
             },
-            width: 300,
+            width: 110,
             fixed: "left",
             render: (hostId) => (
                 <Tooltip placement="topLeft" title={hostId}>
@@ -74,119 +65,62 @@ const HostManagePage: React.FC = () => {
             width: 140
         },
         {
-            title: '区域ID',
-            dataIndex: 'hostZoneUuid',
+            title: 'Qemu端口',
+            dataIndex: 'hostPort',
             ellipsis: {
                 showTitle: false,
             },
-            width: 300,
-            render: (hostZoneUuid) => (
-                <Tooltip placement="topLeft" title={hostZoneUuid}>
-                    {hostZoneUuid}
+            render: (hostPort) => (
+                <Tooltip placement="topLeft" title={hostPort}>
+                    {hostPort}
                 </Tooltip>
             )
         },
         {
-            title: '集群ID',
-            dataIndex: 'hostClusterUuid',
+            title: 'SSH端口',
+            dataIndex: 'hostPortSsh',
             ellipsis: {
                 showTitle: false,
             },
-            width: 300,
-            render: (hostClusterUuid) => (
-                <Tooltip placement="topLeft" title={hostClusterUuid}>
-                    {hostClusterUuid}
+            render: (hostPortSsh) => (
+                <Tooltip placement="topLeft" title={hostPortSsh}>
+                    {hostPortSsh}
                 </Tooltip>
             )
         },
+        {
+            title: '登录用户',
+            dataIndex: 'hostLoginUsername',
+            ellipsis: {
+                showTitle: false,
+            },
+            render: (hostLoginUsername) => (
+                <Tooltip placement="topLeft" title={hostLoginUsername}>
+                    {hostLoginUsername}
+                </Tooltip>
+            )
+        },
+        // {
+        //     title: '登录密码',
+        //     dataIndex: 'hostLoginPassword',
+        //     ellipsis: {
+        //         showTitle: false,
+        //     },
+        //     render: (hostLoginPassword) => (
+        //         <Tooltip placement="topLeft" title={hostLoginPassword}>
+        //             {hostLoginPassword}
+        //         </Tooltip>
+        //     )
+        // },
         {
             title: '描述信息',
             dataIndex: 'hostDescription',
             ellipsis: {
                 showTitle: false,
             },
-            width: 200,
             render: (hostDescription) => (
                 <Tooltip placement="topLeft" title={hostDescription}>
-                    {hostDescription == null ? "无" : hostDescription}
-                </Tooltip>
-            )
-        },
-        {
-            title: '主机地址',
-            dataIndex: 'hostIp',
-            ellipsis: {
-                showTitle: false,
-            },
-            width: 200,
-            render: (hostIp) => (
-                <Tooltip placement="topLeft" title={hostIp}>
-                    {hostIp}
-                </Tooltip>
-            )
-        },
-        {
-            title: '主机内存',
-            dataIndex: 'hostTotalMemorySize',
-            ellipsis: {
-                showTitle: false,
-            },
-            width: 200,
-            render: (hostTotalMemorySize) => (
-                <Tooltip placement="topLeft" title={hostTotalMemorySize}>
-                    {Math.round(hostTotalMemorySize/1024/1024/1024)} GB
-                </Tooltip>
-            )
-        },
-        {
-            title: '处理器核数',
-            dataIndex: 'hostTotalCpuNum',
-            ellipsis: {
-                showTitle: false,
-            },
-            width: 200,
-            render: (hostTotalCpuNum) => (
-                <Tooltip placement="topLeft" title={hostTotalCpuNum}>
-                    {hostTotalCpuNum}
-                </Tooltip>
-            )
-        },
-        {
-            title: '处理器架构',
-            dataIndex: 'hostArchitecture',
-            ellipsis: {
-                showTitle: false,
-            },
-            width: 200,
-            render: (hostArchitecture) => (
-                <Tooltip placement="topLeft" title={hostArchitecture}>
-                    {hostArchitecture}
-                </Tooltip>
-            )
-        },
-        {
-            title: '登录账号',
-            dataIndex: 'hostLoginUser',
-            ellipsis: {
-                showTitle: false,
-            },
-            width: 200,
-            render: (hostLoginUser) => (
-                <Tooltip placement="topLeft" title={hostLoginUser}>
-                    {hostLoginUser}
-                </Tooltip>
-            )
-        },
-        {
-            title: '登录密码',
-            dataIndex: 'hostLoginPassword',
-            ellipsis: {
-                showTitle: false,
-            },
-            width: 200,
-            render: (hostLoginPassword) => (
-                <Tooltip placement="topLeft" title={hostLoginPassword}>
-                    {hostLoginPassword}
+                    {hostDescription}
                 </Tooltip>
             )
         },
@@ -196,45 +130,10 @@ const HostManagePage: React.FC = () => {
             ellipsis: {
                 showTitle: false,
             },
-            width: 200,
             render: (hostCreateTime) => (
                 <Tooltip placement="topLeft" title={hostCreateTime}>
                     {hostCreateTime}
                 </Tooltip>
-            )
-        },
-        {
-            title: '远程端口',
-            dataIndex: 'hostSshPort',
-            ellipsis: {
-                showTitle: false,
-            },
-            width: 200,
-            render: (hostSshPort) => (
-                <Tooltip placement="topLeft" title={hostSshPort}>
-                    {hostSshPort}
-                </Tooltip>
-            )
-        },
-        {
-            title: '状态',
-            dataIndex: 'hostState',
-            ellipsis: {
-                showTitle: false,
-            },
-            width: 100,
-            render: (hostState) => (
-                <>
-                    {hostState=="enable" ? (
-                        <Tag color="blue" key={hostState}>
-                            启用
-                        </Tag>
-                    ) : (
-                        <Tag color="volcano" key={hostState}>
-                            禁用
-                        </Tag>
-                    )}
-                </>
             )
         },
         {
@@ -282,12 +181,13 @@ const HostManagePage: React.FC = () => {
     const showUpdateModal = (record: DataType) => {
         setUpdateModalOpen(true);
         updateFormInstance.setFieldsValue({
-            hostUuid: record.hostUuid,
+            hostId: record.hostId,
             hostName: record.hostName,
             hostDescription: record.hostDescription,
             hostIp: record.hostIp,
-            hostSshPort: record.hostSshPort,
-            hostLoginUser: record.hostLoginUser,
+            hostPort: record.hostPort,
+            hostPortSsh: record.hostPortSsh,
+            hostLoginUsername: record.hostLoginUsername,
             hostLoginPassword: record.hostLoginPassword,
         });
     }
@@ -345,37 +245,18 @@ const HostManagePage: React.FC = () => {
      */
     return (
         <PageContainer>
-            <Drawer
+            <Modal
                 title="新增宿主机"
-                width={720}
                 open={addModalOpen}
-                onClose={cancelAddModal}
+                onOk={submitAddModal}
+                onCancel={cancelAddModal}
                 destroyOnClose={true}
-                styles={{
-                    body: {
-                      paddingBottom: 80,
-                    },
-                }}
-                extra={
-                    <Space>
-                      <Button onClick={cancelAddModal}>取消</Button>
-                      <Button onClick={submitAddModal} type="primary">
-                        确认
-                      </Button>
-                    </Space>
-                  }
             >
                 <Form
-                    layout="vertical"
                     form={addFormInstance}
+                    labelCol={{ span: 7 }}
+                    wrapperCol={{ span: 14 }}
                 >
-                    <Form.Item
-                        label="集群UUID"
-                        name="hostClusterUuid"
-                        rules={[{ required: true, message: '请输入集群UUID' }]}
-                    >
-                        <Input placeholder={"xxxxxxxxxxx"}/>
-                    </Form.Item>
                     <Form.Item
                         label="宿主机名称"
                         name="hostName"
@@ -391,22 +272,27 @@ const HostManagePage: React.FC = () => {
                     >
                         <Input placeholder={"示例: 192.168.0.1"}/>
                     </Form.Item>
-
+                    <Form.Item
+                        label="QEMU-端口"
+                        name="hostPort"
+                        rules={[{ required: true, message: '请输入 QEMU 端口!' }]}
+                    >
+                        <Input placeholder={"示例: 16509"}/>
+                    </Form.Item>
                     <Form.Item
                         label="SSH-端口"
-                        name="hostSshPort"
+                        name="hostPortSsh"
                         rules={[{ required: true, message: '请输入 SSH 端口!' }]}
                     >
                         <Input placeholder={"示例: 22"}/>
                     </Form.Item>
                     <Form.Item
                         label="登录用户"
-                        name="hostLoginUser"
+                        name="hostLoginUsername"
                         rules={[{ required: true, message: '请输入登录用户!' }]}
                     >
                         <Input placeholder={"示例: root"}/>
                     </Form.Item>
-
                     <Form.Item
                         label="登录密码"
                         name="hostLoginPassword"
@@ -414,7 +300,6 @@ const HostManagePage: React.FC = () => {
                     >
                         <Input.Password placeholder={"示例: 1234"}/>
                     </Form.Item>
-
                     <Form.Item
                         label="描述信息"
                         name="hostDescription"
@@ -422,26 +307,13 @@ const HostManagePage: React.FC = () => {
                         <Input.TextArea showCount={true} placeholder={"最大长度为 500 个字符"} />
                     </Form.Item>
                 </Form>
-            </Drawer>
+            </Modal>
 
-            <Drawer
+            <Modal
                 title="宿主机信息修改"
                 open={updateModalOpen}
+                onOk={submitUpdateModal}
                 onCancel={cancelUpdateModal}
-                width={720}
-                styles={{
-                    body: {
-                      paddingBottom: 80,
-                    },
-                }}
-                extra={
-                    <Space>
-                      <Button onClick={cancelUpdateModal}>取消</Button>
-                      <Button onClick={submitUpdateModal} type="primary">
-                        确认
-                      </Button>
-                    </Space>
-                  }
             >
                 <Form
                     form={updateFormInstance}
@@ -450,7 +322,7 @@ const HostManagePage: React.FC = () => {
                 >
                     <Form.Item
                         label="宿主机ID"
-                        name="hostUuid"
+                        name="hostId"
                         rules={[{ required: true, message: '请输入宿主机ID!' }]}
                     >
                         <Input disabled={true}/>
@@ -471,15 +343,22 @@ const HostManagePage: React.FC = () => {
                         <Input placeholder={"示例: 192.168.0.1"}/>
                     </Form.Item>
                     <Form.Item
+                        label="QEMU-端口"
+                        name="hostPort"
+                        rules={[{ required: true, message: '请输入 QEMU 端口!' }]}
+                    >
+                        <Input placeholder={"示例: 16509"}/>
+                    </Form.Item>
+                    <Form.Item
                         label="SSH-端口"
-                        name="hostSshPort"
+                        name="hostPortSsh"
                         rules={[{ required: true, message: '请输入 SSH 端口!' }]}
                     >
                         <Input placeholder={"示例: 22"}/>
                     </Form.Item>
                     <Form.Item
                         label="登录用户"
-                        name="hostLoginUser"
+                        name="hostLoginUsername"
                         rules={[{ required: true, message: '请输入登录用户!' }]}
                     >
                         <Input placeholder={"示例: root"}/>
@@ -498,42 +377,19 @@ const HostManagePage: React.FC = () => {
                         <Input.TextArea showCount={true} placeholder={"最大长度为 500 个字符"} />
                     </Form.Item>
                 </Form>
-            </Drawer>
+            </Modal>
 
             <Space size={"middle"}>
-                <Button type="primary"
-                        size="large"
-                        icon={<RedoOutlined />}
+                <Button shape={"round"} type="primary" onClick={showAddModal}>新增</Button>
+                <Button shape={"round"} type="dashed"
                         onClick={() => apiRefreshHostList().then(resp => {
                             if (resp != null) {
                                 setData(resp);
                             }})}>
                     刷新
                 </Button>
-                <Button type="primary"
-                        size="large"
-                        icon={<PlusOutlined />}
-                        onClick={showAddModal}>新增宿主机</Button>
-                <Button type="dashed"
-                    size="large"
-                        icon={<PlayCircleOutlined />}
-                        onClick={() => apiRefreshHostList().then(resp => {
-                            if (resp != null) {
-                                setData(resp);
-                            }})}>
-                    启动监测
-                </Button>
-                <Button type="dashed"
-                        size="large"
-                        icon={<PauseCircleOutlined />}
-                        onClick={() => apiRefreshHostList().then(resp => {
-                            if (resp != null) {
-                                setData(resp);
-                            }})}>
-                    停止监测
-                </Button>
             </Space>
-            <Table style={{marginTop: 15}} columns={columns} dataSource={data} rowKey={"hostId"} scroll={{x: 1000}}></Table>
+            <Table style={{marginTop: 6}} columns={columns} dataSource={data} rowKey={"hostId"} scroll={{x: 1000}}></Table>
         </PageContainer>
     );
 };

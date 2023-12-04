@@ -10,7 +10,6 @@ export const layout: RunTimeLayoutConfig = (initialState) => {
     // rightContentRender: () => <RightContent />,
     // footerRender: () => <Footer />,
     menuHeaderRender: undefined,
-
     // 其他属性见：https://procomponents.ant.design/components/layout#prolayout
   };
 };

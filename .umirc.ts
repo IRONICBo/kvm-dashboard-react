@@ -2,7 +2,11 @@ import {defineConfig} from '@umijs/max';
 
 export default defineConfig({
     antd: {
-        // dark: true,
+        dark: false,
+    },
+    theme: {
+        // 切换主题
+        // "primary-color": "#1DA57A",
     },
     access: {},
     model: {},
@@ -19,13 +23,13 @@ export default defineConfig({
         {
             name: '宿主机管理',
             path: '/host',
-            icon: 'tool',
+            icon: 'H',
             component: './HostManage',
         },
         {
             name: '虚拟机管理',
             path: '/virtual/manage',
-            icon: 'table',
+            icon: 'V',
             component: './VmManage',
         },
         // {
@@ -37,31 +41,31 @@ export default defineConfig({
         {
             name: '网络管理',
             path: '/virtual/network',
-            icon: 'network',
+            icon: 'N',
             component: './VmNetwork',
         },
         {
-            name: '虚拟机镜像',
+            name: '镜像管理',
             path: '/virtual/mirror',
-            icon: 'mirror',
+            icon: 'M',
             component: './VmMirror',
         },
         {
-            name: '虚拟机快照',
+            name: '快照管理',
             path: '/virtual/snapshot',
-            icon: 'snapshot',
+            icon: 'S',
             component: './VmSnapshot',
         },
         {
-            name: '计算规格',
+            name: '计算规格管理',
             path: '/virtual/instance',
-            icon: 'instance',
+            icon: 'I',
             component: './VmInstance',
         },
         {
-            name: '云盘规格',
+            name: '云盘规格管理',
             path: '/virtual/disk',
-            icon: 'disk',
+            icon: 'D',
             component: './VmDisk',
         },
         {
@@ -75,7 +79,7 @@ export default defineConfig({
         {
             name: '性能指标',
             path: '/performance',
-            icon: 'info',
+            icon: 'P',
             component: './Performance',
         },
         {
@@ -84,6 +88,12 @@ export default defineConfig({
             icon: 'T',
             component: './Plugin',
         },
+        {
+            name: '系统管理',
+            path: '/system/manage',
+            icon: 'S',
+            component: './SystemManage',
+        }
     ],
     npmClient: 'pnpm',
 });

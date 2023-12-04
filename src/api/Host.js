@@ -25,7 +25,7 @@ export const apiDeleteHost = (hostId) => {
     })
 }
 export const apiAddHost = (data) => {
-    return postRequest('/manage/hostInfo/create', data).then(resp => {
+    return postRequest('/host/create', data).then(resp => {
         if (resp.code == 200) {
             message.success("宿主机新增成功！");
         } else {
@@ -46,10 +46,10 @@ export const apiUpdateHost = (data) => {
     })
 }
 
-export const apiGetSimpleHostList = () => {
+export const apiGetHostList = () => {
     return getRequest('/manage/hostInfo/queryAll').then(resp => {
         if (resp.code == 200) {
-            message.success("获取配置信息成功");
+            message.success("获取物理机信息成功");
             return resp.data;
         } else {
             message.error(resp.code + ":" + resp.message);
