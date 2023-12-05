@@ -22,3 +22,25 @@ export const apiQueryThreeNetworkInfoList = () => {
         }
     })
 }
+
+export const apiThreeNetworkCreate = (data) => {
+    return postRequest('/manage/threeNetworkInfo/create', data).then(resp => {
+        if (resp.code == 200) {
+            message.success("创建三层网络信息列表成功");
+            return resp.data;
+        } else {
+            message.error(resp.code + ":" + resp.message);
+        }
+    })
+}
+
+export const apiThreeNetworkDelete = (threeNetworkUuid) => {
+    return postRequest('/manage/threeNetworkInfo/delete', threeNetworkUuid).then(resp => {
+        if (resp.code == 200) {
+            message.success("删除三层网络信息列表成功");
+            return resp.data;
+        } else {
+            message.error(resp.code + ":" + resp.message);
+        }
+    })
+}

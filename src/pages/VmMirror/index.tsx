@@ -1,138 +1,210 @@
 import React, {useState, useEffect} from "react";
 import {PageContainer} from "@ant-design/pro-components";
-import {Button, Form, Input, Modal, Popconfirm, Space, Table, Tooltip} from "antd";
+import {Button, Form, Drawer, Input, Modal, Popconfirm, Space, Table, Tooltip, Tag, Radio} from "antd";
 import {ColumnsType} from "antd/es/table";
-import {apiAddHost, apiDeleteHost, apiRefreshHostList, apiUpdateHost} from "@/api/HostManage";
+import {apiQueryMirrorList, apiMirrorDelete,apiMirrorCreate} from "@/api/VmMirror";
 import { history } from 'umi';
+import { RedoOutlined, PlusOutlined, PlayCircleOutlined, PauseCircleOutlined, PicRightOutlined, PicLeftOutlined } from '@ant-design/icons';
 
 interface DataType {
     hostZzid: number,
-    hostId: string,
+    hostUuid: string,
     hostName: string,
     hostDescription: string,
     hostIp: string,
-    hostPort: string,
-    hostPortSsh: string,
-    hostLoginUsername: string,
+    hostSshPort: string,
+    hostLoginUser: string,
     hostLoginPassword: string,
     hostEnable: number,
     hostCreateTime: unknown
 }
 
-const HostManagePage: React.FC = () => {
-
+const VmNetworkPage: React.FC = () => {
     const columns: ColumnsType<DataType> = [
         {
-            title: 'UUID',
-            dataIndex: 'hostId',
+            title: 'ID',
+            dataIndex: 'mirrorZzid',
             ellipsis: {
                 showTitle: false,
             },
-            width: 110,
+            width: 50,
             fixed: "left",
-            render: (hostId) => (
-                <Tooltip placement="topLeft" title={hostId}>
-                    <a onClick={(event) => {event.preventDefault();history.push("/monitor?uuid=" + hostId)}}>
-                        {hostId}
-                    </a>
-                </Tooltip>
-            )
         },
         {
-            title: '名称',
-            dataIndex: 'hostName',
+            title: 'UUID',
+            dataIndex: 'mirrorUuid',
             ellipsis: {
                 showTitle: false,
             },
-            render: (hostName) => (
-                <Tooltip placement="topLeft" title={hostName}>
-                    {hostName}
+            width: 300,
+            fixed: "left",
+        },
+        {
+            title: '镜像名称',
+            dataIndex: 'mirrorName',
+            ellipsis: {
+                showTitle: false,
+            },
+            render: (mirrorName) => (
+                <Tooltip placement="topLeft" title={mirrorName}>
+                    {mirrorName}
                 </Tooltip>
             ),
             width: 130
         },
         {
-            title: 'IP地址',
-            dataIndex: 'hostIp',
-            ellipsis: {
-                showTitle: false,
-            },
-            render: (hostIp) => (
-                <Tooltip placement="topLeft" title={hostIp}>
-                    {hostIp}
-                </Tooltip>
-            ),
-            width: 140
-        },
-        {
-            title: 'Qemu端口',
-            dataIndex: 'hostPort',
-            ellipsis: {
-                showTitle: false,
-            },
-            render: (hostPort) => (
-                <Tooltip placement="topLeft" title={hostPort}>
-                    {hostPort}
-                </Tooltip>
-            )
-        },
-        {
-            title: 'SSH端口',
-            dataIndex: 'hostPortSsh',
-            ellipsis: {
-                showTitle: false,
-            },
-            render: (hostPortSsh) => (
-                <Tooltip placement="topLeft" title={hostPortSsh}>
-                    {hostPortSsh}
-                </Tooltip>
-            )
-        },
-        {
-            title: '登录用户',
-            dataIndex: 'hostLoginUsername',
-            ellipsis: {
-                showTitle: false,
-            },
-            render: (hostLoginUsername) => (
-                <Tooltip placement="topLeft" title={hostLoginUsername}>
-                    {hostLoginUsername}
-                </Tooltip>
-            )
-        },
-        // {
-        //     title: '登录密码',
-        //     dataIndex: 'hostLoginPassword',
-        //     ellipsis: {
-        //         showTitle: false,
-        //     },
-        //     render: (hostLoginPassword) => (
-        //         <Tooltip placement="topLeft" title={hostLoginPassword}>
-        //             {hostLoginPassword}
-        //         </Tooltip>
-        //     )
-        // },
-        {
             title: '描述信息',
-            dataIndex: 'hostDescription',
+            dataIndex: 'mirrorDescription',
             ellipsis: {
                 showTitle: false,
             },
-            render: (hostDescription) => (
-                <Tooltip placement="topLeft" title={hostDescription}>
-                    {hostDescription}
+            width: 300,
+            render: (mirrorDescription) => (
+                <Tooltip placement="topLeft" title={mirrorDescription}>
+                    {mirrorDescription ? mirrorDescription : "无"}
+                </Tooltip>
+            )
+        },
+        {
+            title: '镜像架构',
+            dataIndex: 'mirrorArchitecture',
+            ellipsis: {
+                showTitle: false,
+            },
+            width: 300,
+            render: (mirrorArchitecture) => (
+                <Tooltip placement="topLeft" title={mirrorArchitecture}>
+                    {mirrorArchitecture}
+                </Tooltip>
+            )
+        },
+        {
+            title: '镜像系统',
+            dataIndex: 'mirrorGuestOsType',
+            ellipsis: {
+                showTitle: false,
+            },
+            width: 200,
+            render: (mirrorGuestOsType) => (
+                <Tooltip placement="topLeft" title={mirrorGuestOsType}>
+                    {mirrorGuestOsType == null ? "无" : mirrorGuestOsType}
+                </Tooltip>
+            )
+        },
+        {
+            title: '虚拟化',
+            dataIndex: 'mirrorVirtio',
+            ellipsis: {
+                showTitle: false,
+            },
+            width: 300,
+            render: (mirrorVirtio) => (
+                <Tooltip placement="topLeft" title={mirrorVirtio}>
+                    {mirrorVirtio == true ? "是" : "否"}
+                </Tooltip>
+            )
+        },
+        {
+            title: '镜像地址',
+            dataIndex: 'mirrorUrl',
+            ellipsis: {
+                showTitle: false,
+            },
+            width: 300,
+            render: (mirrorUrl) => (
+                <Tooltip placement="topLeft" title={mirrorUrl}>
+                    {mirrorUrl}
+                </Tooltip>
+            )
+        },
+        {
+            title: '镜像类别',
+            dataIndex: 'mirrorMediaType',
+            ellipsis: {
+                showTitle: false,
+            },
+            width: 300,
+            render: (mirrorMediaType) => (
+                <Tooltip placement="topLeft" title={mirrorMediaType}>
+                    {mirrorMediaType}
+                </Tooltip>
+            )
+        },
+        {
+            title: '系统镜像',
+            dataIndex: 'mirrorSystem',
+            ellipsis: {
+                showTitle: false,
+            },
+            width: 300,
+            render: (mirrorSystem) => (
+                <Tooltip placement="topLeft" title={mirrorSystem}>
+                    {mirrorSystem==true ? "是" : "否"}
+                </Tooltip>
+            )
+        },
+        {
+            title: '镜像格式',
+            dataIndex: 'mirrorFormat',
+            ellipsis: {
+                showTitle: false,
+            },
+            width: 300,
+            render: (mirrorFormat) => (
+                <Tooltip placement="topLeft" title={mirrorFormat}>
+                    {mirrorFormat}
+                </Tooltip>
+            )
+        },
+        {
+            title: '镜像架构',
+            dataIndex: 'mirrorPlatform',
+            ellipsis: {
+                showTitle: false,
+            },
+            width: 200,
+            render: (mirrorPlatform) => (
+                <Tooltip placement="topLeft" title={mirrorPlatform}>
+                    {mirrorPlatform}
+                </Tooltip>
+            )
+        },
+        {
+            title: '镜像存储ID',
+            dataIndex: 'mirrorBackupStorageUuid',
+            ellipsis: {
+                showTitle: false,
+            },
+            width: 200,
+            render: (mirrorBackupStorageUuid) => (
+                <Tooltip placement="topLeft" title={mirrorBackupStorageUuid}>
+                    {mirrorBackupStorageUuid}
+                </Tooltip>
+            )
+        },
+        {
+            title: '镜像标签',
+            dataIndex: 'mirrorSystemTag',
+            ellipsis: {
+                showTitle: false,
+            },
+            width: 200,
+            render: (mirrorSystemTag) => (
+                <Tooltip placement="topLeft" title={mirrorSystemTag}>
+                    {mirrorSystemTag}
                 </Tooltip>
             )
         },
         {
             title: '创建时间',
-            dataIndex: 'hostCreateTime',
+            dataIndex: 'mirrorCreateTime',
             ellipsis: {
                 showTitle: false,
             },
-            render: (hostCreateTime) => (
-                <Tooltip placement="topLeft" title={hostCreateTime}>
-                    {hostCreateTime}
+            width: 200,
+            render: (mirrorCreateTime) => (
+                <Tooltip placement="topLeft" title={mirrorCreateTime}>
+                    {mirrorCreateTime}
                 </Tooltip>
             )
         },
@@ -143,8 +215,8 @@ const HostManagePage: React.FC = () => {
             width: 155,
             render: (_, record) =>
                 <Space>
-                    <Button size={"small"} shape={"round"} type="dashed" onClick={() => showUpdateModal(record)}>编辑</Button>
-                    <Popconfirm title="Sure to delete?" onConfirm={() => deleteHost(record.hostId)}>
+                    {/* <Button size={"small"} shape={"round"} type="dashed" onClick={() => showUpdateModal(record)}>编辑</Button> */}
+                    <Popconfirm title="Sure to delete?" onConfirm={() => deleteHost(record.hostUuid)}>
                         <Button size={"small"} shape={"round"} danger={true} type="dashed">删除</Button>
                     </Popconfirm>
                 </Space>
@@ -155,14 +227,16 @@ const HostManagePage: React.FC = () => {
      * ----------------------------------------------------------------------------------------------------------------------------------------------------------------
      */
     let [data, setData] = useState([])
+    let [selectData, setSelectData] = useState();
     let [addModalOpen, setAddModalOpen] = useState(false);
     let [updateModalOpen, setUpdateModalOpen] = useState(false);
+    let [getDetailOpen, setGetDetailOpen] = useState(false);
     let [addFormInstance] = Form.useForm();
     let [updateFormInstance] = Form.useForm();
 
-    // 钩子，启动时获取宿主机列表
+    // 钩子，启动时获取镜像列表
     useEffect(() => {
-        apiRefreshHostList().then(resp => {
+        apiQueryMirrorList().then(resp => {
             if (resp != null) {
                 setData(resp);
             }
@@ -172,66 +246,56 @@ const HostManagePage: React.FC = () => {
     /**
      * ----------------------------------------------------------------------------------------------------------------------------------------------------------------
      */
-    // 打开新增宿主机窗口
+    // 打开新增镜像窗口
     const showAddModal = () => {
         addFormInstance.resetFields();
         setAddModalOpen(true);
     }
-    // 打开修改宿主机信息窗口
+    // 打开修改镜像信息窗口
     const showUpdateModal = (record: DataType) => {
         setUpdateModalOpen(true);
         updateFormInstance.setFieldsValue({
-            hostId: record.hostId,
+            hostUuid: record.hostUuid,
             hostName: record.hostName,
             hostDescription: record.hostDescription,
             hostIp: record.hostIp,
-            hostPort: record.hostPort,
-            hostPortSsh: record.hostPortSsh,
-            hostLoginUsername: record.hostLoginUsername,
+            hostSshPort: record.hostSshPort,
+            hostLoginUser: record.hostLoginUser,
             hostLoginPassword: record.hostLoginPassword,
         });
     }
-    // 新增宿主机
+    // 新增镜像
     const submitAddModal = () => {
-        apiAddHost(addFormInstance.getFieldsValue()).then(respCode => {
+        apiMirrorCreate(addFormInstance.getFieldsValue()).then(respCode => {
             // 如果新增成功，刷新列表
             if (respCode == 200) {
-                apiRefreshHostList().then(resp => {
+                apiQueryMirrorList().then(resp => {
                     if (resp != null) {
                         setData(resp);
                     }
                 })
-            }
-        })
-        setAddModalOpen(false);
-    }
-    // 修改宿主机信息
-    const submitUpdateModal = () => {
-        apiUpdateHost(updateFormInstance.getFieldsValue()).then(respCode => {
-            // 如果修改成功刷新列表
-            if (respCode == 200) {
-                apiRefreshHostList().then(resp => {
-                    if (resp != null) {
-                        setData(resp);
-                    }
-                })
+                setAddModalOpen(false);
             }
         })
     }
-    // 取消新增宿主机
+    // 关闭详细信息窗口
+    const cancelGetDetail = () => {
+        setGetDetailOpen(false);
+    }
+    // 取消新增镜像
     const cancelAddModal = () => {
         setAddModalOpen(false);
     }
-    // 取消修改宿主机
+    // 取消修改镜像
     const cancelUpdateModal = () => {
         setUpdateModalOpen(false);
     }
-    // 删除宿主机
+    // 删除镜像
     const deleteHost = (hostId: string) => {
-        apiDeleteHost(hostId).then(respCode => {
-            // 如果宿主机删除成功，刷新列表
+        apiMirrorDelete(hostId).then(respCode => {
+            // 如果镜像删除成功，刷新列表
             if (respCode == 200) {
-                apiRefreshHostList().then(resp => {
+                apiQueryMirrorList().then(resp => {
                     if (resp != null) {
                         setData(resp);
                     }
@@ -239,158 +303,149 @@ const HostManagePage: React.FC = () => {
             }
         })
     }
+
+    const [selectedRowKeys, setSelectedRowKeys] = useState<React.Key[]>([]);
+    const onSelectChange = (newSelectedRowKeys: React.Key[]) => {
+        console.log('selectedRowKeys changed: ', newSelectedRowKeys);
+        setSelectedRowKeys(newSelectedRowKeys);
+    };
+    const rowSelection = {
+        selectedRowKeys,
+        onChange: onSelectChange,
+    };
 
     /**
      * ----------------------------------------------------------------------------------------------------------------------------------------------------------------
      */
     return (
         <PageContainer>
-            <Modal
-                title="新增宿主机"
+            <Drawer
+                title="新增镜像"
+                width={720}
                 open={addModalOpen}
-                onOk={submitAddModal}
-                onCancel={cancelAddModal}
+                onClose={cancelAddModal}
                 destroyOnClose={true}
+                bodyStyle={{
+                      "paddingBottom": 80,
+                }}
+                extra={
+                    <Space>
+                      <Button onClick={cancelAddModal}>取消</Button>
+                      <Button onClick={submitAddModal} type="primary">
+                        确认
+                      </Button>
+                    </Space>
+                  }
             >
                 <Form
+                    layout="vertical"
                     form={addFormInstance}
-                    labelCol={{ span: 7 }}
-                    wrapperCol={{ span: 14 }}
                 >
                     <Form.Item
-                        label="宿主机名称"
-                        name="hostName"
-                        rules={[{ required: true, message: '请输入宿主机名称!' }]}
+                        label="镜像名称"
+                        name="mirrorName"
+                        rules={[{ required: true, message: '请输入镜像名称' }]}
                     >
-                        <Input placeholder={"长度不超过 32 个字符"}/>
-                    </Form.Item>
-
-                    <Form.Item
-                        label="宿主机IP"
-                        name="hostIp"
-                        rules={[{ required: true, message: '请输入宿主机 IP!' }]}
-                    >
-                        <Input placeholder={"示例: 192.168.0.1"}/>
+                        <Input placeholder={"test"}/>
                     </Form.Item>
                     <Form.Item
-                        label="QEMU-端口"
-                        name="hostPort"
-                        rules={[{ required: true, message: '请输入 QEMU 端口!' }]}
+                        label="镜像地址"
+                        name="mirrorUrl"
+                        rules={[{ required: true, message: '请输入镜像地址' }]}
                     >
-                        <Input placeholder={"示例: 16509"}/>
+                        <Input placeholder={"file:///opt/zstack-dvd/zstack-image-1.4.qcow2"}/>
                     </Form.Item>
                     <Form.Item
-                        label="SSH-端口"
-                        name="hostPortSsh"
-                        rules={[{ required: true, message: '请输入 SSH 端口!' }]}
+                        label="镜像系统平台"
+                        name="mirrorPlatform"
+                        rules={[{ required: true, message: '请输入镜像系统平台' }]}
                     >
-                        <Input placeholder={"示例: 22"}/>
+                        <Radio.Group>
+                            <Radio value="Linux"> Linux </Radio>
+                            <Radio value="Windows"> Windows </Radio>
+                            <Radio value="Other"> Other </Radio>
+                        </Radio.Group>
                     </Form.Item>
                     <Form.Item
-                        label="登录用户"
-                        name="hostLoginUsername"
-                        rules={[{ required: true, message: '请输入登录用户!' }]}
+                        label="镜像格式"
+                        name="mirrorFormat"
+                        rules={[{ required: true, message: '请输入请输入镜像格式' }]}
                     >
-                        <Input placeholder={"示例: root"}/>
+                        <Radio.Group>
+                            <Radio value="iso"> iso </Radio>
+                            <Radio value="qcow2"> qcow2 </Radio>
+                            <Radio value="raw"> raw </Radio>
+                        </Radio.Group>
                     </Form.Item>
                     <Form.Item
-                        label="登录密码"
-                        name="hostLoginPassword"
-                        rules={[{ required: true, message: '请输入登录密码!' }]}
+                        label="操作系统类型"
+                        name="mirrorGuestOsType"
+                        rules={[{ required: true, message: '请输入操作系统类型' }]}
                     >
-                        <Input.Password placeholder={"示例: 1234"}/>
+                        <Input placeholder={"Kylin"}/>
+                    </Form.Item>
+                    <Form.Item
+                        label="是否系统镜像"
+                        name="mirrorSystem"
+                        rules={[{ required: true, message: '请输入系统镜像' }]}
+                    >
+                        <Radio.Group>
+                            <Radio value="true"> 是 </Radio>
+                            <Radio value="false"> 否 </Radio>
+                        </Radio.Group>
+                    </Form.Item>
+                    <Form.Item
+                        label="系统标签"
+                        name="mirrorSystem"
+                        rules={[{ required: true, message: '请输入系统标签' }]}
+                    >
+                        <Radio.Group>
+                            <Radio value="Legacy"> bootMode::Legacy </Radio>
+                            <Radio value="UEFI"> bootMode::UEFI </Radio>
+                        </Radio.Group>
+                    </Form.Item>
+                    <Form.Item
+                        label="是否开启virtio"
+                        name="mirrorVirtio"
+                        rules={[{ required: true, message: '请输入是否开启virtio' }]}
+                    >
+                        <Radio.Group>
+                            <Radio value="true"> 是 </Radio>
+                            <Radio value="false"> 否 </Radio>
+                        </Radio.Group>
                     </Form.Item>
                     <Form.Item
                         label="描述信息"
-                        name="hostDescription"
+                        name="mirrorDescription"
                     >
                         <Input.TextArea showCount={true} placeholder={"最大长度为 500 个字符"} />
                     </Form.Item>
                 </Form>
-            </Modal>
-
-            <Modal
-                title="宿主机信息修改"
-                open={updateModalOpen}
-                onOk={submitUpdateModal}
-                onCancel={cancelUpdateModal}
-            >
-                <Form
-                    form={updateFormInstance}
-                    labelCol={{ span: 7 }}
-                    wrapperCol={{ span: 14 }}
-                >
-                    <Form.Item
-                        label="宿主机ID"
-                        name="hostId"
-                        rules={[{ required: true, message: '请输入宿主机ID!' }]}
-                    >
-                        <Input disabled={true}/>
-                    </Form.Item>
-                    <Form.Item
-                        label="宿主机名称"
-                        name="hostName"
-                        rules={[{ required: true, message: '请输入宿主机名称!' }]}
-                    >
-                        <Input placeholder={"长度不超过 32 个字符"}/>
-                    </Form.Item>
-
-                    <Form.Item
-                        label="宿主机IP"
-                        name="hostIp"
-                        rules={[{ required: true, message: '请输入宿主机 IP!' }]}
-                    >
-                        <Input placeholder={"示例: 192.168.0.1"}/>
-                    </Form.Item>
-                    <Form.Item
-                        label="QEMU-端口"
-                        name="hostPort"
-                        rules={[{ required: true, message: '请输入 QEMU 端口!' }]}
-                    >
-                        <Input placeholder={"示例: 16509"}/>
-                    </Form.Item>
-                    <Form.Item
-                        label="SSH-端口"
-                        name="hostPortSsh"
-                        rules={[{ required: true, message: '请输入 SSH 端口!' }]}
-                    >
-                        <Input placeholder={"示例: 22"}/>
-                    </Form.Item>
-                    <Form.Item
-                        label="登录用户"
-                        name="hostLoginUsername"
-                        rules={[{ required: true, message: '请输入登录用户!' }]}
-                    >
-                        <Input placeholder={"示例: root"}/>
-                    </Form.Item>
-                    <Form.Item
-                        label="登录密码"
-                        name="hostLoginPassword"
-                        rules={[{ required: true, message: '请输入登录密码!' }]}
-                    >
-                        <Input.Password placeholder={"示例: 1234"}/>
-                    </Form.Item>
-                    <Form.Item
-                        label="描述信息"
-                        name="hostDescription"
-                    >
-                        <Input.TextArea showCount={true} placeholder={"最大长度为 500 个字符"} />
-                    </Form.Item>
-                </Form>
-            </Modal>
+            </Drawer>
 
             <Space size={"middle"}>
-                <Button shape={"round"} type="primary" onClick={showAddModal}>新增</Button>
-                <Button shape={"round"} type="dashed"
-                        onClick={() => apiRefreshHostList().then(resp => {
+                <Button type="primary"
+                        size="large"
+                        icon={<RedoOutlined />}
+                        onClick={() => apiQueryMirrorList().then(resp => {
                             if (resp != null) {
                                 setData(resp);
                             }})}>
                     刷新
                 </Button>
+                <Button type="primary"
+                        size="large"
+                        icon={<PlusOutlined />}
+                        onClick={showAddModal}>新增镜像</Button>
             </Space>
-            <Table style={{marginTop: 6}} columns={columns} dataSource={data} rowKey={"hostId"} scroll={{x: 1000}}></Table>
+            <Table style={{marginTop: 15}} 
+                    rowSelection={rowSelection}
+                    columns={columns} 
+                    dataSource={data}
+                    rowKey={"hostUuid"}
+                    scroll={{x: 1000}}>
+            </Table>
         </PageContainer>
     );
 };
-export default HostManagePage;
+export default VmNetworkPage;

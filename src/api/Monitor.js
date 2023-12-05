@@ -83,3 +83,27 @@ export const apiGetEvaluateData = () => {
         }
     })
 }
+
+export const apiStartMonitor = (data) => {
+    message.error("暂未合并接口：" + data);
+    return getRequest('/manage/hostInfo/queryAll').then(resp => {
+        if (resp.code == 200) {
+            message.success("刷新成功！");
+            return resp.data;
+        } else {
+            message.error(resp.code + ":" + resp.message);
+        }
+    })
+}
+
+export const apiStopMonitor = (data) => {
+    message.error("暂未合并接口：" + data);
+    return getRequest('/manage/hostInfo/queryAll').then(resp => {
+        if (resp.code == 200) {
+            message.success("刷新成功！");
+            return resp.data;
+        } else {
+            message.error(resp.code + ":" + resp.message);
+        }
+    })
+}

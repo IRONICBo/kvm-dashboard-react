@@ -15,7 +15,7 @@ export const apiRefreshHostList = () => {
 }
 
 export const apiDeleteHost = (hostId) => {
-    return postRequest('/host/delete?hostId=' + hostId).then(resp => {
+    return postRequest('/manage/hostInfo/delete?hostId=' + hostId).then(resp => {
         if (resp.code == 200) {
             message.success("删除成功！");
         } else {
@@ -36,9 +36,20 @@ export const apiAddHost = (data) => {
 }
 
 export const apiUpdateHost = (data) => {
-    return postRequest('/host/update', data).then(resp => {
+    return postRequest('/manage/hostInfo/updateBasic', data).then(resp => {
         if (resp.code == 200) {
             message.success("宿主机信息修改成功！");
+        } else {
+            message.error(resp.code + ":" + resp.message);
+        }
+        return resp.code;
+    })
+}
+
+export const apiUpdateHostSSH = (data) => {
+    return postRequest('/manage/hostInfo/updateSsh', data).then(resp => {
+        if (resp.code == 200) {
+            message.success("SSH信息修改成功！");
         } else {
             message.error(resp.code + ":" + resp.message);
         }

@@ -1,8 +1,10 @@
 import React, {useState, useEffect} from "react";
 import {PageContainer} from "@ant-design/pro-components";
 import {Button, Form, Drawer, Input, Modal, Popconfirm, Space, Table, Tooltip, Tag} from "antd";
+import { ProDescriptions } from '@ant-design/pro-components';
 import {ColumnsType} from "antd/es/table";
-import {apiAddHost, apiDeleteHost, apiRefreshHostList, apiUpdateHost} from "@/api/HostManage";
+import {apiAddHost, apiDeleteHost, apiRefreshHostList, apiUpdateHost, apiUpdateHostSSH} from "@/api/HostManage";
+import {apiStartMonitor, apiStopMonitor} from "@/api/Monitor";
 import { history } from 'umi';
 import { RedoOutlined, PlusOutlined, PlayCircleOutlined, PauseCircleOutlined } from '@ant-design/icons';
 
@@ -20,7 +22,6 @@ interface DataType {
 }
 
 const HostManagePage: React.FC = () => {
-
     const columns: ColumnsType<DataType> = [
         {
             title: 'ID',
@@ -39,12 +40,139 @@ const HostManagePage: React.FC = () => {
             },
             width: 300,
             fixed: "left",
-            render: (hostId) => (
-                <Tooltip placement="topLeft" title={hostId}>
-                    <a onClick={(event) => {event.preventDefault();history.push("/monitor?uuid=" + hostId)}}>
-                        {hostId}
+            render: (hostUuid) => (
+                <Tooltip placement="topLeft" title={hostUuid}>
+                    {/* <a onClick={(event) => {event.preventDefault();history.push("/monitor?uuid=" + hostId)}}> */}
+                    <a onClick={(event) =>  {event.preventDefault();showGetDetailOpen(hostUuid)}}>
+                        {hostUuid}
                     </a>
                 </Tooltip>
+            )
+        },
+        {
+            title: '名称',
+            dataIndex: 'hostName',
+            ellipsis: {
+                showTitle: false,
+            },
+            render: (hostName) => (
+                <Tooltip placement="topLeft" title={hostName}>
+                    {hostName}
+                </Tooltip>
+            ),
+            width: 130
+        },
+        {
+            title: '区域ID',
+            dataIndex: 'hostZoneUuid',
+            ellipsis: {
+                showTitle: false,
+            },
+            width: 300,
+            render: (hostZoneUuid) => (
+                <Tooltip placement="topLeft" title={hostZoneUuid}>
+                    {hostZoneUuid}
+                </Tooltip>
+            )
+        },
+        {
+            title: '集群ID',
+            dataIndex: 'hostClusterUuid',
+            ellipsis: {
+                showTitle: false,
+            },
+            width: 300,
+            render: (hostClusterUuid) => (
+                <Tooltip placement="topLeft" title={hostClusterUuid}>
+                    {hostClusterUuid}
+                </Tooltip>
+            )
+        },
+        {
+            title: '描述信息',
+            dataIndex: 'hostDescription',
+            ellipsis: {
+                showTitle: false,
+            },
+            width: 200,
+            render: (hostDescription) => (
+                <Tooltip placement="topLeft" title={hostDescription}>
+                    {hostDescription == null ? "无" : hostDescription}
+                </Tooltip>
+            )
+        },
+        {
+            title: '创建时间',
+            dataIndex: 'hostCreateTime',
+            ellipsis: {
+                showTitle: false,
+            },
+            width: 200,
+            render: (hostCreateTime) => (
+                <Tooltip placement="topLeft" title={hostCreateTime}>
+                    {hostCreateTime}
+                </Tooltip>
+            )
+        },
+        {
+            title: '状态',
+            dataIndex: 'hostState',
+            ellipsis: {
+                showTitle: false,
+            },
+            width: 100,
+            render: (hostState) => (
+                <>
+                    {hostState=="enable" ? (
+                        <Tag color="blue" key={hostState}>
+                            启用
+                        </Tag>
+                    ) : (
+                        <Tag color="volcano" key={hostState}>
+                            禁用
+                        </Tag>
+                    )}
+                </>
+            )
+        },
+        {
+            title: '操作',
+            dataIndex: 'operation',
+            fixed: 'right',
+            width: 155,
+            render: (_, record) =>
+                <Space>
+                    <Button size={"small"} shape={"round"} type="dashed" onClick={() => showUpdateModal(record)}>编辑</Button>
+                    <Popconfirm title="Sure to delete?" onConfirm={() => deleteHost(record.hostUuid)}>
+                        <Button size={"small"} shape={"round"} danger={true} type="dashed">删除</Button>
+                    </Popconfirm>
+                </Space>
+        }
+    ];
+
+    const detailColumn = [
+        {
+            title: 'ID',
+            dataIndex: 'hostZzid',
+            ellipsis: {
+                showTitle: false,
+            },
+            width: 50,
+            fixed: "left",
+        },
+        {
+            title: 'UUID',
+            dataIndex: 'hostUuid',
+            key: 'hostUuid',
+            ellipsis: {
+                showTitle: false,
+            },
+            width: 300,
+            fixed: "left",
+            render: (hostUuid) => (
+                    <a onClick={(event) => {event.preventDefault();history.push("/monitor?uuid=" + hostUuid)}}>
+                        {hostUuid}
+                    </a>
             )
         },
         {
@@ -134,7 +262,7 @@ const HostManagePage: React.FC = () => {
             width: 200,
             render: (hostTotalMemorySize) => (
                 <Tooltip placement="topLeft" title={hostTotalMemorySize}>
-                    {Math.round(hostTotalMemorySize/1024/1024/1024)} GB
+                    {hostTotalMemorySize} Byte
                 </Tooltip>
             )
         },
@@ -193,6 +321,7 @@ const HostManagePage: React.FC = () => {
         {
             title: '创建时间',
             dataIndex: 'hostCreateTime',
+            valueType: 'date',
             ellipsis: {
                 showTitle: false,
             },
@@ -225,16 +354,27 @@ const HostManagePage: React.FC = () => {
             width: 100,
             render: (hostState) => (
                 <>
-                    {hostState=="enable" ? (
-                        <Tag color="blue" key={hostState}>
-                            启用
-                        </Tag>
+                    {hostState="enable" ? (
+                            "启用"
                     ) : (
-                        <Tag color="volcano" key={hostState}>
-                            禁用
-                        </Tag>
+                            "禁用"
                     )}
                 </>
+            )
+        },
+        {
+            title: '监控',
+            dataIndex: 'hostUuid',
+            key: 'hostUuid',
+            ellipsis: {
+                showTitle: false,
+            },
+            width: 300,
+            fixed: "left",
+            render: (hostUuid) => (
+                    <a onClick={(event) => {event.preventDefault();history.push("/monitor?uuid=" + hostUuid)}}>
+                        查看监控
+                    </a>
             )
         },
         {
@@ -244,9 +384,9 @@ const HostManagePage: React.FC = () => {
             width: 155,
             render: (_, record) =>
                 <Space>
-                    <Button size={"small"} shape={"round"} type="dashed" onClick={() => showUpdateModal(record)}>编辑</Button>
-                    <Popconfirm title="Sure to delete?" onConfirm={() => deleteHost(record.hostId)}>
-                        <Button size={"small"} shape={"round"} danger={true} type="dashed">删除</Button>
+                    <Button size={"large"} type="dashed" onClick={() => showUpdateModal(record)}>编辑</Button>
+                    <Popconfirm title="Sure to delete?" onConfirm={() => deleteHost(record.hostUuid)}>
+                        <Button size={"large"} danger={true} type="dashed">删除</Button>
                     </Popconfirm>
                 </Space>
         }
@@ -256,8 +396,10 @@ const HostManagePage: React.FC = () => {
      * ----------------------------------------------------------------------------------------------------------------------------------------------------------------
      */
     let [data, setData] = useState([])
+    let [selectData, setSelectData] = useState();
     let [addModalOpen, setAddModalOpen] = useState(false);
     let [updateModalOpen, setUpdateModalOpen] = useState(false);
+    let [getDetailOpen, setGetDetailOpen] = useState(false);
     let [addFormInstance] = Form.useForm();
     let [updateFormInstance] = Form.useForm();
 
@@ -273,6 +415,13 @@ const HostManagePage: React.FC = () => {
     /**
      * ----------------------------------------------------------------------------------------------------------------------------------------------------------------
      */
+    // 打开详细信息
+    const showGetDetailOpen = (hostUuid: String) => {
+        const res = data.find(item => item.hostUuid == hostUuid)
+        console.log("showGetDetailOpen", res)
+        setSelectData(res);
+        setGetDetailOpen(true);
+    }
     // 打开新增宿主机窗口
     const showAddModal = () => {
         addFormInstance.resetFields();
@@ -307,7 +456,20 @@ const HostManagePage: React.FC = () => {
     }
     // 修改宿主机信息
     const submitUpdateModal = () => {
-        apiUpdateHost(updateFormInstance.getFieldsValue()).then(respCode => {
+        const temp = updateFormInstance.getFieldsValue();
+        const basicData = {
+            "hostUuid": temp.hostUuid,
+            "hostName": temp.hostName,
+            "hostDescription": temp.hostDescription,
+        }
+        const sshData = {
+            "hostUuid": temp.hostUuid,
+            "password": temp.hostLoginPassword,
+            "sshPort": temp.hostSshPort,
+            "username": temp.hostLoginUser,
+          }
+
+        apiUpdateHost(basicData).then(respCode => {
             // 如果修改成功刷新列表
             if (respCode == 200) {
                 apiRefreshHostList().then(resp => {
@@ -317,6 +479,20 @@ const HostManagePage: React.FC = () => {
                 })
             }
         })
+        apiUpdateHostSSH(sshData).then(respCode => {
+            // 如果修改成功刷新列表
+            if (respCode == 200) {
+                apiRefreshHostList().then(resp => {
+                    if (resp != null) {
+                        setData(resp);
+                    }
+                })
+            }
+        })
+    }
+    // 关闭详细信息窗口
+    const cancelGetDetail = () => {
+        setGetDetailOpen(false);
     }
     // 取消新增宿主机
     const cancelAddModal = () => {
@@ -339,6 +515,16 @@ const HostManagePage: React.FC = () => {
             }
         })
     }
+
+    const [selectedRowKeys, setSelectedRowKeys] = useState<React.Key[]>([]);
+    const onSelectChange = (newSelectedRowKeys: React.Key[]) => {
+        console.log('selectedRowKeys changed: ', newSelectedRowKeys);
+        setSelectedRowKeys(newSelectedRowKeys);
+    };
+    const rowSelection = {
+        selectedRowKeys,
+        onChange: onSelectChange,
+    };
 
     /**
      * ----------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -427,7 +613,7 @@ const HostManagePage: React.FC = () => {
             <Drawer
                 title="宿主机信息修改"
                 open={updateModalOpen}
-                onCancel={cancelUpdateModal}
+                onClose={cancelUpdateModal}
                 width={720}
                 styles={{
                     body: {
@@ -500,6 +686,25 @@ const HostManagePage: React.FC = () => {
                 </Form>
             </Drawer>
 
+            <Drawer
+                title="宿主机详细信息"
+                open={getDetailOpen}
+                onClose={cancelGetDetail}
+                width={720}
+                styles={{
+                    body: {
+                      paddingBottom: 80,
+                    },
+                }}
+                extra={
+                    <Space>
+                      <Button onClick={cancelGetDetail}>取消</Button>
+                    </Space>
+                  }
+            >
+                <ProDescriptions title="基础信息" column={2} layout="vertical" bordered dataSource={selectData} columns={detailColumn} />
+            </Drawer>
+
             <Space size={"middle"}>
                 <Button type="primary"
                         size="large"
@@ -517,7 +722,7 @@ const HostManagePage: React.FC = () => {
                 <Button type="dashed"
                     size="large"
                         icon={<PlayCircleOutlined />}
-                        onClick={() => apiRefreshHostList().then(resp => {
+                        onClick={() => apiStartMonitor(selectedRowKeys).then(resp => {
                             if (resp != null) {
                                 setData(resp);
                             }})}>
@@ -526,14 +731,20 @@ const HostManagePage: React.FC = () => {
                 <Button type="dashed"
                         size="large"
                         icon={<PauseCircleOutlined />}
-                        onClick={() => apiRefreshHostList().then(resp => {
+                        onClick={() => apiStopMonitor(selectedRowKeys).then(resp => {
                             if (resp != null) {
                                 setData(resp);
                             }})}>
                     停止监测
                 </Button>
             </Space>
-            <Table style={{marginTop: 15}} columns={columns} dataSource={data} rowKey={"hostId"} scroll={{x: 1000}}></Table>
+            <Table style={{marginTop: 15}} 
+                    rowSelection={rowSelection}
+                    columns={columns} 
+                    dataSource={data}
+                    rowKey={"hostUuid"}
+                    scroll={{x: 1000}}>
+            </Table>
         </PageContainer>
     );
 };
