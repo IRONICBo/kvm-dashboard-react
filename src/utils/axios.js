@@ -13,11 +13,23 @@ axios.interceptors.response.use(success => {
 
 let base = 'http://localhost:28080/api';
 
-//传送form格式的post请求
+// 传送form格式的post请求
 export const postFormRequest = (url, params) => {
     return axios({
         headers: {
             'Content-Type': 'multipart/form-data'
+        },
+        method: 'post',
+        url: `${base}${url}`,
+        data: params
+    })
+}
+
+// 传送FormUrlencoded格式的post请求
+export const postFormUrlencodedRequest = (url, params) => {
+    return axios({
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded'
         },
         method: 'post',
         url: `${base}${url}`,

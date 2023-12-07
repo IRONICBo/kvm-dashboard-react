@@ -1,26 +1,21 @@
 import React, {useState, useEffect} from "react";
 import {PageContainer} from "@ant-design/pro-components";
-import {Button, Form, Drawer, Input, Modal, Popconfirm, Space, Table, Tooltip, Tag} from "antd";
+import {Button, Form, Drawer, Input, Modal, Popconfirm, Space, Table, Tooltip, Tag, Radio, Slider} from "antd";
 import {ColumnsType} from "antd/es/table";
-import {apiQuerySnapshotList, apiSnapshotDelete,apiSnapshotCreate,apiSnapshotRevert} from "@/api/VmSnapshot";
+import {apiQueryVolumeList, apiVolumeDelete, apiVolumeCreate, apiVolumeExpand} from "@/api/VmVolume";
 import { history } from 'umi';
 import { RedoOutlined, PlusOutlined, PlayCircleOutlined, PauseCircleOutlined, PicRightOutlined, PicLeftOutlined } from '@ant-design/icons';
 
 interface DataType {
-    snapGroupUuid: string,
-    snapGroupName: string,
+    volumeUuid: string,
+    volumeSize: number,
 }
 
-interface HostIdProps {
-    uuid: string;
-}
-const VmSnapshotPage: React.FC<HostIdProps> = (props) => {
-    const UUID = props.uuid;
-    console.log("UUID", UUID)
+const VmVolumePage: React.FC = () => {
     const columns: ColumnsType<DataType> = [
         {
             title: 'ID',
-            dataIndex: 'snapGroupZzid',
+            dataIndex: 'volumeZzid',
             ellipsis: {
                 showTitle: false,
             },
@@ -29,7 +24,7 @@ const VmSnapshotPage: React.FC<HostIdProps> = (props) => {
         },
         {
             title: 'UUID',
-            dataIndex: 'snapGroupUuid',
+            dataIndex: 'volumeUuid',
             ellipsis: {
                 showTitle: false,
             },
@@ -37,80 +32,67 @@ const VmSnapshotPage: React.FC<HostIdProps> = (props) => {
             fixed: "left",
         },
         {
-            title: '快照名称',
-            dataIndex: 'snapGroupName',
+            title: '数据盘名称',
+            dataIndex: 'volumeName',
             ellipsis: {
                 showTitle: false,
             },
-            render: (snapGroupName) => (
-                <Tooltip placement="topLeft" title={snapGroupName}>
-                    {snapGroupName}
+            render: (volumeName) => (
+                <Tooltip placement="topLeft" title={volumeName}>
+                    {volumeName}
                 </Tooltip>
             ),
             width: 130
         },
         {
-            title: '虚拟机ID',
-            dataIndex: 'snapGroupVmUuid',
+            title: '云盘信息描述',
+            dataIndex: 'volumeDescription',
             ellipsis: {
                 showTitle: false,
             },
-            render: (snapGroupVmUuid) => (
-                <Tooltip placement="topLeft" title={snapGroupVmUuid}>
-                    {snapGroupVmUuid}
+            render: (volumeDescription) => (
+                <Tooltip placement="topLeft" title={volumeDescription}>
+                    {volumeDescription}
                 </Tooltip>
             ),
-            width: 130
+            width: 300
         },
         {
-            title: '根云盘ID',
-            dataIndex: 'snapGroupRootVolumeUuid',
+            title: '计算规格ID',
+            dataIndex: 'volumeDiskOfferingUuid',
+            ellipsis: {
+                showTitle: false,
+            },
+            render: (volumeDiskOfferingUuid) => (
+                <Tooltip placement="topLeft" title={volumeDiskOfferingUuid}>
+                    {volumeDiskOfferingUuid}
+                </Tooltip>
+            ),
+            width: 300
+        },
+        {
+            title: '云盘大小',
+            dataIndex: 'volumeSize',
             ellipsis: {
                 showTitle: false,
             },
             width: 300,
-            render: (snapGroupRootVolumeUuid) => (
-                <Tooltip placement="topLeft" title={snapGroupRootVolumeUuid}>
-                    {snapGroupRootVolumeUuid}
-                </Tooltip>
-            )
-        },
-        {
-            title: '快照版本',
-            dataIndex: 'snapGroupVersion',
-            ellipsis: {
-                showTitle: false,
-            },
-            width: 300,
-            render: (snapGroupVersion) => (
-                <Tooltip placement="topLeft" title={snapGroupVersion}>
-                    {snapGroupVersion}
-                </Tooltip>
-            )
-        },
-        {
-            title: '快照类型',
-            dataIndex: 'snapGroupType',
-            ellipsis: {
-                showTitle: false,
-            },
-            width: 200,
-            render: (snapGroupType) => (
-                <Tooltip placement="topLeft" title={snapGroupType}>
-                    {snapGroupType == null ? "无" : snapGroupType}
+            render: (volumeSize) => (
+                <Tooltip placement="topLeft" title={volumeSize}>
+                    {volumeSize/1024/1024/1024} GB
                 </Tooltip>
             )
         },
         {
             title: '创建时间',
-            dataIndex: 'snapGroupCreateTime',
+            dataIndex: 'volumeCreateTime',
             ellipsis: {
                 showTitle: false,
             },
-            width: 200,
-            render: (snapGroupCreateTime) => (
-                <Tooltip placement="topLeft" title={snapGroupCreateTime}>
-                    {snapGroupCreateTime}
+            width: 300,
+            render: (volumeCreateTime) => (
+                <Tooltip placement="topLeft" title={volumeCreateTime}>
+                    {volumeCreateTime? volumeCreateTime :"无"}
                 </Tooltip>
             )
         },
@@ -121,10 +103,8 @@ const VmSnapshotPage: React.FC<HostIdProps> = (props) => {
             width: 155,
             render: (_, record) =>
                 <Space>
-                    <Popconfirm title="Sure to revert?" onConfirm={() => revertSnapshot(record.snapGroupUuid)}>
-                        <Button size={"small"} shape={"round"} type="dashed">恢复</Button>
-                    </Popconfirm>
-                    <Popconfirm title="Sure to delete?" onConfirm={() => deleteSnapshot(record.snapGroupUuid)}>
+                    <Button size={"small"} shape={"round"} type="dashed" onClick={() => showUpdateModal(record)}>扩容</Button>
+                    <Popconfirm title="Sure to delete?" onConfirm={() => deleteHost(record.volumeUuid)}>
                         <Button size={"small"} shape={"round"} danger={true} type="dashed">删除</Button>
                     </Popconfirm>
                 </Space>
@@ -142,10 +122,9 @@ const VmSnapshotPage: React.FC<HostIdProps> = (props) => {
     let [addFormInstance] = Form.useForm();
     let [updateFormInstance] = Form.useForm();
 
-    // 钩子，启动时获取快照列表
+    // 钩子，启动时获取数据盘列表
     useEffect(() => {
-        console.log("UUIDUUIDUUIDUUID", UUID)
-        apiQuerySnapshotList(UUID).then(resp => {
+        apiQueryVolumeList().then(resp => {
             if (resp != null) {
                 setData(resp);
             }
@@ -155,28 +134,25 @@ const VmSnapshotPage: React.FC<HostIdProps> = (props) => {
     /**
      * ----------------------------------------------------------------------------------------------------------------------------------------------------------------
      */
-    // 打开新增快照窗口
+    // 打开新增数据盘窗口
     const showAddModal = () => {
         addFormInstance.resetFields();
-        addFormInstance.setFieldsValue({
-            vmUuid: UUID,
-        });
         setAddModalOpen(true);
     }
-    // 打开修改快照信息窗口
+    // 打开修改数据盘信息窗口
     const showUpdateModal = (record: DataType) => {
         setUpdateModalOpen(true);
         updateFormInstance.setFieldsValue({
-            vmUuid: UUID,
+            volumeUuid: record.volumeUuid,
+            size: record.volumeSize
         });
     }
-    // 新增快照
+    // 新增数据盘
     const submitAddModal = () => {
-        const temp = addFormInstance.getFieldsValue()
-        apiSnapshotCreate(temp.vmUuid, temp.snapGroupName).then(respCode => {
+        apiVolumeCreate(addFormInstance.getFieldsValue()).then(respCode => {
             // 如果新增成功，刷新列表
             if (respCode == 200) {
-                apiQuerySnapshotList(UUID).then(resp => {
+                apiQueryVolumeList().then(resp => {
                     if (resp != null) {
                         setData(resp);
                     }
@@ -189,23 +165,21 @@ const VmSnapshotPage: React.FC<HostIdProps> = (props) => {
     const cancelGetDetail = () => {
         setGetDetailOpen(false);
     }
-    // 取消新增快照
+    // 取消新增数据盘
     const cancelAddModal = () => {
         setAddModalOpen(false);
     }
-    // 取消修改快照
+    // 取消修改数据盘
     const cancelUpdateModal = () => {
         setUpdateModalOpen(false);
     }
-    // 删除快照
-    const revertSnapshot = (snapGroupUuid: string) => {
-        const data = {
-            "snapGroupUuid": snapGroupUuid
-        };
-        apiSnapshotRevert(data).then(respCode => {
-            // 如果快照删除成功，刷新列表
+    // 扩容数据盘
+    const submitUpdateModal = () => {
+        const temp = updateFormInstance.getFieldsValue();
+        apiVolumeExpand(temp.volumeUuid, temp.size).then(respCode => {
+            // 如果数据盘扩容成功，刷新列表
             if (respCode == 200) {
-                apiQuerySnapshotList(UUID).then(resp => {
+                apiQueryVolumeList().then(resp => {
                     if (resp != null) {
                         setData(resp);
                     }
@@ -213,12 +187,13 @@ const VmSnapshotPage: React.FC<HostIdProps> = (props) => {
             }
         })
     }
-    // 删除快照
-    const deleteSnapshot = (hostId: string) => {
-        apiSnapshotDelete(hostId).then(respCode => {
-            // 如果快照删除成功，刷新列表
+
+    // 删除数据盘
+    const deleteHost = (hostId: string) => {
+        apiVolumeDelete(hostId).then(respCode => {
+            // 如果数据盘删除成功，刷新列表
             if (respCode == 200) {
-                apiQuerySnapshotList(UUID).then(resp => {
+                apiQueryVolumeList().then(resp => {
                     if (resp != null) {
                         setData(resp);
                     }
@@ -241,9 +216,9 @@ const VmSnapshotPage: React.FC<HostIdProps> = (props) => {
      * ----------------------------------------------------------------------------------------------------------------------------------------------------------------
      */
     return (
-        <>
+        <PageContainer>
             <Drawer
-                title="新增快照"
+                title="新增数据盘"
                 width={720}
                 open={addModalOpen}
                 onClose={cancelAddModal}
@@ -265,19 +240,73 @@ const VmSnapshotPage: React.FC<HostIdProps> = (props) => {
                     form={addFormInstance}
                 >
                     <Form.Item
-                        label="虚拟机ID"
-                        name="vmUuid"
-                        rules={[{ required: true, message: '请输入虚拟机ID' }]}
+                        label="数据盘名称"
+                        name="volumeName"
+                        rules={[{ required: true, message: '请输入数据盘名称' }]}
                     >
-                        <Input disabled={true}/>
+                        <Input placeholder={"test"}/>
+                    </Form.Item>
+                    
+                    <Form.Item
+                        label="云盘规格ID"
+                        name="volumeDiskOfferingUuid"
+                        rules={[{ required: true, message: '请输入云盘规格ID' }]}
+                    >
+                        <Input placeholder={"42ad89dc78ab42ad8b4929c45a2fa6ec"}/>
                     </Form.Item>
 
                     <Form.Item
-                        label="快照名称"
-                        name="snapGroupName"
-                        rules={[{ required: true, message: '请输入快照名称!' }]}
+                        label="虚拟机ID"
+                        name="volumeVmInstanceUuid"
+                        rules={[{ required: true, message: '请输虚拟机ID' }]}
                     >
-                        <Input placeholder={"长度不超过 32 个字符"}/>
+                        <Input placeholder={"42ad89dc78ab42ad8b4929c45a2fa6ec"}/>
+                    </Form.Item>
+
+                    <Form.Item
+                        label="描述信息"
+                        name="volumeDescription"
+                    >
+                        <Input.TextArea showCount={true} placeholder={"最大长度为 500 个字符"} />
+                    </Form.Item>
+                </Form>
+            </Drawer>
+
+            <Drawer
+                title="扩容"
+                open={updateModalOpen}
+                onClose={cancelUpdateModal}
+                width={720}
+                bodyStyle={{
+                    paddingBottom: 80,
+                }}
+                extra={
+                    <Space>
+                      <Button onClick={cancelUpdateModal}>取消</Button>
+                      <Button onClick={submitUpdateModal} type="primary">
+                        确认
+                      </Button>
+                    </Space>
+                  }
+            >
+                <Form
+                    form={updateFormInstance}
+                    labelCol={{ span: 7 }}
+                    wrapperCol={{ span: 14 }}
+                >
+                    <Form.Item
+                        label="数据盘ID"
+                        name="volumeUuid"
+                        rules={[{ required: true, message: '请输入宿主机ID!' }]}
+                    >
+                        <Input disabled={true}/>
+                    </Form.Item>
+                    <Form.Item
+                        label="数据盘大小"
+                        name="size"
+                        rules={[{ required: true, message: '请输入宿主机 IP!' }]}
+                    >
+                        <Input placeholder={"示例: 21474836480"}/>
                     </Form.Item>
                 </Form>
             </Drawer>
@@ -286,7 +315,7 @@ const VmSnapshotPage: React.FC<HostIdProps> = (props) => {
                 <Button type="primary"
                         size="large"
                         icon={<RedoOutlined />}
-                        onClick={() => apiQuerySnapshotList(UUID).then(resp => {
+                        onClick={() => apiQueryVolumeList().then(resp => {
                             if (resp != null) {
                                 setData(resp);
                             }})}>
@@ -295,16 +324,16 @@ const VmSnapshotPage: React.FC<HostIdProps> = (props) => {
                 <Button type="primary"
                         size="large"
                         icon={<PlusOutlined />}
-                        onClick={showAddModal}>新增快照</Button>
+                        onClick={showAddModal}>新增数据盘</Button>
             </Space>
             <Table style={{marginTop: 15}} 
                     rowSelection={rowSelection}
                     columns={columns} 
                     dataSource={data}
-                    rowKey={"snapGroupUuid"}
+                    rowKey={"hostUuid"}
                     scroll={{x: 1000}}>
             </Table>
-        </>
+        </PageContainer>
     );
 };
-export default VmSnapshotPage;
+export default VmVolumePage;

@@ -8,6 +8,7 @@ import {apiQueryVmList, apiDeleteVm} from "@/api/VmManage";
 import {apiStartMonitor, apiStopMonitor} from "@/api/Monitor";
 import { history } from 'umi';
 import { RedoOutlined, PlusOutlined, PlayCircleOutlined, PauseCircleOutlined, PicRightOutlined, PicLeftOutlined } from '@ant-design/icons';
+import VmSnapshotPage from "../VmSnapshot";
 
 interface DataType {
     hostZzid: number,
@@ -851,7 +852,7 @@ const VmManagePage: React.FC = () => {
                 title="虚拟机详细信息"
                 open={getDetailOpen}
                 onClose={cancelGetDetail}
-                width={720}
+                width={1200}
                 styles={{
                     body: {
                       paddingBottom: 80,
@@ -864,6 +865,13 @@ const VmManagePage: React.FC = () => {
                   }
             >
                 <ProDescriptions title="基础信息" column={2} layout="vertical" bordered dataSource={selectData} columns={detailColumn} />
+
+                <ProDescriptions
+                    style={{
+                        "paddingTop": 20
+                    }} title="快照" column={2} layout="vertical" />
+
+                <VmSnapshotPage uuid={selectData?.vmUuid}/>
             </Drawer>
 
             <Space size={"middle"}>

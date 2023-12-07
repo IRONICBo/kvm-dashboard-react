@@ -51,11 +51,17 @@ export default defineConfig({
             component: './VmMirror',
         },
         {
-            name: '快照管理',
-            path: '/virtual/snapshot',
-            icon: 'S',
-            component: './VmSnapshot',
+            name: '磁盘管理',
+            path: '/virtual/volume',
+            icon: 'D',
+            component: './VmVolume',
         },
+        // {
+        //     name: '快照管理',
+        //     path: '/virtual/snapshot',
+        //     icon: 'S',
+        //     component: './VmSnapshot',
+        // },
         {
             name: '计算规格管理',
             path: '/virtual/instance',
