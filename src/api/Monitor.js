@@ -74,6 +74,19 @@ export const apiGetAlertPage = (uuid, pageCurrent, pageSize) => {
     })
 }
 
+export const apiGetMachineAlertPage = (uuid, pageCurrent, pageSize) => {
+    return getRequest('/alarmInfo/pageListById?'
+     + '&uuid=' + uuid
+     + '&pageCurrent=' + pageCurrent
+     + '&pageSize=' + pageSize).then(resp => {
+        if (resp.code == 200) {
+            return resp.data;
+        } else {
+            console.log(resp.code + ":" + resp.message);
+        }
+    })
+}
+
 export const apiGetEvaluateData = () => {
     return getRequest('/monitor/getEvaluateData').then(resp => {
         if (resp.code == 200) {
@@ -84,11 +97,14 @@ export const apiGetEvaluateData = () => {
     })
 }
 
-export const apiStartMonitor = (data) => {
-    message.error("暂未合并接口：" + data);
-    return getRequest('/manage/hostInfo/queryAll').then(resp => {
+export const apiStartHostMonitor = (data) => {
+    let dataList = {
+        "hostUuidList": data,
+        "vmUuidList": [],
+    }
+    return postRequest('/go/start', dataList).then(resp => {
         if (resp.code == 200) {
-            message.success("刷新成功！");
+            message.success("请求启动成功！");
             return resp.data;
         } else {
             message.error(resp.code + ":" + resp.message);
@@ -96,11 +112,44 @@ export const apiStartMonitor = (data) => {
     })
 }
 
-export const apiStopMonitor = (data) => {
-    message.error("暂未合并接口：" + data);
-    return getRequest('/manage/hostInfo/queryAll').then(resp => {
+export const apiStopHostMonitor = (data) => {
+    let dataList = {
+        "hostUuidList": data,
+        "vmUuidList": [],
+    }
+    return postRequest('/go/stop', dataList).then(resp => {
         if (resp.code == 200) {
-            message.success("刷新成功！");
+            message.success("请求停止成功！");
+            return resp.data;
+        } else {
+            message.error(resp.code + ":" + resp.message);
+        }
+    })
+}
+
+export const apiStartVMMonitor = (data) => {
+    let dataList = {
+        "hostUuidList": [],
+        "vmUuidList": data,
+    }
+    return postRequest('/go/start', dataList).then(resp => {
+        if (resp.code == 200) {
+            message.success("请求启动成功！");
+            return resp.data;
+        } else {
+            message.error(resp.code + ":" + resp.message);
+        }
+    })
+}
+
+export const apiStopVMMonitor = (data) => {
+    let dataList = {
+        "hostUuidList": [],
+        "vmUuidList": data,
+    }
+    return postRequest('/go/stop', dataList).then(resp => {
+        if (resp.code == 200) {
+            message.success("请求停止成功！");
             return resp.data;
         } else {
             message.error(resp.code + ":" + resp.message);

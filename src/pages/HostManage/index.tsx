@@ -1,10 +1,10 @@
 import React, {useState, useEffect} from "react";
 import {PageContainer} from "@ant-design/pro-components";
-import {Button, Form, Drawer, Input, Modal, Popconfirm, Space, Table, Tooltip, Tag} from "antd";
+import {Button, Form, Drawer, Input, Modal, Popconfirm, Space, Table, Tooltip, Tag, notification} from "antd";
 import { ProDescriptions } from '@ant-design/pro-components';
 import {ColumnsType} from "antd/es/table";
 import {apiAddHost, apiDeleteHost, apiRefreshHostList, apiUpdateHost, apiUpdateHostSSH} from "@/api/HostManage";
-import {apiStartMonitor, apiStopMonitor} from "@/api/Monitor";
+import {apiStartHostMonitor, apiStopHostMonitor} from "@/api/Monitor";
 import { history } from 'umi';
 import { RedoOutlined, PlusOutlined, PlayCircleOutlined, PauseCircleOutlined } from '@ant-design/icons';
 
@@ -402,6 +402,7 @@ const HostManagePage: React.FC = () => {
     let [getDetailOpen, setGetDetailOpen] = useState(false);
     let [addFormInstance] = Form.useForm();
     let [updateFormInstance] = Form.useForm();
+    const [apiNotification, contextHolder] = notification.useNotification();
 
     // 钩子，启动时获取宿主机列表
     useEffect(() => {
@@ -531,6 +532,7 @@ const HostManagePage: React.FC = () => {
      */
     return (
         <PageContainer>
+            {contextHolder} 
             <Drawer
                 title="新增宿主机"
                 width={720}
@@ -722,18 +724,48 @@ const HostManagePage: React.FC = () => {
                 <Button type="dashed"
                     size="large"
                         icon={<PlayCircleOutlined />}
-                        onClick={() => apiStartMonitor(selectedRowKeys).then(resp => {
+                        onClick={() => apiStartHostMonitor(selectedRowKeys).then(resp => {
                             if (resp != null) {
-                                setData(resp);
+                                console.log("apiStartHostMonitor", resp.hostErrorMap)
+                                if (resp.hostErrorMap != null) {
+                                    apiNotification.error({
+                                        message: '启动监测失败',
+                                        description: JSON.stringify(resp.hostErrorMap),
+                                        duration: 2,
+                                    })
+                                }
+                                if (resp.hostSuccessfulMap != null) {
+                                    apiNotification.info({
+                                        message: '启动监测失败',
+                                        description: JSON.stringify(resp.hostSuccessfulMap),
+                                        duration: 2,
+                                    })
+                                }
+                                // setData(resp);
                             }})}>
                     启动监测
                 </Button>
                 <Button type="dashed"
                         size="large"
                         icon={<PauseCircleOutlined />}
-                        onClick={() => apiStopMonitor(selectedRowKeys).then(resp => {
+                        onClick={() => apiStopHostMonitor(selectedRowKeys).then(resp => {
                             if (resp != null) {
-                                setData(resp);
+                                console.log("apiStopHostMonitor", resp.hostErrorMap)
+                                if (resp.hostErrorMap != null) {
+                                    apiNotification.error({
+                                        message: '启动监测失败',
+                                        description: JSON.stringify(resp.hostErrorMap),
+                                        duration: 2,
+                                    })
+                                }
+                                if (resp.hostSuccessfulMap != null) {
+                                    apiNotification.info({
+                                        message: '启动监测失败',
+                                        description: JSON.stringify(resp.hostSuccessfulMap),
+                                        duration: 2,
+                                    })
+                                }
+                                // setData(resp);
                             }})}>
                     停止监测
                 </Button>

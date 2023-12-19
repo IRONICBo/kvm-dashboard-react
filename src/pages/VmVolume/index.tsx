@@ -330,7 +330,7 @@ const VmVolumePage: React.FC = () => {
                     rowSelection={rowSelection}
                     columns={columns} 
                     dataSource={data}
-                    rowKey={"hostUuid"}
+                    rowKey={"volumeUuid"}
                     scroll={{x: 1000}}>
             </Table>
         </PageContainer>

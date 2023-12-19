@@ -1,11 +1,12 @@
 import React, {useState, useEffect} from "react";
 import {PageContainer} from "@ant-design/pro-components";
-import {Button, Form, Drawer, Input, Modal, Popconfirm, Space, Table, Tooltip, Tag} from "antd";
+import {Button, Form, Drawer, Input, Modal, Popconfirm, Space, Table, Tooltip, Tag, notification} from "antd";
 import { ProDescriptions } from '@ant-design/pro-components';
 import {ColumnsType} from "antd/es/table";
 import {apiAddHost, apiDeleteHost, apiUpdateHost, apiUpdateHostSSH} from "@/api/HostManage";
 import {apiQueryVmList, apiDeleteVm} from "@/api/VmManage";
-import {apiStartMonitor, apiStopMonitor} from "@/api/Monitor";
+import {apiExtendCPU, apiExtendMem, apiReduceCPU, apiReduceMem} from "@/api/VmResource";
+import {apiStartVMMonitor, apiStopVMMonitor} from "@/api/Monitor";
 import { history } from 'umi';
 import { RedoOutlined, PlusOutlined, PlayCircleOutlined, PauseCircleOutlined, PicRightOutlined, PicLeftOutlined } from '@ant-design/icons';
 import VmSnapshotPage from "../VmSnapshot";
@@ -167,12 +168,18 @@ const VmManagePage: React.FC = () => {
             title: '操作',
             dataIndex: 'operation',
             fixed: 'right',
-            width: 155,
+            width: 350,
             render: (_, record) =>
                 <Space>
                     <Button size={"small"} shape={"round"} type="dashed" onClick={() => showUpdateModal(record)}>编辑</Button>
                     <Popconfirm title="Sure to delete?" onConfirm={() => deleteHost(record.hostUuid)}>
                         <Button size={"small"} shape={"round"} danger={true} type="dashed">删除</Button>
+                    </Popconfirm>
+                    <Popconfirm title="确认扩展?" onConfirm={() => extendHost(record.hostUuid)}>
+                        <Button size={"small"} shape={"round"} danger={true} type="dashed">自动扩展</Button>
+                    </Popconfirm>
+                    <Popconfirm title="确认缩减?" onConfirm={() => reduceHost(record.hostUuid)}>
+                        <Button size={"small"} shape={"round"} danger={true} type="dashed">自动缩减</Button>
                     </Popconfirm>
                 </Space>
         }
@@ -564,6 +571,7 @@ const VmManagePage: React.FC = () => {
     let [getDetailOpen, setGetDetailOpen] = useState(false);
     let [addFormInstance] = Form.useForm();
     let [updateFormInstance] = Form.useForm();
+    const [apiNotification, contextHolder] = notification.useNotification();
 
     // 钩子，启动时获取宿主机列表
     useEffect(() => {
@@ -678,6 +686,54 @@ const VmManagePage: React.FC = () => {
         })
     }
 
+    const extendHost = (hostId: string) => {
+        apiExtendCPU(hostId).then(respCode => {
+            // 如果宿主机删除成功，刷新列表
+            if (respCode == 200) {
+                apiQueryVmList().then(resp => {
+                    if (resp != null) {
+                        setData(resp);
+                    }
+                })
+            }
+        })
+
+        apiExtendMem(hostId).then(respCode => {
+            // 如果宿主机删除成功，刷新列表
+            if (respCode == 200) {
+                apiQueryVmList().then(resp => {
+                    if (resp != null) {
+                        setData(resp);
+                    }
+                })
+            }
+        })
+    }
+
+    const reduceHost = (hostId: string) => {
+        apiReduceCPU(hostId).then(respCode => {
+            // 如果宿主机删除成功，刷新列表
+            if (respCode == 200) {
+                apiQueryVmList().then(resp => {
+                    if (resp != null) {
+                        setData(resp);
+                    }
+                })
+            }
+        })
+
+        apiReduceMem(hostId).then(respCode => {
+            // 如果宿主机删除成功，刷新列表
+            if (respCode == 200) {
+                apiQueryVmList().then(resp => {
+                    if (resp != null) {
+                        setData(resp);
+                    }
+                })
+            }
+        })
+    }
+
     const [selectedRowKeys, setSelectedRowKeys] = useState<React.Key[]>([]);
     const onSelectChange = (newSelectedRowKeys: React.Key[]) => {
         console.log('selectedRowKeys changed: ', newSelectedRowKeys);
@@ -693,6 +749,7 @@ const VmManagePage: React.FC = () => {
      */
     return (
         <PageContainer>
+            {contextHolder}
             <Drawer
                 title="新增虚拟机"
                 width={720}
@@ -891,18 +948,48 @@ const VmManagePage: React.FC = () => {
                 <Button type="dashed"
                     size="large"
                         icon={<PlayCircleOutlined />}
-                        onClick={() => apiStartMonitor(selectedRowKeys).then(resp => {
+                        onClick={() => apiStartVMMonitor(selectedRowKeys).then(resp => {
                             if (resp != null) {
-                                setData(resp);
+                                console.log("apiStartVMMonitor", resp.vmErrorMap)
+                                if (resp.vmErrorMap != null) {
+                                    apiNotification.error({
+                                        message: '启动监测失败',
+                                        description: JSON.stringify(resp.vmErrorMap),
+                                        duration: 2,
+                                    })
+                                }
+                                if (resp.vmSuccessfulMap != null) {
+                                    apiNotification.info({
+                                        message: '启动监测失败',
+                                        description: JSON.stringify(resp.vmErrorMap),
+                                        duration: 2,
+                                    })
+                                }
+                                // setData(resp);
                             }})}>
                     启动监测
                 </Button>
                 <Button type="dashed"
                         size="large"
                         icon={<PauseCircleOutlined />}
-                        onClick={() => apiStopMonitor(selectedRowKeys).then(resp => {
+                        onClick={() => apiStopVMMonitor(selectedRowKeys).then(resp => {
                             if (resp != null) {
-                                setData(resp);
+                                console.log("apiStopVMMonitor", resp.vmErrorMap)
+                                if (resp.vmErrorMap != null) {
+                                    apiNotification.error({
+                                        message: '启动监测失败',
+                                        description: JSON.stringify(resp.vmErrorMap),
+                                        duration: 2,
+                                    })
+                                }
+                                if (resp.vmSuccessfulMap != null) {
+                                    apiNotification.info({
+                                        message: '启动监测失败',
+                                        description: JSON.stringify(resp.vmErrorMap),
+                                        duration: 2,
+                                    })
+                                }
+                                // setData(resp);
                             }})}>
                     停止监测
                 </Button>
@@ -931,7 +1018,7 @@ const VmManagePage: React.FC = () => {
                     rowSelection={rowSelection}
                     columns={columns} 
                     dataSource={data}
-                    rowKey={"hostUuid"}
+                    rowKey={"vmUuid"}
                     scroll={{x: 1000}}>
             </Table>
         </PageContainer>

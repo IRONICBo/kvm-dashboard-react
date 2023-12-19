@@ -442,7 +442,7 @@ const VmNetworkPage: React.FC = () => {
                     rowSelection={rowSelection}
                     columns={columns} 
                     dataSource={data}
-                    rowKey={"hostUuid"}
+                    rowKey={"mirrorZzid"}
                     scroll={{x: 1000}}>
             </Table>
         </PageContainer>

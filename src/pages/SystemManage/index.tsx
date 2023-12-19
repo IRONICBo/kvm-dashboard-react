@@ -1,170 +1,80 @@
 import React, {useState, useEffect} from "react";
 import {PageContainer} from "@ant-design/pro-components";
-import {Button, Form, Input, Modal, Popconfirm, Space, Table, Tooltip} from "antd";
+import {Button, Form, Drawer, Input, Modal, Popconfirm, Space, Table, Tooltip, Tag, notification} from "antd";
+import { ProDescriptions } from '@ant-design/pro-components';
 import {ColumnsType} from "antd/es/table";
-import {apiAddHost, apiDeleteHost, apiRefreshHostList, apiUpdateHost} from "@/api/HostManage";
+import {apiSetRetentionTime, apiGetRetentionTime, apiGetSystemConfig, apiSetSystemConfig} from "@/api/System";
 import { history } from 'umi';
+import { RedoOutlined, PlusOutlined, PlayCircleOutlined, IssuesCloseOutlined} from '@ant-design/icons';
+
 
 interface DataType {
-    hostZzid: number,
-    hostId: string,
-    hostName: string,
-    hostDescription: string,
-    hostIp: string,
-    hostPort: string,
-    hostPortSsh: string,
-    hostLoginUsername: string,
-    hostLoginPassword: string,
-    hostEnable: number,
-    hostCreateTime: unknown
+    key: number,
+    value: string,
 }
 
-const HostManagePage: React.FC = () => {
-
+const SystemManagePage: React.FC = () => {
     const columns: ColumnsType<DataType> = [
         {
-            title: 'UUID',
-            dataIndex: 'hostId',
+            title: '系统配置名',
+            dataIndex: 'key',
             ellipsis: {
                 showTitle: false,
             },
-            width: 110,
+            width: 150,
             fixed: "left",
-            render: (hostId) => (
-                <Tooltip placement="topLeft" title={hostId}>
-                    <a onClick={(event) => {event.preventDefault();history.push("/monitor?uuid=" + hostId)}}>
-                        {hostId}
-                    </a>
-                </Tooltip>
-            )
         },
         {
-            title: '名称',
-            dataIndex: 'hostName',
+            title: '系统配置值',
+            dataIndex: 'value',
             ellipsis: {
                 showTitle: false,
             },
-            render: (hostName) => (
-                <Tooltip placement="topLeft" title={hostName}>
-                    {hostName}
+            width: 300,
+            fixed: "left",
+            render: (value) => (
+                <Tooltip placement="topLeft" title={value}>
+                    {value}
                 </Tooltip>
             ),
-            width: 130
-        },
-        {
-            title: 'IP地址',
-            dataIndex: 'hostIp',
-            ellipsis: {
-                showTitle: false,
-            },
-            render: (hostIp) => (
-                <Tooltip placement="topLeft" title={hostIp}>
-                    {hostIp}
-                </Tooltip>
-            ),
-            width: 140
-        },
-        {
-            title: 'Qemu端口',
-            dataIndex: 'hostPort',
-            ellipsis: {
-                showTitle: false,
-            },
-            render: (hostPort) => (
-                <Tooltip placement="topLeft" title={hostPort}>
-                    {hostPort}
-                </Tooltip>
-            )
-        },
-        {
-            title: 'SSH端口',
-            dataIndex: 'hostPortSsh',
-            ellipsis: {
-                showTitle: false,
-            },
-            render: (hostPortSsh) => (
-                <Tooltip placement="topLeft" title={hostPortSsh}>
-                    {hostPortSsh}
-                </Tooltip>
-            )
-        },
-        {
-            title: '登录用户',
-            dataIndex: 'hostLoginUsername',
-            ellipsis: {
-                showTitle: false,
-            },
-            render: (hostLoginUsername) => (
-                <Tooltip placement="topLeft" title={hostLoginUsername}>
-                    {hostLoginUsername}
-                </Tooltip>
-            )
-        },
-        // {
-        //     title: '登录密码',
-        //     dataIndex: 'hostLoginPassword',
-        //     ellipsis: {
-        //         showTitle: false,
-        //     },
-        //     render: (hostLoginPassword) => (
-        //         <Tooltip placement="topLeft" title={hostLoginPassword}>
-        //             {hostLoginPassword}
-        //         </Tooltip>
-        //     )
-        // },
-        {
-            title: '描述信息',
-            dataIndex: 'hostDescription',
-            ellipsis: {
-                showTitle: false,
-            },
-            render: (hostDescription) => (
-                <Tooltip placement="topLeft" title={hostDescription}>
-                    {hostDescription}
-                </Tooltip>
-            )
-        },
-        {
-            title: '创建时间',
-            dataIndex: 'hostCreateTime',
-            ellipsis: {
-                showTitle: false,
-            },
-            render: (hostCreateTime) => (
-                <Tooltip placement="topLeft" title={hostCreateTime}>
-                    {hostCreateTime}
-                </Tooltip>
-            )
         },
         {
             title: '操作',
             dataIndex: 'operation',
             fixed: 'right',
-            width: 155,
+            width: 50,
             render: (_, record) =>
                 <Space>
                     <Button size={"small"} shape={"round"} type="dashed" onClick={() => showUpdateModal(record)}>编辑</Button>
-                    <Popconfirm title="Sure to delete?" onConfirm={() => deleteHost(record.hostId)}>
-                        <Button size={"small"} shape={"round"} danger={true} type="dashed">删除</Button>
-                    </Popconfirm>
                 </Space>
         }
     ];
+
 
     /**
      * ----------------------------------------------------------------------------------------------------------------------------------------------------------------
      */
     let [data, setData] = useState([])
+    let [selectData, setSelectData] = useState();
     let [addModalOpen, setAddModalOpen] = useState(false);
     let [updateModalOpen, setUpdateModalOpen] = useState(false);
+    let [getDetailOpen, setGetDetailOpen] = useState(false);
     let [addFormInstance] = Form.useForm();
     let [updateFormInstance] = Form.useForm();
+    let [influxSecond, setInfluxSecond] = useState([{'key': 'db', 'value': '0'}]);
+    const [apiNotification, contextHolder] = notification.useNotification();
 
-    // 钩子，启动时获取宿主机列表
+    // 钩子，启动时获取系统配置列表
     useEffect(() => {
-        apiRefreshHostList().then(resp => {
+        apiGetSystemConfig().then(resp => {
             if (resp != null) {
                 setData(resp);
+            }
+        })
+        apiGetRetentionTime().then(resp => {
+            console.log()
+            if (resp != null) {
+                setInfluxSecond([{'key': 'db', 'value': resp}]);
             }
         })
     }, [])
@@ -172,148 +82,103 @@ const HostManagePage: React.FC = () => {
     /**
      * ----------------------------------------------------------------------------------------------------------------------------------------------------------------
      */
-    // 打开新增宿主机窗口
+    // 打开详细信息
+    const showGetDetailOpen = (hostUuid: String) => {
+        const res = data.find(item => item.key == key)
+        console.log("showGetDetailOpen", res)
+        setSelectData(res);
+        setGetDetailOpen(true);
+    }
+    // 打开新增系统配置窗口
     const showAddModal = () => {
         addFormInstance.resetFields();
         setAddModalOpen(true);
     }
-    // 打开修改宿主机信息窗口
+    // 打开修改系统配置信息窗口
     const showUpdateModal = (record: DataType) => {
         setUpdateModalOpen(true);
         updateFormInstance.setFieldsValue({
-            hostId: record.hostId,
-            hostName: record.hostName,
-            hostDescription: record.hostDescription,
-            hostIp: record.hostIp,
-            hostPort: record.hostPort,
-            hostPortSsh: record.hostPortSsh,
-            hostLoginUsername: record.hostLoginUsername,
-            hostLoginPassword: record.hostLoginPassword,
+            key: record.key,
+            value: record.value,
         });
     }
-    // 新增宿主机
-    const submitAddModal = () => {
-        apiAddHost(addFormInstance.getFieldsValue()).then(respCode => {
-            // 如果新增成功，刷新列表
-            if (respCode == 200) {
-                apiRefreshHostList().then(resp => {
-                    if (resp != null) {
-                        setData(resp);
-                    }
-                })
-            }
-        })
-        setAddModalOpen(false);
-    }
-    // 修改宿主机信息
+    // 修改系统配置信息
     const submitUpdateModal = () => {
-        apiUpdateHost(updateFormInstance.getFieldsValue()).then(respCode => {
-            // 如果修改成功刷新列表
-            if (respCode == 200) {
-                apiRefreshHostList().then(resp => {
-                    if (resp != null) {
-                        setData(resp);
-                    }
-                })
-            }
-        })
+        const temp = updateFormInstance.getFieldsValue();
+        if(temp.key == "db") {
+            const data = {
+                "second": temp.value, 
+            };
+            apiSetRetentionTime(data).then(respCode => {
+                // 如果修改成功刷新列表
+                if (respCode == 200) {
+                    apiGetRetentionTime().then(resp => {
+                        if (resp != null) {
+                            setInfluxSecond(resp);
+                        }
+                    })
+                }
+            })
+        } else {
+            apiSetSystemConfig(temp.key, temp.value).then(respCode => {
+                // 如果修改成功刷新列表
+                if (respCode == 200) {
+                    apiGetSystemConfig().then(resp => {
+                        if (resp != null) {
+                            setData(resp);
+                        }
+                    })
+                }
+            })
+        }
+        cancelUpdateModal();
     }
-    // 取消新增宿主机
+    // 关闭详细信息窗口
+    const cancelGetDetail = () => {
+        setGetDetailOpen(false);
+    }
+    // 取消新增系统配置
     const cancelAddModal = () => {
         setAddModalOpen(false);
     }
-    // 取消修改宿主机
+    // 取消修改系统配置
     const cancelUpdateModal = () => {
         setUpdateModalOpen(false);
     }
-    // 删除宿主机
-    const deleteHost = (hostId: string) => {
-        apiDeleteHost(hostId).then(respCode => {
-            // 如果宿主机删除成功，刷新列表
-            if (respCode == 200) {
-                apiRefreshHostList().then(resp => {
-                    if (resp != null) {
-                        setData(resp);
-                    }
-                })
-            }
-        })
-    }
+    const [selectedRowKeys, setSelectedRowKeys] = useState<React.Key[]>([]);
+    const onSelectChange = (newSelectedRowKeys: React.Key[]) => {
+        console.log('selectedRowKeys changed: ', newSelectedRowKeys);
+        setSelectedRowKeys(newSelectedRowKeys);
+    };
+    const rowSelection = {
+        selectedRowKeys,
+        onChange: onSelectChange,
+    };
 
     /**
      * ----------------------------------------------------------------------------------------------------------------------------------------------------------------
      */
     return (
         <PageContainer>
-            <Modal
-                title="新增宿主机"
-                open={addModalOpen}
-                onOk={submitAddModal}
-                onCancel={cancelAddModal}
-                destroyOnClose={true}
-            >
-                <Form
-                    form={addFormInstance}
-                    labelCol={{ span: 7 }}
-                    wrapperCol={{ span: 14 }}
-                >
-                    <Form.Item
-                        label="宿主机名称"
-                        name="hostName"
-                        rules={[{ required: true, message: '请输入宿主机名称!' }]}
-                    >
-                        <Input placeholder={"长度不超过 32 个字符"}/>
-                    </Form.Item>
-
-                    <Form.Item
-                        label="宿主机IP"
-                        name="hostIp"
-                        rules={[{ required: true, message: '请输入宿主机 IP!' }]}
-                    >
-                        <Input placeholder={"示例: 192.168.0.1"}/>
-                    </Form.Item>
-                    <Form.Item
-                        label="QEMU-端口"
-                        name="hostPort"
-                        rules={[{ required: true, message: '请输入 QEMU 端口!' }]}
-                    >
-                        <Input placeholder={"示例: 16509"}/>
-                    </Form.Item>
-                    <Form.Item
-                        label="SSH-端口"
-                        name="hostPortSsh"
-                        rules={[{ required: true, message: '请输入 SSH 端口!' }]}
-                    >
-                        <Input placeholder={"示例: 22"}/>
-                    </Form.Item>
-                    <Form.Item
-                        label="登录用户"
-                        name="hostLoginUsername"
-                        rules={[{ required: true, message: '请输入登录用户!' }]}
-                    >
-                        <Input placeholder={"示例: root"}/>
-                    </Form.Item>
-                    <Form.Item
-                        label="登录密码"
-                        name="hostLoginPassword"
-                        rules={[{ required: true, message: '请输入登录密码!' }]}
-                    >
-                        <Input.Password placeholder={"示例: 1234"}/>
-                    </Form.Item>
-                    <Form.Item
-                        label="描述信息"
-                        name="hostDescription"
-                    >
-                        <Input.TextArea showCount={true} placeholder={"最大长度为 500 个字符"} />
-                    </Form.Item>
-                </Form>
-            </Modal>
-
-            <Modal
-                title="宿主机信息修改"
+            {contextHolder} 
+            <Drawer
+                title="配置修改"
                 open={updateModalOpen}
-                onOk={submitUpdateModal}
-                onCancel={cancelUpdateModal}
+                onClose={cancelUpdateModal}
+                width={720}
+                styles={{
+                    body: {
+                      paddingBottom: 80,
+                    },
+                }}
+                extra={
+                    <Space>
+                      <Button onClick={cancelUpdateModal}>取消</Button>
+                      <Button onClick={submitUpdateModal} type="primary">
+                        确认
+                      </Button>
+                    </Space>
+                  }
             >
                 <Form
                     form={updateFormInstance}
@@ -321,76 +186,69 @@ const HostManagePage: React.FC = () => {
                     wrapperCol={{ span: 14 }}
                 >
                     <Form.Item
-                        label="宿主机ID"
-                        name="hostId"
-                        rules={[{ required: true, message: '请输入宿主机ID!' }]}
+                        label="系统配置名"
+                        name="key"
+                        rules={[{ required: true, message: '请输入系统配置名!' }]}
                     >
                         <Input disabled={true}/>
                     </Form.Item>
                     <Form.Item
-                        label="宿主机名称"
-                        name="hostName"
-                        rules={[{ required: true, message: '请输入宿主机名称!' }]}
+                        label="系统配置值"
+                        name="value"
+                        rules={[{ required: true, message: '请输入系统配置值!' }]}
                     >
-                        <Input placeholder={"长度不超过 32 个字符"}/>
-                    </Form.Item>
-
-                    <Form.Item
-                        label="宿主机IP"
-                        name="hostIp"
-                        rules={[{ required: true, message: '请输入宿主机 IP!' }]}
-                    >
-                        <Input placeholder={"示例: 192.168.0.1"}/>
-                    </Form.Item>
-                    <Form.Item
-                        label="QEMU-端口"
-                        name="hostPort"
-                        rules={[{ required: true, message: '请输入 QEMU 端口!' }]}
-                    >
-                        <Input placeholder={"示例: 16509"}/>
-                    </Form.Item>
-                    <Form.Item
-                        label="SSH-端口"
-                        name="hostPortSsh"
-                        rules={[{ required: true, message: '请输入 SSH 端口!' }]}
-                    >
-                        <Input placeholder={"示例: 22"}/>
-                    </Form.Item>
-                    <Form.Item
-                        label="登录用户"
-                        name="hostLoginUsername"
-                        rules={[{ required: true, message: '请输入登录用户!' }]}
-                    >
-                        <Input placeholder={"示例: root"}/>
-                    </Form.Item>
-                    <Form.Item
-                        label="登录密码"
-                        name="hostLoginPassword"
-                        rules={[{ required: true, message: '请输入登录密码!' }]}
-                    >
-                        <Input.Password placeholder={"示例: 1234"}/>
-                    </Form.Item>
-                    <Form.Item
-                        label="描述信息"
-                        name="hostDescription"
-                    >
-                        <Input.TextArea showCount={true} placeholder={"最大长度为 500 个字符"} />
+                        <Input placeholder={"xxx"}/>
                     </Form.Item>
                 </Form>
-            </Modal>
+            </Drawer>
 
             <Space size={"middle"}>
-                <Button shape={"round"} type="primary" onClick={showAddModal}>新增</Button>
-                <Button shape={"round"} type="dashed"
-                        onClick={() => apiRefreshHostList().then(resp => {
+                <Button type="primary"
+                        size="large"
+                        icon={<RedoOutlined />}
+                        onClick={() => apiGetSystemConfig().then(resp => {
                             if (resp != null) {
                                 setData(resp);
+
+                                apiGetRetentionTime().then(resp => {
+                                    if (resp != null) {
+                                        setInfluxSecond([{'key': 'db', 'value': resp}]);
+                                    }
+                                })
                             }})}>
                     刷新
                 </Button>
+                <Button type="dashed"
+                    size="large"
+                        icon={<IssuesCloseOutlined />}
+                        onClick={() => {
+                            window.location.href = 'http://localhost:28080/api/plumelog/#/';
+                        }}>
+                    查看日志
+                </Button>
             </Space>
-            <Table style={{marginTop: 6}} columns={columns} dataSource={data} rowKey={"hostId"} scroll={{x: 1000}}></Table>
+            <ProDescriptions
+                    style={{
+                        "paddingTop": 20
+                    }} title="系统配置" column={2} layout="vertical" />
+            <Table style={{marginTop: 15}} 
+                    columns={columns} 
+                    dataSource={data}
+                    rowKey={"key"}
+                    pagination={false}
+                    scroll={{x: 1000}} />
+
+            <ProDescriptions
+                    style={{
+                        "paddingTop": 20
+                    }} title="数据持久化配置" column={2} layout="vertical" />
+            <Table style={{marginTop: 15}} 
+                    columns={columns} 
+                    dataSource={influxSecond}
+                    rowKey={"key"}
+                    pagination={false}
+                    scroll={{x: 1000}} />
         </PageContainer>
     );
 };
-export default HostManagePage;
+export default SystemManagePage;

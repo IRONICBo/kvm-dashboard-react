@@ -298,32 +298,32 @@ const HostInfoCard: React.FC<HostIdProps> = (props) => {
     <>
       <ProDescriptions
         title="总体分析"
-        dataSource={performaceInfo.allEvaluateDTO}
+        dataSource={performaceInfo.totalEvaluateVO}
         columns={ALL_EVALUATE_DTO_CLOUMNS}
       ></ProDescriptions>
       <ProDescriptions
         title="处理器性能"
-        dataSource={performaceInfo.cpuEvaluateDTO}
+        dataSource={performaceInfo.cpuEvaluateVO}
         columns={EVALUATE_DTO_CLOUMNS}
       ></ProDescriptions>
       <ProDescriptions
         title="内存性能"
-        dataSource={performaceInfo.memEvaluateDTO}
+        dataSource={performaceInfo.memEvaluateVO}
         columns={EVALUATE_DTO_CLOUMNS}
       ></ProDescriptions>
       <ProDescriptions
         title="磁盘性能"
-        dataSource={performaceInfo.diskEvaluateDTO}
+        dataSource={performaceInfo.diskEvaluateVO}
         columns={EVALUATE_DTO_CLOUMNS}
       ></ProDescriptions>
       <ProDescriptions
         title="网络性能"
-        dataSource={performaceInfo.netEvaluateDTO}
+        dataSource={performaceInfo.netEvaluateVO}
         columns={EVALUATE_DTO_CLOUMNS}
       ></ProDescriptions>
       <ProDescriptions
         title="进程性能"
-        dataSource={performaceInfo.processEvaluateDTO}
+        dataSource={performaceInfo.processEvaluateVO}
         columns={EVALUATE_DTO_CLOUMNS}
       ></ProDescriptions>
     </>

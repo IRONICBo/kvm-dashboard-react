@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-use-before-define */
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { apiGetAlertPage } from '@/api/Monitor';
+import { apiGetAlertPage, apiGetMachineAlertPage } from '@/api/Monitor';
+import { useSearchParams } from '@umijs/max';
 import { ProDescriptions } from '@ant-design/pro-components';
 import { Col, DatePicker, Radio, Row, Select, Table, Tag } from 'antd';
 import React, { useEffect, useState } from 'react';
@@ -70,7 +71,11 @@ const AlertInfoCard: React.FC<HostIdProps> = (props) => {
     alarmBeginTime: string;
     alarmEndTime: string;
   }
-  const UUID = props.uuid;
+  // const UUID = props.uuid;
+  //
+  const [searchParams, setSearchParams] = useSearchParams();
+  const UUID = searchParams.get('uuid') || '';
+  console.log("Alert UUID", UUID)
   const [alertInfo, setAlertInfo] = useState([]);
 
   const [alertCurrent, setAlertCurrent] = useState(1);
@@ -80,10 +85,11 @@ const AlertInfoCard: React.FC<HostIdProps> = (props) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await apiGetAlertPage(UUID, alertCurrent, 10);
-        console.log('res.records: ', res.records);
+        const res = await apiGetMachineAlertPage(UUID, alertCurrent, 10);
+        // console.log('res.records: ', res.records);
         // Do not need to parse
-        const parsedAlertInfo = res.records;
+        // const parsedAlertInfo = res.records;
+        const parsedAlertInfo = res;
         console.log('parsedAlertInfo: ', parsedAlertInfo);
         // Maybe some data need to be parsed
         setAlertInfo(parsedAlertInfo);

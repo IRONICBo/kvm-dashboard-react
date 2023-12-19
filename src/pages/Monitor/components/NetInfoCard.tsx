@@ -7,7 +7,7 @@ import {
   apiGetMetricAgg,
   apiGetMetricPage,
 } from '@/api/Monitor';
-import { Area, Base, Line, Plot, PlotEvent } from '@ant-design/plots';
+import { Area, Base, Line, Plot, PlotEvent } from '@ant-desire wgn/plots';
 import { useSearchParams } from '@umijs/max';
 import { Col, DatePicker, Radio, Row, Select, Table, Tag } from 'antd';
 import type { ColumnsType } from 'antd/es/table';
