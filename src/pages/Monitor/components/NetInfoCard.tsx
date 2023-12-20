@@ -7,9 +7,12 @@ import {
   apiGetMetricAgg,
   apiGetMetricPage,
 } from '@/api/Monitor';
-import { Area, Base, Line, Plot, PlotEvent } from '@ant-desire wgn/plots';
+// import { Area, Base, Line, Plot, PlotEvent } from '@ant-desire wgn/plots';
+import { Area, Base, Line, Plot, PlotEvent } from '@ant-design/plots';
 import { useSearchParams } from '@umijs/max';
-import { Col, DatePicker, Radio, Row, Select, Table, Tag } from 'antd';
+import { Col, Button, DatePicker, Radio, Row, Select, Table, Tag } from 'antd';
+import { CloudDownloadOutlined } from '@ant-design/icons';
+import ExportJsonExcel from "js-export-excel";
 import type { ColumnsType } from 'antd/es/table';
 import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -470,6 +473,24 @@ const NetStatCard: React.FC = () => {
     selectedMethod,
   ]);
 
+  const downloadExcel = () => {
+    var option:any = {
+      fileName:translateKey(selectedMetric),
+      datas:[],
+    };
+    option.datas = [
+      {
+        sheetData: chartList,
+        sheetName: "监测指标",
+        sheetFilter: ["value", "time"],
+        sheetHeader: ["指标值", "测量时间"],
+        columnWidths: [30, 30],
+      },
+    ];
+    var toExcel = new ExportJsonExcel(option); //new
+    toExcel.saveExcel(); //保存
+  }
+
   return (
     <>
       <Row gutter={0} style={{ marginBottom: '20px' }}>
@@ -527,6 +548,16 @@ const NetStatCard: React.FC = () => {
         </Col>
       </Row>
       <Line {...config} data={chartList} />
+      <Button 
+                type="primary"
+                style={{
+                  marginTop: "20px"
+                }}
+                size="large"
+                icon={<CloudDownloadOutlined />}
+                onClick={() => downloadExcel()}>
+                导出Excel
+        </Button>
     </>
   );
 };
@@ -787,6 +818,29 @@ const NetConnStatCard: React.FC = () => {
     fetchData();
   }, [selectedStartTime, selectedEndTime]);
 
+  const downloadExcel = () => {
+    var option:any = {
+      fileName:translateKey('net_stat.connection_stats'),
+      datas:[],
+    };
+    const tempConnTableData = connTableData;
+    tempConnTableData.forEach((item) => {
+      item.localaddr = item.localaddr.ip + ':' + item.localaddr.port;
+      item.remoteaddr = item.remoteaddr.ip + ':' + item.remoteaddr.port;
+    });
+    option.datas = [
+      {
+        sheetData: tempConnTableData,
+        sheetName: "监测指标",
+        sheetFilter: ["fd", "family", "type", "localaddr", "remoteaddr", "status", "uids", "pid"],
+        sheetHeader: ["文件描述符", "地址族", "套接字类型", "本地地址", "远程地址", "套接字状态", "用户标识", "进程标识"],
+        columnWidths: [30, 30, 30, 30, 30, 30, 30, 30],
+      },
+    ];
+    var toExcel = new ExportJsonExcel(option); //new
+    toExcel.saveExcel(); //保存
+  }
+
   return (
     <>
       <Row gutter={0} style={{ marginBottom: '20px' }}>
@@ -825,8 +879,23 @@ const NetConnStatCard: React.FC = () => {
         }}
         style={{ marginBottom: '50px' }}
       />
+      <div style={{
+          marginBottom: '30px',
+          display: 'flex',
+          justifyContent: 'space-between',
+      }}>
       {new Date(selectTime * 1000 + 8 * 60 * 60 * 1000).toISOString() +
         ' 时刻连接状态'}
+      <Button 
+                type="primary"
+                style={{
+                }}
+                size="large"
+                icon={<CloudDownloadOutlined />}
+                onClick={() => downloadExcel()}>
+                导出Excel
+        </Button>
+      </div>
       {connTableData.length !== 0 && (
         <Table columns={NET_CONN_TABLE_CLOUMNS} dataSource={connTableData} />
       )}
@@ -903,6 +972,8 @@ const NetInfoCard: React.FC = () => {
           fontSize: '20px',
           marginTop: '100px',
           marginBottom: '20px',
+          display: 'flex',
+          justifyContent: 'space-between',
         }}
       >
         历史监测信息

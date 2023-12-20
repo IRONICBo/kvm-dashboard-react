@@ -372,7 +372,7 @@ const HostManagePage: React.FC = () => {
             width: 300,
             fixed: "left",
             render: (hostUuid) => (
-                    <a onClick={(event) => {event.preventDefault();history.push("/monitor?uuid=" + hostUuid)}}>
+                    <a onClick={(event) => {console.log(hostUuid.props.children);event.preventDefault();history.push("/monitor?uuid=" + hostUuid.props.children)}}>
                         查看监控
                     </a>
             )

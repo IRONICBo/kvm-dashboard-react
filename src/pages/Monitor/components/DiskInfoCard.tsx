@@ -7,7 +7,9 @@ import {
 } from '@/api/Monitor';
 import { Base, Line, Plot, PlotEvent } from '@ant-design/plots';
 import { useSearchParams } from '@umijs/max';
-import { Col, DatePicker, Row, Select, Table, Tag } from 'antd';
+import { Col, DatePicker, Row, Select, Table, Tag, Button } from 'antd';
+import { CloudDownloadOutlined } from '@ant-design/icons';
+import ExportJsonExcel from "js-export-excel";
 import type { ColumnsType } from 'antd/es/table';
 import React, { useEffect, useState } from 'react';
 import translateKey from '../../../utils/translate';
@@ -691,6 +693,25 @@ const DiskTimeStatCard: React.FC = () => {
     fetchData();
   }, [selectedStartTime, selectedEndTime]);
 
+  const downloadExcel = () => {
+    var option:any = {
+      fileName: translateKey('disk_stat.partition_with_usage_stats'),
+      datas:[],
+    };
+    const tempConnTableData = connTableData;
+    option.datas = [
+      {
+        sheetData: tempConnTableData,
+        sheetName: "监测指标",
+        sheetFilter: ["device", "mountpoint", "fstype", "opts", "path", "total", "free", "used", "usedPercent", "inodesTotal", "inodesUsed", "inodesFree", "inodesUsedPercent", "read_count", "merged_read_count", "write_count", "merged_write_count", "read_bytes", "write_bytes", "read_time", "write_time", "iops_in_progress", "io_time", "weighted_io", "name", "serial_number", "label"],
+        sheetHeader: ["设备", "挂载点", "文件系统类型", "选项", "路径", "总空间", "可用空间", "已使用空间", "已使用百分比", "总索引节点数", "已使用索引节点数", "可使用索引节点数", "已使用索引节点百分比", "读取次数", "合并读取次数", "写入次数", "合并写入次数", "读取字节数", "写入字节数", "读取时间", "写入时间", "进行中的每秒的读写次数", "输入输出时间", "加权输入输出", "名称", "序列号", "标签"],
+        columnWidths: [30, 30, 30, 30, 30, 30, 30, 30, 30, 30,30, 30, 30, 30,30, 30, 30, 30,30, 30, 30, 30,30, 30, 30, 30,30, 30],
+      },
+    ];
+    var toExcel = new ExportJsonExcel(option); //new
+    toExcel.saveExcel(); //保存
+  }
+
   return (
     <>
       <Row gutter={0} style={{ marginBottom: '20px' }}>
@@ -728,8 +749,23 @@ const DiskTimeStatCard: React.FC = () => {
         }}
         style={{ marginBottom: '50px' }}
       />
+      <div style={{
+          marginBottom: '30px',
+          display: 'flex',
+          justifyContent: 'space-between',
+      }}>
       {new Date(selectTime * 1000 + 8 * 60 * 60 * 1000).toISOString() +
         ' 时刻分区状态'}
+        <Button 
+          type="primary"
+          style={{
+          }}
+          size="large"
+          icon={<CloudDownloadOutlined />}
+          onClick={() => downloadExcel()}>
+          导出Excel
+        </Button>
+      </div>
       {connTableData.length !== 0 && (
         <Table
           columns={DISK_TABLE_CLOUMNS}

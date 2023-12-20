@@ -9,7 +9,9 @@ import {
 } from '@/api/Monitor';
 import { Area, Base, Line, Plot, PlotEvent } from '@ant-design/plots';
 import { useSearchParams } from '@umijs/max';
-import { Col, DatePicker, Radio, Row, Select, Table, Tag } from 'antd';
+import { Col, DatePicker, Radio, Row, Select, Table, Tag, Button } from 'antd';
+import { CloudDownloadOutlined } from '@ant-design/icons';
+import ExportJsonExcel from "js-export-excel";
 import type { ColumnsType } from 'antd/es/table';
 import React, { useEffect, useState } from 'react';
 import translateKey from '../../../utils/translate';
@@ -406,6 +408,30 @@ const ProcessStatCard: React.FC = () => {
     fetchData();
   }, [selectedStartTime, selectedEndTime]);
 
+  const downloadExcel = () => {
+    var option:any = {
+      fileName:translateKey('process_stat.processes'),
+      datas:[],
+    };
+    const tempConnTableData = connTableData;
+    tempConnTableData.forEach((item) => {
+      item.num_ctx_switches = "主动："+item.num_ctx_switches.voluntary + '/非主动：' + item.num_ctx_switches.involuntary;
+      item.mem_info = "常驻内存："+item.mem_info.rss + '/虚拟内存：' + item.mem_info.vms + '/峰值常驻内存：' + item.mem_info.hwm + '/数据段：' + item.mem_info.data + '/栈：' + item.mem_info.stack + '/锁定内存：' + item.mem_info.locked + '/交换内存：' + item.mem_info.swap;
+    });
+    option.datas = [
+      {
+        sheetData: tempConnTableData,
+        sheetName: "监测指标",
+        sheetFilter: ["pid", "name", "status", "parent", "num_ctx_switches", "uids", "gids", "groups", "num_threads", "mem_info", "create_time", "last_cpu_time", "tgid"],
+        sheetHeader: ["进程标识符", "进程名称", "进程状态", "父进程标识符", "上下文切换次数的统计信息", "用户标识符列表", "用户组标识符列表", "所属组列表", "线程数量", "内存信息的统计信息", "进程创建时间的时间戳", "上次处理器时间的时间戳", "线程组标识符"],
+        columnWidths: [30, 30, 30, 30, 30, 30, 30, 30, 30, 50, 30, 30, 30],
+      },
+    ];
+    var toExcel = new ExportJsonExcel(option); //new
+    toExcel.saveExcel(); //保存
+  }
+
+
   return (
     <>
       <Row gutter={0} style={{ marginBottom: '20px' }}>
@@ -443,8 +469,23 @@ const ProcessStatCard: React.FC = () => {
         }}
         style={{ marginBottom: '50px' }}
       />
+      <div style={{
+          marginBottom: '30px',
+          display: 'flex',
+          justifyContent: 'space-between',
+      }}>
       {new Date(selectTime * 1000 + 8 * 60 * 60 * 1000).toISOString() +
         ' 时刻连接状态'}
+      <Button 
+          type="primary"
+          style={{
+          }}
+          size="large"
+          icon={<CloudDownloadOutlined />}
+          onClick={() => downloadExcel()}>
+          导出Excel
+        </Button>
+      </div>
       {connTableData.length !== 0 && (
         <Table columns={PROCESS_TABLE_CLOUMNS} scroll={{ x: 1500 }} dataSource={connTableData} />
       )}

@@ -8,7 +8,9 @@ import {
 } from '@/api/Monitor';
 import { Line } from '@ant-design/plots';
 import { useSearchParams } from '@umijs/max';
-import { Col, DatePicker, Radio, Row, Select, Table, Tag } from 'antd';
+import { Col, DatePicker, Radio, Row, Select, Table, Tag, Button } from 'antd';
+import { CloudDownloadOutlined } from '@ant-design/icons';
+import ExportJsonExcel from "js-export-excel";
 import type { ColumnsType } from 'antd/es/table';
 import React, { useEffect, useState } from 'react';
 import translateKey from '../../../utils/translate';
@@ -201,6 +203,24 @@ const MemStatCard: React.FC = () => {
     selectedMethod,
   ]);
 
+  const downloadExcel = () => {
+    var option:any = {
+      fileName:translateKey(selectedMetric),
+      datas:[],
+    };
+    option.datas = [
+      {
+        sheetData: chartList,
+        sheetName: "监测指标",
+        sheetFilter: ["value", "time"],
+        sheetHeader: ["指标值", "测量时间"],
+        columnWidths: [30, 30],
+      },
+    ];
+    var toExcel = new ExportJsonExcel(option); //new
+    toExcel.saveExcel(); //保存
+  }
+
   return (
     <>
       <Row gutter={0} style={{ marginBottom: '20px' }}>
@@ -258,6 +278,16 @@ const MemStatCard: React.FC = () => {
         </Col>
       </Row>
       <Line {...config} data={chartList} />
+      <Button 
+          type="primary"
+          style={{
+            marginTop: "20px"
+          }}
+          size="large"
+          icon={<CloudDownloadOutlined />}
+          onClick={() => downloadExcel()}>
+          导出Excel
+      </Button>
     </>
   );
 };

@@ -9,8 +9,10 @@ import {
 } from '@/api/Monitor';
 import { Base, Heatmap, Line, Plot, PlotEvent } from '@ant-design/plots';
 import { useSearchParams } from '@umijs/max';
-import { Col, DatePicker, Radio, Row, Select, Table, Tag } from 'antd';
+import { Col, DatePicker, Radio, Row, Select, Table, Tag, Button} from 'antd';
 import type { ColumnsType } from 'antd/es/table';
+import { CloudDownloadOutlined } from '@ant-design/icons';
+import ExportJsonExcel from "js-export-excel";
 import React, { useEffect, useState } from 'react';
 import translateKey from '../../../utils/translate';
 
@@ -356,6 +358,24 @@ const CPUStatCard: React.FC = () => {
     selectedMethod,
   ]);
 
+  const downloadExcel = () => {
+    var option:any = {
+      fileName:translateKey(selectedMetric),
+      datas:[],
+    };
+    option.datas = [
+      {
+        sheetData: chartList,
+        sheetName: "监测指标",
+        sheetFilter: ["value", "time"],
+        sheetHeader: ["指标值", "测量时间"],
+        columnWidths: [30, 30],
+      },
+    ];
+    var toExcel = new ExportJsonExcel(option); //new
+    toExcel.saveExcel(); //保存
+  }
+
   return (
     <>
       <Row gutter={0} style={{ marginBottom: '20px' }}>
@@ -413,6 +433,16 @@ const CPUStatCard: React.FC = () => {
         </Col>
       </Row>
       <Line {...config} data={chartList} />
+      <Button 
+                type="primary"
+                style={{
+                  marginTop: "20px"
+                }}
+                size="large"
+                icon={<CloudDownloadOutlined />}
+                onClick={() => downloadExcel()}>
+                导出Excel
+        </Button>
     </>
   );
 };
@@ -678,6 +708,25 @@ const CPUTimeStatCard: React.FC = () => {
     fetchData();
   }, [selectedStartTime, selectedEndTime]);
 
+  const downloadExcel = () => {
+    var option:any = {
+      fileName:translateKey('cpu_stat.cpu_time_stats'),
+      datas:[],
+    };
+    const tempConnTableData = connTableData;
+    option.datas = [
+      {
+        sheetData: tempConnTableData,
+        sheetName: "监测指标",
+        sheetFilter: ["cpu", "user", "system", "idle", "nice", "iowait", "irq", "softirq", "steal", "guest", "guest_nice"],
+        sheetHeader: ["处理器", "用户态时间片", "系统态时间片", "空闲时间片", "低优先级时间片", "等待输入/出时间片", "硬件中断时间片", "软件中断时间片", "被盗用时间片", "虚拟化时间片", "低优先级虚拟化时间片"],
+        columnWidths: [30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30],
+      },
+    ];
+    var toExcel = new ExportJsonExcel(option); //new
+    toExcel.saveExcel(); //保存
+  }
+
   return (
     <>
       <Row gutter={0} style={{ marginBottom: '20px' }}>
@@ -715,8 +764,23 @@ const CPUTimeStatCard: React.FC = () => {
         }}
         style={{ marginBottom: '50px' }}
       />
-      {new Date(selectTime * 1000 + 8 * 60 * 60 * 1000).toISOString() +
+      <div style={{
+          marginBottom: '30px',
+          display: 'flex',
+          justifyContent: 'space-between',
+      }}>
+        {new Date(selectTime * 1000 + 8 * 60 * 60 * 1000).toISOString() +
         ' 时刻处理器状态'}
+        <Button 
+          type="primary"
+          style={{
+          }}
+          size="large"
+          icon={<CloudDownloadOutlined />}
+          onClick={() => downloadExcel()}>
+        导出Excel
+        </Button>
+      </div>
       {connTableData.length !== 0 && (
         <Table columns={CPU_TABLE_CLOUMNS} dataSource={connTableData} />
       )}
@@ -826,7 +890,7 @@ const CPULoadStatCard: React.FC = () => {
                     .toISOString()
                     .substring(11, 19),
                   name: 'cpu-' + i,
-                  value: v,
+                  value: parseFloat(v),
                 });
               });
             } else if (key == 'cpu_load') {
@@ -882,9 +946,10 @@ const CPULoadStatCard: React.FC = () => {
     <>
       <Row>
         <Col span={12}>
-          处理器占用热力图
+          处理器占用
           <div style={{ marginBottom: '10px' }}></div>
-          <Heatmap {...heatmapConfig} data={cpuPercentStat} />
+          <Line {...config} data={cpuPercentStat} />
+          {/* <Heatmap {...heatmapConfig} data={cpuPercentStat} /> */}
         </Col>
         <Col span={12}>
           处理器负载

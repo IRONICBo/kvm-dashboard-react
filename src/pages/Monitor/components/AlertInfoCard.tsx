@@ -3,7 +3,7 @@
 import { apiGetAlertPage, apiGetMachineAlertPage } from '@/api/Monitor';
 import { useSearchParams } from '@umijs/max';
 import { ProDescriptions } from '@ant-design/pro-components';
-import { Col, DatePicker, Radio, Row, Select, Table, Tag } from 'antd';
+import { Col, DatePicker, Radio, Row, Select, Table, Tag, Tooltip } from 'antd';
 import React, { useEffect, useState } from 'react';
 
 const ALERT_INFO_CLOUMNS = [
@@ -23,6 +23,7 @@ const ALERT_INFO_CLOUMNS = [
           </Tag>
       </>
     ),
+    width: 200,
   },
   {
     title: '报警标签',
@@ -46,6 +47,11 @@ const ALERT_INFO_CLOUMNS = [
     title: '报警信息',
     key: 'alarmValue',
     dataIndex: 'alarmValue',
+    render: (_, { alarmValue }) => (
+      <Tooltip placement="topLeft" title={alarmValue}>
+        {alarmValue.length > 7 ? `${alarmValue.substring(0, 40)}...` : alarmValue}
+      </Tooltip>
+    ),
   },
   {
     title: '报警开始时间',

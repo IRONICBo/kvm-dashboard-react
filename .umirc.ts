@@ -5,8 +5,6 @@ export default defineConfig({
         dark: false,
     },
     theme: {
-        // 切换主题
-        // "primary-color": "#1DA57A",
     },
     access: {},
     model: {},
