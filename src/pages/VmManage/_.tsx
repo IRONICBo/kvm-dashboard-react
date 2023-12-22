@@ -10,6 +10,11 @@ import {apiStartVMMonitor, apiStopVMMonitor} from "@/api/Monitor";
 import { history } from 'umi';
 import { RedoOutlined, PlusOutlined, PlayCircleOutlined, PauseCircleOutlined, PicRightOutlined, PicLeftOutlined } from '@ant-design/icons';
 import VmSnapshotPage from "../VmSnapshot";
+import { apiQueryInstanceOfferingList } from "@/api/VmInstance";
+import { apiQueryDiskOfferingList } from "@/api/VmDisk";
+import {apiQueryThreeNetworkInfoList } from "@/api/VmNetwork";
+import { apiQueryMirrorList } from "@/api/VmMirror";
+
 
 interface DataType {
     hostZzid: number,
@@ -584,6 +589,8 @@ const VmManagePage: React.FC = () => {
     let [hostList, setHostList] = useState([]);
     let [migrateType, setMigrateType] = useState(1);
     let [recommendHostName, setRecommendHostName] = useState("无");
+    let [instanceList, setInstanceList] = useState([]);
+    let [diskList, setDiskList] = useState([]);
 
     // 钩子，启动时获取宿主机列表
     useEffect(() => {
@@ -607,6 +614,40 @@ const VmManagePage: React.FC = () => {
     // 打开新增宿主机窗口
     const showAddModal = () => {
         addFormInstance.resetFields();
+        apiQueryInstanceOfferingList().then(resp => {
+            if (resp != null) {
+                const transformedData = [];
+                resp.forEach(element => {
+                console.log("transformedData", element)
+                    transformedData.push(
+                        {
+                            "label": element.instanceName,
+                            "value": element.instanceUuid,
+                        }
+                    )
+                });
+                // let [vmList, setVmList] = useState<{ key: any; value: any; }[]>([]);
+                console.log("transformedData", transformedData)
+                setInstanceList(transformedData);
+            }
+        })
+        apiQueryDiskOfferingList().then(resp => {
+            if (resp != null) {
+                const transformedData = [];
+                resp.forEach(element => {
+                console.log("transformedData", element)
+                    transformedData.push(
+                        {
+                            "label": element.diskOfferingName,
+                            "value": element.diskOfferingUuid,
+                        }
+                    )
+                });
+                // let [vmList, setVmList] = useState<{ key: any; value: any; }[]>([]);
+                console.log("transformedData", transformedData)
+                setDiskList(transformedData);
+            }
+        })
         setAddModalOpen(true);
     }
     // 打开新增宿主机窗口
@@ -884,13 +925,17 @@ const VmManagePage: React.FC = () => {
                         name="rootDiskOfferingUuid"
                         rules={[{ required: true, message: '请输入数据盘规格列表!' }]}
                     >
-                        <Input placeholder={"长度不超过 32 个字符"}/>
+                        <Select 
+                            options={diskList} />
+                        {/* <Input placeholder={"长度不超过 32 个字符"}/> */}
                     </Form.Item>
                     <Form.Item
                         label="数据盘规格列表"
                         name="dataDiskOfferingUuidList"
                     >
-                        <Input placeholder={"长度不超过 32 个字符"}/>
+                        <Select 
+                            options={diskList} />
+                        {/* <Input placeholder={"长度不超过 32 个字符"}/> */}
                     </Form.Item>
                     <Form.Item
                         label="三层网络UUID"
@@ -925,7 +970,8 @@ const VmManagePage: React.FC = () => {
                         name="instanceOfferingUuid"
                         rules={[{ required: true, message: '请输入计算规格 UUID!' }]}
                     >
-                        <Input placeholder={"xxxxxx"}/>
+                        <Select 
+                            options={instanceList} />
                     </Form.Item>
                     <Form.Item
                         label="磁盘所属主存储"
