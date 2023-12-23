@@ -23,6 +23,17 @@ export const apiQueryDiskOfferingList = () => {
     })
 }
 
+export const apiQueryPrimaryStorageList = () => {
+    return getRequest('/manage/primaryStorage/list').then(resp => {
+        if (resp.code == 200) {
+            message.success("查询云盘规格信息列表成功");
+            return resp.data;
+        } else {
+            message.error(resp.code + ":" + resp.message);
+        }
+    })
+}
+
 export const apiDiskOfferingCreate = (data) => {
     return postRequest('/manage/diskOfferingInfo/create', data).then(resp => {
         if (resp.code == 200) {

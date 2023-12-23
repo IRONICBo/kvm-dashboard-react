@@ -3,7 +3,7 @@ import {PageContainer} from "@ant-design/pro-components";
 import {Button, Form, Drawer, Input, Modal, Popconfirm, Space, Table, Tooltip, Tag, notification} from "antd";
 import { ProDescriptions } from '@ant-design/pro-components';
 import {ColumnsType} from "antd/es/table";
-import {apiAddHost, apiDeleteHost, apiRefreshHostList, apiUpdateHost, apiUpdateHostSSH} from "@/api/HostManage";
+import {apiAddHost, apiDeleteHost, apiRefreshHostList, apiUpdateHost, apiUpdateHostSSH, apiStartHost, apiStopHost } from "@/api/HostManage";
 import {apiStartHostMonitor, apiStopHostMonitor} from "@/api/Monitor";
 import { history } from 'umi';
 import { RedoOutlined, PlusOutlined, PlayCircleOutlined, PauseCircleOutlined } from '@ant-design/icons';
@@ -139,12 +139,18 @@ const HostManagePage: React.FC = () => {
             title: '操作',
             dataIndex: 'operation',
             fixed: 'right',
-            width: 155,
+            width: 300,
             render: (_, record) =>
                 <Space>
                     <Button size={"small"} shape={"round"} type="dashed" onClick={() => showUpdateModal(record)}>编辑</Button>
                     <Popconfirm title="Sure to delete?" onConfirm={() => deleteHost(record.hostUuid)}>
                         <Button size={"small"} shape={"round"} danger={true} type="dashed">删除</Button>
+                    </Popconfirm>
+                    <Popconfirm title="Sure to star?" onConfirm={() => startHost(record.hostUuid)}>
+                        <Button size={"small"} shape={"round"} danger={true} type="dashed">启用</Button>
+                    </Popconfirm>
+                    <Popconfirm title="Sure to stop?" onConfirm={() => stopHost(record.hostUuid)}>
+                        <Button size={"small"} shape={"round"} danger={true} type="dashed">停用</Button>
                     </Popconfirm>
                 </Space>
         }
@@ -346,6 +352,32 @@ const HostManagePage: React.FC = () => {
             )
         },
         {
+            title: '智能平台管理接口地址',
+            dataIndex: 'hostIpmiAddr',
+            ellipsis: {
+                showTitle: false,
+            },
+            width: 200,
+            render: (hostIpmiAddr) => (
+                <Tooltip placement="topLeft" title={hostIpmiAddr}>
+                    {hostIpmiAddr}
+                </Tooltip>
+            )
+        },
+        {
+            title: '简单网络协议地址',
+            dataIndex: 'hostSnmpAddr',
+            ellipsis: {
+                showTitle: false,
+            },
+            width: 200,
+            render: (hostSnmpAddr) => (
+                <Tooltip placement="topLeft" title={hostSnmpAddr}>
+                    {hostSnmpAddr}
+                </Tooltip>
+            )
+        },
+        {
             title: '状态',
             dataIndex: 'hostState',
             ellipsis: {
@@ -371,10 +403,14 @@ const HostManagePage: React.FC = () => {
             },
             width: 300,
             fixed: "left",
-            render: (hostUuid) => (
-                    <a onClick={(event) => {console.log(hostUuid.props.children);event.preventDefault();history.push("/monitor?uuid=" + hostUuid.props.children)}}>
-                        查看监控
-                    </a>
+            render: (hostUuid, record) => (
+                <a onClick={(event) => {
+                    console.log(hostUuid.props.children);
+                    event.preventDefault();
+                    history.push(`/monitor?uuid=${hostUuid.props.children}&ipmi=${record.hostIpmiAddr}&snmp=${record.hostSnmpAddr}`);
+                }}>
+                    查看监控
+                </a>
             )
         },
         {
@@ -462,6 +498,8 @@ const HostManagePage: React.FC = () => {
             "hostUuid": temp.hostUuid,
             "hostName": temp.hostName,
             "hostDescription": temp.hostDescription,
+            "hostIpmiAddr": temp.hostIpmiAddr,
+            "hostSnmpAddr": temp.hostSnmpAddr,
         }
         const sshData = {
             "hostUuid": temp.hostUuid,
@@ -507,6 +545,30 @@ const HostManagePage: React.FC = () => {
     const deleteHost = (hostId: string) => {
         apiDeleteHost(hostId).then(respCode => {
             // 如果宿主机删除成功，刷新列表
+            if (respCode == 200) {
+                apiRefreshHostList().then(resp => {
+                    if (resp != null) {
+                        setData(resp);
+                    }
+                })
+            }
+        })
+    }
+    // 启用宿主机
+    const startHost = (hostId: string) => {
+        apiStartHost(hostId).then(respCode => {
+            if (respCode == 200) {
+                apiRefreshHostList().then(resp => {
+                    if (resp != null) {
+                        setData(resp);
+                    }
+                })
+            }
+        })
+    }
+    // 停用宿主机
+    const stopHost = (hostId: string) => {
+        apiStopHost(hostId).then(respCode => {
             if (respCode == 200) {
                 apiRefreshHostList().then(resp => {
                     if (resp != null) {
@@ -609,6 +671,18 @@ const HostManagePage: React.FC = () => {
                     >
                         <Input.TextArea showCount={true} placeholder={"最大长度为 500 个字符"} />
                     </Form.Item>
+                    <Form.Item
+                        label="智能管理平台接口地址"
+                        name="hostIpmiAddr"
+                    >
+                        <Input showCount={true} placeholder={"127.0.0.1:161"} />
+                    </Form.Item>
+                    <Form.Item
+                        label="简单网络协议地址"
+                        name="hostSnmpAddr"
+                    >
+                        <Input showCount={true} placeholder={"127.0.0.1:3344"} />
+                    </Form.Item>
                 </Form>
             </Drawer>
 
@@ -684,6 +758,18 @@ const HostManagePage: React.FC = () => {
                         name="hostDescription"
                     >
                         <Input.TextArea showCount={true} placeholder={"最大长度为 500 个字符"} />
+                    </Form.Item>
+                    <Form.Item
+                        label="智能管理平台接口地址"
+                        name="hostIpmiAddr"
+                    >
+                        <Input placeholder={"127.0.0.1:161"} />
+                    </Form.Item>
+                    <Form.Item
+                        label="简单网络协议地址"
+                        name="hostSnmpAddr"
+                    >
+                        <Input placeholder={"127.0.0.1:3344"} />
                     </Form.Item>
                 </Form>
             </Drawer>

@@ -1,10 +1,11 @@
 import React, {useState, useEffect} from "react";
 import {PageContainer} from "@ant-design/pro-components";
-import {Button, Form, Drawer, Input, Modal, Popconfirm, Space, Table, Tooltip, Tag, Radio, Slider} from "antd";
+import {Button, Form, Drawer, Input, Modal, Popconfirm, Space, Table, Tooltip, Tag, Radio, Slider, Select} from "antd";
 import {ColumnsType} from "antd/es/table";
 import {apiQueryVolumeList, apiVolumeDelete, apiVolumeCreate, apiVolumeExpand} from "@/api/VmVolume";
 import { history } from 'umi';
 import { RedoOutlined, PlusOutlined, PlayCircleOutlined, PauseCircleOutlined, PicRightOutlined, PicLeftOutlined } from '@ant-design/icons';
+import { apiQueryVmList } from '@/api/VmManage';
 
 interface DataType {
     volumeUuid: string,
@@ -121,6 +122,7 @@ const VmVolumePage: React.FC = () => {
     let [getDetailOpen, setGetDetailOpen] = useState(false);
     let [addFormInstance] = Form.useForm();
     let [updateFormInstance] = Form.useForm();
+    let [vmList, setVmList] = useState([]);
 
     // 钩子，启动时获取数据盘列表
     useEffect(() => {
@@ -137,6 +139,24 @@ const VmVolumePage: React.FC = () => {
     // 打开新增数据盘窗口
     const showAddModal = () => {
         addFormInstance.resetFields();
+        apiQueryVmList().then(resp => {
+            if (resp != null) {
+                const transformedData = [];
+                resp.forEach(element => {
+                console.log("transformedData", element)
+                    transformedData.push(
+                        {
+                            "label": element.vmName,
+                            "value": element.vmUuid,
+                        }
+                    )
+                });
+                // let [vmList, setVmList] = useState<{ key: any; value: any; }[]>([]);
+                console.log("transformedData", transformedData)
+                setVmList(transformedData);
+            }
+        })
+        console.log("setVmList", vmList);
         setAddModalOpen(true);
     }
     // 打开修改数据盘信息窗口
@@ -260,7 +280,9 @@ const VmVolumePage: React.FC = () => {
                         name="volumeVmInstanceUuid"
                         rules={[{ required: true, message: '请输虚拟机ID' }]}
                     >
-                        <Input placeholder={"42ad89dc78ab42ad8b4929c45a2fa6ec"}/>
+                        <Select 
+                            options={vmList} />
+                        {/* <Input placeholder={"42ad89dc78ab42ad8b4929c45a2fa6ec"}/> */}
                     </Form.Item>
 
                     <Form.Item

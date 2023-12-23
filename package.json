@@ -18,10 +18,13 @@
     "antd": "^4.24.13",
     "axios": "^1.4.0",
     "core-js": "^3.33.3",
+    "html2canvas": "^1.4.1",
     "js-export-excel": "^1.1.4",
+    "jspdf": "^2.5.1",
     "react-i18next": "^13.2.2",
     "react-json-view": "^1.21.3",
-    "socket.io-client": "^4.7.2"
+    "socket.io-client": "^4.7.2",
+    "svg2pdf.js": "^2.2.3"
   },
   "devDependencies": {
     "@types/react": "^18.2.21",

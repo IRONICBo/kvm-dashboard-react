@@ -22,6 +22,7 @@ import {
   Table,
   Tabs,
   Tag,
+  message
 } from 'antd';
 import type { ColumnsType } from 'antd/es/table';
 import React, { useEffect, useState } from 'react';
@@ -32,7 +33,13 @@ import MemInfoCard from './components/MemInfoCard';
 import DiskInfoCard from './components/DiskInfoCard';
 import ProcessInfoCard from './components/ProcessInfoCard';
 import AlertInfoCard from './components/AlertInfoCard';
+import IPMIInfoCard from './components/IPMIInfoCard';
+import SNMPInfoCard from './components/SNMPInfoCard';
 import ExportJsonExcel from "js-export-excel";
+import ExportWord from 'js-export-word';
+import { jsPDF } from "jspdf";
+import 'svg2pdf.js'
+import html2canvas from "html2canvas";
 
 const onChange = (key: string) => {
   console.log(key);
@@ -64,6 +71,16 @@ const TAB_ITEMS: TabsProps['items'] = [
     label: `进程`,
     children: <ProcessInfoCard />,
   },
+  {
+    key: 'ipmi',
+    label: `智能管理平台接口`,
+    children: <IPMIInfoCard />,
+  },
+  {
+    key: 'snmp',
+    label: `简单网络协议`,
+    children: <SNMPInfoCard />,
+  },
 ];
 
 const Context = React.createContext({ name: 'Default' });
@@ -85,6 +102,33 @@ const Welcome: React.FC = () => {
     }
     
     const random = Math.random().toString(36).slice(-8);
+    const websocket_recommend = new WebSocket(
+      'ws://localhost:28080/websocket/resource/' +
+        random,
+    );
+    websocket_recommend.onopen = function () {
+      console.log('websocket open');
+    };
+    websocket_recommend.onmessage = function (msg) {
+      console.log("ws://localhost:28080/api/websocket/resource/", msg.data);
+      api.warning({
+        message: '推荐信息变更：',
+        description: '节点：' + UUID + '：' + msg.data,
+        duration: 2,
+      });
+    };
+    websocket_recommend.onclose = function () {
+      console.log('websocket closed');
+    };
+    websocket_recommend.onerror = function () {
+      console.log('websocket error');
+      api.error({
+        message: '报警接口连接失败',
+        description: '',
+        duration: 2,
+      });
+    };
+
     const websocket = new WebSocket(
       'ws://localhost:28080/api/websocket/alarm/' +
         UUID +
@@ -117,7 +161,7 @@ const Welcome: React.FC = () => {
 
   const downloadExcel = async () => {
     var option:any = {
-      fileName:"excel",
+      fileName:"系统信息",
       datas:[],
     };
 
@@ -209,6 +253,111 @@ const Welcome: React.FC = () => {
     ];
     var toExcel = new ExportJsonExcel(option); //new
     toExcel.saveExcel(); //保存
+
+    message.info("导出Excel成功")
+  }
+
+  const downloadWord = async () => {
+    // TODO: update to async code.
+    const tabs = document.getElementsByClassName("ant-tabs-tab");
+    for (var i = 0; i < tabs.length; i++) {
+      tabs[i].click();
+      await new Promise(resolve => setTimeout(resolve, 2000));
+    }
+
+    // const wrap = document.getElementById('test')
+    const wrap = document.getElementsByClassName("ant-layout-content ant-pro-layout-content css-dev-only-do-not-override-1ainthx ant-pro-layout-has-header ant-pro-layout-content-has-page-container")[0]
+    const config = {
+          addStyle:true,
+          fileName:'系统信息',
+          toImg:['.for-export-word'],
+          success(){
+            message.info("导出Word成功")
+          }
+    }
+    ExportWord(wrap,config) 
+  }
+
+  const downloadPDF = async () =>  {
+    // TODO: update to async code.
+    const tabs = document.getElementsByClassName("ant-tabs-tab");
+    for (var i = 0; i < tabs.length; i++) {
+      tabs[i].click();
+      await new Promise(resolve => setTimeout(resolve, 2000));
+    }
+
+    const doc = new jsPDF();
+    var pdf = new jsPDF("p", "mm", "a4") // A4纸，纵向
+    const header_element = document.getElementsByClassName("ant-card ant-card-bordered")[0] as HTMLElement;
+    const cpu_element = document.getElementById("rc-tabs-0-panel-cpu").childNodes[0] as HTMLElement;
+    const mem_element = document.getElementById("rc-tabs-0-panel-mem").childNodes[0] as HTMLElement;
+    const disk_element = document.getElementById("rc-tabs-0-panel-disk").childNodes[0] as HTMLElement;
+    const net_element = document.getElementById("rc-tabs-0-panel-net").childNodes[0] as HTMLElement;
+    const process_element = document.getElementById("rc-tabs-0-panel-process").childNodes[0] as HTMLElement;
+    
+    header_element.appendChild(cpu_element);
+    header_element.appendChild(mem_element);
+    header_element.appendChild(disk_element);
+    header_element.appendChild(net_element);
+    header_element.appendChild(process_element);
+
+    html2canvas(header_element, {
+      logging: false
+    }).then(function(canvas) {
+        var ctx = canvas.getContext("2d")
+        var a4w = 190;
+        var a4h = 257 // A4大小，210mm x 297mm，四边各保留20mm的边距
+        var imgHeight = Math.floor(a4h * canvas.width / a4w) // 按A4显示比例换算一页图像的像素高度
+        var renderedHeight = 0
+
+        while (renderedHeight < canvas.height) {
+            var page = document.createElement("canvas")
+            page.width = canvas.width
+            page.height = Math.min(imgHeight, canvas.height - renderedHeight) // 可能内容不足一页
+
+            // 用getImageData剪裁指定区域，并画到前面创建的canvas对象中
+            if (page) {
+              page.getContext("2d").putImageData(ctx.getImageData(0, renderedHeight, canvas.width, Math.min(imgHeight, canvas.height - renderedHeight)), 0, 0);
+            }
+            pdf.addImage(page.toDataURL("image/jpeg", 1.0), "JPEG", 10, 10, a4w, Math.min(a4h, a4w * page.height / page.width)) // 添加图像到页面，保留10mm边距
+
+            renderedHeight += imgHeight
+            if (renderedHeight < canvas.height) { pdf.addPage() } // 如果后面还有内容，添加一个空页
+            // delete page;
+        }
+
+        pdf.save("系统信息.pdf")
+        message.info("导出PDF成功")
+        location.reload();
+    })
+
+    // const cpu_element = document.getElementById("rc-tabs-0-panel-cpu") as HTMLElement;
+    // html2canvas(cpu_element, {
+    //   logging: false
+    // }).then(function(canvas) {
+    //     var ctx = canvas.getContext("2d")
+    //     var a4w = 190;
+    //     var a4h = 257 // A4大小，210mm x 297mm，四边各保留20mm的边距
+    //     var imgHeight = Math.floor(a4h * canvas.width / a4w) // 按A4显示比例换算一页图像的像素高度
+    //     var renderedHeight = 0
+
+    //     while (renderedHeight < canvas.height) {
+    //         var page = document.createElement("canvas")
+    //         page.width = canvas.width
+    //         page.height = Math.min(imgHeight, canvas.height - renderedHeight) // 可能内容不足一页
+
+    //         // 用getImageData剪裁指定区域，并画到前面创建的canvas对象中
+    //         if (page) {
+    //           page.getContext("2d").putImageData(ctx.getImageData(0, renderedHeight, canvas.width, Math.min(imgHeight, canvas.height - renderedHeight)), 0, 0);
+    //         }
+    //         pdf.addImage(page.toDataURL("image/jpeg", 1.0), "JPEG", 10, 10, a4w, Math.min(a4h, a4w * page.height / page.width)) // 添加图像到页面，保留10mm边距
+
+    //         renderedHeight += imgHeight
+    //         if (renderedHeight < canvas.height) { pdf.addPage() } // 如果后面还有内容，添加一个空页
+    //         // delete page;
+    //     }
+    // })
+
   }
 
   return (

@@ -1,4 +1,6 @@
 {
+    "ipmi": "IPMI",
+    "snmp": "SNMP",
     "bytes_recv": "BytesRecv",
     "InType8": "Intype8",
     "load1": "Load1",

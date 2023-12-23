@@ -42,3 +42,13 @@ export const apiGetPluginResp = (params) => {
         }
     })
 }
+
+export const apiTestPlugin = (params) => {
+    return postRequest('/plugInfo/selector', params).then(resp => {
+        if (resp.code == 200) {
+            return resp.data;
+        } else {
+            console.log(resp.code + ":" + resp.message);
+        }
+    })
+}

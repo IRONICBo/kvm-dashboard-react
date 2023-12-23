@@ -1,4 +1,4 @@
-import {getRequest, postRequest} from "../utils/axios";
+import {getRequest, postFormUrlencodedRequest, postRequest} from "../utils/axios";
 import {message} from "antd";
 
 
@@ -24,6 +24,7 @@ export const apiDeleteHost = (hostId) => {
         return resp.code;
     })
 }
+
 export const apiAddHost = (data) => {
     return postRequest('/manage/hostInfo/create', data).then(resp => {
         if (resp.code == 200) {
@@ -35,8 +36,30 @@ export const apiAddHost = (data) => {
     })
 }
 
+export const apiStopHost = (data) => {
+    return getRequest('/manage/hostInfo/stop?hostUuid='+data).then(resp => {
+        if (resp.code == 200) {
+            message.success("宿主机停用成功！");
+        } else {
+            message.error(resp.code + ":" + resp.message);
+        }
+        return resp.code;
+    })
+}
+
+export const apiStartHost = (data) => {
+    return getRequest('/manage/hostInfo/start?hostUuid='+data).then(resp => {
+        if (resp.code == 200) {
+            message.success("宿主机启用成功！");
+        } else {
+            message.error(resp.code + ":" + resp.message);
+        }
+        return resp.code;
+    })
+}
+
 export const apiUpdateHost = (data) => {
-    return postRequest('/manage/hostInfo/updateBasic', data).then(resp => {
+    return postFormUrlencodedRequest('/manage/hostInfo/updateBasic', data).then(resp => {
         if (resp.code == 200) {
             message.success("宿主机信息修改成功！");
         } else {
@@ -61,6 +84,61 @@ export const apiGetSimpleHostList = () => {
     return getRequest('/manage/hostInfo/queryAll').then(resp => {
         if (resp.code == 200) {
             message.success("获取配置信息成功");
+            return resp.data;
+        } else {
+            message.error(resp.code + ":" + resp.message);
+        }
+    })
+}
+
+export const apiGetRecommendHost = () => {
+    return getRequest('/manage/hostInfo/getBestHealthHostl').then(resp => {
+        if (resp.code == 200) {
+            message.success("获取推荐成功");
+            return resp.data;
+        } else {
+            message.error(resp.code + ":" + resp.message);
+        }
+    })
+}
+
+export const apiGetHostCPUAvailable = (hostUuid) => {
+    return getRequest('/manage/hostInfo/getHostAllCpuAvailableRate?hostUuid='+hostUuid).then(resp => {
+        if (resp.code == 200) {
+            message.success("查询物理机CPU空闲率");
+            return resp.data;
+        } else {
+            message.error(resp.code + ":" + resp.message);
+        }
+    })
+}
+
+export const apiGetHostCPUUsed = (hostUuid) => {
+    return getRequest('/manage/hostInfo/getHostAllCpuUsedRate?hostUuid='+hostUuid).then(resp => {
+        if (resp.code == 200) {
+            message.success("查询物理机CPU使用率");
+            return resp.data;
+        } else {
+            message.error(resp.code + ":" + resp.message);
+        }
+    })
+}
+
+export const apiGetMemUsedBytes = (hostUuid) => {
+    return getRequest('/manage/hostInfo/getHostMemoryUsedBytes?hostUuid='+hostUuid).then(resp => {
+        if (resp.code == 200) {
+            message.success("查询物理机CPU空闲率");
+            return resp.data;
+        } else {
+            message.error(resp.code + ":" + resp.message);
+        }
+    })
+}
+
+export const apiGetMemUsedRate = (hostUuid) => {
+    return getRequest('/manage/hostInfo/getMemoryUsedInPercent?hostUuid='+hostUuid).then(resp => {
+        if (resp.code == 200) {
+            message.success("查询物理机CPU使用率");
             return resp.data;
         } else {
             message.error(resp.code + ":" + resp.message);

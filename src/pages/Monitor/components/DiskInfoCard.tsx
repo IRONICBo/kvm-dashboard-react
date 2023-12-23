@@ -195,7 +195,7 @@ const DiskLoadStatCard: React.FC = () => {
 
   return (
     <>
-      <Row>
+      <Row className='for-export-word'>
         <Col span={24}>
           <Line {...config} data={diskPercentStat} />
         </Col>
@@ -714,7 +714,7 @@ const DiskTimeStatCard: React.FC = () => {
 
   return (
     <>
-      <Row gutter={0} style={{ marginBottom: '20px' }}>
+      <Row className='for-export-word' gutter={0} style={{ marginBottom: '20px' }}>
         <Col
           className="gutter-row"
           span={12}
@@ -739,6 +739,7 @@ const DiskTimeStatCard: React.FC = () => {
         </Col>
       </Row>
       <Line
+        className='for-export-word'
         {...config}
         data={chartList}
         onReady={(plot) => {

@@ -378,7 +378,7 @@ const CPUStatCard: React.FC = () => {
 
   return (
     <>
-      <Row gutter={0} style={{ marginBottom: '20px' }}>
+      <Row className='for-export-word' gutter={0} style={{ marginBottom: '20px' }}>
         <Col
           className="gutter-row"
           span={16}
@@ -412,7 +412,7 @@ const CPUStatCard: React.FC = () => {
           </Radio.Group>
         </Col>
       </Row>
-      <Row gutter={0} style={{ marginBottom: '20px' }}>
+      <Row className='for-export-word' gutter={0} style={{ marginBottom: '20px' }}>
         <Col className="gutter-row" span={16}>
           监测区间：
           <RangePicker showTime onChange={handleRangeTimeChange} />
@@ -432,7 +432,7 @@ const CPUStatCard: React.FC = () => {
           </Radio.Group>
         </Col>
       </Row>
-      <Line {...config} data={chartList} />
+      <Line className='for-export-word' {...config} data={chartList} />
       <Button 
                 type="primary"
                 style={{
@@ -729,7 +729,7 @@ const CPUTimeStatCard: React.FC = () => {
 
   return (
     <>
-      <Row gutter={0} style={{ marginBottom: '20px' }}>
+      <Row className='for-export-word' gutter={0} style={{ marginBottom: '20px' }}>
         <Col
           className="gutter-row"
           span={12}
@@ -754,6 +754,7 @@ const CPUTimeStatCard: React.FC = () => {
         </Col>
       </Row>
       <Line
+        className='for-export-word'
         {...config}
         data={chartList}
         onReady={(plot) => {
@@ -945,13 +946,13 @@ const CPULoadStatCard: React.FC = () => {
   return (
     <>
       <Row>
-        <Col span={12}>
+        <Col className='for-export-word' span={12}>
           处理器占用
           <div style={{ marginBottom: '10px' }}></div>
           <Line {...config} data={cpuPercentStat} />
           {/* <Heatmap {...heatmapConfig} data={cpuPercentStat} /> */}
         </Col>
-        <Col span={12}>
+        <Col className='for-export-word' span={12}>
           处理器负载
           <Line {...config} data={cpuLoadStat} />
         </Col>

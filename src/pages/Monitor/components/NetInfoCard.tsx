@@ -306,7 +306,7 @@ const NetIOCard: React.FC = () => {
 
   return (
     <>
-      <Row>
+      <Row className='for-export-word'>
         <Col span={12}>
           网卡发送字节流量
           <Line {...config} data={ioBytesSendStat} />
@@ -316,7 +316,7 @@ const NetIOCard: React.FC = () => {
           <Line {...config} data={ioBytesRecvStat} />
         </Col>
       </Row>
-      <Row style={{ marginTop: '50px' }}>
+      <Row className='for-export-word' style={{ marginTop: '50px' }}>
         <Col span={12}>
           网卡发送包流量
           <Line {...config} data={ioPacketsSendStat} />
@@ -493,7 +493,7 @@ const NetStatCard: React.FC = () => {
 
   return (
     <>
-      <Row gutter={0} style={{ marginBottom: '20px' }}>
+      <Row className='for-export-word' gutter={0} style={{ marginBottom: '20px' }}>
         <Col
           className="gutter-row"
           span={16}
@@ -843,7 +843,7 @@ const NetConnStatCard: React.FC = () => {
 
   return (
     <>
-      <Row gutter={0} style={{ marginBottom: '20px' }}>
+      <Row className='for-export-word' gutter={0} style={{ marginBottom: '20px' }}>
         <Col
           className="gutter-row"
           span={12}
@@ -869,6 +869,7 @@ const NetConnStatCard: React.FC = () => {
       </Row>
       <Line
         {...config}
+        className='for-export-word'
         data={chartList}
         onReady={(plot) => {
           PlotMaps.line = plot;

@@ -14,7 +14,7 @@ interface DataType {
 }
 
 const SystemManagePage: React.FC = () => {
-    const columns: ColumnsType<DataType> = [
+    const dbColumns: ColumnsType<DataType> = [
         {
             title: '系统配置名',
             dataIndex: 'key',
@@ -46,6 +46,87 @@ const SystemManagePage: React.FC = () => {
             render: (_, record) =>
                 <Space>
                     <Button size={"small"} shape={"round"} type="dashed" onClick={() => showUpdateModal(record)}>编辑</Button>
+                </Space>
+        }
+    ];
+
+    const columns: ColumnsType<DataType> = [
+        {
+            title: '系统配置索引',
+            dataIndex: 'configZzid',
+            ellipsis: {
+                showTitle: false,
+            },
+            width: 150,
+            fixed: "left",
+        },
+        {
+            title: '系统配置名',
+            dataIndex: 'configKey',
+            ellipsis: {
+                showTitle: false,
+            },
+            width: 300,
+            fixed: "left",
+        },
+        {
+            title: '系统配置值',
+            dataIndex: 'configValue',
+            ellipsis: {
+                showTitle: false,
+            },
+            width: 300,
+            render: (configValue) => (
+                <Tooltip placement="topLeft" title={configValue}>
+                    {configValue}
+                </Tooltip>
+            ),
+        },
+        {
+            title: '系统配置描述',
+            dataIndex: 'configDescription',
+            ellipsis: {
+                showTitle: false,
+            },
+            width: 300,
+            render: (configDescription) => (
+                <Tooltip placement="topLeft" title={configDescription}>
+                    {configDescription}
+                </Tooltip>
+            ),
+        },
+        {
+            title: '系统配置类型',
+            dataIndex: 'configType',
+            ellipsis: {
+                showTitle: false,
+            },
+            width: 150,
+        },
+        {
+            title: '系统配置时间',
+            dataIndex: 'configUpdateTime',
+            ellipsis: {
+                showTitle: false,
+            },
+            width: 150,
+        },
+        {
+            title: '系统配置环境',
+            dataIndex: 'configEnv',
+            ellipsis: {
+                showTitle: false,
+            },
+            width: 150,
+        },
+        {
+            title: '操作',
+            dataIndex: 'operation',
+            fixed: 'right',
+            width: 100,
+            render: (_, record) =>
+                <Space>
+                    <Button size={"small"} shape={"round"} type="dashed" onClick={() => showSysUpdateModal(record)}>编辑</Button>
                 </Space>
         }
     ];
@@ -100,6 +181,13 @@ const SystemManagePage: React.FC = () => {
         updateFormInstance.setFieldsValue({
             key: record.key,
             value: record.value,
+        });
+    }
+    const showSysUpdateModal = (record: DataType) => {
+        setUpdateModalOpen(true);
+        updateFormInstance.setFieldsValue({
+            key: record.configKey,
+            value: record.configValue,
         });
     }
     // 修改系统配置信息
@@ -243,7 +331,7 @@ const SystemManagePage: React.FC = () => {
                         "paddingTop": 20
                     }} title="数据持久化配置" column={2} layout="vertical" />
             <Table style={{marginTop: 15}} 
-                    columns={columns} 
+                    columns={dbColumns} 
                     dataSource={influxSecond}
                     rowKey={"key"}
                     pagination={false}

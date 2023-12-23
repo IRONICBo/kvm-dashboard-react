@@ -5,7 +5,8 @@ export const layout: RunTimeLayoutConfig = (initialState) => {
     // 常用属性
     title: '虚拟机运维平台',
     logo: 'https://img.alicdn.com/tfs/TB1YHEpwUT1gK0jSZFhXXaAtVXa-28-27.svg',
-
+    contentStyle: {
+    },
     // 默认布局调整
     // rightContentRender: () => <RightContent />,
     // footerRender: () => <Footer />,

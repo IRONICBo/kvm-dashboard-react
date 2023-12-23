@@ -223,7 +223,7 @@ const MemStatCard: React.FC = () => {
 
   return (
     <>
-      <Row gutter={0} style={{ marginBottom: '20px' }}>
+      <Row className='for-export-word' gutter={0} style={{ marginBottom: '20px' }}>
         <Col
           className="gutter-row"
           span={16}
@@ -257,7 +257,7 @@ const MemStatCard: React.FC = () => {
           </Radio.Group>
         </Col>
       </Row>
-      <Row gutter={0} style={{ marginBottom: '20px' }}>
+      <Row className='for-export-word' gutter={0} style={{ marginBottom: '20px' }}>
         <Col className="gutter-row" span={16}>
           监测区间：
           <RangePicker showTime onChange={handleRangeTimeChange} />
@@ -277,7 +277,7 @@ const MemStatCard: React.FC = () => {
           </Radio.Group>
         </Col>
       </Row>
-      <Line {...config} data={chartList} />
+      <Line className='for-export-word' {...config} data={chartList} />
       <Button 
           type="primary"
           style={{
@@ -423,7 +423,7 @@ const MemLoadStatCard: React.FC = () => {
 
   return (
     <>
-      <Row>
+      <Row className='for-export-word'> 
         <Col span={12}>
           虚拟内存占用百分比
           <Line {...config} data={memPercentStat} />

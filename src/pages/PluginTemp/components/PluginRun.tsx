@@ -6,7 +6,7 @@ import { ProDescriptions } from '@ant-design/pro-components';
 import type { UploadProps } from 'antd';
 import { Button, Form, Input, Select, Space, message, Empty, Spin } from 'antd';
 import React, { useEffect, useState } from 'react';
-import { apiGetPluginInfo, apiRunPlugin, apiGetPluginResp, apiTestPlugin } from '@/api/Plugin';
+import { apiGetPluginInfo, apiRunPlugin, apiGetPluginResp } from '@/api/Plugin';
 import { apiQueryVmList } from '@/api/VmManage';
 
 const normFile = (e: any) => {
@@ -28,63 +28,26 @@ const PluginRun: React.FC<HostIdProps> = (props) => {
 
   const onFinish = (values: any) => {
     console.log('Received values of form: ', values);
-
-    let data = {};
-    switch (selectedMetric) {
-      case 'ping':
-      data = {
-        "host": values.host,
-        "count": values.count,
-        "size": values.size,
-        "interval": values.interval,
-      }
-      break;
-      case 'fio':
-      data = {
-        "dir": values.dir,
-        "batch": values.batch,
-        "size": values.size,
-      }
-      break;
-      case 'dbtest':
-      data = {
-        "host": values.host,
-        "port": values.port,
-        "username": values.username,
-        "password": values.password,
-        "count": values.count,
-      }
-      break;
-      case 'ptp4l':
-      data = {
-        "interface": values.interface,
-      }
-      break;
-    }
-
     // 上传文件
     const params = {
-      "uuid": values.node,
-      "type": selectedMetric,
-      "paramJson": data,
+      "plugId": selectedMetric,
+      "paramJson": JSON.stringify(values.params),
     }
-    console.log('type', selectedMetric);
-    console.log('uuid', values.node);
-    console.log('paramJson', data);
-    apiTestPlugin(params).then((res) => {
+    console.log('plugId', selectedMetric);
+    console.log('paramJson', JSON.stringify(values.params));
+    apiRunPlugin(params).then((res) => {
       console.log('apiRunPlugin', res);
       // 获取结果
-      if (res != undefined) {
-        setPluginResult(res);
-      } else {
-        message.error('插件运行失败');
-      }
+      const res2 = apiGetPluginResp(res).then((res2) => {
+        console.log('apiGetPluginResp', res2);
+        setPluginResult(res2);
+      });
     });
+
   };
 
   const { Option } = Select;
   let [vmList, setVmList] = useState([]);
-  let [fields, setFields] = useState([]);
 
   const DraggerProps: UploadProps = {
     name: 'file',
@@ -108,33 +71,8 @@ const PluginRun: React.FC<HostIdProps> = (props) => {
 
   const [form] = Form.useForm();
   const onNodeChange = (value: string) => {
-    // {
-    //   value: "ping",
-    //   label: "网络时延"
-    // },
-    // {
-    //   value: "fio",
-    //   label: "存储性能"
-    // },
-    // {
-    //   value: "dbtest",
-    //   label: "数据库性能测试"
-    // },
-    // {
-    //   value: "ptp4l",
-    //   label: "对时精度"
-    // },
     switch (value) {
-      case 'ping':
-        form.setFieldsValue({ note: 'vm1' });
-        break;
-      case 'fio':
-        form.setFieldsValue({ note: 'vm1' });
-        break;
-      case 'dbtest':
-        form.setFieldsValue({ note: 'vm1' });
-        break;
-      case 'ptp4l':
+      case 'vm1':
         form.setFieldsValue({ note: 'vm1' });
         break;
     }
@@ -154,43 +92,40 @@ const PluginRun: React.FC<HostIdProps> = (props) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-          apiQueryVmList().then(resp => {
-            if (resp != null) {
-                const transformedData = [];
-                resp.forEach(element => {
-                console.log("transformedData", element)
-                    transformedData.push(
-                        {
-                            "label": element.vmName,
-                            "value": element.vmUuid,
-                        }
-                    )
-                });
-                // let [vmList, setVmList] = useState<{ key: any; value: any; }[]>([]);
-                console.log("transformedData", transformedData)
-                setVmList(transformedData);
-            }
-        })
-        console.log("setVmList", vmList);
+        apiQueryVmList().then(resp => {
+          if (resp != null) {
+              const transformedData = [];
+              resp.forEach(element => {
+              console.log("transformedData", element)
+                  transformedData.push(
+                      {
+                          "label": element.vmName,
+                          "value": element.vmUuid,
+                      }
+                  )
+              });
+              // let [vmList, setVmList] = useState<{ key: any; value: any; }[]>([]);
+              console.log("transformedData", transformedData)
+              setVmList(transformedData);
+          }
+      })
+      console.log("setVmList", vmList);
 
-        const tempMetricList = [
-          {
-            value: "ping",
-            label: "网络时延"
-          },
-          {
-            value: "fio",
-            label: "存储性能"
-          },
-          {
-            value: "dbtest",
-            label: "数据库性能测试"
-          },
-          {
-            value: "ptp4l",
-            label: "对时精度"
-          },
-        ]
+        let res = await apiGetPluginInfo();
+        console.log('apiGetPluginInfo : ', res);
+
+        const deletedIndex = res.indexOf('net_stat.connection_stats');
+        if (deletedIndex > -1) {
+          res.splice(deletedIndex, 1);
+        }
+
+        console.log('res', res);
+        const tempMetricList = res.map((item) => {
+          return {
+            value: item.plugZzid,
+            label: item.plugName,
+          };
+        });
         setMetricList(tempMetricList);
         // set default metric
         setSelectedMetric(tempMetricList[0].value);
@@ -238,69 +173,6 @@ const PluginRun: React.FC<HostIdProps> = (props) => {
             options={metricList}
           />
         </Form.Item>
-        {
-            selectedMetric == 'ping'&& (
-              <>
-                <Form.Item name="host" label="主机地址" rules={[{ required: true }]}>
-                  <Input />
-                </Form.Item>
-                <Form.Item name="count" label="报文次数" rules={[{ required: true }]}>
-                  <Input />
-                </Form.Item>
-                <Form.Item name="size" label="报文个数" rules={[{ required: true }]}>
-                  <Input />
-                </Form.Item>
-                <Form.Item name="interval" label="报文间隔" rules={[{ required: true }]}>
-                  <Input />
-                </Form.Item>
-              </>
-            )
-        }
-        {
-            selectedMetric == 'fio'&& (
-              <>
-                <Form.Item name="dir" label="挂载地址" rules={[{ required: true }]}>
-                  <Input />
-                </Form.Item>
-                <Form.Item name="batch" label="文件块大小" rules={[{ required: true }]}>
-                  <Input />
-                </Form.Item>
-                <Form.Item name="size" label="文件总大小" rules={[{ required: true }]}>
-                  <Input />
-                </Form.Item>
-              </>
-            )
-        }
-        {
-            selectedMetric == 'dbtest' && (
-              <>
-                <Form.Item name="host" label="数据库地址" rules={[{ required: true }]}>
-                  <Input />
-                </Form.Item>
-                <Form.Item name="port" label="数据库端口" rules={[{ required: true }]}>
-                  <Input />
-                </Form.Item>
-                <Form.Item name="username" label="用户名" rules={[{ required: true }]}>
-                  <Input />
-                </Form.Item>
-                <Form.Item name="password" label="密码" rules={[{ required: true }]}>
-                  <Input />
-                </Form.Item>
-                <Form.Item name="count" label="读/写/并发访问量" rules={[{ required: true }]}>
-                  <Input />
-                </Form.Item>
-              </>
-            )
-        }
-        {
-            selectedMetric == 'ptp4l'&& (
-              <>
-                <Form.Item name="interface" label="网络接口" rules={[{ required: true }]}>
-                  <Input />
-                </Form.Item>
-              </>
-            )
-        }
         <Form.List name="params">
           {(fields, { add, remove }) => (
             <>
