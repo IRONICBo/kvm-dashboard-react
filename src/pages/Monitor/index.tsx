@@ -122,11 +122,11 @@ const Welcome: React.FC = () => {
     };
     websocket_recommend.onerror = function () {
       console.log('websocket error');
-      api.error({
-        message: '报警接口连接失败',
-        description: '',
-        duration: 2,
-      });
+      // api.error({
+      //   message: '报警接口连接失败',
+      //   description: '',
+      //   duration: 2,
+      // });
     };
 
     const websocket = new WebSocket(
@@ -151,11 +151,11 @@ const Welcome: React.FC = () => {
     };
     websocket.onerror = function () {
       console.log('websocket error');
-      api.error({
-        message: '报警接口连接失败',
-        description: '',
-        duration: 2,
-      });
+      // api.error({
+      //   message: '报警接口连接失败',
+      //   description: '',
+      //   duration: 2,
+      // });
     };
   }, [UUID]);
 

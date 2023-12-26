@@ -34,9 +34,9 @@ const PluginRun: React.FC<HostIdProps> = (props) => {
       case 'ping':
       data = {
         "host": values.host,
-        "count": values.count,
-        "size": values.size,
-        "interval": values.interval,
+        "count": parseInt(values.count),
+        "size": parseInt(values.size),
+        "interval": parseInt(values.interval),
       }
       break;
       case 'fio':
@@ -49,10 +49,10 @@ const PluginRun: React.FC<HostIdProps> = (props) => {
       case 'dbtest':
       data = {
         "host": values.host,
-        "port": values.port,
+        "port": parseInt(values.port),
         "username": values.username,
         "password": values.password,
-        "count": values.count,
+        "count": parseInt(values.count),
       }
       break;
       case 'ptp4l':
@@ -66,7 +66,7 @@ const PluginRun: React.FC<HostIdProps> = (props) => {
     const params = {
       "uuid": values.node,
       "type": selectedMetric,
-      "paramJson": data,
+      "paramJson": JSON.stringify(data),
     }
     console.log('type', selectedMetric);
     console.log('uuid', values.node);
