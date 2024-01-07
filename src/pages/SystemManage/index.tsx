@@ -3,7 +3,7 @@ import {PageContainer} from "@ant-design/pro-components";
 import {Button, Form, Drawer, Input, Modal, Popconfirm, Space, Table, Tooltip, Tag, notification} from "antd";
 import { ProDescriptions } from '@ant-design/pro-components';
 import {ColumnsType} from "antd/es/table";
-import {apiSetRetentionTime, apiGetRetentionTime, apiGetSystemConfig, apiSetSystemConfig} from "@/api/System";
+import {apiSetRetentionTime, apiGetRetentionTime, apiGetSystemConfig, apiSetSystemConfig, apiSetBackup, apiQueryBackup, apiDeleteBackup, apiReverBackup } from "@/api/System";
 import { history } from 'umi';
 import { RedoOutlined, PlusOutlined, PlayCircleOutlined, IssuesCloseOutlined} from '@ant-design/icons';
 
@@ -14,6 +14,80 @@ interface DataType {
 }
 
 const SystemManagePage: React.FC = () => {
+    const backupColumns: ColumnsType<DataType> = [
+        {
+            title: '系统备份索引',
+            dataIndex: 'backupZzid',
+            ellipsis: {
+                showTitle: false,
+            },
+            width: 150,
+            fixed: "left",
+        },
+        {
+            title: '系统备份名',
+            dataIndex: 'backupName',
+            ellipsis: {
+                showTitle: false,
+            },
+            width: 300,
+            fixed: "left",
+        },
+        {
+            title: '系统备份路径',
+            dataIndex: 'backupPath',
+            ellipsis: {
+                showTitle: false,
+            },
+            width: 300,
+            render: (backupPath) => (
+                <Tooltip placement="topLeft" title={backupPath}>
+                    {backupPath}
+                </Tooltip>
+            ),
+        },
+        {
+            title: '系统备份类型',
+            dataIndex: 'backupType',
+            ellipsis: {
+                showTitle: false,
+            },
+            width: 300,
+            render: (backupType) => (
+                <Tooltip placement="topLeft" title={backupType}>
+                    {backupType}
+                </Tooltip>
+            ),
+        },
+        {
+            title: '系统备份时间',
+            dataIndex: 'backupTime',
+            ellipsis: {
+                showTitle: false,
+            },
+            width: 300,
+            render: (backupTime) => (
+                <Tooltip placement="topLeft" title={backupTime}>
+                    {backupTime}
+                </Tooltip>
+            ),
+        },
+        {
+            title: '操作',
+            dataIndex: 'operation',
+            fixed: 'right',
+            width: 200,
+            render: (_, record) =>
+                <Space>
+                    <Popconfirm title="Sure to revert?" onConfirm={() => apiReverBackup({"id": record.backupZzid})}>
+                        <Button size={"small"} shape={"round"} danger={false} type="dashed">恢复</Button>
+                    </Popconfirm>
+                    <Popconfirm title="Sure to delete?" onConfirm={() => apiDeleteBackup([record.backupZzid])}>
+                        <Button size={"small"} shape={"round"} danger={true} type="dashed">删除</Button>
+                    </Popconfirm>
+                </Space>
+        }
+    ]    
     const dbColumns: ColumnsType<DataType> = [
         {
             title: '系统配置名',
@@ -45,7 +119,9 @@ const SystemManagePage: React.FC = () => {
             width: 50,
             render: (_, record) =>
                 <Space>
-                    <Button size={"small"} shape={"round"} type="dashed" onClick={() => showUpdateModal(record)}>编辑</Button>
+                    <Popconfirm title="Sure to delete?" onConfirm={() => deleteHost(record.hostUuid)}>
+                        <Button size={"small"} shape={"round"} danger={true} type="dashed">删除</Button>
+                    </Popconfirm>
                 </Space>
         }
     ];
@@ -143,6 +219,7 @@ const SystemManagePage: React.FC = () => {
     let [addFormInstance] = Form.useForm();
     let [updateFormInstance] = Form.useForm();
     let [influxSecond, setInfluxSecond] = useState([{'key': 'db', 'value': '0'}]);
+    let [backupData, setBackupData] = useState([]);
     const [apiNotification, contextHolder] = notification.useNotification();
 
     // 钩子，启动时获取系统配置列表
@@ -156,6 +233,11 @@ const SystemManagePage: React.FC = () => {
             console.log()
             if (resp != null) {
                 setInfluxSecond([{'key': 'db', 'value': resp}]);
+            }
+        })
+        apiQueryBackup().then(resp => {
+            if (resp != null) {
+                setBackupData(resp);
             }
         })
     }, [])
@@ -333,6 +415,51 @@ const SystemManagePage: React.FC = () => {
             <Table style={{marginTop: 15}} 
                     columns={dbColumns} 
                     dataSource={influxSecond}
+                    rowKey={"key"}
+                    pagination={false}
+                    scroll={{x: 1000}} />
+
+            <ProDescriptions
+                    style={{
+                        "paddingTop": 20
+                    }} title="系统备份" column={2} layout="vertical" />
+            <Space size={"middle"}>
+                <Button type="primary"
+                    size="large"
+                        onClick={() => {
+                            // 1:全量备份、2:增量备份
+                            apiSetBackup({"type": 1}).then(resp => {
+                                if (resp != null) {
+                                    apiQueryBackup().then(resp => {
+                                        if (resp != null) {
+                                            setBackupData(resp);
+                                        }
+                                    })
+                                }
+                            })
+                        }}>
+                    全量备份
+                </Button>
+                <Button type="primary"
+                    size="large"
+                        onClick={() => {
+                            // 1:全量备份、2:增量备份
+                            apiSetBackup({"type": 2}).then(resp => {
+                                if (resp != null) {
+                                    apiQueryBackup().then(resp => {
+                                        if (resp != null) {
+                                            setBackupData(resp);
+                                        }
+                                    })
+                                }
+                            })
+                        }}>
+                    增量备份
+                </Button>
+            </Space>
+            <Table style={{marginTop: 15}} 
+                    columns={backupColumns} 
+                    dataSource={backupData}
                     rowKey={"key"}
                     pagination={false}
                     scroll={{x: 1000}} />

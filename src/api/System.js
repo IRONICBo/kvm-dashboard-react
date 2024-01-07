@@ -44,3 +44,50 @@ export const apiSetSystemConfig = (key, value) => {
         }
     })
 }
+
+// System backup
+export const apiSetBackup = (data) => {
+    // data = {type: 1, 2}
+    return postFormRequest('/web/backupInfo/backup', data).then(resp => {
+        if (resp.code == 200) {
+            message.success("系统备份成功！");
+            return resp.data;
+        } else {
+            message.error(resp.code + ":" + resp.message);
+        }
+    })
+}
+
+export const apiQueryBackup = () => {
+    return getRequest('/web/backupInfo/queryAll').then(resp => {
+        if (resp.code == 200) {
+            message.success("系统备份查询成功！");
+            return resp.data;
+        } else {
+            message.error(resp.code + ":" + resp.message);
+        }
+    })
+}
+
+export const apiDeleteBackup = (ids) => {
+    return getRequest('/web/backupInfo/queryAll?ids=' + ids).then(resp => {
+        if (resp.code == 200) {
+            message.success("系统备份删除成功");
+            return resp.data;
+        } else {
+            message.error(resp.code + ":" + resp.message);
+        }
+    })
+}
+
+export const apiReverBackup = (data) => {
+    // data = {id: 1}
+    return postFormRequest('/web/backupInfo/restore', data).then(resp => {
+        if (resp.code == 200) {
+            message.success("系统恢复成功！");
+            return resp.data;
+        } else {
+            message.error(resp.code + ":" + resp.message);
+        }
+    })
+}

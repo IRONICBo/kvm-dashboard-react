@@ -145,7 +145,7 @@ const VmVolumePage: React.FC = () => {
                 resp.forEach(element => {
                 console.log("transformedData", element)
                     transformedData.push(
-                        {
+                        {                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 
                             "label": element.vmName,
                             "value": element.vmUuid,
                         }

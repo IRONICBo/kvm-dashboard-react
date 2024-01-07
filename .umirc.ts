@@ -93,6 +93,12 @@ export default defineConfig({
             component: './Plugin',
         },
         {
+            name: '服务监控',
+            path: '/service',
+            icon: 'T',
+            component: './ServiceManage',
+        },
+        {
             name: '系统管理',
             path: '/system/manage',
             icon: 'S',
