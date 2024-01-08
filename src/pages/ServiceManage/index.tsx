@@ -3,10 +3,20 @@ import {PageContainer} from "@ant-design/pro-components";
 import {Button, Form, Drawer, Input, Select, Modal, Popconfirm, Space, Table, Tooltip, Tag, notification, Radio} from "antd";
 import { ProDescriptions } from '@ant-design/pro-components';
 import {ColumnsType} from "antd/es/table";
-import {apiAddServiceMonitor, apiDeleteServiceMonitor, apiReplaceService, apiGetServiceList, apiGetAllServiceList, apiGetRunningServiceList, apiUpdateServiceMonitor } from "@/api/Service";
+import { apiAddServiceMonitor,
+    apiDeleteServiceMonitor,
+    apiReplaceService,
+    apiGetServiceList,
+    apiGetAllServiceList,
+    apiGetRunningServiceList,
+    apiUpdateServiceMonitor,
+    apiStartServiceMonitor,
+    apiStopServiceMonitor
+} from "@/api/Service";
 import { history } from 'umi';
 import { RedoOutlined, PlusOutlined, PlayCircleOutlined, IssuesCloseOutlined} from '@ant-design/icons';
 import { apiQueryVmList } from '@/api/VmManage';
+import { apiRefreshHostList } from '@/api/HostManage';
 
 interface DataType {
     key: number,
@@ -33,7 +43,7 @@ const ServiceManagePage: React.FC = () => {
             width: 100,
             fixed: "left",
             render: (serviceMachineType) => (
-                (serviceMachineType == 1) ? <Tag color="green">虚拟机</Tag> : <Tag color="red">物理机</Tag>
+                (serviceMachineType == 1) ? <Tag color="green">物理机</Tag> : <Tag color="red">虚拟机</Tag>
             ),
         },
         {
@@ -130,8 +140,19 @@ const ServiceManagePage: React.FC = () => {
                 showTitle: false,
             },
             width: 300,
-            render: (serviceHealthLimitScore) => (
-                (serviceHealthLimitScore == 1) ? <Tag color="green">是</Tag> : <Tag color="red">否</Tag>
+            render: (serviceAutoType) => (
+                (serviceAutoType == 2) ? <Tag color="green">是</Tag> : <Tag color="red">否</Tag>
+            ),
+        },
+        {
+            title: '服务监测状态',
+            dataIndex: 'serviceState',
+            ellipsis: {
+                showTitle: false,
+            },
+            width: 300,
+            render: (serviceState) => (
+                (serviceState == "stopped") ? <Tag color="red">停用</Tag> : <Tag color="green">启用</Tag>
             ),
         },
         {
@@ -146,17 +167,23 @@ const ServiceManagePage: React.FC = () => {
             title: '操作',
             dataIndex: 'operation',
             fixed: 'right',
-            width: 250,
+            width: 350,
             render: (_, record) =>
                 <Space>
-                    <Popconfirm title="Sure to delete?" onConfirm={() => apiDeleteServiceMonitor(record.serviceZzid)}>
-                        <Button size={"small"} shape={"round"} danger={true} type="dashed">删除</Button>
-                    </Popconfirm>
                     <Popconfirm title="Sure to update?" onConfirm={() => showUpdateModal(record)}>
                         <Button size={"small"} shape={"round"} danger={false} type="dashed">更新</Button>
                     </Popconfirm>
                     <Popconfirm title="Sure to replace?" onConfirm={() => showReplaceModal(record)}>
                         <Button size={"small"} shape={"round"} danger={false} type="dashed">替换</Button>
+                    </Popconfirm>
+                    <Popconfirm title="Sure to start?" onConfirm={() => apiStartServiceMonitor(record.serviceZzid)}>
+                        <Button size={"small"} shape={"round"} danger={false} type="dashed">启用</Button>
+                    </Popconfirm>
+                    <Popconfirm title="Sure to stop?" onConfirm={() => apiStopServiceMonitor(record.serviceZzid)}>
+                        <Button size={"small"} shape={"round"} danger={true} type="dashed">停用</Button>
+                    </Popconfirm>
+                    <Popconfirm title="Sure to delete?" onConfirm={() => apiDeleteServiceMonitor(record.serviceZzid)}>
+                        <Button size={"small"} shape={"round"} danger={true} type="dashed">删除</Button>
                     </Popconfirm>
                 </Space>
         }
@@ -167,6 +194,8 @@ const ServiceManagePage: React.FC = () => {
      * ----------------------------------------------------------------------------------------------------------------------------------------------------------------
      */
     let [data, setData] = useState([])
+    let [runningService, setRunningService] = useState([])
+    let [allService, setAllService] = useState([])
     let [selectData, setSelectData] = useState();
     let [addModalOpen, setAddModalOpen] = useState(false);
     let [updateModalOpen, setUpdateModalOpen] = useState(false);
@@ -179,9 +208,73 @@ const ServiceManagePage: React.FC = () => {
     let [backupData, setBackupData] = useState([]);
     const [apiNotification, contextHolder] = notification.useNotification();
     let [vmList, setVmList] = useState([]);
+    let [hostList, setHostList] = useState([]);
+    const Context = React.createContext({ name: 'Default' });
+
+    const handleVMListChange = (value: any) => {
+        apiGetRunningServiceList(1, value).then(resp => {
+            if (resp != null) {
+                console.log("apiGetRunningServiceList", resp)
+                const transformedData = [];
+                resp.forEach(element => {
+                console.log("transformedData", element)
+                    transformedData.push(
+                        {
+                            "label": element.serviceName.replace(/● /g, ""),
+                            "value": element.serviceName.replace(/● /g, ""),
+                        }
+                    )
+                });
+                // let [vmList, setVmList] = useState<{ key: any; value: any; }[]>([]);
+                setRunningService(transformedData);
+            }
+        })
+        apiGetAllServiceList(1, value).then(resp => {
+            if (resp != null) {
+                const transformedData = [];
+                resp.forEach(element => {
+                    console.log("transformedData", element)
+                    transformedData.push(
+                        {
+                            "label": element.serviceName.replace(/● /g, ""),
+                            "value": element.serviceName.replace(/● /g, ""),
+                        }
+                    )
+                });
+                setAllService(transformedData);
+            }
+        })
+    }
 
     // 钩子，启动时获取系统配置列表
     useEffect(() => {
+        const random = Math.random().toString(36).slice(-8);
+        const websocket_recommend = new WebSocket(
+          'ws://localhost:28080/api/websocket/resource/' +
+            random,
+        );
+        websocket_recommend.onopen = function () {
+          console.log('websocket open');
+        };
+        websocket_recommend.onmessage = function (msg) {
+          console.log("ws://localhost:28080/api/websocket/resource/", msg.data);
+          apiNotification.warning({
+            message: '推荐信息变更：',
+            description: msg.data,
+            duration: 2,
+          });
+        };
+        websocket_recommend.onclose = function () {
+          console.log('websocket closed');
+        };
+        websocket_recommend.onerror = function () {
+          console.log('websocket error');
+          // api.error({
+          //   message: '报警接口连接失败',
+          //   description: '',
+          //   duration: 2,
+          // });
+        };
         apiGetServiceList().then(resp => {
             if (resp != null) {
                 setData(resp);
@@ -205,6 +298,23 @@ const ServiceManagePage: React.FC = () => {
                   setVmList(transformedData);
               }
           })
+          apiRefreshHostList().then(resp => {
+            if (resp != null) {
+                const transformedData = [];
+                resp.forEach(element => {
+                console.log("transformedData", element)
+                    transformedData.push(
+                        {
+                            "label": element.hostName,
+                            "value": element.hostUuid,
+                        }
+                    )
+                });
+                // let [vmList, setVmList] = useState<{ key: any; value: any; }[]>([]);
+                console.log("transformedData", transformedData)
+                setHostList(transformedData);
+            }
+        })
           console.log("setVmList", vmList);
         } catch (error) {
             console.error('Error retrieving guest infos:', error);
@@ -366,6 +476,16 @@ const ServiceManagePage: React.FC = () => {
                         </Radio.Group>
                     </Form.Item>
                     <Form.Item
+                        label="服务节点类型"
+                        name="serviceMachineType"
+                        rules={[{ required: true, message: '请输入服务自动调整类型!' }]}
+                    >
+                        <Radio.Group>
+                            <Radio value={1}>物理机</Radio>
+                            <Radio value={2}>虚拟机</Radio>
+                        </Radio.Group>
+                    </Form.Item>
+                    <Form.Item
                         label="服务 CPU 上限占用率"
                         name="serviceCpuLimitRate"
                         rules={[{ required: true, message: '请输入服务 CPU 上限占用率!' }]}
@@ -391,14 +511,22 @@ const ServiceManagePage: React.FC = () => {
                         name="serviceName"
                         rules={[{ required: true, message: '请输入服务健康值分数下限值!' }]}
                     >
-                        <Input placeholder={"xxx"}/>
+                        <Select
+                            placeholder="选择一个服务"
+                            allowClear
+                            options={runningService}
+s                        />
                     </Form.Item>
                     <Form.Item
                         label="预备替换服务名称"
                         name="serviceReplaceName"
                         rules={[{ required: true, message: '请输入服务健康值分数下限值!' }]}
                     >
-                        <Input placeholder={"xxx"}/>
+                        <Select
+                            placeholder="选择一个服务"
+                            allowClear
+                            options={allService}
+                        />
                     </Form.Item>
                     <Form.Item
                         label="服务所属节点UUID"
@@ -408,7 +536,8 @@ const ServiceManagePage: React.FC = () => {
                         <Select
                             placeholder="选择一个节点"
                             allowClear
-                            options={vmList}
+                            options={hostList}
+                            onChange={handleVMListChange}
                         />
                     </Form.Item>
                 </Form>
@@ -480,7 +609,11 @@ const ServiceManagePage: React.FC = () => {
                         name="serviceReplaceName"
                         rules={[{ required: true, message: '请输入服务健康值分数下限值!' }]}
                     >
-                        <Input placeholder={"xxx"}/>
+                        <Select
+                            placeholder="选择一个服务"
+                            allowClear
+                            options={allService}
+                        />
                     </Form.Item>
                     <Form.Item
                         label="服务监控标识"
@@ -521,8 +654,8 @@ const ServiceManagePage: React.FC = () => {
                         rules={[{ required: true, message: '请输入服务所属节点类型!' }]}
                     >
                         <Radio.Group>
-                            <Radio value={1}>虚拟机</Radio>
-                            <Radio value={2}>物理机</Radio>
+                            <Radio value={1}>物理机</Radio>
+                            <Radio value={2}>虚拟机</Radio>
                         </Radio.Group>
                     </Form.Item>
                     <Form.Item
@@ -530,14 +663,22 @@ const ServiceManagePage: React.FC = () => {
                         name="serviceName"
                         rules={[{ required: true, message: '请输入服务健康值分数下限值!' }]}
                     >
-                        <Input placeholder={"xxx"}/>
+                        <Select
+                            placeholder="选择一个服务"
+                            allowClear
+                            options={allService}
+                        />
                     </Form.Item>
                     <Form.Item
                         label="预备替换服务名称"
                         name="serviceReplaceName"
                         rules={[{ required: true, message: '请输入服务健康值分数下限值!' }]}
                     >
-                        <Input placeholder={"xxx"}/>
+                        <Select
+                            placeholder="选择一个服务"
+                            allowClear
+                            options={allService}
+                        />
                     </Form.Item>
                     <Form.Item
                         label="服务监控标识"

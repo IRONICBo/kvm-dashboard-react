@@ -79,3 +79,25 @@ export const apiUpdateServiceMonitor = (data) => {
         }
     })
 }
+
+export const apiStartServiceMonitor = (id) => {
+    return getRequest('/monitor/serviceMonitor/start?id='+id).then(resp => {
+        if (resp.code == 200) {
+            message.success("启用服务监控成功！");
+            return resp.data;
+        } else {
+            message.error(resp.code + ":" + resp.message);
+        }
+    })
+}
+
+export const apiStopServiceMonitor = (id) => {
+    return getRequest('/monitor/serviceMonitor/stop?id='+id).then(resp => {
+        if (resp.code == 200) {
+            message.success("停用服务监控成功！");
+            return resp.data;
+        } else {
+            message.error(resp.code + ":" + resp.message);
+        }
+    })
+}
