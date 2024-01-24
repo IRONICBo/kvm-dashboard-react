@@ -96,11 +96,26 @@ const Welcome: React.FC = () => {
     setUUID(uuid);
   }, []);
 
+  // // 每隔5秒打印一次
+  // useEffect(() => {
+  //   if (UUID === '') {
+  //     return;
+  //   }
+  //   const interval = setInterval(() => {
+  //     api.error({
+  //       message: '配置推荐：',
+  //       description: '节点：' + UUID + '：' + 'CPU使用率过高',
+  //       duration: 2,
+  //     });
+  //   }, 5000);
+  //   return () => clearInterval(interval);
+  // }, [UUID]);
+
   useEffect(() => {
     if (UUID === '') {
       return;
     }
-    
+  
     const random = Math.random().toString(36).slice(-8);
     const websocket_recommend = new WebSocket(
       'ws://localhost:28080/websocket/resource/' +
