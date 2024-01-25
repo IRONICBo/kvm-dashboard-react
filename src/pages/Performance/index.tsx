@@ -47,7 +47,7 @@ const Performance: React.FC = () => {
     
     const random = Math.random().toString(36).slice(-8);
     const websocket = new WebSocket(
-      'ws://localhost:28080/api/websocket/alarm/' +
+      'ws://' + window.location.hostname + ':28080/api/websocket/alarm/' +
         UUID +
         '/' +
         random,
@@ -56,7 +56,7 @@ const Performance: React.FC = () => {
       console.log('websocket open');
     };
     websocket.onmessage = function (msg) {
-      console.log("ws://localhost:28080/api/websocket/alarm/", msg.data);
+      console.log('ws://' + window.location.hostname + ':28080/api/websocket/alarm/', msg.data);
       api.warning({
         message: '报警信息：'+msg.data,
         description: '节点：' + UUID + '：' + msg.data,

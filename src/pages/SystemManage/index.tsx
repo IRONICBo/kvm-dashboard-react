@@ -392,7 +392,7 @@ const SystemManagePage: React.FC = () => {
                     size="large"
                         icon={<IssuesCloseOutlined />}
                         onClick={() => {
-                            window.location.href = 'http://localhost:28080/api/plumelog/#/';
+                            window.location.href = 'http://' + window.location.hostname + ':28080/api/plumelog/#/';
                         }}>
                     查看日志
                 </Button>

@@ -614,14 +614,14 @@ const VmManagePage: React.FC = () => {
     useEffect(() => {      
         const random = Math.random().toString(36).slice(-8);
         const websocket_recommend = new WebSocket(
-          'ws://localhost:28080/websocket/resource/' +
+            'ws://' + window.location.hostname + ':28080/websocket/resource/' +
             random,
         );
         websocket_recommend.onopen = function () {
           console.log('websocket open');
         };
         websocket_recommend.onmessage = function (msg) {
-          console.log("ws://localhost:28080/api/websocket/resource/", msg.data);
+          console.log('ws://' + window.location.hostname + ':28080/api/websocket/resource/', msg.data);
           apiNotification.warning({
             message: '推荐信息变更：',
             description: '节点：' + msg.data,
@@ -1541,7 +1541,7 @@ const VmManagePage: React.FC = () => {
                         shape="round"
                         size="large"
                         style={{
-                            marginRight: "500px"
+                            marginRight: "300px"
                         }}
                         onClick={() => apiVmResume(selectedRowKeys).then(resp => {
                             if (resp != null) {

@@ -257,7 +257,7 @@ const ServiceManagePage: React.FC = () => {
           console.log('websocket open');
         };
         websocket_recommend.onmessage = function (msg) {
-          console.log("ws://localhost:28080/api/websocket/resource/", msg.data);
+          console.log('ws://' + window.location.hostname + ':28080/api/websocket/resource/', msg.data);
           apiNotification.warning({
             message: '推荐信息变更：',
             description: msg.data,

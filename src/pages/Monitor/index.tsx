@@ -118,14 +118,14 @@ const Welcome: React.FC = () => {
   
     const random = Math.random().toString(36).slice(-8);
     const websocket_recommend = new WebSocket(
-      'ws://localhost:28080/websocket/resource/' +
+      'ws://' + window.location.hostname + ':28080/websocket/resource/' +
         random,
     );
     websocket_recommend.onopen = function () {
       console.log('websocket open');
     };
     websocket_recommend.onmessage = function (msg) {
-      console.log("ws://localhost:28080/api/websocket/resource/", msg.data);
+      console.log('ws://' + window.location.hostname + ':28080/api/websocket/resource/', msg.data);
       api.warning({
         message: '推荐信息变更：',
         description: '节点：' + UUID + '：' + msg.data,
@@ -145,7 +145,7 @@ const Welcome: React.FC = () => {
     };
 
     const websocket = new WebSocket(
-      'ws://localhost:28080/api/websocket/alarm/' +
+      'ws://' + window.location.hostname + ':28080/api/websocket/alarm/' +
         UUID +
         '/' +
         random,
@@ -154,7 +154,7 @@ const Welcome: React.FC = () => {
       console.log('websocket open');
     };
     websocket.onmessage = function (msg) {
-      console.log("ws://localhost:28080/api/websocket/alarm/", msg.data);
+      console.log('ws://' + window.location.hostname + ':28080/api/websocket/alarm/', msg.data);
       api.warning({
         message: '报警信息：'+msg.data,
         description: '节点：' + UUID + '：' + msg.data,

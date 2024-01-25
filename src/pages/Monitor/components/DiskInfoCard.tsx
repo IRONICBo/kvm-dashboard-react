@@ -96,7 +96,7 @@ const DiskLoadStatCard: React.FC = () => {
 
   useEffect(() => {
     const websocket = new WebSocket(
-      'ws://localhost:28080/api/websocket/monitor/' +
+      'ws://' + window.location.hostname + ':28080/api/websocket/monitor/' +
         UUID +
         '/' +
         statType +

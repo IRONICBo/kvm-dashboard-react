@@ -11,7 +11,7 @@ axios.interceptors.response.use(success => {
 });
 
 
-let base = 'http://localhost:28080/api';
+let base = 'http://' + window.location.hostname + ':28080/api';
 
 // 传送form格式的post请求
 export const postFormRequest = (url, params) => {

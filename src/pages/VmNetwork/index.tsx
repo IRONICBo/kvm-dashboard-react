@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from "react";
 import {PageContainer} from "@ant-design/pro-components";
-import {Button, Form, Drawer, Input, Modal, Popconfirm, Space, Table, Tooltip, Tag} from "antd";
+import {Button, Radio, Form, Drawer, Input, Modal, Popconfirm, Space, Table, Tooltip, Tag} from "antd";
 import {ColumnsType} from "antd/es/table";
 import {apiQueryThreeNetworkInfoList, apiThreeNetworkDelete,apiThreeNetworkCreate} from "@/api/VmNetwork";
 import { history } from 'umi';
@@ -352,6 +352,18 @@ const VmNetworkPage: React.FC = () => {
                         rules={[{ required: true, message: '请输入三层网络 DHCP!' }]}
                     >
                         <Input placeholder={"示例: 192.168.0.1"}/>
+                    </Form.Item>
+                    
+                    <Form.Item
+                        label="三层网络分类"
+                        name="threeNetworkCategory"
+                        rules={[{ required: true, message: '请输入三层网络分类!' }]}
+                    >
+                        <Radio.Group>
+                            <Radio value="Public">公有</Radio>
+                            <Radio value="Private">私有</Radio>
+                            <Radio value="System">系统</Radio>
+                        </Radio.Group>
                     </Form.Item>
 
                     <Form.Item

@@ -49,7 +49,7 @@ const Performance: React.FC = () => {
     
     const random = Math.random().toString(36).slice(-8);
     const websocket = new WebSocket(
-      'ws://localhost:28080/api/websocket/alarm/' +
+      'ws://' + window.location.hostname + ':28080/api/websocket/alarm/' +
         UUID +
         '/' +
         random,
