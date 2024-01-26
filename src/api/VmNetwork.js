@@ -1,4 +1,4 @@
-import {getRequest, postRequest} from "../utils/axios";
+import {getRequest, postRequest, postFormRequest} from "../utils/axios";
 import {message} from "antd";
 
 export const apiQueryThreeNetworkInfoListPage = (pageCurrent, pageSize) => {
@@ -35,7 +35,7 @@ export const apiThreeNetworkCreate = (data) => {
 }
 
 export const apiThreeNetworkDelete = (threeNetworkUuid) => {
-    return postRequest('/manage/threeNetworkInfo/delete', threeNetworkUuid).then(resp => {
+    return postFormRequest('/manage/threeNetworkInfo/delete', threeNetworkUuid).then(resp => {
         if (resp.code == 200) {
             message.success("删除三层网络信息列表成功");
             return resp.data;

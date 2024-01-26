@@ -177,7 +177,7 @@ const VmNetworkPage: React.FC = () => {
             render: (_, record) =>
                 <Space>
                     {/* <Button size={"small"} shape={"round"} type="dashed" onClick={() => showUpdateModal(record)}>编辑</Button> */}
-                    <Popconfirm title="Sure to delete?" onConfirm={() => deleteHost(record.hostUuid)}>
+                    <Popconfirm title="Sure to delete?" onConfirm={() => deleteHost(record.threeNetworkUuid)}>
                         <Button size={"small"} shape={"round"} danger={true} type="dashed">删除</Button>
                     </Popconfirm>
                 </Space>
@@ -253,7 +253,7 @@ const VmNetworkPage: React.FC = () => {
     }
     // 删除三层网络
     const deleteHost = (hostId: string) => {
-        apiThreeNetworkDelete(hostId).then(respCode => {
+        apiThreeNetworkDelete({"threeNetworkUuid":hostId}).then(respCode => {
             // 如果三层网络删除成功，刷新列表
             if (respCode == 200) {
                 apiQueryThreeNetworkInfoList().then(resp => {

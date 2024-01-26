@@ -66,7 +66,7 @@ const PluginRun: React.FC<HostIdProps> = (props) => {
     const params = {
       "uuid": values.node,
       "type": selectedMetric,
-      "paramJson": JSON.stringify(data),
+      "paramsJson": data,
     }
     console.log('type', selectedMetric);
     console.log('uuid', values.node);

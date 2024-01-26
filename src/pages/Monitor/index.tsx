@@ -118,7 +118,7 @@ const Welcome: React.FC = () => {
   
     const random = Math.random().toString(36).slice(-8);
     const websocket_recommend = new WebSocket(
-      'ws://' + window.location.hostname + ':28080/websocket/resource/' +
+      'ws://' + window.location.hostname + ':28080/api/websocket/resource/' +
         random,
     );
     websocket_recommend.onopen = function () {

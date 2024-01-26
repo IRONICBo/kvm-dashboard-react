@@ -24,7 +24,7 @@ export const apiQueryMirrorList = () => {
 }
 
 export const apiMirrorCreate = (data) => {
-    return postRequest('/manage/threeNetworkInfo/create', data).then(resp => {
+    return postRequest('/manage/mirrorInfo/create', data).then(resp => {
         if (resp.code == 200) {
             message.success("创建镜像信息列表成功");
             return resp.data;
@@ -37,7 +37,7 @@ export const apiMirrorCreate = (data) => {
 export const apiMirrorDelete = (threeNetworkUuid) => {
     return postRequest('/manage/mirrorInfo/delete', threeNetworkUuid).then(resp => {
         if (resp.code == 200) {
-            message.success("删除计算规格信息列表成功");
+            message.success("创建镜像信息列表成功");
             return resp.data;
         } else {
             message.error(resp.code + ":" + resp.message);

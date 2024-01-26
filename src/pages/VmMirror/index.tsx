@@ -266,6 +266,7 @@ const VmNetworkPage: React.FC = () => {
     }
     // 新增镜像
     const submitAddModal = () => {
+        // 将"true" 改为 true
         apiMirrorCreate(addFormInstance.getFieldsValue()).then(respCode => {
             // 如果新增成功，刷新列表
             if (respCode == 200) {
@@ -356,6 +357,16 @@ const VmNetworkPage: React.FC = () => {
                         <Input placeholder={"file:///opt/zstack-dvd/zstack-image-1.4.qcow2"}/>
                     </Form.Item>
                     <Form.Item
+                        label="镜像处理器架构"
+                        name="mirrorArchitecture"
+                        rules={[{ required: true, message: '请输入镜像系统平台' }]}
+                    >
+                        <Radio.Group>
+                            <Radio value="x86_64"> x86_64 </Radio>
+                            <Radio value="aarch64"> aarch64 </Radio>
+                        </Radio.Group>
+                    </Form.Item>
+                    <Form.Item
                         label="镜像系统平台"
                         name="mirrorPlatform"
                         rules={[{ required: true, message: '请输入镜像系统平台' }]}
@@ -364,6 +375,16 @@ const VmNetworkPage: React.FC = () => {
                             <Radio value="Linux"> Linux </Radio>
                             <Radio value="Windows"> Windows </Radio>
                             <Radio value="Other"> Other </Radio>
+                        </Radio.Group>
+                    </Form.Item>
+                    <Form.Item
+                        label="镜像类型"
+                        name="mirrorMediaType"
+                        rules={[{ required: true, message: '请输入镜像系统平台' }]}
+                    >
+                        <Radio.Group>
+                            <Radio value="ISO"> ISO </Radio>
+                            <Radio value="RootVolumeTemplate"> RootVolumeTemplate </Radio>
                         </Radio.Group>
                     </Form.Item>
                     <Form.Item
@@ -396,7 +417,7 @@ const VmNetworkPage: React.FC = () => {
                     </Form.Item>
                     <Form.Item
                         label="系统标签"
-                        name="mirrorSystem"
+                        name="mirrorSystemTag"
                         rules={[{ required: true, message: '请输入系统标签' }]}
                     >
                         <Radio.Group>

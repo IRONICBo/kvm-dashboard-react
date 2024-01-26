@@ -212,7 +212,9 @@ const ServiceManagePage: React.FC = () => {
     const Context = React.createContext({ name: 'Default' });
 
     const handleVMListChange = (value: any) => {
-        apiGetRunningServiceList(1, value).then(resp => {
+        const tempValues = addFormInstance.getFieldsValue()
+        const machineType = tempValues.serviceMachineType
+        apiGetRunningServiceList(machineType, value).then(resp => {
             if (resp != null) {
                 console.log("apiGetRunningServiceList", resp)
                 const transformedData = [];
@@ -229,7 +231,7 @@ const ServiceManagePage: React.FC = () => {
                 setRunningService(transformedData);
             }
         })
-        apiGetAllServiceList(1, value).then(resp => {
+        apiGetAllServiceList(machineType, value).then(resp => {
             if (resp != null) {
                 const transformedData = [];
                 resp.forEach(element => {
@@ -283,7 +285,7 @@ const ServiceManagePage: React.FC = () => {
         try {
             apiQueryVmList().then(resp => {
               if (resp != null) {
-                  const transformedData = [];
+                  var transformedData = [];
                   resp.forEach(element => {
                   console.log("transformedData", element)
                       transformedData.push(
@@ -294,13 +296,14 @@ const ServiceManagePage: React.FC = () => {
                       )
                   });
                   // let [vmList, setVmList] = useState<{ key: any; value: any; }[]>([]);
+                  transformedData = transformedData.concat(hostList)
                   console.log("transformedData", transformedData)
                   setVmList(transformedData);
               }
           })
           apiRefreshHostList().then(resp => {
             if (resp != null) {
-                const transformedData = [];
+                var transformedData = [];
                 resp.forEach(element => {
                 console.log("transformedData", element)
                     transformedData.push(
@@ -311,6 +314,7 @@ const ServiceManagePage: React.FC = () => {
                     )
                 });
                 // let [vmList, setVmList] = useState<{ key: any; value: any; }[]>([]);
+                transformedData = transformedData.concat(vmList)
                 console.log("transformedData", transformedData)
                 setHostList(transformedData);
             }
@@ -536,7 +540,7 @@ s                        />
                         <Select
                             placeholder="选择一个节点"
                             allowClear
-                            options={hostList}
+                            options={hostList.concat(vmList)}
                             onChange={handleVMListChange}
                         />
                     </Form.Item>

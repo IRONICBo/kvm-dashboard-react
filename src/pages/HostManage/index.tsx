@@ -25,7 +25,7 @@ const HostManagePage: React.FC = () => {
     useEffect(() => {      
         const random = Math.random().toString(36).slice(-8);
         const websocket_recommend = new WebSocket(
-          'ws://' + window.location.hostname + ':28080/websocket/resource/' +
+          'ws://' + window.location.hostname + ':28080/api/websocket/resource/' +
             random,
         );
         websocket_recommend.onopen = function () {
@@ -843,16 +843,16 @@ const HostManagePage: React.FC = () => {
                         onClick={() => apiStartHostMonitor(selectedRowKeys).then(resp => {
                             if (resp != null) {
                                 console.log("apiStartHostMonitor", resp.hostErrorMap)
-                                if (resp.hostErrorMap != null) {
+                                if (JSON.stringify(resp.hostErrorMap) != '{}') {
                                     apiNotification.error({
                                         message: '启动监测失败',
                                         description: JSON.stringify(resp.hostErrorMap),
                                         duration: 2,
                                     })
                                 }
-                                if (resp.hostSuccessfulMap != null) {
+                                if (JSON.stringify(resp.hostSuccessfulMap) != '{}') {
                                     apiNotification.info({
-                                        message: '启动监测失败',
+                                        message: '启动监测成功',
                                         description: JSON.stringify(resp.hostSuccessfulMap),
                                         duration: 2,
                                     })
@@ -867,16 +867,16 @@ const HostManagePage: React.FC = () => {
                         onClick={() => apiStopHostMonitor(selectedRowKeys).then(resp => {
                             if (resp != null) {
                                 console.log("apiStopHostMonitor", resp.hostErrorMap)
-                                if (resp.hostErrorMap != null) {
+                                if (JSON.stringify(resp.hostErrorMap) != '{}') {
                                     apiNotification.error({
-                                        message: '启动监测失败',
+                                        message: '停止监测失败',
                                         description: JSON.stringify(resp.hostErrorMap),
                                         duration: 2,
                                     })
                                 }
-                                if (resp.hostSuccessfulMap != null) {
+                                if (JSON.stringify(resp.hostSuccessfulMap) != '{}') {
                                     apiNotification.info({
-                                        message: '启动监测失败',
+                                        message: '停止监测成功',
                                         description: JSON.stringify(resp.hostSuccessfulMap),
                                         duration: 2,
                                     })

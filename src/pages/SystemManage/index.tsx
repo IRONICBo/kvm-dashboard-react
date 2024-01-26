@@ -118,11 +118,9 @@ const SystemManagePage: React.FC = () => {
             fixed: 'right',
             width: 50,
             render: (_, record) =>
-                <Space>
-                    <Popconfirm title="Sure to delete?" onConfirm={() => deleteHost(record.hostUuid)}>
-                        <Button size={"small"} shape={"round"} danger={true} type="dashed">删除</Button>
-                    </Popconfirm>
-                </Space>
+            <Space>
+                <Button size={"small"} shape={"round"} type="dashed" onClick={() => showSysUpdateModal(record)}>编辑</Button>
+            </Space>
         }
     ];
 
@@ -267,10 +265,17 @@ const SystemManagePage: React.FC = () => {
     }
     const showSysUpdateModal = (record: DataType) => {
         setUpdateModalOpen(true);
-        updateFormInstance.setFieldsValue({
-            key: record.configKey,
-            value: record.configValue,
-        });
+        if (record.key == "db") {
+            updateFormInstance.setFieldsValue({
+                key: record.key,
+                value: record.value,
+            });
+        } else {
+            updateFormInstance.setFieldsValue({
+                key: record.configKey,
+                value: record.configValue,
+            });
+        }
     }
     // 修改系统配置信息
     const submitUpdateModal = () => {

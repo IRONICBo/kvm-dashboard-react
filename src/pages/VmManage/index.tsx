@@ -614,7 +614,7 @@ const VmManagePage: React.FC = () => {
     useEffect(() => {      
         const random = Math.random().toString(36).slice(-8);
         const websocket_recommend = new WebSocket(
-            'ws://' + window.location.hostname + ':28080/websocket/resource/' +
+            'ws://' + window.location.hostname + ':28080/api/websocket/resource/' +
             random,
         );
         websocket_recommend.onopen = function () {
@@ -1051,6 +1051,12 @@ const VmManagePage: React.FC = () => {
     const submitAddModal = () => {
         let tempAddFormInstance = addFormInstance.getFieldsValue()
         tempAddFormInstance.dataDiskOfferingUuidList = [tempAddFormInstance.dataDiskOfferingUuidList];
+
+        // If is ISO, set rootDiskOfferingUuid to null
+        if (tempAddFormInstance.isISO == true) {
+            tempAddFormInstance.rootDiskOfferingUuid = "";
+        }
+
         apiCreateVM(tempAddFormInstance).then(respCode => {
             // 如果新增成功，刷新列表
             if (respCode == 200) {
@@ -1258,6 +1264,15 @@ const VmManagePage: React.FC = () => {
                         <Radio.Group>
                             <Radio value={0}> 正常 </Radio>
                             <Radio value={1}> 高 </Radio>
+                        </Radio.Group>
+                    </Form.Item>
+                    <Form.Item
+                        label="是否为ISO"
+                        name="isISO"
+                    >
+                        <Radio.Group>
+                            <Radio value={true}> 是 </Radio>
+                            <Radio value={false}> 否 </Radio>
                         </Radio.Group>
                     </Form.Item>
                     <Form.Item
@@ -1555,17 +1570,17 @@ const VmManagePage: React.FC = () => {
                         onClick={() => apiStartVMMonitor(selectedRowKeys).then(resp => {
                             if (resp != null) {
                                 console.log("apiStartVMMonitor", resp.vmErrorMap)
-                                if (resp.vmErrorMap != null) {
+                                if (JSON.stringify(resp.vmErrorMap) != '{}') {
                                     apiNotification.error({
                                         message: '启动监测失败',
                                         description: JSON.stringify(resp.vmErrorMap),
                                         duration: 2,
                                     })
                                 }
-                                if (resp.vmSuccessfulMap != null) {
+                                if (JSON.stringify(resp.vmSuccessfulMap) != '{}') {
                                     apiNotification.info({
-                                        message: '启动监测失败',
-                                        description: JSON.stringify(resp.vmErrorMap),
+                                        message: '启动监测成功',
+                                        description: JSON.stringify(resp.vmSuccessfulMap),
                                         duration: 2,
                                     })
                                 }
@@ -1579,17 +1594,17 @@ const VmManagePage: React.FC = () => {
                         onClick={() => apiStopVMMonitor(selectedRowKeys).then(resp => {
                             if (resp != null) {
                                 console.log("apiStopVMMonitor", resp.vmErrorMap)
-                                if (resp.vmErrorMap != null) {
+                                if (JSON.stringify(resp.vmErrorMap) != '{}') {
                                     apiNotification.error({
-                                        message: '启动监测失败',
+                                        message: '停止监测失败',
                                         description: JSON.stringify(resp.vmErrorMap),
                                         duration: 2,
                                     })
                                 }
-                                if (resp.vmSuccessfulMap != null) {
+                                if (JSON.stringify(resp.vmSuccessfulMap) != '{}') {
                                     apiNotification.info({
-                                        message: '启动监测失败',
-                                        description: JSON.stringify(resp.vmErrorMap),
+                                        message: '停止监测成功',
+                                        description: JSON.stringify(resp.vmSuccessfulMap),
                                         duration: 2,
                                     })
                                 }
