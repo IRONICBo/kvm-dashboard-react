@@ -95,12 +95,15 @@ const AlertInfoCard: React.FC<HostIdProps> = (props) => {
         // console.log('res.records: ', res.records);
         // Do not need to parse
         // const parsedAlertInfo = res.records;
-        const parsedAlertInfo = res;
+        const parsedAlertInfo = res.data;
         console.log('parsedAlertInfo: ', parsedAlertInfo);
         // Maybe some data need to be parsed
         setAlertInfo(parsedAlertInfo);
         setAlertTotal(res.total);
 
+        console.log("alertTotal", alertTotal)
+        console.log("alertCurrent", alertCurrent)
+        console.log("alertInfo", alertInfo)
       } catch (error) {
         console.error('Error retrieving guest infos:', error);
       }

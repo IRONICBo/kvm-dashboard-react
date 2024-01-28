@@ -80,7 +80,8 @@ export const apiGetMachineAlertPage = (uuid, pageCurrent, pageSize) => {
      + '&pageCurrent=' + pageCurrent
      + '&pageSize=' + pageSize).then(resp => {
         if (resp.code == 200) {
-            return resp.data;
+            // data: {}, "current": 1, "size": 10, "total": 17
+            return resp;
         } else {
             console.log(resp.code + ":" + resp.message);
         }

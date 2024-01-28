@@ -1581,7 +1581,7 @@ const VmManagePage: React.FC = () => {
                                     apiNotification.info({
                                         message: '启动监测成功',
                                         description: JSON.stringify(resp.vmSuccessfulMap),
-                                        duration: 2,
+                                        duration: 5,
                                     })
                                 }
                                 // setData(resp);
@@ -1605,7 +1605,7 @@ const VmManagePage: React.FC = () => {
                                     apiNotification.info({
                                         message: '停止监测成功',
                                         description: JSON.stringify(resp.vmSuccessfulMap),
-                                        duration: 2,
+                                        duration: 5,
                                     })
                                 }
                                 // setData(resp);

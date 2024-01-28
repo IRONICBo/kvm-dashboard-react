@@ -854,7 +854,7 @@ const HostManagePage: React.FC = () => {
                                     apiNotification.info({
                                         message: '启动监测成功',
                                         description: JSON.stringify(resp.hostSuccessfulMap),
-                                        duration: 2,
+                                        duration: 5,
                                     })
                                 }
                                 // setData(resp);
@@ -878,7 +878,7 @@ const HostManagePage: React.FC = () => {
                                     apiNotification.info({
                                         message: '停止监测成功',
                                         description: JSON.stringify(resp.hostSuccessfulMap),
-                                        duration: 2,
+                                        duration: 5,
                                     })
                                 }
                                 // setData(resp);
