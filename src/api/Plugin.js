@@ -152,6 +152,9 @@ export const apiDeletePlugParam = (id) => {
     })
 }
 
+// plugExecRecord query
+
+
 export const apiRunPlugin = (params) => {
     return postRequest('/plugState/run', params).then(resp => {
         if (resp.code == 200) {

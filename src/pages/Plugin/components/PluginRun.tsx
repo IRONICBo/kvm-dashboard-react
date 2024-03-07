@@ -1,5 +1,10 @@
 /* eslint-disable @typescript-eslint/no-use-before-define */
 /* eslint-disable @typescript-eslint/no-unused-vars */
+import {
+  apiDeletePlugParam,
+  apiGetPlugParamByPlugId,
+  apiAddPlugParam,
+} from '@/api/Plugin';
 import { apiPluginUpload } from '@/api/Plugin';
 import { MinusCircleOutlined, PlusOutlined } from '@ant-design/icons';
 import { ProDescriptions } from '@ant-design/pro-components';
@@ -8,6 +13,8 @@ import { Button, Form, Input, Select, Space, message, Empty, Spin } from 'antd';
 import React, { useEffect, useState } from 'react';
 import { apiGetPluginInfo, apiRunPlugin, apiGetPluginResp, apiTestPlugin } from '@/api/Plugin';
 import { apiQueryVmList } from '@/api/VmManage';
+import { useSearchParams } from '@umijs/max';
+import { apiRefreshHostList } from '@/api/HostManage';
 
 const normFile = (e: any) => {
   console.log('Upload event:', e);
@@ -21,6 +28,8 @@ interface HostIdProps {
   uuid: string;
 }
 const PluginRun: React.FC<HostIdProps> = (props) => {
+  const [UUID, setUUID] = useState('');
+  const [searchParams, setSearchParams] = useSearchParams();
   const formItemLayout = {
     labelCol: { span: 6 },
     wrapperCol: { span: 14 },
@@ -84,7 +93,9 @@ const PluginRun: React.FC<HostIdProps> = (props) => {
 
   const { Option } = Select;
   let [vmList, setVmList] = useState([]);
+  let [hostList, setHostList] = useState([]);
   let [fields, setFields] = useState([]);
+  let [data, setData] = useState([]);
 
   const DraggerProps: UploadProps = {
     name: 'file',
@@ -152,6 +163,40 @@ const PluginRun: React.FC<HostIdProps> = (props) => {
     setSelectedMetric(value);
   };
   useEffect(() => {
+    const uuid = searchParams.get('plugId') || '';
+    console.log("PluginRun UUID:", uuid)
+    setUUID(uuid);
+    apiGetPlugParamByPlugId(uuid).then((resp) => {
+      if (resp != null) {
+        setData(resp);
+        // Set form data
+        // [
+        //   {
+        //     "paramZzid": 5,
+        //     "paramPlugId": 11,
+        //     "paramKey": "param",
+        //     "paramDefaultValue": "123",
+        //     "paramRequire": 1,
+        //     "paramDescription": null
+        //   }
+        // ]
+        const tempFields = [];
+        resp.forEach((element) => {
+          tempFields.push({
+            key: element.paramKey,
+            value: element.paramDefaultValue,
+          });
+        });
+        form.setFieldsValue(
+          {
+            params: tempFields,
+          }
+        );
+        console.log('form', form);
+      }
+    });
+  }, []);
+  useEffect(() => {
     const fetchData = async () => {
       try {
           apiQueryVmList().then(resp => {
@@ -171,6 +216,24 @@ const PluginRun: React.FC<HostIdProps> = (props) => {
                 setVmList(transformedData);
             }
         })
+        apiRefreshHostList().then(resp => {
+          if (resp != null) {
+              const transformedData = [];
+              resp.forEach(element => {
+              console.log("transformedData", element)
+                  transformedData.push(
+                      {
+                          "label": element.hostName,
+                          "value": element.hostUuid,
+                      }
+                  )
+              });
+              // let [vmList, setVmList] = useState<{ key: any; value: any; }[]>([]);
+              console.log("transformedData", transformedData)
+              setHostList(transformedData);
+          }
+      })
+
         console.log("setVmList", vmList);
 
         const tempMetricList = [
@@ -212,7 +275,7 @@ const PluginRun: React.FC<HostIdProps> = (props) => {
         autoComplete="off"
         form={form}
       >
-        <Form.Item name="node" label="节点" rules={[{ required: true }]}>
+        <Form.Item name="vmUuidList" label="虚拟机节点" rules={[{ required: false }]}>
           <Select
             placeholder="选择一个节点并更改上面的输入"
             onChange={onNodeChange}
@@ -221,6 +284,16 @@ const PluginRun: React.FC<HostIdProps> = (props) => {
           >
           </Select>
         </Form.Item>
+        <Form.Item name="hostUuidList" label="物理机节点" rules={[{ required: false }]}>
+          <Select
+            placeholder="选择一个节点并更改上面的输入"
+            onChange={onNodeChange}
+            allowClear
+            options={hostList}
+          >
+          </Select>
+        </Form.Item>
+        
         {/* <Form.Item name="plugin" label="插件" rules={[{ required: true }]}>
           <Select
             placeholder="选择一个插件并更改上面的输入"
@@ -238,7 +311,7 @@ const PluginRun: React.FC<HostIdProps> = (props) => {
             options={metricList}
           />
         </Form.Item> */}
-        {
+        {/* {
             selectedMetric == 'ping'&& (
               <>
                 <Form.Item name="host" label="主机地址" rules={[{ required: true }]}>
@@ -300,7 +373,7 @@ const PluginRun: React.FC<HostIdProps> = (props) => {
                 </Form.Item>
               </>
             )
-        }
+        } */}
         <Form.List name="params">
           {(fields, { add, remove }) => (
             <>
