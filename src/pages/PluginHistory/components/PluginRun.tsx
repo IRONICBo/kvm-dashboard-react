@@ -221,14 +221,14 @@ const PluginRun: React.FC<HostIdProps> = (props) => {
           >
           </Select>
         </Form.Item>
-        {/* <Form.Item name="plugin" label="插件" rules={[{ required: true }]}>
-          <Select
+        <Form.Item name="plugin" label="插件" rules={[{ required: true }]}>
+          {/* <Select
             placeholder="选择一个插件并更改上面的输入"
             onChange={onNodeChange}
             allowClear
           >
             <Option value="vm1">vm1</Option>
-          </Select>
+          </Select> */}
           <Select
             placeholder="选择一个插件并更改上面的输入"
             showSearch
@@ -237,7 +237,7 @@ const PluginRun: React.FC<HostIdProps> = (props) => {
             onSearch={handleMetricListChange}
             options={metricList}
           />
-        </Form.Item> */}
+        </Form.Item>
         {
             selectedMetric == 'ping'&& (
               <>

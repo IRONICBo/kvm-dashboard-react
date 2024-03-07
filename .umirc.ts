@@ -19,16 +19,45 @@ export default defineConfig({
             redirect: '/virtual/manage',
         },
         {
-            name: '宿主机管理',
-            path: '/host',
-            icon: 'H',
-            component: './HostManage',
-        },
-        {
-            name: '虚拟机管理',
-            path: '/virtual/manage',
-            icon: 'V',
-            component: './VmManage',
+            name: '资源池控制模块',
+            path: '/',
+            routes: [
+                {
+                    name: '宿主机管理',
+                    path: '/host',
+                    component: './HostManage',
+                },
+                {
+                    name: '虚拟机管理',
+                    path: '/virtual/manage',
+                    component: './VmManage',
+                },
+                {
+                    name: '网络管理',
+                    path: '/virtual/network',
+                    component: './VmNetwork',
+                },
+                {
+                    name: '镜像管理',
+                    path: '/virtual/mirror',
+                    component: './VmMirror',
+                },
+                {
+                    name: '磁盘管理',
+                    path: '/virtual/volume',
+                    component: './VmVolume',
+                },
+                {
+                    name: '计算规格管理',
+                    path: '/virtual/instance',
+                    component: './VmInstance',
+                },
+                {
+                    name: '云盘规格管理',
+                    path: '/virtual/disk',
+                    component: './VmDisk',
+                },
+            ]
         },
         // {
         //     name: '虚拟机创建',
@@ -36,73 +65,88 @@ export default defineConfig({
         //     icon: 'crown',
         //     component: './VmCreate',
         // },
-        {
-            name: '网络管理',
-            path: '/virtual/network',
-            icon: 'N',
-            component: './VmNetwork',
-        },
-        {
-            name: '镜像管理',
-            path: '/virtual/mirror',
-            icon: 'M',
-            component: './VmMirror',
-        },
-        {
-            name: '磁盘管理',
-            path: '/virtual/volume',
-            icon: 'D',
-            component: './VmVolume',
-        },
         // {
         //     name: '快照管理',
         //     path: '/virtual/snapshot',
         //     icon: 'S',
         //     component: './VmSnapshot',
         // },
-        {
-            name: '计算规格管理',
-            path: '/virtual/instance',
-            icon: 'I',
-            component: './VmInstance',
-        },
-        {
-            name: '云盘规格管理',
-            path: '/virtual/disk',
-            icon: 'D',
-            component: './VmDisk',
-        },
-        {
-            name: '监控',
-            path: '/monitor',
-            icon: 'table',
-            component: './Monitor',
-            hideInMenu: true,
-        },
         // TODO: Update Create VM Machine
         {
-            name: '性能指标',
-            path: '/performance',
-            icon: 'P',
-            component: './Performance',
-        },
-        {
             name: '插件测试',
-            path: '/plugin',
-            icon: 'T',
-            component: './Plugin',
+            path: '/',
+            routes: [
+                {
+                    name: '插件管理',
+                    path: '/plugin/manage',
+                    component: './PluginManage',
+                },
+                {
+                    name: '插件测试',
+                    path: '/plugin/runner',
+                    component: './Plugin',
+                },
+                {
+                    name: '测试历史',
+                    path: '/plugin/history',
+                    component: './PluginHistory',
+                },
+            ]
         },
         {
-            name: '服务监控',
-            path: '/service',
-            icon: 'T',
-            component: './ServiceManage',
+            name: '资源动态监控模块',
+            path: '/',
+            routes: [
+                {
+                    name: '系统管理',
+                    path: '/system/manage',
+                    component: './SystemManage',
+                },
+                {
+                    name: '监控',
+                    path: '/monitor',
+                    component: './Monitor',
+                    hideInMenu: true,
+                },
+            ],
         },
         {
-            name: '系统管理',
-            path: '/system/manage',
-            icon: 'S',
-            component: './SystemManage',
+            name: '服务质量监控模块',
+            path: '/',
+            routes: [
+                {
+                    name: '系统管理',
+                    path: '/system/manage',
+                    component: './SystemManage',
+                },
+                {
+                    name: '性能指标',
+                    path: '/performance',
+                    component: './Performance',
+                },
+            ],
+        },
+        {
+            name: '用户权限管理模块',
+            path: '/',
+            routes: [
+                {
+                    name: '用户管理',
+                    path: '/user/manage',
+                    component: './UserManage',
+                },
+            ]
+        },
+        {
+            name: '外部接口模块',
+            path: '/',
+            routes: [
+                {
+                    name: '外部接口文档',
+                    path: '/api/doc',
+                    component: './ApiDoc',
+                },
+            ]
         }
     ],
     npmClient: 'pnpm',

@@ -72,3 +72,15 @@ export const deleteRequest = (url, params) => {
         data: params
     })
 }
+
+// delete form data
+export const deleteFormRequest = (url, params) => {
+    return axios({
+        headers: {
+            'Content-Type': 'multipart/form-data'
+        },
+        method: 'delete',
+        url: `${base}${url}`,
+        data: params
+    })
+}
