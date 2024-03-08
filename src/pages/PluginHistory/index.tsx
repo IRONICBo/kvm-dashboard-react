@@ -1,3 +1,10 @@
+import {
+    apiDeletePlugParam,
+    apiGetPlugParamByPlugId,
+    apiAddPlugParam,
+    apiStartPlugState,
+    apiGetPlugExecRecord,
+} from '@/api/Plugin';
 import React, {useState, useEffect} from "react";
 import {PageContainer} from "@ant-design/pro-components";
 import {Button, Form, Drawer, Input, Modal, Popconfirm, Space, Table, Tooltip, Tag, notification} from "antd";
@@ -7,6 +14,8 @@ import {apiAddHost, apiDeleteHost, apiRefreshHostList, apiUpdateHost, apiUpdateH
 import {apiStartHostMonitor, apiStopHostMonitor} from "@/api/Monitor";
 import { history } from 'umi';
 import { RedoOutlined, PlusOutlined, PlayCircleOutlined, PauseCircleOutlined } from '@ant-design/icons';
+import { useSearchParams } from '@umijs/max';
+import ParamInfoPage from './components/ResultInfo';
 
 interface DataType {
     hostZzid: number,
@@ -21,7 +30,10 @@ interface DataType {
     hostCreateTime: unknown
 }
 
-const HostManagePage: React.FC = () => {
+const PluginHistoryPage: React.FC = () => {
+    const [UUID, setUUID] = useState('');
+    const [searchParams, setSearchParams] = useSearchParams();
+
     useEffect(() => {      
         const random = Math.random().toString(36).slice(-8);
         const websocket_recommend = new WebSocket(
@@ -54,111 +66,110 @@ const HostManagePage: React.FC = () => {
 
     const columns: ColumnsType<DataType> = [
         {
-            title: 'ID',
-            dataIndex: 'hostZzid',
+            title: '插件ID',
+            dataIndex: 'recordPlugId',
             ellipsis: {
                 showTitle: false,
             },
-            width: 50,
+            width: 100,
             fixed: "left",
         },
         {
-            title: 'UUID',
-            dataIndex: 'hostUuid',
+            title: '记录ID',
+            dataIndex: 'recordId',
             ellipsis: {
                 showTitle: false,
             },
-            width: 300,
+            width: 220,
             fixed: "left",
-            render: (hostUuid) => (
-                <Tooltip placement="topLeft" title={hostUuid}>
-                    {/* <a onClick={(event) => {event.preventDefault();history.push("/monitor?uuid=" + hostId)}}> */}
-                    <a onClick={(event) =>  {event.preventDefault();showGetDetailOpen(hostUuid)}}>
-                        {hostUuid}
+            render: (recordId) => (
+                <Tooltip placement="topLeft" title={recordId}>
+                    <a onClick={(event) =>  {event.preventDefault();showGetDetailOpen(recordId)}}>
+                        {recordId}
                     </a>
                 </Tooltip>
             )
         },
         {
-            title: '名称',
-            dataIndex: 'hostName',
+            title: '虚拟机列表',
+            dataIndex: 'recordVmList',
             ellipsis: {
                 showTitle: false,
             },
-            render: (hostName) => (
-                <Tooltip placement="topLeft" title={hostName}>
-                    {hostName}
+            render: (recordVmList) => (
+                <Tooltip placement="topLeft" title={recordVmList}>
+                    {recordVmList}
                 </Tooltip>
             ),
             width: 130
         },
         {
-            title: '区域ID',
-            dataIndex: 'hostZoneUuid',
+            title: '宿主机列表',
+            dataIndex: 'recordHostList',
             ellipsis: {
                 showTitle: false,
             },
             width: 300,
-            render: (hostZoneUuid) => (
-                <Tooltip placement="topLeft" title={hostZoneUuid}>
-                    {hostZoneUuid}
+            render: (recordHostList) => (
+                <Tooltip placement="topLeft" title={recordHostList}>
+                    {recordHostList}
                 </Tooltip>
             )
         },
         {
-            title: '集群ID',
-            dataIndex: 'hostClusterUuid',
+            title: '执行脚本',
+            dataIndex: 'recordExecCommand',
             ellipsis: {
                 showTitle: false,
             },
             width: 300,
-            render: (hostClusterUuid) => (
-                <Tooltip placement="topLeft" title={hostClusterUuid}>
-                    {hostClusterUuid}
+            render: (recordExecCommand) => (
+                <Tooltip placement="topLeft" title={recordExecCommand}>
+                    {recordExecCommand}
                 </Tooltip>
             )
         },
         {
-            title: '描述信息',
-            dataIndex: 'hostDescription',
+            title: '执行参数',
+            dataIndex: 'recordExecParams',
             ellipsis: {
                 showTitle: false,
             },
             width: 200,
-            render: (hostDescription) => (
-                <Tooltip placement="topLeft" title={hostDescription}>
-                    {hostDescription == null ? "无" : hostDescription}
+            render: (recordExecParams) => (
+                <Tooltip placement="topLeft" title={recordExecParams}>
+                    {recordExecParams == null ? "无" : recordExecParams}
                 </Tooltip>
             )
         },
         {
-            title: '创建时间',
-            dataIndex: 'hostCreateTime',
+            title: '执行次数',
+            dataIndex: 'recordExecNumber',
             ellipsis: {
                 showTitle: false,
             },
             width: 200,
-            render: (hostCreateTime) => (
-                <Tooltip placement="topLeft" title={hostCreateTime}>
-                    {hostCreateTime}
+            render: (recordExecNumber) => (
+                <Tooltip placement="topLeft" title={recordExecNumber}>
+                    {recordExecNumber}
                 </Tooltip>
             )
         },
         {
-            title: '状态',
-            dataIndex: 'hostState',
+            title: '执行使能',
+            dataIndex: 'recordEnable',
             ellipsis: {
                 showTitle: false,
             },
             width: 100,
-            render: (hostState) => (
+            render: (recordEnable) => (
                 <>
-                    {hostState=="enable" ? (
-                        <Tag color="blue" key={hostState}>
+                    {recordEnable=="0" ? (
+                        <Tag color="blue" key={recordEnable}>
                             启用
                         </Tag>
                     ) : (
-                        <Tag color="volcano" key={hostState}>
+                        <Tag color="volcano" key={recordEnable}>
                             禁用
                         </Tag>
                     )}
@@ -166,23 +177,10 @@ const HostManagePage: React.FC = () => {
             )
         },
         {
-            title: '操作',
-            dataIndex: 'operation',
+            title: '执行时间',
+            dataIndex: 'recordCreateTime',
             fixed: 'right',
             width: 300,
-            render: (_, record) =>
-                <Space>
-                    <Button size={"small"} shape={"round"} type="dashed" onClick={() => showUpdateModal(record)}>编辑</Button>
-                    <Popconfirm title="Sure to delete?" onConfirm={() => deleteHost(record.hostUuid)}>
-                        <Button size={"small"} shape={"round"} danger={true} type="dashed">删除</Button>
-                    </Popconfirm>
-                    <Popconfirm title="Sure to star?" onConfirm={() => startHost(record.hostUuid)}>
-                        <Button size={"small"} shape={"round"} danger={true} type="dashed">启用</Button>
-                    </Popconfirm>
-                    <Popconfirm title="Sure to stop?" onConfirm={() => stopHost(record.hostUuid)}>
-                        <Button size={"small"} shape={"round"} danger={true} type="dashed">停用</Button>
-                    </Popconfirm>
-                </Space>
         }
     ];
 
@@ -206,7 +204,7 @@ const HostManagePage: React.FC = () => {
             width: 300,
             fixed: "left",
             render: (hostUuid) => (
-                    <a onClick={(event) => {event.preventDefault();history.push("/monitor?uuid=" + hostUuid)}}>
+                    <a onClick={(event) => {event.preventDefault();history.push("/system/monitor?uuid=" + hostUuid)}}>
                         {hostUuid}
                     </a>
             )
@@ -437,7 +435,7 @@ const HostManagePage: React.FC = () => {
                 <a onClick={(event) => {
                     console.log(hostUuid.props.children);
                     event.preventDefault();
-                    history.push(`/monitor?uuid=${hostUuid.props.children}&ipmi=${record.hostIpmiAddr}&snmp=${record.hostSnmpAddr}`);
+                    history.push(`/system/monitor?uuid=${hostUuid.props.children}&ipmi=${record.hostIpmiAddr}&snmp=${record.hostSnmpAddr}`);
                 }}>
                     查看监控
                 </a>
@@ -472,8 +470,16 @@ const HostManagePage: React.FC = () => {
 
     // 钩子，启动时获取插件列表
     useEffect(() => {
-        apiRefreshHostList().then(resp => {
+        const uuid = searchParams.get('plugId') || '';
+        console.log("PluginRun UUID:", uuid)
+        setUUID(uuid);
+        apiGetPlugExecRecord(uuid).then(resp => {
             if (resp != null) {
+                // // filter data recordId to string
+                // resp.forEach((item: any) => {
+                //     item.recordId = item.recordId.toString();
+                // });
+                console.log("PluginRun Data:", resp)
                 setData(resp);
             }
         })
@@ -483,8 +489,8 @@ const HostManagePage: React.FC = () => {
      * ----------------------------------------------------------------------------------------------------------------------------------------------------------------
      */
     // 打开详细信息
-    const showGetDetailOpen = (hostUuid: String) => {
-        const res = data.find(item => item.hostUuid == hostUuid)
+    const showGetDetailOpen = (recordId: String) => {
+        const res = data.find(item => item.recordId == recordId)
         console.log("showGetDetailOpen", res)
         setSelectData(res);
         setGetDetailOpen(true);
@@ -512,7 +518,7 @@ const HostManagePage: React.FC = () => {
         apiAddHost(addFormInstance.getFieldsValue()).then(respCode => {
             // 如果新增成功，刷新列表
             if (respCode == 200) {
-                apiRefreshHostList().then(resp => {
+                apiGetPlugExecRecord(UUID).then(resp => {
                     if (resp != null) {
                         setData(resp);
                     }
@@ -541,7 +547,7 @@ const HostManagePage: React.FC = () => {
         apiUpdateHost(basicData).then(respCode => {
             // 如果修改成功刷新列表
             if (respCode == 200) {
-                apiRefreshHostList().then(resp => {
+                apiGetPlugExecRecord(UUID).then(resp => {
                     if (resp != null) {
                         setData(resp);
                     }
@@ -551,7 +557,7 @@ const HostManagePage: React.FC = () => {
         apiUpdateHostSSH(sshData).then(respCode => {
             // 如果修改成功刷新列表
             if (respCode == 200) {
-                apiRefreshHostList().then(resp => {
+                apiGetPlugExecRecord(UUID).then(resp => {
                     if (resp != null) {
                         setData(resp);
                     }
@@ -576,7 +582,7 @@ const HostManagePage: React.FC = () => {
         apiDeleteHost(hostId).then(respCode => {
             // 如果插件删除成功，刷新列表
             if (respCode == 200) {
-                apiRefreshHostList().then(resp => {
+                apiGetPlugExecRecord(UUID).then(resp => {
                     if (resp != null) {
                         setData(resp);
                     }
@@ -588,7 +594,7 @@ const HostManagePage: React.FC = () => {
     const startHost = (hostId: string) => {
         apiStartHost(hostId).then(respCode => {
             if (respCode == 200) {
-                apiRefreshHostList().then(resp => {
+                apiGetPlugExecRecord(UUID).then(resp => {
                     if (resp != null) {
                         setData(resp);
                     }
@@ -600,7 +606,7 @@ const HostManagePage: React.FC = () => {
     const stopHost = (hostId: string) => {
         apiStopHost(hostId).then(respCode => {
             if (respCode == 200) {
-                apiRefreshHostList().then(resp => {
+                apiGetPlugExecRecord(UUID).then(resp => {
                     if (resp != null) {
                         setData(resp);
                     }
@@ -625,12 +631,36 @@ const HostManagePage: React.FC = () => {
     return (
         <PageContainer>
             {contextHolder} 
+            <Drawer
+                title="运行结果"
+                open={getDetailOpen}
+                onClose={cancelGetDetail}
+                width={1400}
+                styles={{
+                body: {
+                    paddingBottom: 80,
+                },
+                }}
+                extra={
+                <Space>
+                    <Button onClick={cancelGetDetail}>取消</Button>
+                </Space>
+                }
+            >
+                <ProDescriptions
+                title="结果列表"
+                column={2}
+                layout="vertical"
+                />
 
+                {/* <ParamInfoPage key={selectData?.recordId} uuid={"1764552466801758208"} /> */}
+                <ParamInfoPage key={selectData?.recordId} uuid={selectData?.recordId} />
+            </Drawer>
             <Space size={"middle"}>
                 <Button type="primary"
                         size="large"
                         icon={<RedoOutlined />}
-                        onClick={() => apiRefreshHostList().then(resp => {
+                        onClick={() => apiGetPlugExecRecord(UUID).then(resp => {
                             if (resp != null) {
                                 setData(resp);
                             }})}>
@@ -641,10 +671,10 @@ const HostManagePage: React.FC = () => {
                     rowSelection={rowSelection}
                     columns={columns}
                     dataSource={data}
-                    rowKey={"hostUuid"}
+                    rowKey={"recordId"}
                     scroll={{x: 1000}}>
             </Table>
         </PageContainer>
     );
 };
-export default HostManagePage;
+export default PluginHistoryPage;

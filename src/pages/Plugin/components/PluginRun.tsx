@@ -4,12 +4,13 @@ import {
   apiDeletePlugParam,
   apiGetPlugParamByPlugId,
   apiAddPlugParam,
+  apiStartPlugState,
 } from '@/api/Plugin';
 import { apiPluginUpload } from '@/api/Plugin';
 import { MinusCircleOutlined, PlusOutlined } from '@ant-design/icons';
 import { ProDescriptions } from '@ant-design/pro-components';
 import type { UploadProps } from 'antd';
-import { Button, Form, Input, Select, Space, message, Empty, Spin } from 'antd';
+import { Button, Form, Input, Select, Space, message, Empty, Spin, Card } from 'antd';
 import React, { useEffect, useState } from 'react';
 import { apiGetPluginInfo, apiRunPlugin, apiGetPluginResp, apiTestPlugin } from '@/api/Plugin';
 import { apiQueryVmList } from '@/api/VmManage';
@@ -39,52 +40,26 @@ const PluginRun: React.FC<HostIdProps> = (props) => {
     console.log('Received values of form: ', values);
 
     let data = {};
-    switch (selectedMetric) {
-      case 'ping':
-      data = {
-        "host": values.host,
-        "count": parseInt(values.count),
-        "size": parseInt(values.size),
-        "interval": parseInt(values.interval),
-      }
-      break;
-      case 'fio':
-      data = {
-        "dir": values.dir,
-        "batch": values.batch,
-        "size": values.size,
-      }
-      break;
-      case 'dbtest':
-      data = {
-        "host": values.host,
-        "port": parseInt(values.port),
-        "username": values.username,
-        "password": values.password,
-        "count": parseInt(values.count),
-      }
-      break;
-      case 'ptp4l':
-      data = {
-        "interface": values.interface,
-      }
-      break;
-    }
 
     // 上传文件
     const params = {
-      "uuid": values.node,
-      "type": selectedMetric,
-      "paramsJson": data,
-    }
-    console.log('type', selectedMetric);
-    console.log('uuid', values.node);
-    console.log('paramJson', data);
-    apiTestPlugin(params).then((res) => {
+      execNumber: parseInt(values.execNumber),
+      hostUuidList: Array.isArray(values.hostUuidList) ? values.hostUuidList : [values.hostUuidList],
+      vmUuidList: Array.isArray(values.vmUuidList) ? values.vmUuidList : [values.vmUuidList],
+      paramsJson: JSON.stringify(values.params),
+      updateScriptFile: true,
+      plugId: parseInt(UUID),
+    };
+    console.log('params', params);
+    apiStartPlugState(params).then((res) => {
       console.log('apiRunPlugin', res);
       // 获取结果
+      // TODO:
       if (res != undefined) {
-        setPluginResult(res);
+        setPluginResult({
+          hostErrorMap: JSON.stringify(res.hostErrorMap),
+          vmErrorMap: JSON.stringify(res.vmErrorMap),
+        });
       } else {
         message.error('插件运行失败');
       }
@@ -275,11 +250,15 @@ const PluginRun: React.FC<HostIdProps> = (props) => {
         autoComplete="off"
         form={form}
       >
+        <Form.Item name="execNumber" label="执行次数" rules={[{ required: false }]}>
+          <Input placeholder={'1'} />
+        </Form.Item>
         <Form.Item name="vmUuidList" label="虚拟机节点" rules={[{ required: false }]}>
           <Select
             placeholder="选择一个节点并更改上面的输入"
             onChange={onNodeChange}
             allowClear
+            mode="multiple"
             options={vmList}
           >
           </Select>
@@ -289,6 +268,7 @@ const PluginRun: React.FC<HostIdProps> = (props) => {
             placeholder="选择一个节点并更改上面的输入"
             onChange={onNodeChange}
             allowClear
+            mode="multiple"
             options={hostList}
           >
           </Select>
@@ -424,7 +404,11 @@ const PluginRun: React.FC<HostIdProps> = (props) => {
 
       {/* <Spin tip="Loading..."> */}
 
-      { pluginResult == null ? <Empty /> : <pre>{pluginResult}</pre> }
+      { pluginResult == null ? <Empty /> : 
+        <Card>
+          <p>主机节点响应：{pluginResult.hostErrorMap}</p>
+          <p>虚拟机节点响应：{pluginResult.vmErrorMap}</p>
+        </Card>}
       {/* </Spin> */}
     </>
   );

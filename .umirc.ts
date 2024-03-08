@@ -20,11 +20,11 @@ export default defineConfig({
         },
         {
             name: '资源池控制模块',
-            path: '/',
+            path: '/virtual',
             routes: [
                 {
                     name: '宿主机管理',
-                    path: '/host',
+                    path: '/virtual/host',
                     component: './HostManage',
                 },
                 {
@@ -74,7 +74,7 @@ export default defineConfig({
         // TODO: Update Create VM Machine
         {
             name: '插件测试',
-            path: '/',
+            path: '/plugin',
             routes: [
                 {
                     name: '插件管理',
@@ -95,7 +95,7 @@ export default defineConfig({
         },
         {
             name: '资源动态监控模块',
-            path: '/',
+            path: '/system',
             routes: [
                 {
                     name: '系统管理',
@@ -103,32 +103,32 @@ export default defineConfig({
                     component: './SystemManage',
                 },
                 {
-                    name: '监控',
-                    path: '/monitor',
+                    name: '节点监控',
+                    path: '/system/monitor',
                     component: './Monitor',
-                    hideInMenu: true,
+                    // hideInMenu: true,
                 },
             ],
         },
         {
             name: '服务质量监控模块',
-            path: '/',
+            path: '/service',
             routes: [
                 {
-                    name: '系统管理',
-                    path: '/system/manage',
-                    component: './SystemManage',
+                    name: '服务质量',
+                    path: '/service/manage',
+                    component: './ServiceManage',
                 },
                 {
                     name: '性能指标',
-                    path: '/performance',
+                    path: '/service/performance',
                     component: './Performance',
                 },
             ],
         },
         {
             name: '用户权限管理模块',
-            path: '/',
+            path: '/user',
             routes: [
                 {
                     name: '用户管理',
@@ -139,7 +139,7 @@ export default defineConfig({
         },
         {
             name: '外部接口模块',
-            path: '/',
+            path: '/api',
             routes: [
                 {
                     name: '外部接口文档',

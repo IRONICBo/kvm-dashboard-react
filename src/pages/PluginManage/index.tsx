@@ -113,7 +113,7 @@ const PluginManagePage: React.FC = () => {
       fixed: 'left',
       render: (cardTag) => (
         <Tooltip placement="topLeft" title={cardTag}>
-          {/* <a onClick={(event) => {event.preventDefault();history.push("/monitor?uuid=" + hostId)}}> */}
+          {/* <a onClick={(event) => {event.preventDefault();history.push("/system/monitor?uuid=" + hostId)}}> */}
             {cardTag}
         </Tooltip>
       ),
@@ -245,7 +245,7 @@ const PluginManagePage: React.FC = () => {
         <a
           onClick={(event) => {
             event.preventDefault();
-            history.push('/monitor?uuid=' + hostUuid);
+            history.push('/system/monitor?uuid=' + hostUuid);
           }}
         >
           {hostUuid}
@@ -472,7 +472,7 @@ const PluginManagePage: React.FC = () => {
             console.log(hostUuid.props.children);
             event.preventDefault();
             history.push(
-              `/monitor?uuid=${hostUuid.props.children}&ipmi=${record.hostIpmiAddr}&snmp=${record.hostSnmpAddr}`,
+              `/system/monitor?uuid=${hostUuid.props.children}&ipmi=${record.hostIpmiAddr}&snmp=${record.hostSnmpAddr}`,
             );
           }}
         >

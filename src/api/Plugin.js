@@ -153,7 +153,39 @@ export const apiDeletePlugParam = (id) => {
 }
 
 // plugExecRecord query
+export const apiGetPlugExecRecord = (plugId) => {
+    return getRequest('/plugExecRecord/query?plugId='+plugId).then(resp => {
+        if (resp.code == 200) {
+            return resp.data;
+        } else {
+            console.log(resp.code + ":" + resp.message);
+        }
+    })
+}
 
+// plugState start
+export const apiStartPlugState = (params) => {
+    return postRequest('/plugState/start', params).then(resp => {
+        if (resp.code == 200) {
+            message.success("启动成功");
+            return resp.data;
+        } else {
+            message.error("启动失败");
+            console.log(resp.code + ":" + resp.message);
+        }
+    })
+}
+
+// plugState query
+export const apiGetPlugState = (id) => {
+    return getRequest('/plugState/query?recordId='+id).then(resp => {
+        if (resp.code == 200) {
+            return resp.data;
+        } else {
+            console.log(resp.code + ":" + resp.message);
+        }
+    })
+}
 
 export const apiRunPlugin = (params) => {
     return postRequest('/plugState/run', params).then(resp => {

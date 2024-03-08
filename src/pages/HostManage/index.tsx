@@ -72,7 +72,7 @@ const HostManagePage: React.FC = () => {
             fixed: "left",
             render: (hostUuid) => (
                 <Tooltip placement="topLeft" title={hostUuid}>
-                    {/* <a onClick={(event) => {event.preventDefault();history.push("/monitor?uuid=" + hostId)}}> */}
+                    {/* <a onClick={(event) => {event.preventDefault();history.push("/system/monitor?uuid=" + hostId)}}> */}
                     <a onClick={(event) =>  {event.preventDefault();showGetDetailOpen(hostUuid)}}>
                         {hostUuid}
                     </a>
@@ -206,7 +206,7 @@ const HostManagePage: React.FC = () => {
             width: 300,
             fixed: "left",
             render: (hostUuid) => (
-                    <a onClick={(event) => {event.preventDefault();history.push("/monitor?uuid=" + hostUuid)}}>
+                    <a onClick={(event) => {event.preventDefault();history.push("/system/monitor?uuid=" + hostUuid)}}>
                         {hostUuid}
                     </a>
             )
@@ -437,7 +437,7 @@ const HostManagePage: React.FC = () => {
                 <a onClick={(event) => {
                     console.log(hostUuid.props.children);
                     event.preventDefault();
-                    history.push(`/monitor?uuid=${hostUuid.props.children}&ipmi=${record.hostIpmiAddr}&snmp=${record.hostSnmpAddr}`);
+                    history.push(`/system/monitor?uuid=${hostUuid.props.children}&ipmi=${record.hostIpmiAddr}&snmp=${record.hostSnmpAddr}`);
                 }}>
                     查看监控
                 </a>

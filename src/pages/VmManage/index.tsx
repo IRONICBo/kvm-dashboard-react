@@ -57,7 +57,7 @@ const VmManagePage: React.FC = () => {
             fixed: "left",
             render: (vmUuid) => (
                 <Tooltip placement="topLeft" title={vmUuid}>
-                    {/* <a onClick={(event) => {event.preventDefault();history.push("/monitor?uuid=" + hostId)}}> */}
+                    {/* <a onClick={(event) => {event.preventDefault();history.push("/system/monitor?uuid=" + hostId)}}> */}
                     <a onClick={(event) =>  {event.preventDefault();showGetDetailOpen(vmUuid)}}>
                         {vmUuid}
                     </a>
@@ -225,7 +225,7 @@ const VmManagePage: React.FC = () => {
             width: 300,
             fixed: "left",
             render: (vmUuid) => (
-                    <a onClick={(event) => {event.preventDefault();history.push("/monitor?uuid=" + vmUuid)}}>
+                    <a onClick={(event) => {event.preventDefault();history.push("/system/monitor?uuid=" + vmUuid)}}>
                         {vmUuid}
                     </a>
             )
@@ -561,7 +561,7 @@ const VmManagePage: React.FC = () => {
             width: 300,
             fixed: "left",
             render: (vmUuid) => (
-                    <a onClick={(event) => {console.log(vmUuid.props.children);event.preventDefault();history.push("/monitor?uuid=" + vmUuid.props.children)}}>
+                    <a onClick={(event) => {console.log(vmUuid.props.children);event.preventDefault();history.push("/system/monitor?uuid=" + vmUuid.props.children)}}>
                         查看监控
                     </a>
             )
