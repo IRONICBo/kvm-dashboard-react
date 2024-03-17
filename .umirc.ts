@@ -77,6 +77,11 @@ export default defineConfig({
             path: '/plugin',
             routes: [
                 {
+                    name: '测试节点管理',
+                    path: '/plugin/node',
+                    component: './PluginNodeManage',
+                },
+                {
                     name: '插件管理',
                     path: '/plugin/manage',
                     component: './PluginManage',

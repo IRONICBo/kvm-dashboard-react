@@ -3,9 +3,19 @@ import {message} from "antd";
 
 //响应拦截器
 axios.interceptors.response.use(success => {
+    if (success == null || success == undefined || success.data == null || success.data == undefined) {
+        console.log("success is null or undefined");
+        return;
+    }
+
     console.log(success.data);
     return success.data;
 }, error => {
+    if (error == null || error == undefined || error.response == null || error.response == undefined) {
+        console.log("error is null or undefined");
+        return;
+    }
+    
     console.error(error.response.data);
     return error.response.data;
 });

@@ -6,6 +6,13 @@ import {
   apiAddPlugParam,
   apiStartPlugState,
 } from '@/api/Plugin';
+import {
+  apiInsertAllEvaluateNode,
+  apiGetAllEvaluateNode,
+  apiDeleteEvaluateNode,
+  apiUpdateEvaluateNode,
+  apiInsertEvaluateNode,
+} from '@/api/PluginNode';
 import { apiPluginUpload } from '@/api/Plugin';
 import { MinusCircleOutlined, PlusOutlined } from '@ant-design/icons';
 import { ProDescriptions } from '@ant-design/pro-components';
@@ -44,8 +51,9 @@ const PluginRun: React.FC<HostIdProps> = (props) => {
     // 上传文件
     const params = {
       execNumber: parseInt(values.execNumber),
-      hostUuidList: Array.isArray(values.hostUuidList) ? values.hostUuidList : [values.hostUuidList],
-      vmUuidList: Array.isArray(values.vmUuidList) ? values.vmUuidList : [values.vmUuidList],
+      // hostUuidList: Array.isArray(values.hostUuidList) ? values.hostUuidList : [values.hostUuidList],
+      // vmUuidList: Array.isArray(values.vmUuidList) ? values.vmUuidList : [values.vmUuidList],
+      nodeIdList: Array.isArray(values.nodeIdList) ? values.nodeIdList : [values.nodeIdList],
       paramsJson: JSON.stringify(values.params),
       updateScriptFile: true,
       plugId: parseInt(UUID),
@@ -68,6 +76,7 @@ const PluginRun: React.FC<HostIdProps> = (props) => {
 
   const { Option } = Select;
   let [vmList, setVmList] = useState([]);
+  let [nodeList, setNodeList] = useState([]);
   let [hostList, setHostList] = useState([]);
   let [fields, setFields] = useState([]);
   let [data, setData] = useState([]);
@@ -174,6 +183,23 @@ const PluginRun: React.FC<HostIdProps> = (props) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
+            apiGetAllEvaluateNode().then(resp => {
+              if (resp != null) {
+                  const transformedData = [];
+                  resp.forEach(element => {
+                  console.log("transformedData", element)
+                      transformedData.push(
+                          {
+                              "label": element.nodeName,
+                              "value": element.nodeId,
+                          }
+                      )
+                  });
+                  // let [vmList, setVmList] = useState<{ key: any; value: any; }[]>([]);
+                  console.log("transformedData", transformedData)
+                  setNodeList(transformedData);
+              }
+          })
           apiQueryVmList().then(resp => {
             if (resp != null) {
                 const transformedData = [];
@@ -253,7 +279,17 @@ const PluginRun: React.FC<HostIdProps> = (props) => {
         <Form.Item name="execNumber" label="执行次数" rules={[{ required: false }]}>
           <Input placeholder={'1'} />
         </Form.Item>
-        <Form.Item name="vmUuidList" label="虚拟机节点" rules={[{ required: false }]}>
+        <Form.Item name="nodeIdList" label="测试节点" rules={[{ required: false }]}>
+          <Select
+            placeholder="选择一个节点并更改上面的输入"
+            onChange={onNodeChange}
+            allowClear
+            mode="multiple"
+            options={nodeList}
+          >
+          </Select>
+        </Form.Item>
+        {/* <Form.Item name="vmUuidList" label="虚拟机节点" rules={[{ required: false }]}>
           <Select
             placeholder="选择一个节点并更改上面的输入"
             onChange={onNodeChange}
@@ -272,7 +308,7 @@ const PluginRun: React.FC<HostIdProps> = (props) => {
             options={hostList}
           >
           </Select>
-        </Form.Item>
+        </Form.Item> */}
         
         {/* <Form.Item name="plugin" label="插件" rules={[{ required: true }]}>
           <Select

@@ -1,5 +1,12 @@
 /* eslint-disable @typescript-eslint/no-use-before-define */
 /* eslint-disable @typescript-eslint/no-unused-vars */
+import {
+  apiInsertAllEvaluateNode,
+  apiGetAllEvaluateNode,
+  apiDeleteEvaluateNode,
+  apiUpdateEvaluateNode,
+  apiInsertEvaluateNode,
+} from '@/api/PluginNode';
 import { apiPluginUpload } from '@/api/Plugin';
 import { MinusCircleOutlined, PlusOutlined } from '@ant-design/icons';
 import { ProDescriptions } from '@ant-design/pro-components';

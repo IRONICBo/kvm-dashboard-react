@@ -187,6 +187,25 @@ export const apiGetPlugState = (id) => {
     })
 }
 
+// plugResultFile/queryByStateId 
+export const apiGetPlugResultFile = (id) => {
+    return getRequest('/plugResultFile/queryByStateId?stateId='+id).then(resp => {
+        if (resp.code == 200) {
+            return resp.data;
+        } else {
+            console.log(resp.code + ":" + resp.message);
+        }
+    })
+}
+
+// plugResultFile/download/single
+export const apiDownloadPlugResultFile = (id) => {
+    return getRequest('/plugResultFile/download/single?id='+id).then(resp => {
+        console.log(resp);
+    })
+    // 返回请求地址getRequest中的url地址
+}
+
 export const apiRunPlugin = (params) => {
     return postRequest('/plugState/run', params).then(resp => {
         if (resp.code == 200) {

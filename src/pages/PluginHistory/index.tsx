@@ -635,7 +635,7 @@ const PluginHistoryPage: React.FC = () => {
                 title="运行结果"
                 open={getDetailOpen}
                 onClose={cancelGetDetail}
-                width={1400}
+                width={1200}
                 styles={{
                 body: {
                     paddingBottom: 80,
