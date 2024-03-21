@@ -73,7 +73,7 @@ export default defineConfig({
         // },
         // TODO: Update Create VM Machine
         {
-            name: '插件测试',
+            name: '测试脚本集成模块',
             path: '/plugin',
             routes: [
                 {
@@ -94,6 +94,84 @@ export default defineConfig({
                 {
                     name: '测试历史',
                     path: '/plugin/history',
+                    component: './PluginHistory',
+                },
+            ]
+        },
+        // {
+        //     name: '测试操作录制与重播模块',
+        //     path: '/plugin',
+        //     routes: [
+        //         {
+        //             name: '测试节点管理',
+        //             path: '/plugin/node',
+        //             component: './PluginNodeManage',
+        //         },
+        //         {
+        //             name: '插件管理',
+        //             path: '/plugin/manage',
+        //             component: './PluginManage',
+        //         },
+        //         {
+        //             name: '插件测试',
+        //             path: '/plugin/runner',
+        //             component: './Plugin',
+        //         },
+        //         {
+        //             name: '测试历史',
+        //             path: '/plugin/history',
+        //             component: './PluginHistory',
+        //         },
+        //     ]
+        // },
+        {
+            name: '存储服务测试模块',
+            path: '/storage',
+            routes: [
+                {
+                    name: '测试节点管理',
+                    path: '/storage/node',
+                    component: './PluginNodeManage',
+                },
+                {
+                    name: '插件管理',
+                    path: '/storage/manage',
+                    component: './StoragePlugManage',
+                },
+                {
+                    name: '插件测试',
+                    path: '/storage/runner',
+                    component: './Plugin',
+                },
+                {
+                    name: '测试历史',
+                    path: '/storage/history',
+                    component: './PluginHistory',
+                },
+            ]
+        },
+        {
+            name: '计算服务测试模块',
+            path: '/compute',
+            routes: [
+                {
+                    name: '测试节点管理',
+                    path: '/compute/node',
+                    component: './PluginNodeManage',
+                },
+                {
+                    name: '插件管理',
+                    path: '/compute/manage',
+                    component: './ComputePlugManage',
+                },
+                {
+                    name: '插件测试',
+                    path: '/compute/runner',
+                    component: './Plugin',
+                },
+                {
+                    name: '测试历史',
+                    path: '/compute/history',
                     component: './PluginHistory',
                 },
             ]

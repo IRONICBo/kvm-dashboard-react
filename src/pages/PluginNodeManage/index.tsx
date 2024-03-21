@@ -249,7 +249,7 @@ const HostManagePage: React.FC = () => {
   };
   // 新增测试节点
   const submitAddModal = () => {
-    apiAddHost(addFormInstance.getFieldsValue()).then((respCode) => {
+    apiInsertEvaluateNode(addFormInstance.getFieldsValue()).then((respCode) => {
       // 如果新增成功，刷新列表
       if (respCode == 200) {
         apiGetAllEvaluateNode().then((resp) => {
@@ -558,7 +558,7 @@ const HostManagePage: React.FC = () => {
       </Space>
       <Table
         style={{ marginTop: 15 }}
-        rowSelection={rowSelection}
+        // rowSelection={rowSelection}
         columns={columns}
         dataSource={data}
         rowKey={'hostUuid'}

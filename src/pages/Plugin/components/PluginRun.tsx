@@ -65,8 +65,7 @@ const PluginRun: React.FC<HostIdProps> = (props) => {
       // TODO:
       if (res != undefined) {
         setPluginResult({
-          hostErrorMap: JSON.stringify(res.hostErrorMap),
-          vmErrorMap: JSON.stringify(res.vmErrorMap),
+          resMap: JSON.stringify(res),
         });
       } else {
         message.error('插件运行失败');
@@ -93,7 +92,8 @@ const PluginRun: React.FC<HostIdProps> = (props) => {
       if (status === 'done') {
         message.success(`${info.file.name} file uploaded successfully.`);
       } else if (status === 'error') {
-        message.error(`${info.file.name} file upload failed.`);
+        console.log(`${info.file.name} file upload failed.`);
+        // message.error(`${info.file.name} file upload failed.`);
       }
     },
     onDrop(e) {
@@ -442,8 +442,7 @@ const PluginRun: React.FC<HostIdProps> = (props) => {
 
       { pluginResult == null ? <Empty /> : 
         <Card>
-          <p>主机节点响应：{pluginResult.hostErrorMap}</p>
-          <p>虚拟机节点响应：{pluginResult.vmErrorMap}</p>
+          <p>响应信息：{pluginResult.resMap}</p>
         </Card>}
       {/* </Spin> */}
     </>

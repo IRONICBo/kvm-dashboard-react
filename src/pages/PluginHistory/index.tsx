@@ -668,7 +668,7 @@ const PluginHistoryPage: React.FC = () => {
                 </Button>
             </Space>
             <Table style={{marginTop: 15}}
-                    rowSelection={rowSelection}
+                    // rowSelection={rowSelection}
                     columns={columns}
                     dataSource={data}
                     rowKey={"recordId"}

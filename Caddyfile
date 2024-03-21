@@ -1,8 +1,0 @@
-:80 {
-    root * ./dist
-    file_server
-    try_files {path} /index.html
-
-    reverse_proxy /api/* localhost:28080/api
-    reverse_proxy /api/websocket/* localhost:28080/api/websocket/*
-}
