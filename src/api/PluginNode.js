@@ -67,8 +67,9 @@ export const apiInsertEvaluateNode = (params) => {
 
 
 // Query all plugin list
-export const apiGetPlugCardList = () => {
-    return getRequest('/plugCard/queryList').then(resp => {
+// 查询类型：(null-All、0-未定、1-存储、2-计算)
+export const apiGetPlugCardList = (cardType) => {
+    return getRequest('/plugCard/queryList?cardType='+cardType).then(resp => {
         if (resp.code == 200) {
             return resp.data;
         } else {

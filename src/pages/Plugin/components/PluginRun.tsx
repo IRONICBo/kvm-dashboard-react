@@ -5,6 +5,7 @@ import {
   apiGetPlugParamByPlugId,
   apiAddPlugParam,
   apiStartPlugState,
+  apiStopPlugState,
 } from '@/api/Plugin';
 import {
   apiInsertAllEvaluateNode,
@@ -23,6 +24,7 @@ import { apiGetPluginInfo, apiRunPlugin, apiGetPluginResp, apiTestPlugin } from 
 import { apiQueryVmList } from '@/api/VmManage';
 import { useSearchParams } from '@umijs/max';
 import { apiRefreshHostList } from '@/api/HostManage';
+import ParamInfoPage from './ResultInfo';
 
 const normFile = (e: any) => {
   console.log('Upload event:', e);
@@ -58,15 +60,18 @@ const PluginRun: React.FC<HostIdProps> = (props) => {
       updateScriptFile: true,
       plugId: parseInt(UUID),
     };
+
+    setSelectNodeList(Array.isArray(values.nodeIdList) ? values.nodeIdList : [values.nodeIdList]);
+
     console.log('params', params);
     apiStartPlugState(params).then((res) => {
       console.log('apiRunPlugin', res);
       // 获取结果
       // TODO:
       if (res != undefined) {
-        setPluginResult({
-          resMap: JSON.stringify(res),
-        });
+        // console.log('apiRunPlugin', res);
+        setPluginResult(res);
+        // console.log('setPluginResult', pluginResult.recordId);
       } else {
         message.error('插件运行失败');
       }
@@ -76,6 +81,7 @@ const PluginRun: React.FC<HostIdProps> = (props) => {
   const { Option } = Select;
   let [vmList, setVmList] = useState([]);
   let [nodeList, setNodeList] = useState([]);
+  let [selectNodeList, setSelectNodeList] = useState([]);
   let [hostList, setHostList] = useState([]);
   let [fields, setFields] = useState([]);
   let [data, setData] = useState([]);
@@ -103,6 +109,8 @@ const PluginRun: React.FC<HostIdProps> = (props) => {
 
   const [form] = Form.useForm();
   const onNodeChange = (value: string) => {
+    console.log(`selected ${value}`); 
+    setSelectNodeList(value);
     // {
     //   value: "ping",
     //   label: "网络时延"
@@ -433,6 +441,31 @@ const PluginRun: React.FC<HostIdProps> = (props) => {
           <Button type="primary" htmlType="submit">
             运行
           </Button>
+          <Button
+          style={{ marginLeft: 8 }}
+          type="danger" 
+          onClick={() => {
+            const params = {
+              nodeIdList: selectNodeList,
+              recordId: pluginResult.recordId,
+            };
+
+            console.log("selectNodeList", selectNodeList);
+
+            apiStopPlugState(params).then((res) => {
+              console.log('apiStopPlugState', res);
+              // 获取结果
+
+              if (res != undefined) {
+              } else {
+                // message.error('插件停止失败');
+              }
+            });
+
+            message.success('插件已停止');
+          }}>
+            停止
+          </Button>
         </Form.Item>
       </Form>
 
@@ -442,7 +475,15 @@ const PluginRun: React.FC<HostIdProps> = (props) => {
 
       { pluginResult == null ? <Empty /> : 
         <Card>
-          <p>响应信息：{pluginResult.resMap}</p>
+          <p>响应信息：{JSON.stringify(pluginResult.nodeErrorMap)}</p>
+          <ProDescriptions
+                title="结果列表"
+                column={2}
+                layout="vertical"
+                />
+
+                {/* <ParamInfoPage key={selectData?.recordId} uuid={"1764552466801758208"} /> */}
+                <ParamInfoPage key={pluginResult.recordId} uuid={pluginResult.recordId} />
         </Card>}
       {/* </Spin> */}
     </>

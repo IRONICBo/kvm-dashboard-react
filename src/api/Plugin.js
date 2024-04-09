@@ -2,8 +2,9 @@ import {getRequest, postRequest,putRequest, deleteFormRequest, postFormRequest} 
 import {message} from "antd";
 
 // Query all plugin list
-export const apiGetPlugCardList = () => {
-    return getRequest('/plugCard/queryList').then(resp => {
+// 查询类型：(null-All、0-未定、1-存储、2-计算)
+export const apiGetPlugCardList = (cardType) => {
+    return getRequest('/plugCard/queryList?cardType='+cardType).then(resp => {
         if (resp.code == 200) {
             return resp.data;
         } else {
@@ -44,6 +45,7 @@ export const apiDeletePlugCard = (id) => {
 }
 
 // Add plugin card
+// 插件类型（0-未定、1-存储、2-计算）
 export const apiAddPlugCard = (params) => {
     // {
     //     "cardDescription": "",
@@ -171,6 +173,19 @@ export const apiStartPlugState = (params) => {
             return resp.data;
         } else {
             message.error("启动失败");
+            console.log(resp.code + ":" + resp.message);
+        }
+    })
+}
+
+// plugState stop
+export const apiStopPlugState = (params) => {
+    return postRequest('/plugState/stop', params).then(resp => {
+        if (resp.code == 200) {
+            message.success("停止成功");
+            return resp.data;
+        } else {
+            message.error("停止失败");
             console.log(resp.code + ":" + resp.message);
         }
     })

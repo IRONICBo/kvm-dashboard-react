@@ -3,8 +3,8 @@ import { RunTimeLayoutConfig } from '@umijs/max';
 export const layout: RunTimeLayoutConfig = (initialState) => {
   return {
     // 常用属性
-    title: '虚拟机运维平台',
-    logo: '/logo.png',
+    title: '申威测试脚本集成管理',
+    // logo: '/logo.png',
     contentStyle: {
     },
     // 默认布局调整

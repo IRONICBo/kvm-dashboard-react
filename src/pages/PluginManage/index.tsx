@@ -534,7 +534,7 @@ const PluginManagePage: React.FC = () => {
 
   // 钩子，启动时获取插件列表
   useEffect(() => {
-    apiGetPlugCardList().then((resp) => {
+    apiGetPlugCardList(0).then((resp) => {
       if (resp != null) {
         setData(resp);
       }
@@ -567,10 +567,12 @@ const PluginManagePage: React.FC = () => {
   };
   // 新增插件
   const submitAddModal = () => {
-    apiAddPlugCard(addFormInstance.getFieldsValue()).then((respCode) => {
+    let temp = addFormInstance.getFieldsValue();
+    temp.cardType = 0;
+    apiAddPlugCard(temp).then((respCode) => {
       // 如果新增成功，刷新列表
       if (respCode == 200) {
-        apiGetPlugCardList().then((resp) => {
+        apiGetPlugCardList(0).then((resp) => {
           if (resp != null) {
             setData(resp);
           }
@@ -582,39 +584,14 @@ const PluginManagePage: React.FC = () => {
   // 修改插件信息
   const submitUpdateModal = () => {
     const temp = updateFormInstance.getFieldsValue();
-    const basicData = {
-      hostUuid: temp.hostUuid,
-      hostName: temp.hostName,
-      hostDescription: temp.hostDescription,
-      hostIpmiAddr: temp.hostIpmiAddr,
-      hostSnmpAddr: temp.hostSnmpAddr,
-    };
-    const sshData = {
-      hostUuid: temp.hostUuid,
-      password: temp.hostLoginPassword,
-      sshPort: temp.hostSshPort,
-      username: temp.hostLoginUser,
-    };
-
-    apiUpdateHost(basicData).then((respCode) => {
+    apiUpdatePlugCard(temp).then((respCode) => {
       // 如果修改成功刷新列表
-      if (respCode == 200) {
-        apiGetPlugCardList().then((resp) => {
+        apiGetPlugCardList(0).then((resp) => {
           if (resp != null) {
             setData(resp);
           }
         });
-      }
-    });
-    apiUpdateHostSSH(sshData).then((respCode) => {
-      // 如果修改成功刷新列表
-      if (respCode == 200) {
-        apiGetPlugCardList().then((resp) => {
-          if (resp != null) {
-            setData(resp);
-          }
-        });
-      }
+        cancelUpdateModal();
     });
   };
   // 关闭详细信息窗口
@@ -633,32 +610,28 @@ const PluginManagePage: React.FC = () => {
   const deleteHost = (hostId: string) => {
     apiDeletePlugCard(hostId).then((respCode) => {
       // 如果插件删除成功，刷新列表
-      if (respCode == 200) {
-        apiGetPlugCardList().then((resp) => {
+        apiGetPlugCardList(0).then((resp) => {
           if (resp != null) {
             setData(resp);
           }
         });
-      }
     });
   };
   // 启用插件
   const startHost = (hostId: string) => {
     apiStartHost(hostId).then((respCode) => {
-      if (respCode == 200) {
-        apiGetPlugCardList().then((resp) => {
+        apiGetPlugCardList(0).then((resp) => {
           if (resp != null) {
             setData(resp);
           }
         });
-      }
     });
   };
   // 停用插件
   const stopHost = (hostId: string) => {
     apiStopHost(hostId).then((respCode) => {
       if (respCode == 200) {
-        apiGetPlugCardList().then((resp) => {
+        apiGetPlugCardList(0).then((resp) => {
           if (resp != null) {
             setData(resp);
           }
@@ -718,7 +691,14 @@ const PluginManagePage: React.FC = () => {
           >
             <Input placeholder={'长度不超过 32 个字符'} />
           </Form.Item>
-
+          <Form.Item
+            label="插件类型"
+            name="cardType"
+            style={{ display: 'none' }}
+            rules={[{ required: true, message: '请输入插件名称!' }]}
+          >
+            <Input placeholder={'长度不超过 32 个字符'} defaultValue={0} />
+          </Form.Item>
         </Form>
       </Drawer>
 
@@ -802,7 +782,7 @@ const PluginManagePage: React.FC = () => {
           size="large"
           icon={<RedoOutlined />}
           onClick={() =>
-            apiGetPlugCardList().then((resp) => {
+            apiGetPlugCardList(0).then((resp) => {
               if (resp != null) {
                 setData(resp);
               }

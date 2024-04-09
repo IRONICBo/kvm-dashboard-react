@@ -1,11 +1,12 @@
-import { apiDeletePlugInfo, apiGetPlugInfoByCardId, apiAddPlugInfo } from '@/api/Plugin';
-import { PageContainer, ProDescriptions } from '@ant-design/pro-components';
 import {
-  apiSnapshotCreate,
-  apiSnapshotDelete,
-  apiSnapshotRevert,
-} from '@/api/VmSnapshot';
-import { PlusOutlined, RedoOutlined, InboxOutlined } from '@ant-design/icons';
+  apiDeletePlugParam,
+  apiAddPlugParam,
+  apiGetPlugState,
+} from '@/api/Plugin';
+import { apiSnapshotDelete, apiSnapshotRevert } from '@/api/VmSnapshot';
+import { InboxOutlined, PlusOutlined, RedoOutlined } from '@ant-design/icons';
+import type { UploadProps } from 'antd';
+import { PageContainer, ProDescriptions } from '@ant-design/pro-components';
 import {
   Button,
   Drawer,
@@ -15,13 +16,13 @@ import {
   Radio,
   Space,
   Table,
+  Tooltip,
   Upload,
   message,
 } from 'antd';
-import type { UploadProps } from 'antd';
 import { ColumnsType } from 'antd/es/table';
 import React, { useEffect, useState } from 'react';
-import ParamInfoPage from './ParamInfo';
+import PlugFiles from './PlugFiles';
 
 interface DataType {
   snapGroupUuid: string;
@@ -31,182 +32,118 @@ interface DataType {
 interface HostIdProps {
   uuid: string;
 }
-const PlugInfoPage: React.FC<HostIdProps> = (props) => {
+const ParamInfoPage: React.FC<HostIdProps> = (props) => {
   const UUID = props.uuid;
   console.log('UUID', UUID);
   const columns: ColumnsType<DataType> = [
     {
-      title: 'ID',
-      dataIndex: 'plugZzid',
+      title: '状态ID',
+      dataIndex: 'stateId',
       ellipsis: {
         showTitle: false,
       },
-      width: 50,
-      fixed: 'left',
-      render: (plugZzid: string) => (
-        <a
-            onClick={(event) => {
-              event.preventDefault();
-              showGetDetailOpen(plugZzid);
-            // setSelectData(data.find((item) => item.plugZzid === plugZzid));
-          }}
-        >
-          {plugZzid}
-        </a>
+      width: 200,
+      render: (stateId) => (
+        <Tooltip placement="topLeft" title={stateId}>
+            <a
+                onClick={(event) => {
+                event.preventDefault();
+                showGetDetailOpen(stateId);
+                }}
+            >
+                {stateId}
+            </a>
+        </Tooltip>
       ),
     },
     {
-      title: '插件卡片ID',
-      dataIndex: 'plugCardId',
+      title: '执行类型',
+      dataIndex: 'stateExecType',
       ellipsis: {
         showTitle: false,
       },
       width: 100,
     },
     {
-      title: '插件版本',
-      dataIndex: 'plugVersion',
+      title: '执行UUID',
+      dataIndex: 'stateExecUuid',
+      ellipsis: {
+        showTitle: false,
+      },
+      width: 400,
+    },
+    {
+      title: '插件ID',
+      dataIndex: 'statePlugId',
       ellipsis: {
         showTitle: false,
       },
       width: 100,
     },
     {
-      title: '插件版本名称',
-      dataIndex: 'plugVersionName',
+      title: '执行记录ID',
+      dataIndex: 'stateExecRecordId',
       ellipsis: {
         showTitle: false,
       },
       width: 150,
     },
     {
-      title: '插件版本描述',
-      dataIndex: 'plugVersionDescription',
+      title: '状态代码',
+      dataIndex: 'stateCode',
+      ellipsis: {
+        showTitle: false,
+      },
+      width: 150,
+    },
+    {
+      title: '响应信息',
+      dataIndex: 'stateResponse',
+      ellipsis: {
+        showTitle: false,
+      },
+      width: 500,
+    },
+    {
+      title: '创建时间',
+      dataIndex: 'stateCreateTime',
       ellipsis: {
         showTitle: false,
       },
       width: 200,
     },
     {
-      title: '插件脚本大小',
-      dataIndex: 'plugScriptSize',
-      ellipsis: {
-        showTitle: false,
-      },
-      width: 150,
-    },
-    {
-      title: '插件脚本数量',
-      dataIndex: 'plugScriptNumber',
-      ellipsis: {
-        showTitle: false,
-      },
-      width: 150,
-    },
-    {
-      title: '插件脚本路径',
-      dataIndex: 'plugScriptPath',
+      title: '中间时间',
+      dataIndex: 'stateMiddleTime',
       ellipsis: {
         showTitle: false,
       },
       width: 200,
     },
     {
-      title: '插件启动命令',
-      dataIndex: 'plugStartCommand',
+      title: '完成时间',
+      dataIndex: 'stateFinishTime',
       ellipsis: {
         showTitle: false,
       },
       width: 200,
     },
     {
-      title: '插件是否启用',
-      dataIndex: 'plugEnable',
-      ellipsis: {
-        showTitle: false,
-      },
-      width: 150,
-    },
-    {
-      title: '插件创建时间',
-      dataIndex: 'plugCreateTime',
+      title: '结果类型',
+      dataIndex: 'stateResultType',
       ellipsis: {
         showTitle: false,
       },
       width: 200,
-    },
-    {
-      title: '插件类型',
-      dataIndex: 'plugType',
-      ellipsis: {
-        showTitle: false,
-      },
-      width: 150,
-    },
-    {
-      title: '插件结果类型',
-      dataIndex: 'plugResultType',
-      ellipsis: {
-        showTitle: false,
-      },
-      width: 150,
-    },
-    {
-      title: '操作',
-      dataIndex: 'operation',
-      fixed: 'right',
-      width: 220,
-      render: (_, record) => (
-        <Space>
-          {/* <Button
-            size={'small'}
-            shape={'round'}
-            type="dashed"
-            onClick={() => showUpdateModal(record)}
-          >
-            编辑
-          </Button> */}
-          <Popconfirm
-            title="Sure to delete?"
-            onConfirm={() => deleteHost(record.plugZzid)}
-          >
-            <Button size={'small'} shape={'round'} danger={true} type="dashed">
-              删除
-            </Button>
-          </Popconfirm>
-          <Button size={'small'} shape={'round'}
-          onClick={() => {
-              window.open('/plugin/runner?plugId=' + record.plugZzid);
-          }}
-          >
-              运行
-          </Button>
-          <Button size={'small'} shape={'round'}
-          onClick={() => {
-              window.open('/plugin/history?plugId=' + record.plugZzid);
-          }}
-          >
-              历史
-          </Button>
-        </Space>
-      ),
     },
   ];
 
   const { Dragger } = Upload;
-  const normFile = (e: any) => {
-    console.log('Upload event:', e);
-    if (Array.isArray(e)) {
-      return e;
-    }
-    return e?.fileList;
-  };
   const DraggerProps: UploadProps = {
     name: 'files',
-    multiple: true,
+    multiple: false,
     // action: 'https://run.mocky.io/v3/435e224c-44fb-4773-9faf-380c5e6a2188',
     onChange(info) {
-      console.log("info", info)
       const { status } = info.file;
       if (status !== 'uploading') {
         console.log(info.file, info.fileList);
@@ -237,7 +174,7 @@ const PlugInfoPage: React.FC<HostIdProps> = (props) => {
   // 钩子，启动时获取插件信息列表
   useEffect(() => {
     console.log('UUIDUUIDUUIDUUID', UUID);
-    apiGetPlugInfoByCardId(UUID).then((resp) => {
+    apiGetPlugState(UUID).then((resp) => {
       if (resp != null) {
         setData(resp);
       }
@@ -247,8 +184,8 @@ const PlugInfoPage: React.FC<HostIdProps> = (props) => {
   /**
    * ----------------------------------------------------------------------------------------------------------------------------------------------------------------
    */
-  const showGetDetailOpen = (plugZzid: String) => {
-    const res = data.find((item) => item.plugZzid == plugZzid);
+  const showGetDetailOpen = (stateId: String) => {
+    const res = data.find((item) => item.stateId == stateId);
     console.log('showGetDetailOpen', res);
     setSelectData(res);
     setGetDetailOpen(true);
@@ -271,12 +208,22 @@ const PlugInfoPage: React.FC<HostIdProps> = (props) => {
   // 新增插件信息
   const submitAddModal = () => {
     const temp = addFormInstance.getFieldsValue();
-    temp.files = temp.files[0].originFileObj;
-    console.log('temp', temp);
-    apiAddPlugInfo(temp).then((respCode) => {
+    const param = {
+      plugId: UUID,
+      plugParamList: [
+        {
+          paramDefaultValue: temp.paramDefaultValue,
+          paramDescription: temp.paramDescription,
+          paramKey: temp.paramKey,
+          paramRequire: temp.paramRequire
+        }
+      ]
+    };
+    console.log('temp Param', temp);
+    apiAddPlugParam(param).then((respCode) => {
       // 如果新增成功，刷新列表
       if (respCode == 200) {
-        apiGetPlugInfoByCardId(UUID).then((resp) => {
+        apiGetPlugState(UUID).then((resp) => {
           if (resp != null) {
             setData(resp);
           }
@@ -305,7 +252,7 @@ const PlugInfoPage: React.FC<HostIdProps> = (props) => {
     apiSnapshotRevert(data).then((respCode) => {
       // 如果插件信息删除成功，刷新列表
       if (respCode == 200) {
-        apiGetPlugInfoByCardId(UUID).then((resp) => {
+        apiGetPlugState(UUID).then((resp) => {
           if (resp != null) {
             setData(resp);
           }
@@ -318,7 +265,7 @@ const PlugInfoPage: React.FC<HostIdProps> = (props) => {
     apiSnapshotDelete(hostId).then((respCode) => {
       // 如果插件信息删除成功，刷新列表
       if (respCode == 200) {
-        apiGetPlugInfoByCardId(UUID).then((resp) => {
+        apiGetPlugState(UUID).then((resp) => {
           if (resp != null) {
             setData(resp);
           }
@@ -328,10 +275,10 @@ const PlugInfoPage: React.FC<HostIdProps> = (props) => {
   };
   // 删除插件
   const deleteHost = (plugId: string) => {
-    apiDeletePlugInfo(plugId).then((respCode) => {
+    apiDeletePlugParam(plugId).then((respCode) => {
       // 如果插件删除成功，刷新列表
       if (respCode == 200) {
-        apiGetPlugInfoByCardId(UUID).then((resp) => {
+        apiGetPlugState(UUID).then((resp) => {
           if (resp != null) {
             setData(resp);
           }
@@ -356,7 +303,7 @@ const PlugInfoPage: React.FC<HostIdProps> = (props) => {
   return (
     <>
       <Drawer
-        title="新增插件信息"
+        title="新增参数"
         width={720}
         open={addModalOpen}
         onClose={cancelAddModal}
@@ -375,84 +322,45 @@ const PlugInfoPage: React.FC<HostIdProps> = (props) => {
       >
         <Form layout="vertical" form={addFormInstance}>
           <Form.Item
-            label="插件卡片ID"
-            name="plugCardId"
-            rules={[{ required: true, message: '请输入插件卡片ID!' }]}
+            label="参数键"
+            name="paramKey"
+            rules={[{ required: true, message: '请输入参数键!' }]}
           >
-            <Input disabled={true} />
+            <Input placeholder={'参数键'} />
+          </Form.Item>
+          <Form.Item
+            label="参数默认值"
+            name="paramDefaultValue"
+            rules={[{ required: true, message: '请输入参数默认值!' }]}
+          >
+            <Input placeholder={'参数默认值'} />
           </Form.Item>
 
           <Form.Item
-            label="插件"
-            name="files"
-            valuePropName="fileList"
-            getValueFromEvent={normFile}
-            rules={[{ required: true, message: '请输入插件信息名称!' }]}
+            label="参数描述"
+            name="paramDescription"
+            rules={[{ required: true, message: '请输入参数描述!' }]}
           >
-            <Dragger {...DraggerProps}>
-              <p className="ant-upload-drag-icon">
-                <InboxOutlined />
-              </p>
-              <p className="ant-upload-text">点击或拖动文件上传</p>
-              <p className="ant-upload-hint">
-                支持单次或批量上传。严禁上传公司数据或其他 违禁文件。
-              </p>
-            </Dragger>
+            <Input placeholder={'参数描述'} />
           </Form.Item>
-
           <Form.Item
-            label="插件结果类型"
-            name="plugResultType"
-            rules={[{ required: true, message: '请输入插件结果类型!' }]}
+            label="参数是否必需"
+            name="paramRequire"
+            rules={[{ required: true, message: '请选择参数是否必需!' }]}
           >
             <Radio.Group>
-              <Radio value={'TEXT'}>文本</Radio>
-              <Radio value={'FILE'}>文件</Radio>
+              <Radio value={1}>是</Radio>
+              <Radio value={0}>否</Radio>
             </Radio.Group>
-          </Form.Item>
-
-          <Form.Item
-            label="插件启动命令"
-            name="plugStartCommand"
-            rules={[{ required: true, message: '请输入插件启动命令!' }]}
-          >
-            <Input placeholder={'插件启动命令'} />
-          </Form.Item>
-
-          <Form.Item
-            label="插件类型"
-            name="plugType"
-            rules={[{ required: true, message: '请输入插件类型!' }]}
-          >
-            <Radio.Group>
-              <Radio value={'COMMAND_PARAM'}>命令行</Radio>
-              <Radio value={'HTTP_PARAM'}>接口请求</Radio>
-            </Radio.Group>
-          </Form.Item>
-
-          <Form.Item
-            label="插件版本描述"
-            name="plugVersionDescription"
-            rules={[{ required: true, message: '请输入插件版本描述!' }]}
-          >
-            <Input placeholder={'插件版本描述'} />
-          </Form.Item>
-
-          <Form.Item
-            label="插件版本名称"
-            name="plugVersionName"
-            rules={[{ required: true, message: '请输入插件版本名称!' }]}
-          >
-            <Input placeholder={'插件版本名称'} />
           </Form.Item>
         </Form>
       </Drawer>
 
       <Drawer
-        title="参数详细信息"
+        title="文件详细信息"
         open={getDetailOpen}
         onClose={cancelGetDetail}
-        width={1200}
+        width={1000}
         styles={{
           body: {
             paddingBottom: 80,
@@ -465,12 +373,12 @@ const PlugInfoPage: React.FC<HostIdProps> = (props) => {
         }
       >
         <ProDescriptions
-          title="参数列表"
+          title="文件列表"
           column={2}
           layout="vertical"
         />
 
-        <ParamInfoPage key={selectData?.plugZzid} uuid={selectData?.plugZzid} />
+        <PlugFiles key={selectData?.stateId} uuid={selectData?.stateId} />
       </Drawer>
 
       <Space size={'middle'}>
@@ -479,7 +387,7 @@ const PlugInfoPage: React.FC<HostIdProps> = (props) => {
           size="large"
           icon={<RedoOutlined />}
           onClick={() =>
-            apiGetPlugInfoByCardId(UUID).then((resp) => {
+            apiGetPlugState(UUID).then((resp) => {
               if (resp != null) {
                 setData(resp);
               }
@@ -488,24 +396,16 @@ const PlugInfoPage: React.FC<HostIdProps> = (props) => {
         >
           刷新
         </Button>
-        <Button
-          type="primary"
-          size="large"
-          icon={<PlusOutlined />}
-          onClick={showAddModal}
-        >
-          新增插件版本
-        </Button>
       </Space>
       <Table
         style={{ marginTop: 15 }}
-        // rowSelection={rowSelection}
+        rowSelection={rowSelection}
         columns={columns}
         dataSource={data}
         rowKey={'snapGroupUuid'}
-        scroll={{ x: 1000 }}
+        scroll={{ x: 1500 }}
       ></Table>
     </>
   );
 };
-export default PlugInfoPage;
+export default ParamInfoPage;

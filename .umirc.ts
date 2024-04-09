@@ -11,54 +11,55 @@ export default defineConfig({
     initialState: {},
     request: {},
     layout: {
-        title: '虚拟机运维平台',
+        title: '申威测试脚本集成管理',
     },
     routes: [
         {
             path: '/',
-            redirect: '/virtual/manage',
+            // redirect: '/virtual/manage',
+            redirect: '/plugin/node',
         },
-        {
-            name: '资源池控制模块',
-            path: '/virtual',
-            routes: [
-                {
-                    name: '宿主机管理',
-                    path: '/virtual/host',
-                    component: './HostManage',
-                },
-                {
-                    name: '虚拟机管理',
-                    path: '/virtual/manage',
-                    component: './VmManage',
-                },
-                {
-                    name: '网络管理',
-                    path: '/virtual/network',
-                    component: './VmNetwork',
-                },
-                {
-                    name: '镜像管理',
-                    path: '/virtual/mirror',
-                    component: './VmMirror',
-                },
-                {
-                    name: '磁盘管理',
-                    path: '/virtual/volume',
-                    component: './VmVolume',
-                },
-                {
-                    name: '计算规格管理',
-                    path: '/virtual/instance',
-                    component: './VmInstance',
-                },
-                {
-                    name: '云盘规格管理',
-                    path: '/virtual/disk',
-                    component: './VmDisk',
-                },
-            ]
-        },
+        // {
+        //     name: '资源池控制模块',
+        //     path: '/virtual',
+        //     routes: [
+        //         {
+        //             name: '宿主机管理',
+        //             path: '/virtual/host',
+        //             component: './HostManage',
+        //         },
+        //         {
+        //             name: '虚拟机管理',
+        //             path: '/virtual/manage',
+        //             component: './VmManage',
+        //         },
+        //         {
+        //             name: '网络管理',
+        //             path: '/virtual/network',
+        //             component: './VmNetwork',
+        //         },
+        //         {
+        //             name: '镜像管理',
+        //             path: '/virtual/mirror',
+        //             component: './VmMirror',
+        //         },
+        //         {
+        //             name: '磁盘管理',
+        //             path: '/virtual/volume',
+        //             component: './VmVolume',
+        //         },
+        //         {
+        //             name: '计算规格管理',
+        //             path: '/virtual/instance',
+        //             component: './VmInstance',
+        //         },
+        //         {
+        //             name: '云盘规格管理',
+        //             path: '/virtual/disk',
+        //             component: './VmDisk',
+        //         },
+        //     ]
+        // },
         // {
         //     name: '虚拟机创建',
         //     path: '/virtual/create',
@@ -98,32 +99,32 @@ export default defineConfig({
                 },
             ]
         },
-        // {
-        //     name: '测试操作录制与重播模块',
-        //     path: '/plugin',
-        //     routes: [
-        //         {
-        //             name: '测试节点管理',
-        //             path: '/plugin/node',
-        //             component: './PluginNodeManage',
-        //         },
-        //         {
-        //             name: '插件管理',
-        //             path: '/plugin/manage',
-        //             component: './PluginManage',
-        //         },
-        //         {
-        //             name: '插件测试',
-        //             path: '/plugin/runner',
-        //             component: './Plugin',
-        //         },
-        //         {
-        //             name: '测试历史',
-        //             path: '/plugin/history',
-        //             component: './PluginHistory',
-        //         },
-        //     ]
-        // },
+        {
+            name: '测试操作录制与重播模块',
+            path: '/record',
+            routes: [
+                {
+                    name: '测试节点管理',
+                    path: '/record/node',
+                    component: './PluginNodeManage',
+                },
+                // {
+                //     name: '插件管理',
+                //     path: '/record/manage',
+                //     component: './PluginManage',
+                // },
+                // {
+                //     name: '插件测试',
+                //     path: '/record/runner',
+                //     component: './Plugin',
+                // },
+                // {
+                //     name: '测试历史',
+                //     path: '/record/history',
+                //     component: './PluginHistory',
+                // },
+            ]
+        },
         {
             name: '存储服务测试模块',
             path: '/storage',
@@ -177,7 +178,7 @@ export default defineConfig({
             ]
         },
         {
-            name: '资源动态监控模块',
+            name: '界面展示模块-资源动态监控模块',
             path: '/system',
             routes: [
                 {
@@ -194,7 +195,7 @@ export default defineConfig({
             ],
         },
         {
-            name: '服务质量监控模块',
+            name: '界面展示模块-服务质量监控模块',
             path: '/service',
             routes: [
                 {
@@ -221,7 +222,7 @@ export default defineConfig({
             ]
         },
         {
-            name: '外部接口模块',
+            name: '对外接口模块',
             path: '/api',
             routes: [
                 {

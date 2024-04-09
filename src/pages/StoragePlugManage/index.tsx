@@ -534,7 +534,7 @@ const PluginManagePage: React.FC = () => {
 
   // 钩子，启动时获取插件列表
   useEffect(() => {
-    apiGetPlugCardList().then((resp) => {
+    apiGetPlugCardList(1).then((resp) => {
       if (resp != null) {
         setData(resp);
       }
@@ -567,10 +567,12 @@ const PluginManagePage: React.FC = () => {
   };
   // 新增插件
   const submitAddModal = () => {
-    apiAddPlugCard(addFormInstance.getFieldsValue()).then((respCode) => {
+    let temp = addFormInstance.getFieldsValue();
+    temp.cardType = 1;
+    apiAddPlugCard(temp).then((respCode) => {
       // 如果新增成功，刷新列表
       if (respCode == 200) {
-        apiGetPlugCardList().then((resp) => {
+        apiGetPlugCardList(1).then((resp) => {
           if (resp != null) {
             setData(resp);
           }
@@ -599,7 +601,7 @@ const PluginManagePage: React.FC = () => {
     apiUpdateHost(basicData).then((respCode) => {
       // 如果修改成功刷新列表
       if (respCode == 200) {
-        apiGetPlugCardList().then((resp) => {
+        apiGetPlugCardList(1).then((resp) => {
           if (resp != null) {
             setData(resp);
           }
@@ -609,7 +611,7 @@ const PluginManagePage: React.FC = () => {
     apiUpdateHostSSH(sshData).then((respCode) => {
       // 如果修改成功刷新列表
       if (respCode == 200) {
-        apiGetPlugCardList().then((resp) => {
+        apiGetPlugCardList(1).then((resp) => {
           if (resp != null) {
             setData(resp);
           }
@@ -634,7 +636,7 @@ const PluginManagePage: React.FC = () => {
     apiDeletePlugCard(hostId).then((respCode) => {
       // 如果插件删除成功，刷新列表
       if (respCode == 200) {
-        apiGetPlugCardList().then((resp) => {
+        apiGetPlugCardList(1).then((resp) => {
           if (resp != null) {
             setData(resp);
           }
@@ -646,7 +648,7 @@ const PluginManagePage: React.FC = () => {
   const startHost = (hostId: string) => {
     apiStartHost(hostId).then((respCode) => {
       if (respCode == 200) {
-        apiGetPlugCardList().then((resp) => {
+        apiGetPlugCardList(1).then((resp) => {
           if (resp != null) {
             setData(resp);
           }
@@ -658,7 +660,7 @@ const PluginManagePage: React.FC = () => {
   const stopHost = (hostId: string) => {
     apiStopHost(hostId).then((respCode) => {
       if (respCode == 200) {
-        apiGetPlugCardList().then((resp) => {
+        apiGetPlugCardList(1).then((resp) => {
           if (resp != null) {
             setData(resp);
           }
@@ -718,7 +720,6 @@ const PluginManagePage: React.FC = () => {
           >
             <Input placeholder={'长度不超过 32 个字符'} />
           </Form.Item>
-
         </Form>
       </Drawer>
 
@@ -802,7 +803,7 @@ const PluginManagePage: React.FC = () => {
           size="large"
           icon={<RedoOutlined />}
           onClick={() =>
-            apiGetPlugCardList().then((resp) => {
+            apiGetPlugCardList(1).then((resp) => {
               if (resp != null) {
                 setData(resp);
               }
