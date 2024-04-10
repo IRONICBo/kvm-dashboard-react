@@ -584,39 +584,14 @@ const PluginManagePage: React.FC = () => {
   // 修改插件信息
   const submitUpdateModal = () => {
     const temp = updateFormInstance.getFieldsValue();
-    const basicData = {
-      hostUuid: temp.hostUuid,
-      hostName: temp.hostName,
-      hostDescription: temp.hostDescription,
-      hostIpmiAddr: temp.hostIpmiAddr,
-      hostSnmpAddr: temp.hostSnmpAddr,
-    };
-    const sshData = {
-      hostUuid: temp.hostUuid,
-      password: temp.hostLoginPassword,
-      sshPort: temp.hostSshPort,
-      username: temp.hostLoginUser,
-    };
-
-    apiUpdateHost(basicData).then((respCode) => {
+    apiUpdatePlugCard(temp).then((respCode) => {
       // 如果修改成功刷新列表
-      if (respCode == 200) {
         apiGetPlugCardList(1).then((resp) => {
           if (resp != null) {
             setData(resp);
           }
         });
-      }
-    });
-    apiUpdateHostSSH(sshData).then((respCode) => {
-      // 如果修改成功刷新列表
-      if (respCode == 200) {
-        apiGetPlugCardList(1).then((resp) => {
-          if (resp != null) {
-            setData(resp);
-          }
-        });
-      }
+        cancelUpdateModal();
     });
   };
   // 关闭详细信息窗口
