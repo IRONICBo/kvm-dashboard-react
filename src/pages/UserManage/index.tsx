@@ -10,6 +10,7 @@ import {
 } from '@/api/System';
 import {
     apiCreateAuthGroup,
+    apiUserRegister,
     apiGetAuthGroup,
     apiDeleteAuthGroup,
     apiGetAuthInfo,

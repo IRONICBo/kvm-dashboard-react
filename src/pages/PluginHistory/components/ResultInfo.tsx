@@ -102,6 +102,11 @@ const ParamInfoPage: React.FC<HostIdProps> = (props) => {
       ellipsis: {
         showTitle: false,
       },
+      render: (stateResponse) => (
+        <Tooltip placement="topLeft" title={stateResponse}>
+            {stateResponse}
+        </Tooltip>
+      ),
       width: 500,
     },
     {

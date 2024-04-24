@@ -15,6 +15,16 @@ export default defineConfig({
     },
     routes: [
         {
+            path: '/login',
+            component: './Login',
+            layout: false,
+        },
+        {
+            path: '/register',
+            component: './Register',
+            layout: false,
+        },
+        {
             path: '/',
             // redirect: '/virtual/manage',
             redirect: '/plugin/node',
@@ -91,6 +101,8 @@ export default defineConfig({
                     name: '插件测试',
                     path: '/plugin/runner',
                     component: './Plugin',
+                    // exact: true,
+                    hideInMenu: true,
                 },
                 {
                     name: '测试历史',
@@ -143,6 +155,8 @@ export default defineConfig({
                     name: '插件测试',
                     path: '/storage/runner',
                     component: './Plugin',
+                    // exact: true,
+                    hideInMenu: true,
                 },
                 {
                     name: '测试历史',
@@ -169,6 +183,8 @@ export default defineConfig({
                     name: '插件测试',
                     path: '/compute/runner',
                     component: './Plugin',
+                    // exact: true,
+                    hideInMenu: true,
                 },
                 {
                     name: '测试历史',

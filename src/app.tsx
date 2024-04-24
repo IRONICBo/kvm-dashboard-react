@@ -9,8 +9,10 @@ export const layout: RunTimeLayoutConfig = (initialState) => {
     },
     // 默认布局调整
     // rightContentRender: () => <RightContent />,
-    // footerRender: () => <Footer />,
+    footerRender: () => null,
     menuHeaderRender: undefined,
     // 其他属性见：https://procomponents.ant.design/components/layout#prolayout
+    logout: () => {
+    }
   };
 };
