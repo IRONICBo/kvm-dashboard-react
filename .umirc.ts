@@ -15,46 +15,42 @@ export default defineConfig({
     },
     routes: [
         {
-            path: '/',
-            redirect: '/virtual/manage',
-        },
-        {
             name: '资源池控制模块',
-            path: '/',
+            path: '/zone',
             routes: [
                 {
                     name: '宿主机管理',
-                    path: '/host',
+                    path: '/zone/host',
                     component: './HostManage',
                 },
                 {
                     name: '虚拟机管理',
-                    path: '/virtual/manage',
+                    path: '/zone/virtual/manage',
                     component: './VmManage',
                 },
                 {
                     name: '网络管理',
-                    path: '/virtual/network',
+                    path: '/zone/virtual/network',
                     component: './VmNetwork',
                 },
                 {
                     name: '镜像管理',
-                    path: '/virtual/mirror',
+                    path: '/zone/virtual/mirror',
                     component: './VmMirror',
                 },
                 {
                     name: '磁盘管理',
-                    path: '/virtual/volume',
+                    path: '/zone/virtual/volume',
                     component: './VmVolume',
                 },
                 {
                     name: '计算规格管理',
-                    path: '/virtual/instance',
+                    path: '/zone/virtual/instance',
                     component: './VmInstance',
                 },
                 {
                     name: '云盘规格管理',
-                    path: '/virtual/disk',
+                    path: '/zone/virtual/disk',
                     component: './VmDisk',
                 },
             ]
@@ -72,74 +68,73 @@ export default defineConfig({
         //     component: './VmSnapshot',
         // },
         // TODO: Update Create VM Machine
-        {
-            name: '插件测试',
-            path: '/',
-            routes: [
-                {
-                    name: '插件管理',
-                    path: '/plugin/manage',
-                    component: './PluginManage',
-                },
-                {
-                    name: '插件测试',
-                    path: '/plugin/runner',
-                    component: './Plugin',
-                },
-                {
-                    name: '测试历史',
-                    path: '/plugin/history',
-                    component: './PluginHistory',
-                },
-            ]
-        },
+        // {
+        //     name: '插件测试',
+        //     path: '/',
+        //     routes: [
+        //         {
+        //             name: '插件管理',
+        //             path: '/plugin/manage',
+        //             component: './PluginManage',
+        //         },
+        //         {
+        //             name: '插件测试',
+        //             path: '/plugin/runner',
+        //             component: './Plugin',
+        //         },
+        //         {
+        //             name: '测试历史',
+        //             path: '/plugin/history',
+        //             component: './PluginHistory',
+        //         },
+        //     ]
+        // },
         {
             name: '资源动态监控模块',
             path: '/',
             routes: [
                 {
-                    name: '系统管理',
-                    path: '/system/manage',
-                    component: './SystemManage',
-                },
-                {
-                    name: '监控',
+                    name: '资源监控',
                     path: '/monitor',
                     component: './Monitor',
-                    hideInMenu: true,
                 },
             ],
         },
         {
             name: '服务质量监控模块',
-            path: '/',
+            path: '/servicemonitor',
             routes: [
                 {
-                    name: '系统管理',
-                    path: '/system/manage',
-                    component: './SystemManage',
+                    name: '服务监控',
+                    path: '/servicemonitor/service',
+                    component: './ServiceManage',
                 },
                 {
                     name: '性能指标',
-                    path: '/performance',
+                    path: '/servicemonitor/performance',
                     component: './Performance',
+                },
+                {
+                    name: '系统管理',
+                    path: '/servicemonitor/system/manage',
+                    component: './SystemManage',
                 },
             ],
         },
         {
             name: '用户权限管理模块',
-            path: '/',
+            path: '/sysmanage',
             routes: [
                 {
                     name: '用户管理',
-                    path: '/user/manage',
+                    path: '/sysmanage/user/manage',
                     component: './UserManage',
                 },
             ]
         },
         {
             name: '外部接口模块',
-            path: '/',
+            path: '/api',
             routes: [
                 {
                     name: '外部接口文档',

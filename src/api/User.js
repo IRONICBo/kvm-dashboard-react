@@ -23,8 +23,8 @@ export const apiGetAuthGroup = () => {
     })
 }
 
-export const apiDeleteAuthGroup = () => {
-    return postFormRequest('/manage/authorityGroup/deleteById').then(resp => {
+export const apiDeleteAuthGroup = (id) => {
+    return postFormRequest('/manage/authorityGroup/deleteById?authGroupUuid='+id).then(resp => {
         if (resp.code == 200) {
             message.success("删除用户权限组信息成功");
             return resp.data;
@@ -45,8 +45,8 @@ export const apiGetAuthInfo = () => {
     })
 }
 
-export const apiCreateAuthInfo = () => {
-    return postRequest('/manage/authorityInfo/create').then(resp => {
+export const apiCreateAuthInfo = (data) => {
+    return postRequest('/manage/authorityInfo/create', data).then(resp => {
         if (resp.code == 200) {
             message.success("查询用户权限组成功");
             return resp.data;
@@ -57,7 +57,7 @@ export const apiCreateAuthInfo = () => {
 }
 
 export const apiDeleteAuthInfo = (authGroupUuid, authUserUuid) => {
-    return postFormRequest('/manage/authorityInfo/deleteOne?authGroupUuid='+authGroupUuid+"&authUserUuid="+authUserUuid).then(resp => {
+    return getRequest('/manage/authorityInfo/deleteOne?authGroupUuid='+authGroupUuid+"&authUserUuid="+authUserUuid).then(resp => {
         if (resp.code == 200) {
             message.success("删除用户权限组信息成功");
             return resp.data;
