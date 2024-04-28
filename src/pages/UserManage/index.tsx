@@ -78,9 +78,9 @@ const SystemManagePage: React.FC = () => {
         showTitle: false,
       },
       width: 300,
-      render: (backupType) => (
-        <Tooltip placement="topLeft" title={backupType}>
-          {backupType}
+      render: (authUserUuid) => (
+        <Tooltip placement="topLeft" title={authUserUuid}>
+          {authUserUuid}
         </Tooltip>
       ),
     },
@@ -105,16 +105,8 @@ const SystemManagePage: React.FC = () => {
       render: (_, record) => (
         <Space>
           <Popconfirm
-            title="Sure to revert?"
-            onConfirm={() => apiReverBackup({ id: record.backupZzid })}
-          >
-            <Button size={'small'} shape={'round'} danger={false} type="dashed">
-              恢复
-            </Button>
-          </Popconfirm>
-          <Popconfirm
             title="Sure to delete?"
-            onConfirm={() => apiDeleteBackup([record.backupZzid])}
+            onConfirm={() => apiDeleteAuthInfo(record.authGroupUuid, record.authUserUuid)}
           >
             <Button size={'small'} shape={'round'} danger={true} type="dashed">
               删除
@@ -159,7 +151,7 @@ const SystemManagePage: React.FC = () => {
             size={'small'}
             shape={'round'}
             type="dashed"
-            onClick={() => showSysUpdateModal(record)}
+            onClick={() => apiDeleteAuthGroup(record.backupZzid)}
           >
             编辑
           </Button>
@@ -223,16 +215,8 @@ const SystemManagePage: React.FC = () => {
             <Button
               size={'small'}
               shape={'round'}
-              type="dashed"
-              onClick={() => showSysUpdateModal(record)}
-            >
-              编辑
-            </Button>
-            <Button
-              size={'small'}
-              shape={'round'}
               type="danger"
-              onClick={() => showSysUpdateModal(record)}
+              onClick={() => apiDeleteAuthGroup(record.authGroupUuid)}
             >
               删除
             </Button>
@@ -248,9 +232,11 @@ const SystemManagePage: React.FC = () => {
   let [data, setData] = useState([]);
   let [selectData, setSelectData] = useState();
   let [addModalOpen, setAddModalOpen] = useState(false);
+  let [addModalOpen2, setAddModalOpen2] = useState(false);
   let [updateModalOpen, setUpdateModalOpen] = useState(false);
   let [getDetailOpen, setGetDetailOpen] = useState(false);
   let [addFormInstance] = Form.useForm();
+  let [addFormInstance2] = Form.useForm();
   let [updateFormInstance] = Form.useForm();
   let [influxSecond, setInfluxSecond] = useState([{ key: 'db', value: '0' }]);
   let [backupData, setBackupData] = useState([]);
@@ -285,6 +271,36 @@ const SystemManagePage: React.FC = () => {
     addFormInstance.resetFields();
     setAddModalOpen(true);
   };
+  const showAddModal2 = () => {
+    addFormInstance2.resetFields();
+    setAddModalOpen2(true);
+  };
+  const submitAddModal = () => {
+    apiCreateAuthGroup(addFormInstance.getFieldsValue()).then((respCode) => {
+      // 如果新增成功，刷新列表
+      if (respCode == 200) {
+        apiGetAuthGroup().then((resp) => {
+          if (resp != null) {
+            setData(resp);
+          }
+        });
+        setAddModalOpen(false);
+      }
+    });
+}
+const submitAddModal2 = () => {
+    apiCreateAuthInfo(addFormInstance2.getFieldsValue()).then((respCode) => {
+      // 如果新增成功，刷新列表
+      if (respCode == 200) {
+        apiGetAuthInfo().then((resp) => {
+          if (resp != null) {
+            setBackupData(resp);
+          }
+        });
+        setAddModalOpen2(false);
+      }
+    });
+}
   // 打开修改系统配置信息窗口
   const showUpdateModal = (record: DataType) => {
     setUpdateModalOpen(true);
@@ -346,6 +362,9 @@ const SystemManagePage: React.FC = () => {
   const cancelAddModal = () => {
     setAddModalOpen(false);
   };
+  const cancelAddModal2 = () => {
+    setAddModalOpen2(false);
+  }
   // 取消修改系统配置
   const cancelUpdateModal = () => {
     setUpdateModalOpen(false);
@@ -366,6 +385,84 @@ const SystemManagePage: React.FC = () => {
   return (
     <PageContainer>
       {contextHolder}
+      <Drawer
+          title="创建权限组"
+          width={720}
+          open={addModalOpen}
+          onClose={cancelAddModal}
+          destroyOnClose={true}
+          bodyStyle={{
+                "paddingBottom": 80,
+          }}
+          extra={
+              <Space>
+                <Button onClick={cancelAddModal}>取消</Button>
+                <Button onClick={submitAddModal} type="primary">
+                  确认
+                </Button>
+              </Space>
+            }
+      >
+          <Form
+              layout="vertical"
+              form={addFormInstance}
+          >
+              <Form.Item
+                  label="权限组名称"
+                  name="authGroupName"
+                  rules={[{ required: true, message: '请输入名称' }]}
+              >
+                  <Input placeholder={"test"}/>
+              </Form.Item>
+              <Form.Item
+                  label="权限组描述信息"
+                  name="authGroupDescription"
+                  rules={[{ required: true, message: '请输入' }]}
+              >
+                  <Input placeholder={"8"}/>
+              </Form.Item>
+          </Form>
+      </Drawer>
+
+      <Drawer
+          title="创建用户权限组"
+          width={720}
+          open={addModalOpen2}
+          onClose={cancelAddModal2}
+          destroyOnClose={true}
+          bodyStyle={{
+                "paddingBottom": 80,
+          }}
+          extra={
+              <Space>
+                <Button onClick={cancelAddModal2}>取消</Button>
+                <Button onClick={submitAddModal2} type="primary">
+                  确认
+                </Button>
+              </Space>
+            }
+      >
+          <Form
+              layout="vertical"
+              form={addFormInstance2}
+          >
+              <Form.Item
+                  label="权限组 UUID"
+                  name="authGroupUuid"
+                  rules={[{ required: true, message: '请输入名称' }]}
+              >
+                  <Input placeholder={"test"}/>
+              </Form.Item>
+              <Form.Item
+                  label="用户 ID"
+                  name="authUserUuid"
+                  rules={[{ required: true, message: '请输入' }]}
+              >
+                  <Input placeholder={"8"}/>
+              </Form.Item>
+          </Form>
+      </Drawer>
+
       <Drawer
         title="配置修改"
         open={updateModalOpen}
@@ -413,15 +510,9 @@ const SystemManagePage: React.FC = () => {
           size="large"
           icon={<RedoOutlined />}
           onClick={() =>
-            apiGetSystemConfig().then((resp) => {
+            apiGetAuthGroup().then((resp) => {
               if (resp != null) {
                 setData(resp);
-
-                apiGetRetentionTime().then((resp) => {
-                  if (resp != null) {
-                    setInfluxSecond([{ key: 'db', value: resp }]);
-                  }
-                });
               }
             })
           }
@@ -432,10 +523,7 @@ const SystemManagePage: React.FC = () => {
           type="dashed"
           size="large"
           icon={<IssuesCloseOutlined />}
-          onClick={() => {
-            window.location.href =
-              'http://' + window.location.hostname + ':28080/api/plumelog/#/';
-          }}
+          onClick={showAddModal}
         >
           创建权限组
         </Button>
@@ -471,15 +559,9 @@ const SystemManagePage: React.FC = () => {
           size="large"
           icon={<RedoOutlined />}
           onClick={() =>
-            apiGetSystemConfig().then((resp) => {
+            apiGetAuthInfo().then((resp) => {
               if (resp != null) {
-                setData(resp);
-
-                apiGetRetentionTime().then((resp) => {
-                  if (resp != null) {
-                    setInfluxSecond([{ key: 'db', value: resp }]);
-                  }
-                });
+                setBackupData(resp);
               }
             })
           }
@@ -490,10 +572,7 @@ const SystemManagePage: React.FC = () => {
           type="dashed"
           size="large"
           icon={<IssuesCloseOutlined />}
-          onClick={() => {
-            window.location.href =
-              'http://' + window.location.hostname + ':28080/api/plumelog/#/';
-          }}
+          onClick={showAddModal2}
         >
           创建用户权限组
         </Button>
