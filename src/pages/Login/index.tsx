@@ -66,12 +66,9 @@ export default () => {
               password: values.password,
             };
             apiUserLogin(loginValues).then((res) => {
-              if (res.code === 200) {
+                console.log("login res", res);
                 message.success('登录成功！');
                 window.location.href = '/';
-              } else {
-                message.error('登录失败！');
-              }
             });
           }}
         >
