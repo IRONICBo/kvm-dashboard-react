@@ -68,11 +68,7 @@ import {
                 userPassword: values.password,
               };
               apiUserRegister(registerValues).then((res) => {
-                if (res.code === 200) {
-                  message.success('注册成功！');
-                } else {
-                  message.error('注册失败！');
-                }
+                  message.success('注册成功！', res);
               });
             }}
           >

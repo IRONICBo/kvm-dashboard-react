@@ -5,7 +5,11 @@ import {message} from "antd";
 axios.interceptors.response.use(success => {
     if (success == null || success == undefined || success.data == null || success.data == undefined) {
         console.log("success is null or undefined");
-        return;
+        let resp = {
+            code: 500,
+            message: '未知错误'
+        };
+        return resp;
     }
 
     console.log(success.data);
@@ -13,7 +17,11 @@ axios.interceptors.response.use(success => {
 }, error => {
     if (error == null || error == undefined || error.response == null || error.response == undefined) {
         console.log("error is null or undefined");
-        return;
+        let resp = {
+            code: 500,
+            message: '未知错误'
+        };
+        return resp;
     }
 
     console.error(error.response.data);

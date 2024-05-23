@@ -115,7 +115,7 @@ const Welcome: React.FC = () => {
     if (UUID === '') {
       return;
     }
-  
+
     const random = Math.random().toString(36).slice(-8);
     const websocket_recommend = new WebSocket(
       'ws://' + window.location.hostname + ':28080/api/websocket/resource/' +
@@ -281,7 +281,11 @@ const Welcome: React.FC = () => {
     }
 
     // const wrap = document.getElementById('test')
-    const wrap = document.getElementsByClassName("ant-layout-content ant-pro-layout-content css-dev-only-do-not-override-1ainthx ant-pro-layout-has-header ant-pro-layout-content-has-page-container")[0]
+    const wrap = document.getElementsByClassName("ant-layout-content ant-pro-layout-content css-dev-only-do-not-override-1ainthx ant-pro-layout-has-header ant-pro-layout-content-has-page-container")
+    if (!wrap) {
+      return;
+    }
+    const tempWrap = wrap[0]
     const config = {
           addStyle:true,
           fileName:'系统信息',
@@ -290,7 +294,7 @@ const Welcome: React.FC = () => {
             message.info("导出Word成功")
           }
     }
-    ExportWord(wrap,config) 
+    ExportWord(tempWrap,config)
   }
 
   const downloadPDF = async () =>  {
@@ -309,7 +313,7 @@ const Welcome: React.FC = () => {
     const disk_element = document.getElementById("rc-tabs-0-panel-disk").childNodes[0] as HTMLElement;
     const net_element = document.getElementById("rc-tabs-0-panel-net").childNodes[0] as HTMLElement;
     const process_element = document.getElementById("rc-tabs-0-panel-process").childNodes[0] as HTMLElement;
-    
+
     header_element.appendChild(cpu_element);
     header_element.appendChild(mem_element);
     header_element.appendChild(disk_element);
@@ -406,7 +410,7 @@ const Welcome: React.FC = () => {
           >
             虚拟机监控信息
             <div>
-              <Button 
+              <Button
                       type="primary"
                       style={{
                       }}
@@ -415,7 +419,7 @@ const Welcome: React.FC = () => {
                       onClick={() => downloadExcel()}>
                       导出Excel
               </Button>
-              <Button 
+              <Button
                       type="primary"
                       style={{
                         marginLeft: '10px',
@@ -425,7 +429,7 @@ const Welcome: React.FC = () => {
                       onClick={() => downloadWord()}>
                       导出Word
               </Button>
-              <Button 
+              <Button
                       type="primary"
                       style={{
                         marginLeft: '10px',

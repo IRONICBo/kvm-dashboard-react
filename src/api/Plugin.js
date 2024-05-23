@@ -202,7 +202,7 @@ export const apiGetPlugState = (id) => {
     })
 }
 
-// plugResultFile/queryByStateId 
+// plugResultFile/queryByStateId
 export const apiGetPlugResultFile = (id) => {
     return getRequest('/plugResultFile/queryByStateId?stateId='+id).then(resp => {
         if (resp.code == 200) {

@@ -84,7 +84,7 @@ const PluginRun: React.FC<HostIdProps> = (props) => {
       if (res != undefined) {
         setPluginResult(res);
       } else {
-        message.error('插件运行失败');
+        // message.error('插件运行失败');
       }
     });
   };

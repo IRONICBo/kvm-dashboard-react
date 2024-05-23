@@ -73,7 +73,7 @@ const PluginRun: React.FC<HostIdProps> = (props) => {
         setPluginResult(res);
         // console.log('setPluginResult', pluginResult.recordId);
       } else {
-        message.error('插件运行失败');
+        // message.error('插件运行失败');
       }
     });
   };
@@ -109,7 +109,7 @@ const PluginRun: React.FC<HostIdProps> = (props) => {
 
   const [form] = Form.useForm();
   const onNodeChange = (value: string) => {
-    console.log(`selected ${value}`); 
+    console.log(`selected ${value}`);
     setSelectNodeList(value);
     // {
     //   value: "ping",
@@ -317,7 +317,7 @@ const PluginRun: React.FC<HostIdProps> = (props) => {
           >
           </Select>
         </Form.Item> */}
-        
+
         {/* <Form.Item name="plugin" label="插件" rules={[{ required: true }]}>
           <Select
             placeholder="选择一个插件并更改上面的输入"
@@ -443,7 +443,7 @@ const PluginRun: React.FC<HostIdProps> = (props) => {
           </Button>
           <Button
           style={{ marginLeft: 8 }}
-          type="danger" 
+          type="danger"
           onClick={() => {
             const params = {
               nodeIdList: selectNodeList,
@@ -473,7 +473,7 @@ const PluginRun: React.FC<HostIdProps> = (props) => {
 
       {/* <Spin tip="Loading..."> */}
 
-      { pluginResult == null ? <Empty /> : 
+      { pluginResult == null ? <Empty /> :
         <Card>
           <p>响应信息：{JSON.stringify(pluginResult.nodeErrorMap)}</p>
           <ProDescriptions

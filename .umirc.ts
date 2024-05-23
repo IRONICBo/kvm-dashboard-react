@@ -1,6 +1,11 @@
 import {defineConfig} from '@umijs/max';
 
 export default defineConfig({
+    // legacy: {},
+    // jsMinifier: 'terser',
+    // targets: {
+    //     ie: 11,
+    // },
     antd: {
         dark: false,
     },
@@ -20,51 +25,15 @@ export default defineConfig({
             layout: false,
         },
         {
+            path: '/register',
+            component: './Register',
+            layout: false,
+        },
+        {
             path: '/',
             // redirect: '/virtual/manage',
             redirect: '/plugin/node',
         },
-        // {
-        //     name: '资源池控制模块',
-        //     path: '/virtual',
-        //     routes: [
-        //         {
-        //             name: '宿主机管理',
-        //             path: '/virtual/host',
-        //             component: './HostManage',
-        //         },
-        //         {
-        //             name: '虚拟机管理',
-        //             path: '/virtual/manage',
-        //             component: './VmManage',
-        //         },
-        //         {
-        //             name: '网络管理',
-        //             path: '/virtual/network',
-        //             component: './VmNetwork',
-        //         },
-        //         {
-        //             name: '镜像管理',
-        //             path: '/virtual/mirror',
-        //             component: './VmMirror',
-        //         },
-        //         {
-        //             name: '磁盘管理',
-        //             path: '/virtual/volume',
-        //             component: './VmVolume',
-        //         },
-        //         {
-        //             name: '计算规格管理',
-        //             path: '/virtual/instance',
-        //             component: './VmInstance',
-        //         },
-        //         {
-        //             name: '云盘规格管理',
-        //             path: '/virtual/disk',
-        //             component: './VmDisk',
-        //         },
-        //     ]
-        // },
         // {
         //     name: '虚拟机创建',
         //     path: '/virtual/create',
@@ -104,15 +73,15 @@ export default defineConfig({
                 },
             ]
         },
-        {
-            name: '测试操作录制与重播模块',
-            path: '/record',
-            routes: [
-                {
-                    name: '测试节点管理',
-                    path: '/record/node',
-                    component: './PluginNodeManage',
-                },
+        // {
+            // name: '测试操作录制与重播模块',
+            // path: '/record',
+            // routes: [
+                // {
+                //     name: '测试节点管理',
+                //     path: '/record/node',
+                //     component: './PluginNodeManage',
+                // },
                 // {
                 //     name: '插件管理',
                 //     path: '/record/manage',
@@ -128,8 +97,8 @@ export default defineConfig({
                 //     path: '/record/history',
                 //     component: './PluginHistory',
                 // },
-            ]
-        },
+        //     ]
+        // },
         {
             name: '存储服务测试模块',
             path: '/storage',
@@ -195,7 +164,7 @@ export default defineConfig({
                     name: '节点监控',
                     path: '/system/monitor',
                     component: './Monitor',
-                    // hideInMenu: true,
+                    hideInMenu: true,
                 },
             ],
         },
@@ -214,6 +183,47 @@ export default defineConfig({
                     component: './Performance',
                 },
             ],
+        },
+        {
+            name: '资源池控制模块',
+            path: '/virtual',
+            routes: [
+                {
+                    name: '宿主机管理',
+                    path: '/virtual/host',
+                    component: './HostManage',
+                },
+                {
+                    name: '虚拟机管理',
+                    path: '/virtual/manage',
+                    component: './VmManage',
+                },
+                {
+                    name: '网络管理',
+                    path: '/virtual/network',
+                    component: './VmNetwork',
+                },
+                {
+                    name: '镜像管理',
+                    path: '/virtual/mirror',
+                    component: './VmMirror',
+                },
+                {
+                    name: '磁盘管理',
+                    path: '/virtual/volume',
+                    component: './VmVolume',
+                },
+                {
+                    name: '计算规格管理',
+                    path: '/virtual/instance',
+                    component: './VmInstance',
+                },
+                {
+                    name: '云盘规格管理',
+                    path: '/virtual/disk',
+                    component: './VmDisk',
+                },
+            ]
         },
         {
             name: '用户权限管理模块',
