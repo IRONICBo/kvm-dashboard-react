@@ -35,7 +35,7 @@ export const apiInstanceOfferingCreate = (data) => {
 }
 
 export const apiInstanceOfferingDelete = (threeNetworkUuid) => {
-    return postRequest('/manage/instanceOfferingInfo/delete', threeNetworkUuid).then(resp => {
+    return getRequest('/manage/instanceOfferingInfo/delete?uuid='+threeNetworkUuid).then(resp => {
         if (resp.code == 200) {
             message.success("删除计算规格信息列表成功");
             return resp.data;

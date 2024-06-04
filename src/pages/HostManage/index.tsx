@@ -7,6 +7,7 @@ import {apiAddHost, apiDeleteHost, apiRefreshHostList, apiUpdateHost, apiUpdateH
 import {apiStartHostMonitor, apiStopHostMonitor} from "@/api/Monitor";
 import { history } from 'umi';
 import { RedoOutlined, PlusOutlined, PlayCircleOutlined, PauseCircleOutlined } from '@ant-design/icons';
+import {message} from "antd";
 
 interface DataType {
     hostZzid: number,
@@ -22,7 +23,9 @@ interface DataType {
 }
 
 const HostManagePage: React.FC = () => {
-    useEffect(() => {      
+    const [apiNotification, contextHolder] = notification.useNotification();
+
+    useEffect(() => {
         const random = Math.random().toString(36).slice(-8);
         const websocket_recommend = new WebSocket(
           'ws://' + window.location.hostname + ':28080/api/websocket/resource/' +
@@ -36,8 +39,9 @@ const HostManagePage: React.FC = () => {
           apiNotification.warning({
             message: '推荐信息变更：',
             description: '节点：' + msg.data,
-            duration: 2,
+            duration: 5,
           });
+          message.success('推荐信息变更：' + msg.data);
         };
         websocket_recommend.onclose = function () {
           console.log('websocket closed');
@@ -468,7 +472,6 @@ const HostManagePage: React.FC = () => {
     let [getDetailOpen, setGetDetailOpen] = useState(false);
     let [addFormInstance] = Form.useForm();
     let [updateFormInstance] = Form.useForm();
-    const [apiNotification, contextHolder] = notification.useNotification();
 
     // 钩子，启动时获取宿主机列表
     useEffect(() => {
@@ -624,7 +627,7 @@ const HostManagePage: React.FC = () => {
      */
     return (
         <PageContainer>
-            {contextHolder} 
+            {contextHolder}
             <Drawer
                 title="新增宿主机"
                 width={720}
@@ -886,9 +889,9 @@ const HostManagePage: React.FC = () => {
                     停止监测
                 </Button>
             </Space>
-            <Table style={{marginTop: 15}} 
+            <Table style={{marginTop: 15}}
                     rowSelection={rowSelection}
-                    columns={columns} 
+                    columns={columns}
                     dataSource={data}
                     rowKey={"hostUuid"}
                     scroll={{x: 1000}}>

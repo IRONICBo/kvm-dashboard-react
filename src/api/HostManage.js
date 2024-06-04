@@ -15,7 +15,7 @@ export const apiRefreshHostList = () => {
 }
 
 export const apiDeleteHost = (hostId) => {
-    return postRequest('/manage/hostInfo/delete?hostId=' + hostId).then(resp => {
+    return getRequest('/manage/hostInfo/delete?hostId='+ hostId).then(resp => {
         if (resp.code == 200) {
             message.success("删除成功！");
         } else {

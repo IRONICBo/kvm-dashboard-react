@@ -13,3 +13,5 @@
 .swc
 dist*
 *.rpm
+
+zips/

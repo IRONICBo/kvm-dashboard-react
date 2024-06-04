@@ -6,6 +6,7 @@ export default defineConfig({
     },
     theme: {
     },
+    // legacy: {},
     access: {},
     model: {},
     initialState: {},

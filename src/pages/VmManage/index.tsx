@@ -14,7 +14,7 @@ import { apiQueryInstanceOfferingList } from "@/api/VmInstance";
 import { apiQueryDiskOfferingList, apiQueryPrimaryStorageList } from "@/api/VmDisk";
 import { apiQueryThreeNetworkInfoList } from "@/api/VmNetwork";
 import { apiQueryMirrorList } from "@/api/VmMirror";
-
+import {message} from "antd";
 
 interface DataType {
     authorityGroupUuid: string,
@@ -611,7 +611,7 @@ const VmManagePage: React.FC = () => {
         })
     }, [])
 
-    useEffect(() => {      
+    useEffect(() => {
         const random = Math.random().toString(36).slice(-8);
         const websocket_recommend = new WebSocket(
             'ws://' + window.location.hostname + ':28080/api/websocket/resource/' +
@@ -622,10 +622,11 @@ const VmManagePage: React.FC = () => {
         };
         websocket_recommend.onmessage = function (msg) {
           console.log('ws://' + window.location.hostname + ':28080/api/websocket/resource/', msg.data);
+          message.success('推荐信息变更：节点：' + msg.data);
           apiNotification.warning({
             message: '推荐信息变更：',
             description: '节点：' + msg.data,
-            duration: 2,
+            duration: 5,
           });
         };
         websocket_recommend.onclose = function () {
@@ -1096,13 +1097,14 @@ const VmManagePage: React.FC = () => {
                     setAddModalOpen(false);
                 }
             })
-        
+
         }
     }
     // 修改宿主机信息
     const submitUpdateModal = () => {
         const temp = updateFormInstance.getFieldsValue();
-        apiChangeInstanceOffering(temp.vmUuid, temp.instanceUuid).then(respCode => {
+        console.log("temp", temp)
+        apiChangeInstanceOffering(temp.vmUuid, temp.instanceOfferingUuid).then(respCode => {
             // 如果修改成功刷新列表
             if (respCode == 200) {
                 apiQueryVmList().then(resp => {
@@ -1280,7 +1282,7 @@ const VmManagePage: React.FC = () => {
                         name="rootDiskOfferingUuid"
                         rules={[{ required: true, message: '请输入数据盘规格列表!' }]}
                     >
-                        <Select 
+                        <Select
                             options={diskList} />
                         {/* <Input placeholder={"长度不超过 32 个字符"}/> */}
                     </Form.Item>
@@ -1288,7 +1290,7 @@ const VmManagePage: React.FC = () => {
                         label="数据盘规格列表"
                         name="dataDiskOfferingUuidList"
                     >
-                        <Select 
+                        <Select
                             options={diskList} />
                         {/* <Input placeholder={"长度不超过 32 个字符"}/> */}
                     </Form.Item>
@@ -1297,7 +1299,7 @@ const VmManagePage: React.FC = () => {
                         name="defaultL3NetworkUuid"
                         rules={[{ required: true, message: '请输入三层网络UUID!' }]}
                     >
-                        <Select 
+                        <Select
                             options={threeNetList} />
                     </Form.Item>
                     <Form.Item
@@ -1312,7 +1314,7 @@ const VmManagePage: React.FC = () => {
                         name="hostUuid"
                         rules={[{ required: true, message: '请输入物理机 UUID!' }]}
                     >
-                        <Select 
+                        <Select
                             options={hostList} />
                     </Form.Item>
                     <Form.Item
@@ -1320,7 +1322,7 @@ const VmManagePage: React.FC = () => {
                         name="imageUuid"
                         rules={[{ required: true, message: '请输入虚拟机镜像 UUID!' }]}
                     >
-                        <Select 
+                        <Select
                             options={mirrorList} />
                     </Form.Item>
                     <Form.Item
@@ -1328,7 +1330,7 @@ const VmManagePage: React.FC = () => {
                         name="instanceOfferingUuid"
                         rules={[{ required: true, message: '请输入计算规格 UUID!' }]}
                     >
-                        <Select 
+                        <Select
                             options={instanceList} />
                     </Form.Item>
                     <Form.Item
@@ -1336,7 +1338,7 @@ const VmManagePage: React.FC = () => {
                         name="vmPrimaryStorageUuid"
                         rules={[{ required: true, message: '请输入磁盘所属主存储 UUID!' }]}
                     >
-                        <Select 
+                        <Select
                             options={primaryStorage} />
                     </Form.Item>
 
@@ -1431,7 +1433,7 @@ const VmManagePage: React.FC = () => {
                         name="instanceOfferingUuid"
                         rules={[{ required: true, message: '请输入计算规格 UUID!' }]}
                     >
-                        <Select 
+                        <Select
                             options={instanceList} />
                     </Form.Item>
                 </Form>
@@ -1499,7 +1501,7 @@ const VmManagePage: React.FC = () => {
                         name="hostUuid"
                         rules={[{ required: true, message: '请输入宿主机 IP!' }]}
                     >
-                        <Select 
+                        <Select
                             options={hostList} />
                     </Form.Item>
                 </Form>
@@ -1613,9 +1615,9 @@ const VmManagePage: React.FC = () => {
                     停止监测
                 </Button>
             </Space>
-            <Table style={{marginTop: 15}} 
+            <Table style={{marginTop: 15}}
                     rowSelection={rowSelection}
-                    columns={columns} 
+                    columns={columns}
                     dataSource={data}
                     rowKey={"vmUuid"}
                     scroll={{x: 1000}}>

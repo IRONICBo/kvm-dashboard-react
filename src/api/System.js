@@ -70,7 +70,7 @@ export const apiQueryBackup = () => {
 }
 
 export const apiDeleteBackup = (ids) => {
-    return getRequest('/web/backupInfo/queryAll?ids=' + ids).then(resp => {
+    return getRequest('/web/backupInfo/delete?ids=' + ids).then(resp => {
         if (resp.code == 200) {
             message.success("系统备份删除成功");
             return resp.data;

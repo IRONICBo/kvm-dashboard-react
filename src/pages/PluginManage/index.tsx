@@ -31,6 +31,7 @@ import { ColumnsType } from 'antd/es/table';
 import React, { useEffect, useState } from 'react';
 import { history } from 'umi';
 import PlugInfoPage from './components/PlugInfo';
+import {message} from "antd";
 
 interface DataType {
   hostZzid: number;
@@ -46,13 +47,13 @@ interface DataType {
 }
 
 const PluginManagePage: React.FC = () => {
+  const [apiNotification, contextHolder] = notification.useNotification();
+
   useEffect(() => {
     const random = Math.random().toString(36).slice(-8);
     const websocket_recommend = new WebSocket(
-      'ws://' +
-        window.location.hostname +
-        ':28080/api/websocket/resource/' +
-        random,
+      'ws://' + window.location.hostname + ':28080/api/websocket/resource/' +
+      random,
     );
     websocket_recommend.onopen = function () {
       console.log('websocket open');
@@ -62,10 +63,11 @@ const PluginManagePage: React.FC = () => {
         'ws://' + window.location.hostname + ':28080/api/websocket/resource/',
         msg.data,
       );
+      message.success('推荐信息变更：' + msg.data);
       apiNotification.warning({
         message: '推荐信息变更：',
         description: '节点：' + msg.data,
-        duration: 2,
+        duration: 5,
       });
     };
     websocket_recommend.onclose = function () {
@@ -517,7 +519,6 @@ const PluginManagePage: React.FC = () => {
   let [getDetailOpen, setGetDetailOpen] = useState(false);
   let [addFormInstance] = Form.useForm();
   let [updateFormInstance] = Form.useForm();
-  const [apiNotification, contextHolder] = notification.useNotification();
 
   // 钩子，启动时获取插件列表
   useEffect(() => {

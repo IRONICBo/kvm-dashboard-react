@@ -79,7 +79,7 @@ export const apiVmResume = (vmUuid) => {
 }
 
 export const apiDeleteVm = (hostId) => {
-    return getRequest('/manage/vmInfo/delete?vmUuid=', hostId).then(resp => {
+    return getRequest('/manage/vmInfo/delete?vmUuid='+hostId).then(resp => {
         if (resp.code == 200) {
             message.success("虚拟机删除查询成功！");
             return resp.data;

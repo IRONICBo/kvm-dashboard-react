@@ -17,6 +17,7 @@ import { history } from 'umi';
 import { RedoOutlined, PlusOutlined, PlayCircleOutlined, IssuesCloseOutlined} from '@ant-design/icons';
 import { apiQueryVmList } from '@/api/VmManage';
 import { apiRefreshHostList } from '@/api/HostManage';
+import {message} from "antd";
 
 interface DataType {
     key: number,
@@ -252,7 +253,7 @@ const ServiceManagePage: React.FC = () => {
     useEffect(() => {
         const random = Math.random().toString(36).slice(-8);
         const websocket_recommend = new WebSocket(
-          'ws://localhost:28080/api/websocket/resource/' +
+            'ws://' + window.location.hostname + ':28080/api/websocket/resource/' +
             random,
         );
         websocket_recommend.onopen = function () {
@@ -260,10 +261,11 @@ const ServiceManagePage: React.FC = () => {
         };
         websocket_recommend.onmessage = function (msg) {
           console.log('ws://' + window.location.hostname + ':28080/api/websocket/resource/', msg.data);
+          message.success('推荐信息变更：' + msg.data);
           apiNotification.warning({
             message: '推荐信息变更：',
             description: msg.data,
-            duration: 2,
+            duration: 5,
           });
         };
         websocket_recommend.onclose = function () {
@@ -366,7 +368,7 @@ const ServiceManagePage: React.FC = () => {
             "serviceMachineUuid": record.serviceMachineUuid,
             "serviceName": record.serviceName,
         });
-    }       
+    }
     const showSysUpdateModal = (record: DataType) => {
         setUpdateModalOpen(true);
         updateFormInstance.setFieldsValue({
@@ -717,8 +719,8 @@ s                        />
                     style={{
                         "paddingTop": 20
                     }} title="服务监控" column={2} layout="vertical" />
-            <Table style={{marginTop: 15}} 
-                    columns={columns} 
+            <Table style={{marginTop: 15}}
+                    columns={columns}
                     dataSource={data}
                     rowKey={"key"}
                     pagination={false}

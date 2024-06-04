@@ -7,6 +7,7 @@ import {apiAddHost, apiDeleteHost, apiRefreshHostList, apiUpdateHost, apiUpdateH
 import {apiStartHostMonitor, apiStopHostMonitor} from "@/api/Monitor";
 import { history } from 'umi';
 import { RedoOutlined, PlusOutlined, PlayCircleOutlined, PauseCircleOutlined } from '@ant-design/icons';
+import {message} from "antd";
 
 interface DataType {
     hostZzid: number,
@@ -22,7 +23,9 @@ interface DataType {
 }
 
 const HostManagePage: React.FC = () => {
-    useEffect(() => {      
+    const [apiNotification, contextHolder] = notification.useNotification();
+
+    useEffect(() => {
         const random = Math.random().toString(36).slice(-8);
         const websocket_recommend = new WebSocket(
           'ws://' + window.location.hostname + ':28080/api/websocket/resource/' +
@@ -33,10 +36,11 @@ const HostManagePage: React.FC = () => {
         };
         websocket_recommend.onmessage = function (msg) {
           console.log('ws://' + window.location.hostname + ':28080/api/websocket/resource/', msg.data);
+          message.success('推荐信息变更：' + msg.data);
           apiNotification.warning({
             message: '推荐信息变更：',
             description: '节点：' + msg.data,
-            duration: 2,
+            duration: 5,
           });
         };
         websocket_recommend.onclose = function () {
@@ -468,7 +472,6 @@ const HostManagePage: React.FC = () => {
     let [getDetailOpen, setGetDetailOpen] = useState(false);
     let [addFormInstance] = Form.useForm();
     let [updateFormInstance] = Form.useForm();
-    const [apiNotification, contextHolder] = notification.useNotification();
 
     // 钩子，启动时获取插件列表
     useEffect(() => {
@@ -624,7 +627,7 @@ const HostManagePage: React.FC = () => {
      */
     return (
         <PageContainer>
-            {contextHolder} 
+            {contextHolder}
 
             <Space size={"middle"}>
                 <Button type="primary"

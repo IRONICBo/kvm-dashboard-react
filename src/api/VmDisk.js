@@ -45,8 +45,8 @@ export const apiDiskOfferingCreate = (data) => {
     })
 }
 
-export const apiDiskOfferingDelete = (threeNetworkUuid) => {
-    return postRequest('/manage/diskOfferingInfo/delete', threeNetworkUuid).then(resp => {
+export const apiDiskOfferingDelete = (diskOfferingUuid) => {
+    return getRequest('/manage/diskOfferingInfo/delete?diskOfferingUuid='+diskOfferingUuid).then(resp => {
         if (resp.code == 200) {
             message.success("删除云盘规格信息列表成功");
             return resp.data;

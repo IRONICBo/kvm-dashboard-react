@@ -6,6 +6,7 @@ import {apiQueryVolumeList, apiVolumeDelete, apiVolumeCreate, apiVolumeExpand} f
 import { history } from 'umi';
 import { RedoOutlined, PlusOutlined, PlayCircleOutlined, PauseCircleOutlined, PicRightOutlined, PicLeftOutlined } from '@ant-design/icons';
 import { apiQueryVmList } from '@/api/VmManage';
+import { apiQueryDiskOfferingList, apiQueryPrimaryStorageList } from "@/api/VmDisk";
 
 interface DataType {
     volumeUuid: string,
@@ -123,6 +124,7 @@ const VmVolumePage: React.FC = () => {
     let [addFormInstance] = Form.useForm();
     let [updateFormInstance] = Form.useForm();
     let [vmList, setVmList] = useState([]);
+    let [primaryStorage, setPrimaryStorageList] = useState([]);
 
     // 钩子，启动时获取数据盘列表
     useEffect(() => {
@@ -145,7 +147,7 @@ const VmVolumePage: React.FC = () => {
                 resp.forEach(element => {
                 console.log("transformedData", element)
                     transformedData.push(
-                        {                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 
+                        {
                             "label": element.vmName,
                             "value": element.vmUuid,
                         }
@@ -154,6 +156,23 @@ const VmVolumePage: React.FC = () => {
                 // let [vmList, setVmList] = useState<{ key: any; value: any; }[]>([]);
                 console.log("transformedData", transformedData)
                 setVmList(transformedData);
+            }
+        })
+        apiQueryPrimaryStorageList().then(resp => {
+            if (resp != null) {
+                const transformedData = [];
+                resp.forEach(element => {
+                console.log("transformedData", element)
+                    transformedData.push(
+                        {
+                            "label": element.psName,
+                            "value": element.psUuid,
+                        }
+                    )
+                });
+                // let [vmList, setVmList] = useState<{ key: any; value: any; }[]>([]);
+                console.log("transformedData", transformedData)
+                setPrimaryStorageList(transformedData);
             }
         })
         console.log("setVmList", vmList);
@@ -266,7 +285,7 @@ const VmVolumePage: React.FC = () => {
                     >
                         <Input placeholder={"test"}/>
                     </Form.Item>
-                    
+
                     <Form.Item
                         label="云盘规格ID"
                         name="volumeDiskOfferingUuid"
@@ -274,13 +293,21 @@ const VmVolumePage: React.FC = () => {
                     >
                         <Input placeholder={"42ad89dc78ab42ad8b4929c45a2fa6ec"}/>
                     </Form.Item>
+                    <Form.Item
+                        label="磁盘所属主存储"
+                        name="volumePrimaryStorageUuid"
+                        rules={[{ required: true, message: '请输入磁盘所属主存储 UUID!' }]}
+                    >
+                        <Select
+                            options={primaryStorage} />
+                    </Form.Item>
 
                     <Form.Item
                         label="虚拟机ID"
                         name="volumeVmInstanceUuid"
                         rules={[{ required: true, message: '请输虚拟机ID' }]}
                     >
-                        <Select 
+                        <Select
                             options={vmList} />
                         {/* <Input placeholder={"42ad89dc78ab42ad8b4929c45a2fa6ec"}/> */}
                     </Form.Item>
@@ -348,9 +375,9 @@ const VmVolumePage: React.FC = () => {
                         icon={<PlusOutlined />}
                         onClick={showAddModal}>新增数据盘</Button>
             </Space>
-            <Table style={{marginTop: 15}} 
+            <Table style={{marginTop: 15}}
                     rowSelection={rowSelection}
-                    columns={columns} 
+                    columns={columns}
                     dataSource={data}
                     rowKey={"volumeUuid"}
                     scroll={{x: 1000}}>

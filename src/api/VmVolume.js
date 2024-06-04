@@ -35,7 +35,7 @@ export const apiVolumeCreate = (data) => {
 }
 
 export const apiVolumeDelete = (Uuid) => {
-    return getRequest('/manage/dataVolumeInfo/delete?dataVolumeUuid=', Uuid).then(resp => {
+    return getRequest('/manage/dataVolumeInfo/delete?dataVolumeUuid='+Uuid).then(resp => {
         if (resp.code == 200) {
             message.success("删除数据盘信息列表成功");
             return resp.data;
