@@ -3,7 +3,10 @@ import { RunTimeLayoutConfig } from '@umijs/max';
 export const layout: RunTimeLayoutConfig = (initialState) => {
   return {
     // 常用属性
-    title: '虚拟机运维平台',
+    // title: '虚拟机运维平台',
+    title: '面向申威平台的系统性能指标实时监测与服务质量管理工具',
+    // title: false,
+    layout: 'mix',
     // logo: '/logo.png',
     contentStyle: {
     },
