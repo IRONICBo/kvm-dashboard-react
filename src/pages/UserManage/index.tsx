@@ -45,7 +45,7 @@ const SystemManagePage: React.FC = () => {
       ellipsis: {
         showTitle: false,
       },
-      width: 150,
+      width: 400,
       fixed: 'left',
     },
     {
@@ -54,7 +54,7 @@ const SystemManagePage: React.FC = () => {
       ellipsis: {
         showTitle: false,
       },
-      width: 300,
+      width: 200,
       fixed: 'left',
     },
     {
@@ -175,7 +175,7 @@ const SystemManagePage: React.FC = () => {
       ellipsis: {
         showTitle: false,
       },
-      width: 200,
+      width: 400,
       fixed: 'left',
     },
     {

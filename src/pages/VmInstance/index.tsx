@@ -112,7 +112,7 @@ const VmNetworkPage: React.FC = () => {
             render: (_, record) =>
                 <Space>
                     {/* <Button size={"small"} shape={"round"} type="dashed" onClick={() => showUpdateModal(record)}>编辑</Button> */}
-                    <Popconfirm title="Sure to delete?" onConfirm={() => deleteHost(record.hostUuid)}>
+                    <Popconfirm title="Sure to delete?" onConfirm={() => deleteHost(record.instanceUuid)}>
                         <Button size={"small"} shape={"round"} danger={true} type="dashed">删除</Button>
                     </Popconfirm>
                 </Space>
@@ -283,9 +283,9 @@ const VmNetworkPage: React.FC = () => {
                         icon={<PlusOutlined />}
                         onClick={showAddModal}>新增计算规格</Button>
             </Space>
-            <Table style={{marginTop: 15}} 
+            <Table style={{marginTop: 15}}
                     rowSelection={rowSelection}
-                    columns={columns} 
+                    columns={columns}
                     dataSource={data}
                     rowKey={"instanceZzid"}
                     scroll={{x: 1000}}>
