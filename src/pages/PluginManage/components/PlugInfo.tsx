@@ -271,9 +271,22 @@ const PlugInfoPage: React.FC<HostIdProps> = (props) => {
   // 新增插件信息
   const submitAddModal = () => {
     const temp = addFormInstance.getFieldsValue();
-    temp.files = temp.files[0].originFileObj;
+    // temp.files = temp.files[0].originFileObj;
+    const originFiles = temp.files.map((file: any) => file.originFileObj);
+    temp.files = originFiles;
     console.log('temp', temp);
-    apiAddPlugInfo(temp).then((respCode) => {
+    const formData = new FormData();
+    Object.keys(temp).forEach(key => {
+        if (Array.isArray(temp[key])) {
+            // directly append the key and value to FormData
+            temp[key].forEach(item => {
+                formData.append(key, item);
+            });
+        } else {
+            formData.append(key, temp[key]);
+          }
+    });
+    apiAddPlugInfo(formData).then((respCode) => {
       // 如果新增成功，刷新列表
       if (respCode == 200) {
         apiGetPlugInfoByCardId(UUID).then((resp) => {
