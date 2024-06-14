@@ -16,19 +16,13 @@ export default defineConfig({
     },
     routes: [
         {
+            path: '/',
+            redirect: '/host',
+        },
+        {
             name: '资源池控制模块',
             path: '/zone',
             routes: [
-                {
-                    name: '宿主机管理',
-                    path: '/zone/host',
-                    component: './HostManage',
-                },
-                {
-                    name: '虚拟机管理',
-                    path: '/zone/virtual/manage',
-                    component: './VmManage',
-                },
                 {
                     name: '网络管理',
                     path: '/zone/virtual/network',
@@ -95,9 +89,20 @@ export default defineConfig({
             path: '/',
             routes: [
                 {
+                    name: '宿主机',
+                    path: '/host',
+                    component: './HostManage',
+                },
+                {
+                    name: '虚拟机',
+                    path: '/vm',
+                    component: './VmManage',
+                },
+                {
                     name: '资源监控',
                     path: '/monitor',
                     component: './Monitor',
+                    hideInMenu: true,
                 },
             ],
         },
